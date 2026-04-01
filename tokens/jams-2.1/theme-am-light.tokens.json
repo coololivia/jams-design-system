@@ -1,0 +1,21 @@
+{
+  "$description": "JAMS 2.1 — AM Brand (Orange), Light Mode",
+  "color": {
+    "primary":        { "$value": "{color.am.500}",  "$type": "color" },
+    "primary-hover":  { "$value": "{color.am.600}",  "$type": "color" },
+    "primary-active": { "$value": "{color.am.700}",  "$type": "color" },
+    "bg": {
+      "base":     { "$value": "{color.white}",      "$type": "color" },
+      "surface":  { "$value": "{color.gray.50}",    "$type": "color" },
+      "elevated": { "$value": "{color.white}",      "$type": "color" }
+    },
+    "text": {
+      "default":    { "$value": "{color.near-black}",  "$type": "color" },
+      "secondary":  { "$value": "{color.gray.600}",    "$type": "color" },
+      "on-primary": { "$value": "{color.white}",       "$type": "color" }
+    },
+    "border": {
+      "default": { "$value": "{color.gray.200}", "$type": "color" }
+    }
+  }
+}

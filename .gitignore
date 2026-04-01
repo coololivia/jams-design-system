@@ -1,0 +1,7 @@
+node_modules/
+dist/
+*.log
+
+# Figma secrets - never commit actual tokens
+figma/figma-config.json
+.DS_Store

@@ -1,0 +1,57 @@
+{
+  "name": "Input",
+  "systems": ["jams-core", "jams-2.1", "biz-jams"],
+  "props": {
+    "type": { "type": "enum", "values": ["text", "email", "password", "number", "tel", "url", "search"], "default": "text" },
+    "size": { "type": "enum", "values": ["sm", "md", "lg"], "default": "md" },
+    "variant": { "type": "enum", "values": ["outlined", "filled"], "default": "outlined" },
+    "disabled": { "type": "boolean", "default": false },
+    "readOnly": { "type": "boolean", "default": false },
+    "error": { "type": "boolean", "default": false },
+    "errorMessage": { "type": "string", "default": null },
+    "label": { "type": "string", "default": null },
+    "placeholder": { "type": "string", "default": null },
+    "helperText": { "type": "string", "default": null },
+    "prefixIcon": { "type": "ReactNode", "default": null },
+    "suffixIcon": { "type": "ReactNode", "default": null },
+    "clearable": { "type": "boolean", "default": false }
+  },
+  "tokens": {
+    "outlined": {
+      "bg": "{color.bg.base}",
+      "border": "{color.border.default}",
+      "border-focus": "{color.border.focus}",
+      "border-error": "{color.border.error}",
+      "text": "{color.text.default}",
+      "placeholder": "{color.text.tertiary}",
+      "border-radius": "{radius.md}",
+      "padding-x": "{spacing.3}",
+      "padding-y": "{spacing.2}"
+    },
+    "filled": {
+      "bg": "{color.bg.surface}",
+      "border": "transparent",
+      "border-focus": "{color.border.focus}",
+      "text": "{color.text.default}",
+      "placeholder": "{color.text.tertiary}",
+      "border-radius": "{radius.md}",
+      "padding-x": "{spacing.3}",
+      "padding-y": "{spacing.2}"
+    }
+  },
+  "sizes": {
+    "sm": { "height": "32px", "font-size": "{typography.font-size.sm}" },
+    "md": { "height": "40px", "font-size": "{typography.font-size.md}" },
+    "lg": { "height": "48px", "font-size": "{typography.font-size.lg}" }
+  },
+  "states": ["default", "hover", "focus", "error", "disabled", "readOnly"],
+  "accessibility": {
+    "role": "textbox",
+    "keyboard": ["Tab to focus"],
+    "aria": {
+      "label": "aria-label or associated label element",
+      "invalid": "aria-invalid when error",
+      "describedby": "aria-describedby linked to errorMessage/helperText"
+    }
+  }
+}

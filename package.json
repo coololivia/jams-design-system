@@ -1,0 +1,25 @@
+{
+  "name": "design-system",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "validate": "tsx scripts/validate-tokens.ts",
+    "generate:md": "tsx scripts/tokens-to-md.ts",
+    "sync:md-push": "tsx scripts/md-to-tokens.ts",
+    "sync:figma-push": "tsx scripts/tokens-to-figma.ts",
+    "sync:figma-pull": "tsx scripts/figma-to-tokens.ts",
+    "sync:full": "npm run validate && npm run generate:md"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.2"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "name": "Data Table",
+  "systems": ["biz-jams"],
+  "description": "B2B 데이터 테이블 패턴 (정렬, 필터, 페이지네이션)",
+  "structure": {
+    "table-toolbar": ["search", "filters", "actions (export, bulk)"],
+    "table-header": ["column-header* (sortable)"],
+    "table-body": ["table-row*"],
+    "table-footer": ["pagination", "row-count"]
+  },
+  "props": {
+    "sortable": { "type": "boolean", "default": true },
+    "selectable": { "type": "boolean", "default": false },
+    "stickyHeader": { "type": "boolean", "default": true },
+    "striped": { "type": "boolean", "default": false },
+    "dense": { "type": "boolean", "default": false },
+    "loading": { "type": "boolean", "default": false }
+  },
+  "tokens": {
+    "header": {
+      "bg": "{color.bg.surface}",
+      "text": "{color.text.secondary}",
+      "font-size": "{typography.font-size.sm}",
+      "font-weight": "{typography.font-weight.semibold}",
+      "padding": "{spacing.3} {spacing.4}",
+      "border-bottom": "{color.border.strong}"
+    },
+    "row": {
+      "bg": "{color.bg.base}",
+      "bg-hover": "{color.bg.surface}",
+      "bg-selected": "{color.blue.50}",
+      "bg-stripe": "{color.bg.surface}",
+      "text": "{color.text.default}",
+      "font-size": "{typography.font-size.sm}",
+      "padding": "{spacing.3} {spacing.4}",
+      "border-bottom": "{color.border.default}"
+    },
+    "row-dense": {
+      "padding": "{spacing.2} {spacing.3}"
+    }
+  },
+  "accessibility": {
+    "role": "table (or grid if interactive)",
+    "aria-sort": "정렬 상태 표시",
+    "aria-selected": "선택된 행 표시",
+    "keyboard": "Arrow keys for cell navigation, Space for row selection"
+  }
+}

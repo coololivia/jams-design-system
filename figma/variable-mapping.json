@@ -1,0 +1,34 @@
+{
+  "collections": [
+    {
+      "name": "Shared Primitives",
+      "modes": [
+        { "name": "Default", "tokenFile": "primitives/primitives.tokens.json" }
+      ]
+    },
+    {
+      "name": "JAMS Core (Legacy)",
+      "modes": [
+        { "name": "Default", "tokenFile": "jams-core/semantic.tokens.json" }
+      ]
+    },
+    {
+      "name": "JAMS 2.1",
+      "modes": [
+        { "name": "JK Light", "tokenFile": "jams-2.1/theme-jk-light.tokens.json" },
+        { "name": "JK Dark", "tokenFile": "jams-2.1/theme-jk-dark.tokens.json" },
+        { "name": "AM Light", "tokenFile": "jams-2.1/theme-am-light.tokens.json" },
+        { "name": "AM Dark", "tokenFile": "jams-2.1/theme-am-dark.tokens.json" },
+        { "name": "JP Light", "tokenFile": "jams-2.1/theme-jp-light.tokens.json" },
+        { "name": "JP Dark", "tokenFile": "jams-2.1/theme-jp-dark.tokens.json" }
+      ]
+    },
+    {
+      "name": "Biz JAMS",
+      "modes": [
+        { "name": "Light", "tokenFile": "biz-jams/theme-light.tokens.json" },
+        { "name": "Dark", "tokenFile": "biz-jams/theme-dark.tokens.json" }
+      ]
+    }
+  ]
+}
