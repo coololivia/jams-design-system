@@ -1,70 +1,62 @@
 {
-  "$description": "Biz JAMS (B2B) — Semantic tokens for business applications",
-  "color": {
-    "primary":        { "$value": "{color.blue.600}",  "$type": "color" },
-    "primary-hover":  { "$value": "{color.blue.700}",  "$type": "color" },
-    "primary-active": { "$value": "{color.blue.800}",  "$type": "color" },
-    "secondary":      { "$value": "{color.gray.600}",  "$type": "color" },
-    "secondary-hover": { "$value": "{color.gray.700}", "$type": "color" },
-    "danger":         { "$value": "{color.red.600}",   "$type": "color" },
-    "danger-hover":   { "$value": "{color.red.700}",   "$type": "color" },
-    "warning":        { "$value": "{color.yellow.500}", "$type": "color" },
-    "success":        { "$value": "{color.green.600}",  "$type": "color" },
-    "info":           { "$value": "{color.blue.500}",   "$type": "color" },
-    "bg": {
-      "base":     { "$value": "{color.white}",      "$type": "color" },
-      "surface":  { "$value": "{color.gray.50}",    "$type": "color" },
-      "elevated": { "$value": "{color.white}",      "$type": "color" },
-      "overlay":  { "$value": "rgba(0,0,0,0.5)",    "$type": "color" },
-      "disabled": { "$value": "{color.gray.100}",   "$type": "color" },
-      "sidebar":  { "$value": "{color.gray.950}",   "$type": "color" }
-    },
-    "text": {
-      "default":     { "$value": "{color.near-black}",  "$type": "color" },
-      "secondary":   { "$value": "{color.gray.600}",    "$type": "color" },
-      "tertiary":    { "$value": "{color.gray.400}",    "$type": "color" },
-      "disabled":    { "$value": "{color.gray.300}",    "$type": "color" },
-      "on-primary":  { "$value": "{color.white}",       "$type": "color" },
-      "on-danger":   { "$value": "{color.white}",       "$type": "color" },
-      "on-sidebar":  { "$value": "{color.gray.100}",    "$type": "color" },
-      "link":        { "$value": "{color.blue.600}",    "$type": "color" },
-      "link-hover":  { "$value": "{color.blue.700}",    "$type": "color" }
-    },
-    "border": {
-      "default": { "$value": "{color.gray.200}", "$type": "color" },
-      "strong":  { "$value": "{color.gray.400}", "$type": "color" },
-      "focus":   { "$value": "{color.blue.500}", "$type": "color" },
-      "error":   { "$value": "{color.red.500}",  "$type": "color" }
-    },
-    "icon": {
-      "default":    { "$value": "{color.gray.600}", "$type": "color" },
-      "secondary":  { "$value": "{color.gray.400}", "$type": "color" },
-      "on-primary": { "$value": "{color.white}",    "$type": "color" },
-      "on-sidebar": { "$value": "{color.gray.300}", "$type": "color" }
-    },
-    "data": {
-      "$description": "Colors for data visualization in B2B dashboards",
-      "chart-1": { "$value": "{color.blue.500}",   "$type": "color" },
-      "chart-2": { "$value": "{color.green.500}",  "$type": "color" },
-      "chart-3": { "$value": "{color.am.500}",     "$type": "color" },
-      "chart-4": { "$value": "{color.violet.500}", "$type": "color" },
-      "chart-5": { "$value": "{color.red.500}",    "$type": "color" }
-    }
-  },
-  "spacing": {
+  "$description": "BizJAMS (B2B) — Color는 JAMS 2.1 semantic을 상속. Space·Radius·B2B 전용 토큰은 여기서 정의.",
+
+  "$extends": "jams-2.1/semantic.tokens.json",
+
+  "space": {
+    "$description": "BizJAMS는 데스크톱 밀도에 맞게 독자 space 스케일 정의",
     "component": {
-      "xs": { "$value": "{spacing.1}", "$type": "dimension" },
-      "sm": { "$value": "{spacing.2}", "$type": "dimension" },
-      "md": { "$value": "{spacing.3}", "$type": "dimension" },
-      "lg": { "$value": "{spacing.4}", "$type": "dimension" },
-      "xl": { "$value": "{spacing.6}", "$type": "dimension" }
+      "xs":  { "$value": "{spacing.4}",  "$type": "dimension", "$description": "4px — 아이콘-텍스트" },
+      "sm":  { "$value": "{spacing.6}",  "$type": "dimension", "$description": "6px — compact 인풋" },
+      "md":  { "$value": "{spacing.10}", "$type": "dimension", "$description": "10px — 버튼 패딩" },
+      "lg":  { "$value": "{spacing.14}", "$type": "dimension", "$description": "14px — 카드 내부" },
+      "xl":  { "$value": "{spacing.20}", "$type": "dimension", "$description": "20px — 모달 내부" }
     },
     "layout": {
-      "xs": { "$value": "{spacing.4}",  "$type": "dimension" },
-      "sm": { "$value": "{spacing.6}",  "$type": "dimension" },
-      "md": { "$value": "{spacing.8}",  "$type": "dimension" },
-      "lg": { "$value": "{spacing.12}", "$type": "dimension" },
-      "xl": { "$value": "{spacing.16}", "$type": "dimension" }
+      "xs":  { "$value": "{spacing.12}", "$type": "dimension", "$description": "12px — 섹션 내부" },
+      "sm":  { "$value": "{spacing.20}", "$type": "dimension", "$description": "20px — 섹션 간" },
+      "md":  { "$value": "{spacing.28}", "$type": "dimension", "$description": "28px — 블록 간" },
+      "lg":  { "$value": "{spacing.40}", "$type": "dimension", "$description": "40px — 페이지 섹션 간" },
+      "xl":  { "$value": "{spacing.56}", "$type": "dimension", "$description": "56px — 페이지 상하 여백" },
+      "sidebar": { "$value": "240px", "$type": "dimension", "$description": "사이드바 폭 고정값" }
+    }
+  },
+
+  "radius": {
+    "$description": "BizJAMS — B2B는 더 각진(conservative) radius 사용",
+    "component": {
+      "xs":   { "$value": "{radius.2}",  "$type": "dimension", "$description": "2px — 태그·배지" },
+      "sm":   { "$value": "{radius.4}",  "$type": "dimension", "$description": "4px — 인풋·버튼 xs" },
+      "md":   { "$value": "{radius.6}",  "$type": "dimension", "$description": "6px — 버튼 기본" },
+      "lg":   { "$value": "{radius.8}",  "$type": "dimension", "$description": "8px — 카드" },
+      "xl":   { "$value": "{radius.12}", "$type": "dimension", "$description": "12px — 모달·패널" },
+      "pill": { "$value": "{radius.999}", "$type": "dimension" }
+    }
+  },
+
+  "color": {
+    "$description": "BizJAMS 전용 추가 색상. 기본 color.* 는 JAMS 2.1 semantic 상속.",
+    "bg": {
+      "sidebar":        { "$value": "{color.gray.950}",  "$type": "color", "$description": "사이드바 배경" },
+      "sidebar-active": { "$value": "{color.gray.800}",  "$type": "color", "$description": "사이드바 활성 항목" },
+      "table-header":   { "$value": "{color.gray.50}",   "$type": "color", "$description": "테이블 헤더" },
+      "table-hover":    { "$value": "{color.gray.50}",   "$type": "color", "$description": "테이블 행 hover" }
+    },
+    "text": {
+      "on-sidebar":  { "$value": "{color.gray.100}",  "$type": "color", "$description": "사이드바 위 텍스트" },
+      "on-sidebar-secondary": { "$value": "{color.gray.500}", "$type": "color" }
+    },
+    "icon": {
+      "on-sidebar":  { "$value": "{color.gray.300}",  "$type": "color" }
+    },
+    "data": {
+      "$description": "데이터 시각화 (차트·그래프) 전용 색상",
+      "1": { "$value": "{color.blue.500}",   "$type": "color" },
+      "2": { "$value": "{color.green.500}",  "$type": "color" },
+      "3": { "$value": "{color.orange.500}", "$type": "color" },
+      "4": { "$value": "{color.violet.500}", "$type": "color" },
+      "5": { "$value": "{color.red.500}",    "$type": "color" },
+      "6": { "$value": "{color.yellow.500}", "$type": "color" }
     }
   }
 }

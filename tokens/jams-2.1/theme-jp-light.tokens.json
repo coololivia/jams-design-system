@@ -1,21 +1,25 @@
 {
-  "$description": "JAMS 2.1 — JP Brand (Violet), Light Mode",
+  "$description": "JAMS 2.1 — JP Brand, Light Mode. ⚠ 브랜드 컬러 미확정 — 컬러 세트 도착 대기 중.",
+  "$status": "placeholder",
   "color": {
-    "primary":        { "$value": "{color.violet.500}", "$type": "color" },
-    "primary-hover":  { "$value": "{color.violet.600}", "$type": "color" },
-    "primary-active": { "$value": "{color.violet.700}", "$type": "color" },
     "bg": {
-      "base":     { "$value": "{color.white}",      "$type": "color" },
-      "surface":  { "$value": "{color.gray.50}",    "$type": "color" },
-      "elevated": { "$value": "{color.white}",      "$type": "color" }
+      "interactive":         { "$value": "TODO", "$type": "color", "$description": "TODO: JP 브랜드 컬러 입력 필요" },
+      "interactive-hover":   { "$value": "TODO", "$type": "color" },
+      "interactive-active":  { "$value": "TODO", "$type": "color" },
+      "brand":               { "$value": "TODO", "$type": "color" },
+      "brand-dim":           { "$value": "TODO", "$type": "color" },
+      "brand-subtle":        { "$value": "TODO", "$type": "color" },
+      "brand-subtle-hover":  { "$value": "TODO", "$type": "color" }
     },
     "text": {
-      "default":    { "$value": "{color.near-black}",  "$type": "color" },
-      "secondary":  { "$value": "{color.gray.600}",    "$type": "color" },
-      "on-primary": { "$value": "{color.white}",       "$type": "color" }
+      "brand": { "$value": "TODO", "$type": "color" }
     },
     "border": {
-      "default": { "$value": "{color.gray.200}", "$type": "color" }
+      "brand":        { "$value": "TODO", "$type": "color" },
+      "brand-subtle": { "$value": "TODO", "$type": "color" }
+    },
+    "icon": {
+      "brand": { "$value": "TODO", "$type": "color" }
     }
   }
 }

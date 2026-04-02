@@ -38,7 +38,8 @@
   - **Red**: #FBF5F5 ~ #450A0A — 에러/위험
   - **Yellow**: #FAF9EC ~ #4B2407 — 경고
   - **Green**: #EAFAF4 ~ #073B28 — 성공
-  - **Violet**: #F5F3FF ~ #2E1065 — JP 브랜드 프라이머리
+  - **Violet**: #F5F3FF ~ #2E1065
+  - ⚠ **JP 브랜드**: 컬러 미확정 — 새로 지정 예정
 - 스페이싱 (4px 그리드 기반: 0~96px)
 - 타이포그래피 (Pretendard, xs~5xl)
 - 그림자 (sm, md, lg, xl)
@@ -47,7 +48,7 @@
 
 ## 3. JAMS 2.1 (B2C) — Canonical
 소비자향 서비스를 위한 디자인 시스템입니다.
-- **3개 브랜드 테마**: JK (Blue-Indigo #1B55F6), AM (Orange #FF6D12), JP (Violet #8B5CF6)
+- **3개 브랜드 테마**: JK (Blue-Indigo #1B55F6), AM (Orange #FF6D12), JP (컬러 미확정 — 새로 지정 예정)
 - **2개 모드**: 라이트/다크
 - 총 6개 테마 조합
 - **다크/라이트 모드 컬러 로직** (Figma "status" 프레임 기준):

@@ -1,0 +1,40 @@
+{
+  "$description": "플로팅 버튼 섹션 — JAMS 2.1. DTCG 토큰 기준.",
+  "$figmaSource": "https://www.figma.com/design/Dojrcqpr6br5B6BNkj08jR/JAMS-2.0?m=dev",
+  "$figmaSection": "플로팅 버튼",
+  "$status": "extracted-from-figma",
+
+  "components": {
+
+    "button.floating": {
+      "$description": "플로팅 CTA 버튼 — 어두운 배경의 pill 형태. 이모지(왼쪽) + 텍스트 + 화살표(오른쪽)",
+      "props": {
+        "leftIcon": { "type": "boolean", "default": true },
+        "rightIcon": { "type": "boolean", "default": true },
+        "label": { "type": "string", "default": "버튼명" }
+      },
+      "layout": {
+        "flow": "Horizontal",
+        "height": "Fixed (40px)",
+        "radius": "unit-999 (pill)",
+        "padding": { "left": "unit-10", "right": "unit-12" },
+        "gap": "unit-4"
+      },
+      "tokens": {
+        "bg": "color.bg.dark",
+        "text": "color.text.inverse",
+        "leftIcon": "color.icon.brand",
+        "rightIcon": "color.icon.inverse"
+      },
+      "icons": [
+        { "name": "emoji-tip", "size": "32×32" },
+        { "name": "system-arrowright", "size": "16×16" }
+      ],
+      "$status": "✅ confirmed"
+    }
+  },
+
+  "progress": {
+    "button.floating": "✅ confirmed"
+  }
+}

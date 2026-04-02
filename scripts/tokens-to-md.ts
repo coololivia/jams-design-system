@@ -267,7 +267,11 @@ function generateComponentDocs() {
     // States
     if (spec.states) {
       md += `## States\n\n`;
-      md += spec.states.map((s: string) => `- ${s}`).join("\n");
+      if (Array.isArray(spec.states)) {
+        md += spec.states.map((s: string) => `- ${s}`).join("\n");
+      } else {
+        md += Object.entries(spec.states).filter(([k]) => !k.startsWith('$')).map(([k, v]: [string, any]) => `- **${k}**${v.$description ? ': ' + v.$description : ''}`).join("\n");
+      }
       md += `\n\n`;
     }
 

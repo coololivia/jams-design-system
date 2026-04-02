@@ -1,0 +1,71 @@
+{
+  "$description": "텍스트 버튼 섹션 — JAMS 2.1. DTCG 토큰 기준.",
+  "$figmaSource": "https://www.figma.com/design/Dojrcqpr6br5B6BNkj08jR/JAMS-2.0?m=dev",
+  "$figmaSection": "텍스트 버튼",
+  "$status": "extracted-from-figma",
+
+  "components": {
+
+    "ButtonText": {
+      "$description": "텍스트 전용 버튼 — 배경/테두리 없이 텍스트만으로 동작하는 인라인 버튼",
+      "props": {
+        "variant": {
+          "type": "enum",
+          "values": ["normal", "underline"]
+        },
+        "color": {
+          "type": "enum",
+          "values": ["button.text.brand", "button.text.primary", "button.text.secondary"],
+          "$description": "DTCG 토큰명으로 color 선택"
+        },
+        "size": {
+          "type": "enum",
+          "values": ["13", "14", "16"],
+          "$description": "폰트 크기 (px)"
+        },
+        "weight": {
+          "type": "enum",
+          "values": ["400", "500"]
+        }
+      },
+      "layout": {
+        "flow": "Horizontal",
+        "width": "Hug",
+        "height": "Hug",
+        "padding": "none",
+        "border": "none",
+        "bg": "none"
+      },
+      "sizeSpecs": {
+        "13": { "height": "Hug (18px)", "$typography": "c1" },
+        "14": { "height": "Hug (20px)", "$typography": "b4" },
+        "16": { "height": "Hug (22px)", "$typography": "b2" }
+      },
+      "tokens": {
+        "button.text.brand": { "text": "color.text.brand", "$status": "✅ confirmed" },
+        "button.text.primary": { "text": "color.text.primary", "$status": "✅ confirmed" },
+        "button.text.secondary": { "text": "color.text.secondary", "$status": "✅ confirmed" }
+      },
+      "variantOverrides": {
+        "normal": { "textDecoration": "none" },
+        "underline": { "textDecoration": "underline" }
+      },
+      "darkMode": "있음",
+      "$status": "✅ confirmed"
+    }
+  },
+
+  "matrix": {
+    "$description": "variant(2) × color(3) × size(3) × weight(2) = 36 조합",
+    "total": 36,
+    "axes": {
+      "rows": "variant(normal, underline) × size(13, 14, 16)",
+      "columns": "color(brand, primary) × weight(400, 500)",
+      "$note": "secondary는 별도 열로 존재"
+    }
+  },
+
+  "progress": {
+    "ButtonText": "✅ confirmed"
+  }
+}

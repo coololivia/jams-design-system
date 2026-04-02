@@ -1,0 +1,165 @@
+{
+  "$description": "D-Button — JAMS 2.1 컴포넌트 스펙. DTCG 토큰 기준.",
+  "$figmaSource": "https://www.figma.com/design/Dojrcqpr6br5B6BNkj08jR/JAMS-2.0?m=dev&node-id=73-251",
+  "$codeConnect": "src/components/Button.tsx",
+  "$status": "extracted-from-figma",
+
+  "name": "D-Button",
+  "figmaType": "Main component",
+  "systems": ["jams-2.1", "biz-jams"],
+
+  "categories": {
+    "$description": "4개 시각 카테고리 — 시각적 무게(Visual Weight) 순으로 정렬. Heavy → Light",
+    "filled": {
+      "$description": "■ Heavy — 배경색이 채워진 주요 버튼. Primary action",
+      "weight": "heavy",
+      "variants": ["button.filled.primary", "button.filled.brand", "button.filled.brand-dim", "button.filled.subtle"]
+    },
+    "outlined": {
+      "$description": "□ Heavy — 테두리만 있는 보조 버튼. Secondary action",
+      "weight": "heavy",
+      "variants": ["button.outlined.default", "button.outlined.brand", "button.outlined.pill"]
+    },
+    "borderless": {
+      "$description": "_ Light — 테두리 없는 텍스트 버튼. Tertiary action",
+      "weight": "light",
+      "variants": ["button.borderless.default", "button.borderless.pill", "button.borderless.subtle"]
+    },
+    "iconOnly": {
+      "$description": "● Light — 아이콘만 있는 버튼. 공간 절약. 툴바, 닫기 등. 별도 섹션(아이콘/이모지 버튼)에서 관리",
+      "weight": "light",
+      "$note": "기본 버튼 격자가 아닌 '아이콘/이모지 버튼' 섹션에 별도 정의"
+    }
+  },
+
+  "props": {
+    "variant": {
+      "type": "enum",
+      "values": [
+        "button.filled.primary", "button.filled.brand", "button.filled.brand-dim", "button.filled.subtle",
+        "button.outlined.default", "button.outlined.brand", "button.outlined.pill",
+        "button.borderless.default", "button.borderless.pill", "button.borderless.subtle"
+      ],
+      "default": "button.filled.primary"
+    },
+    "state": {
+      "type": "enum",
+      "values": ["default", "D-hover", "disabled", "loading"],
+      "default": "default",
+      "$description": "D-hover는 Figma에서의 hover 상태 이름"
+    },
+    "size": {
+      "type": "enum",
+      "values": ["lg", "md", "sm", "xs"],
+      "heights": { "lg": "52px", "md": "48px", "sm": "40px", "xs": "32px" },
+      "default": "lg"
+    },
+    "D-leftIcon": { "type": "boolean", "default": true },
+    "label": { "type": "string", "default": "버튼명" },
+    "D-rightIcon": { "type": "boolean", "default": true },
+    "rightIcon": { "type": "instance-swap", "default": "icon" }
+  },
+
+  "sizes": {
+    "lg": {
+      "height": "52px", "padding": "{space.component.lg} {space.component.xl}",
+      "gap": "{space.component.xs}", "borderRadius": "{radius.component.md}",
+      "fontSize": "16px (b2)", "leftIconSize": "20px", "rightIconSize": "14px"
+    },
+    "md": {
+      "height": "48px", "padding": "{space.component.md} {space.component.lg}",
+      "gap": "{space.component.xs}", "borderRadius": "{radius.component.md}",
+      "fontSize": "16px (b2)", "leftIconSize": "20px", "rightIconSize": "14px"
+    },
+    "sm": {
+      "height": "40px", "padding": "{space.component.sm} {space.component.md}",
+      "gap": "{space.component.2xs}", "borderRadius": "{radius.component.md}",
+      "fontSize": "14px (b4)", "leftIconSize": "16px", "rightIconSize": "14px"
+    },
+    "xs": {
+      "height": "32px", "padding": "0 {space.component.sm}",
+      "gap": "{space.component.2xs}", "borderRadius": "{radius.component.xs}",
+      "fontSize": "13px (c1)", "leftIconSize": "16px", "rightIconSize": "14px"
+    }
+  },
+
+  "tokens": {
+    "filled": {
+      "bg": "color.bg.interactive",
+      "text": "color.icon.inverse",
+      "bg-hover": "color.bg.interactive-hover",
+      "bg-disabled": "color.bg.interactive-disabled",
+      "text-disabled": "color.text.disabled"
+    },
+    "outlined": {
+      "bg": "color.bg.base",
+      "border": "color.border.default",
+      "text": "color.text.primary",
+      "bg-hover": "color.bg.surface",
+      "text-disabled": "color.text.disabled"
+    },
+    "borderless": {
+      "bg": "color.bg.base",
+      "text": "color.text.primary",
+      "bg-hover": "color.bg.surface",
+      "text-disabled": "color.text.disabled"
+    },
+    "iconOnly": {
+      "$description": "iconOnly는 variant에 따라 filled/outlined/borderless/dark 스타일 적용"
+    }
+  },
+
+  "states": {
+    "default": { "$description": "기본 — variant 토큰 그대로 적용" },
+    "D-hover": {
+      "$description": "마우스 오버 — 동일 토큰명이지만 Figma Variable Mode가 hover resolve 값(더 진한 색)으로 자동 변환. opacity 방식 아님"
+    },
+    "disabled": {
+      "bg": "color.bg.interactive-disabled",
+      "text": "color.text.disabled",
+      "$description": "비활성 — opacity가 아닌 토큰 교체 방식"
+    },
+    "loading": {
+      "bg": "default와 동일",
+      "text": "숨김",
+      "spinner": "system-loading 20x20",
+      "$description": "로딩 — bg 유지, label 숨기고 spinner로 대체, 클릭 불가"
+    }
+  },
+
+  "theming": {
+    "modes": {
+      "Theme": { "values": ["JK", "AM"], "pending": ["JP"] },
+      "Component": { "values": ["Light"], "pending": ["Dark"] }
+    },
+    "mechanism": "color.bg.interactive 같은 시맨틱 토큰이 Theme mode에 따라 JK=blue2.500, AM=orange.500으로 resolve"
+  },
+
+  "icons": {
+    "leftIcon": { "size": 20, "$description": "D-leftIcon 토글로 표시/숨김" },
+    "rightIcon": { "size": 14, "$description": "rightIcon prop으로 인스턴스 교체 가능" },
+    "loadingSpinner": { "asset": "system-loading", "size": "20x20" }
+  },
+
+  "accessibility": {
+    "role": "button",
+    "keyboard": ["Enter", "Space"],
+    "aria": {
+      "disabled": "aria-disabled when disabled",
+      "busy": "aria-busy when loading",
+      "label": "iconOnly일 때 aria-label 필수"
+    },
+    "focusRing": "2px offset, color.border.default"
+  },
+
+  "usageGuidelines": {
+    "patterns": [
+      { "name": "Full width button", "description": "버튼이 부모 너비를 100% 채움. 모바일에서 주요 CTA용" },
+      { "name": "2개 이상의 Button 배치", "description": "Primary(filled) + Secondary(outlined) 조합 권장" },
+      { "name": "Icon button 단독 사용", "description": "IconOnly 사용 시 aria-label 필수" },
+      { "name": "콘텐츠 내 보조 버튼", "description": "콘텐츠 영역 안에 보조 action 버튼 배치" },
+      { "name": "Bottom 고정 버튼 배치", "description": "하단 고정(sticky) CTA 버튼. Shadow 사용하여 콘텐츠와 구분" },
+      { "name": "Text button과 함께 사용 시", "description": "Text 사이즈 버튼(borderless)과 일반 버튼 혼용 시 정렬 주의" }
+    ]
+  }
+}

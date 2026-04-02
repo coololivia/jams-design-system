@@ -1,0 +1,88 @@
+{
+  "$description": "button.icon.* — JAMS 2.1 아이콘 전용 버튼. 6 variants × 4 sizes",
+  "$figmaSource": "https://www.figma.com/design/Dojrcqpr6br5B6BNkj08jR/JAMS-2.0?node-id=758-61130&m=dev",
+  "$figmaSection": "아이콘/이모지 버튼 > ButtonIcononly",
+  "$status": "extracted-from-figma",
+
+  "name": "button.icon",
+  "systems": ["jams-2.1"],
+
+  "props": {
+    "size": {
+      "type": "enum",
+      "values": ["lg", "md", "sm", "xs"],
+      "heights": { "lg": "52px", "md": "48px", "sm": "40px", "xs": "32px" },
+      "default": "lg"
+    },
+    "variant": {
+      "type": "enum",
+      "values": ["button.icon.outlined", "button.icon.brand", "button.icon.primary", "button.icon.borderless", "button.icon.circle", "button.icon.dark"],
+      "default": "button.icon.outlined"
+    },
+    "icon": { "type": "instance-swap", "default": "icon" }
+  },
+
+  "sizes": {
+    "$description": "모든 variant 공통 — 정사각형(W=H). gap: unit-4 공통",
+    "lg": { "width": "52px", "height": "52px", "iconSize": "24px", "gap": "unit-4", "$status": "✅ confirmed" },
+    "md": { "width": "48px", "height": "48px", "iconSize": "24px", "gap": "unit-4", "$status": "✅ confirmed" },
+    "sm": { "width": "40px", "height": "40px", "iconSize": "20px", "gap": "unit-4", "$status": "⬜ iconSize 미확인" },
+    "xs": { "width": "32px", "height": "32px", "iconSize": "18px", "gap": "unit-4", "$status": "✅ confirmed" }
+  },
+
+  "variantTokens": {
+    "button.icon.outlined": {
+      "bg": "color.bg.base",
+      "icon": "color.icon.primary",
+      "border": "color.border.default (1px Inside)",
+      "radius": "radius.component.md",
+      "$status": "✅ confirmed"
+    },
+    "button.icon.brand": {
+      "bg": "color.bg.brand-dim",
+      "icon": "color.icon.inverse",
+      "border": "none",
+      "radius": "radius.component.pill",
+      "$status": "✅ confirmed"
+    },
+    "button.icon.primary": {
+      "bg": "color.bg.interactive",
+      "icon": "color.icon.inverse",
+      "border": "none",
+      "radius": "radius.component.pill",
+      "$status": "✅ confirmed"
+    },
+    "button.icon.borderless": {
+      "bg": "color.bg.base",
+      "icon": "color.icon.primary",
+      "border": "none",
+      "radius": "radius.component.pill",
+      "$status": "✅ confirmed"
+    },
+    "button.icon.circle": {
+      "bg": "color.bg.base",
+      "icon": "color.icon.primary",
+      "border": "color.border.default (1px Inside)",
+      "radius": "radius.component.pill",
+      "$status": "✅ confirmed"
+    },
+    "button.icon.dark": {
+      "bg": "color.bg.dark",
+      "icon": "color.icon.inverse",
+      "border": "none",
+      "radius": "radius.component.xs",
+      "$status": "✅ confirmed"
+    }
+  },
+
+  "accessibility": {
+    "role": "button",
+    "keyboard": ["Enter", "Space"],
+    "aria-label": "필수 — 아이콘만 있으므로 접근성 라벨 필수"
+  },
+
+  "progress": {
+    "total": "6 variants × 4 sizes = 24 조합",
+    "confirmed": "6/6 variants ✅"
+  }
+}

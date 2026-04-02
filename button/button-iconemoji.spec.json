@@ -1,0 +1,111 @@
+{
+  "$description": "아이콘/이모지 버튼 섹션 — JAMS 2.1. DTCG 토큰 기준.",
+  "$figmaSource": "https://www.figma.com/design/Dojrcqpr6br5B6BNkj08jR/JAMS-2.0?node-id=758-61130&m=dev",
+  "$figmaSection": "아이콘/이모지 버튼",
+  "$status": "extracted-from-figma",
+
+  "components": {
+
+    "ButtonIconEmoji": {
+      "$description": "아이콘 + 텍스트 세로 배치 버튼",
+      "props": {
+        "fontsize": { "type": "enum", "values": ["13", "11"] },
+        "Instance": { "type": "instance-swap", "default": "Buttonicon.icon" },
+        "label": { "type": "string", "default": "버튼명" }
+      },
+      "layout": {
+        "flow": "Vertical",
+        "width": "Fixed (34px)",
+        "height": "Hug",
+        "gap": "unit-4"
+      },
+      "darkMode": "있음",
+      "$status": "✅ confirmed"
+    },
+
+    "ButtonEmoji": {
+      "$description": "이모지 + 텍스트 가로 배치 버튼 (칩 형태)",
+      "props": {
+        "size": { "type": "enum", "values": ["40", "32"] },
+        "D-hover": { "type": "boolean" }
+      },
+      "darkMode": "있음",
+      "$status": "⬜ 세부 토큰/레이아웃 미확인"
+    },
+
+    "ButtonIcon": {
+      "$description": "소형 아이콘 버튼. 삭제(휴지통) 등 단일 액션용",
+      "props": {
+        "status": { "type": "enum", "values": ["default", "D-hover", "disabled"] },
+        "size": { "type": "enum", "values": ["20", "24"] }
+      },
+      "layout": {
+        "flow": "Horizontal",
+        "width": "Fixed (32px)",
+        "height": "Hug (32px)",
+        "padding": "unit-6"
+      },
+      "tokens": {
+        "default": {
+          "bg": "none",
+          "icon": "color.icon.secondary",
+          "border": "none"
+        },
+        "D-hover": { "$description": "TODO — hover 상태 토큰 확인 필요" },
+        "disabled": { "$description": "TODO — disabled 상태 토큰 확인 필요" }
+      },
+      "darkMode": "있음",
+      "$status": "✅ default confirmed"
+    },
+
+    "ButtonScrap": {
+      "$description": "스크랩/즐겨찾기 별(⭐) 토글 버튼",
+      "props": {
+        "state": { "type": "enum", "values": ["Off", "On"] },
+        "variant": { "type": "enum", "values": ["gray", "TODO"] }
+      },
+      "layout": {
+        "width": "Fixed (24px)",
+        "height": "Fixed (24px)"
+      },
+      "darkMode": "있음",
+      "$status": "✅ 기본 구조 confirmed"
+    },
+
+    "ButtonIcontext": {
+      "$description": "아이콘+텍스트 컨텍스트 버튼. '버튼명 >' 형태의 내비게이션/링크형",
+      "props": {
+        "state": { "type": "enum", "values": ["normal", "D-hover"] },
+        "label": { "type": "string", "default": "버튼명" },
+        "leftIcon": { "type": "boolean", "default": true },
+        "rightIcon": { "type": "boolean" }
+      },
+      "layout": {
+        "flow": "Horizontal",
+        "height": "Hug (20px)",
+        "radius": "radius.component.xs",
+        "padding": { "top": "6px", "bottom": "6px", "left": "unit-8", "right": "unit-8" },
+        "gap": "unit-4"
+      },
+      "tokens": {
+        "normal": {
+          "bg": "none",
+          "icon": "color.icon.secondary",
+          "text": "color.text.secondary",
+          "border": "none"
+        },
+        "D-hover": { "$description": "TODO — hover 상태 토큰 확인 필요" }
+      },
+      "darkMode": "있음",
+      "$status": "✅ normal confirmed"
+    }
+  },
+
+  "progress": {
+    "ButtonIconEmoji": "✅ confirmed",
+    "ButtonEmoji": "⬜ 세부 토큰 미확인",
+    "ButtonIcon": "✅ default confirmed",
+    "ButtonScrap": "✅ 기본 구조 confirmed",
+    "ButtonIcontext": "✅ normal confirmed"
+  }
+}

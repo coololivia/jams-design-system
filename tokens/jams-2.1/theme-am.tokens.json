@@ -1,0 +1,33 @@
+{
+  "$description": "JAMS 2.1 — AM Brand (Orange #FF6D12), Light Mode. semantic.tokens.json의 brand 계열 override. Dark mode brand: theme-am-dark.tokens.json",
+
+  "color": {
+    "bg": {
+      "interactive":        { "$value": "{color.orange.500}", "$type": "color" },
+      "interactive-hover":  { "$value": "{color.orange.600}", "$type": "color" },
+      "interactive-active": { "$value": "{color.orange.700}", "$type": "color" },
+      "brand":              { "$value": "{color.orange.500}", "$type": "color" },
+      "brand-dim":          { "$value": "{color.orange.400}", "$type": "color" },
+      "brand-subtle":       { "$value": "{color.orange.50}",  "$type": "color" },
+      "brand-subtle-hover": { "$value": "{color.orange.100}", "$type": "color" }
+    },
+    "text": {
+      "brand": { "$value": "{color.orange.500}", "$type": "color" }
+    },
+    "border": {
+      "brand":        { "$value": "{color.orange.500}", "$type": "color" },
+      "brand-subtle": { "$value": "{color.orange.200}", "$type": "color" },
+      "focus":        { "$value": "{color.orange.500}", "$type": "color" }
+    },
+    "icon": {
+      "brand": { "$value": "{color.orange.500}", "$type": "color" }
+    }
+  },
+  "radius": {
+    "component": {
+      "md": { "$value": "{radius.16}", "$type": "dimension", "$description": "AM 버튼 lg/md radius" },
+      "sm": { "$value": "{radius.12}", "$type": "dimension", "$description": "AM 버튼 sm radius" },
+      "xs": { "$value": "{radius.8}",  "$type": "dimension", "$description": "AM 버튼 xs radius" }
+    }
+  }
+}

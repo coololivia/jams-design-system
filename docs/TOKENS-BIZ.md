@@ -53,16 +53,16 @@ B2B용 디자인 토큰. 사이드바, 데이터 시각화 등 비즈니스 앱 
 
 | Token | Value | Type |
 |-------|-------|------|
-| `spacing.component.xs` | `{spacing.1}` | dimension |
-| `spacing.component.sm` | `{spacing.2}` | dimension |
-| `spacing.component.md` | `{spacing.3}` | dimension |
-| `spacing.component.lg` | `{spacing.4}` | dimension |
-| `spacing.component.xl` | `{spacing.6}` | dimension |
-| `spacing.layout.xs` | `{spacing.4}` | dimension |
-| `spacing.layout.sm` | `{spacing.6}` | dimension |
-| `spacing.layout.md` | `{spacing.8}` | dimension |
-| `spacing.layout.lg` | `{spacing.12}` | dimension |
-| `spacing.layout.xl` | `{spacing.16}` | dimension |
+| `spacing.component.xs` | `{spacing.4}` | dimension |
+| `spacing.component.sm` | `{spacing.8}` | dimension |
+| `spacing.component.md` | `{spacing.12}` | dimension |
+| `spacing.component.lg` | `{spacing.16}` | dimension |
+| `spacing.component.xl` | `{spacing.24}` | dimension |
+| `spacing.layout.xs` | `{spacing.16}` | dimension |
+| `spacing.layout.sm` | `{spacing.24}` | dimension |
+| `spacing.layout.md` | `{spacing.32}` | dimension |
+| `spacing.layout.lg` | `{spacing.48}` | dimension |
+| `spacing.layout.xl` | `{spacing.64}` | dimension |
 
 ## Theme: DARK
 

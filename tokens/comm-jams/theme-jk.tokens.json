@@ -1,0 +1,5 @@
+{
+  "$description": "CommJAMS — JK 테마 (Light). JAMS 2.1 theme-jk-light와 동일 값 사용. CommJAMS는 단일 테마(JK Light)만 지원.",
+  "$extends": "jams-2.1/theme-jk-light.tokens.json",
+  "$note": "Dark mode·AM 테마·JP 테마는 CommJAMS 스코프 밖. 필요 시 JAMS 2.1 사용."
+}

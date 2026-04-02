@@ -104,30 +104,49 @@ JAMS 2.1이 정의/소유하는 기본 값입니다. Core, Biz 모두 이 primit
 | Token | Value | Type |
 |-------|-------|------|
 | `spacing.0` | `0px` | dimension |
-| `spacing.1` | `4px` | dimension |
-| `spacing.2` | `8px` | dimension |
-| `spacing.3` | `12px` | dimension |
-| `spacing.4` | `16px` | dimension |
-| `spacing.5` | `20px` | dimension |
-| `spacing.6` | `24px` | dimension |
-| `spacing.8` | `32px` | dimension |
-| `spacing.10` | `40px` | dimension |
-| `spacing.12` | `48px` | dimension |
-| `spacing.16` | `64px` | dimension |
-| `spacing.20` | `80px` | dimension |
-| `spacing.24` | `96px` | dimension |
+| `spacing.1` | `1px` | dimension |
+| `spacing.2` | `2px` | dimension |
+| `spacing.4` | `4px` | dimension |
+| `spacing.6` | `6px` | dimension |
+| `spacing.8` | `8px` | dimension |
+| `spacing.10` | `10px` | dimension |
+| `spacing.12` | `12px` | dimension |
+| `spacing.14` | `14px` | dimension |
+| `spacing.16` | `16px` | dimension |
+| `spacing.18` | `18px` | dimension |
+| `spacing.20` | `20px` | dimension |
+| `spacing.24` | `24px` | dimension |
+| `spacing.32` | `32px` | dimension |
+| `spacing.36` | `36px` | dimension |
+| `spacing.40` | `40px` | dimension |
+| `spacing.48` | `48px` | dimension |
+| `spacing.56` | `56px` | dimension |
+| `spacing.64` | `64px` | dimension |
+| `spacing.80` | `80px` | dimension |
 
 ## radius
 
 | Token | Value | Type |
 |-------|-------|------|
-| `radius.none` | `0px` | dimension |
-| `radius.sm` | `4px` | dimension |
-| `radius.md` | `8px` | dimension |
-| `radius.lg` | `12px` | dimension |
-| `radius.xl` | `16px` | dimension |
-| `radius.2xl` | `24px` | dimension |
-| `radius.full` | `9999px` | dimension |
+| `radius.1` | `1px` | dimension |
+| `radius.2` | `2px` | dimension |
+| `radius.4` | `4px` | dimension |
+| `radius.6` | `6px` | dimension |
+| `radius.8` | `8px` | dimension |
+| `radius.10` | `10px` | dimension |
+| `radius.12` | `12px` | dimension |
+| `radius.14` | `14px` | dimension |
+| `radius.16` | `16px` | dimension |
+| `radius.20` | `20px` | dimension |
+| `radius.24` | `24px` | dimension |
+| `radius.32` | `32px` | dimension |
+| `radius.36` | `36px` | dimension |
+| `radius.40` | `40px` | dimension |
+| `radius.48` | `48px` | dimension |
+| `radius.56` | `56px` | dimension |
+| `radius.64` | `64px` | dimension |
+| `radius.80` | `80px` | dimension |
+| `radius.999` | `999px` | dimension |
 
 ## typography
 
@@ -135,31 +154,39 @@ JAMS 2.1이 정의/소유하는 기본 값입니다. Core, Biz 모두 이 primit
 |-------|-------|------|
 | `typography.font-family.sans` | `Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif` | fontFamily |
 | `typography.font-family.mono` | `JetBrains Mono, Menlo, Consolas, monospace` | fontFamily |
-| `typography.font-size.xs` | `12px` | dimension |
-| `typography.font-size.sm` | `14px` | dimension |
-| `typography.font-size.md` | `16px` | dimension |
-| `typography.font-size.lg` | `18px` | dimension |
-| `typography.font-size.xl` | `20px` | dimension |
-| `typography.font-size.2xl` | `24px` | dimension |
-| `typography.font-size.3xl` | `30px` | dimension |
-| `typography.font-size.4xl` | `36px` | dimension |
-| `typography.font-size.5xl` | `48px` | dimension |
 | `typography.font-weight.regular` | `400` | fontWeight |
 | `typography.font-weight.medium` | `500` | fontWeight |
 | `typography.font-weight.semibold` | `600` | fontWeight |
 | `typography.font-weight.bold` | `700` | fontWeight |
-| `typography.line-height.tight` | `1.25` | number |
-| `typography.line-height.normal` | `1.5` | number |
-| `typography.line-height.loose` | `1.75` | number |
+| `typography.styles.display1` | `{"fontSize":"48px","lineHeight":"64px","letterSpacing":"0.5px"}` | typography |
+| `typography.styles.display2` | `{"fontSize":"36px","lineHeight":"46px","letterSpacing":"0.5px"}` | typography |
+| `typography.styles.h1` | `{"fontSize":"32px","lineHeight":"42px","letterSpacing":"0.5px"}` | typography |
+| `typography.styles.h2` | `{"fontSize":"28px","lineHeight":"34px","letterSpacing":"0.5px"}` | typography |
+| `typography.styles.h3` | `{"fontSize":"24px","lineHeight":"32px","letterSpacing":"0.5px"}` | typography |
+| `typography.styles.h4` | `{"fontSize":"20px","lineHeight":"28px","letterSpacing":"0.5px"}` | typography |
+| `typography.styles.h5` | `{"fontSize":"18px","lineHeight":"24px","letterSpacing":"0px"}` | typography |
+| `typography.styles.b1` | `{"fontSize":"17px","lineHeight":"25px","letterSpacing":"0px"}` | typography |
+| `typography.styles.b2` | `{"fontSize":"16px","lineHeight":"24px","letterSpacing":"0px"}` | typography |
+| `typography.styles.b3` | `{"fontSize":"15px","lineHeight":"22px","letterSpacing":"0px"}` | typography |
+| `typography.styles.b4` | `{"fontSize":"14px","lineHeight":"20px","letterSpacing":"0px"}` | typography |
+| `typography.styles.c1` | `{"fontSize":"13px","lineHeight":"18px","letterSpacing":"0px"}` | typography |
+| `typography.styles.c2` | `{"fontSize":"12px","lineHeight":"17px","letterSpacing":"0px"}` | typography |
+| `typography.styles.c3` | `{"fontSize":"11px","lineHeight":"15px","letterSpacing":"0px"}` | typography |
 
 ## shadow
 
 | Token | Value | Type |
 |-------|-------|------|
-| `shadow.sm` | `0 1px 2px 0 rgba(0,0,0,0.05)` | shadow |
-| `shadow.md` | `0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1)` | shadow |
-| `shadow.lg` | `0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1)` | shadow |
-| `shadow.xl` | `0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1)` | shadow |
+| `shadow.default` | `0px 4px 16px 0px rgba(0,0,0,0.07)` | shadow |
+| `shadow.secondary` | `0px 4px 16px 0px rgba(0,0,0,0.12)` | shadow |
+| `shadow.tertiary` | `0px 0px 10px 0px rgba(0,0,0,0.06)` | shadow |
+| `shadow.up` | `0px -2px 12px 0px rgba(0,0,0,0.12)` | shadow |
+| `shadow.list` | `0px 4px 8px 0px rgba(0,0,0,0.2)` | shadow |
+| `shadow.white` | `0px 4px 20px 0px rgba(0,0,0,0.10)` | shadow |
+| `shadow.buttonbig` | `0px 0px 12px 0px rgba(0,0,0,0.20)` | shadow |
+| `shadow.buttonsmall` | `0px 0px 8px 0px rgba(0,0,0,0.10)` | shadow |
+| `shadow.bottomsheet` | `0px -4px 12px 0px rgba(0,0,0,0.08)` | shadow |
+| `shadow.inverse100` | `0px 4px 20px 0px rgba(0,0,0,10)` | shadow |
 
 ## opacity
 

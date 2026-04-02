@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JAMS Design System</title>
+<style>
+  :root { --bg: #0e0e10; --surface: #1a1a1e; --surface2: #232328; --text: #f1f2f3; --text2: #949ba8; --text3: #575f6c; --border: #292c32; --accent: #1B55F6; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: var(--bg); color: var(--text); }
+
+  /* Nav */
+  .nav { position: sticky; top: 0; z-index: 100; background: rgba(14,14,16,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 24px; }
+  .nav-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; gap: 32px; height: 56px; }
+  .nav-logo { font-size: 16px; font-weight: 700; white-space: nowrap; }
+  .nav-tabs { display: flex; gap: 4px; overflow-x: auto; }
+  .nav-tab { padding: 8px 16px; font-size: 13px; font-weight: 500; color: var(--text2); cursor: pointer; border-radius: 8px; white-space: nowrap; transition: all 0.15s; border: none; background: none; }
+  .nav-tab:hover { color: var(--text); background: var(--surface); }
+  .nav-tab.active { color: #fff; background: var(--accent); }
+
+  /* Content */
+  .content { max-width: 1400px; margin: 0 auto; padding: 40px 24px 80px; }
+  .page { display: none; }
+  .page.active { display: block; }
+
+  h2 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .page-desc { color: var(--text2); font-size: 15px; margin-bottom: 40px; }
+  .section { margin-bottom: 56px; }
+  .section-title { font-size: 18px; font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .section-desc { color: var(--text2); font-size: 13px; margin-top: -12px; margin-bottom: 20px; }
+
+  .badge { font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 999px; background: #292c32; color: var(--text2); }
+  .badge.canonical { background: #1B55F6; color: #fff; }
+  .badge.legacy { background: #741B1B; color: #FBF5F5; }
+  .badge.placeholder { background: #4B2407; color: #FAF9EC; }
+  .badge.todo { background: #AB6807; color: #FAF9EC; }
+
+  /* Palette Grid */
+  .palette { margin-bottom: 32px; }
+  .palette-name { font-size: 14px; font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+  .palette-name .hex { font-weight: 400; color: var(--text2); font-size: 12px; }
+  .steps { display: flex; gap: 4px; }
+  .step { flex: 1; min-width: 0; }
+  .swatch { aspect-ratio: 1; border-radius: 8px; position: relative; cursor: pointer; transition: transform 0.15s; border: 1px solid rgba(255,255,255,0.06); }
+  .swatch:hover { transform: scale(1.1); z-index: 1; }
+  .swatch.copied::after { content: '\2713'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+  .step-label { font-size: 10px; color: var(--text2); text-align: center; margin-top: 4px; }
+  .step-hex { font-size: 9px; color: var(--text2); text-align: center; opacity: 0.6; font-family: 'JetBrains Mono', monospace; }
+
+  /* Theme Cards */
+  .themes { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+  .theme-card { border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+  .theme-header { padding: 16px 20px; font-size: 14px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+  .theme-body { padding: 16px 20px; display: flex; flex-direction: column; gap: 12px; }
+  .theme-row { display: flex; align-items: center; gap: 12px; }
+  .theme-swatch { width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.06); }
+  .theme-token { font-size: 12px; font-family: 'JetBrains Mono', monospace; color: var(--text2); }
+  .theme-value { font-size: 11px; color: var(--text2); opacity: 0.6; }
+  .theme-card.light { background: #fff; }
+  .theme-card.light .theme-header { color: #1a1a1e; border-bottom: 1px solid #e6e8ea; }
+  .theme-card.light .theme-token { color: #575f6c; }
+  .theme-card.light .theme-value { color: #949ba8; }
+  .theme-card.light .theme-swatch { border-color: rgba(0,0,0,0.08); }
+  .theme-card.dark { background: #1a1a1e; }
+  .theme-card.dark .theme-header { border-bottom: 1px solid #292c32; }
+
+  /* Logic Bar */
+  .logic-bar { display: flex; height: 48px; border-radius: 12px; overflow: hidden; margin-bottom: 8px; }
+  .logic-segment { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; }
+  .logic-labels { display: flex; font-size: 10px; color: var(--text2); }
+  .logic-labels span { flex: 1; text-align: center; }
+
+  /* Token Table */
+  .token-table { width: 100%; border-collapse: collapse; }
+  .token-table th { text-align: left; font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 12px; border-bottom: 1px solid var(--border); }
+  .token-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); font-size: 13px; vertical-align: middle; }
+  .token-table tr:last-child td { border-bottom: none; }
+  .token-table code { font-family: 'JetBrains Mono', monospace; font-size: 12px; background: var(--surface); padding: 2px 6px; border-radius: 4px; }
+  .token-table .val { color: var(--text2); font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+  .token-table .desc { color: var(--text3); font-size: 12px; }
+
+  /* Typography Preview */
+  .type-preview { margin-bottom: 20px; padding: 20px; background: var(--surface); border-radius: 12px; }
+  .type-sample { margin-bottom: 4px; }
+  .type-meta { font-size: 11px; color: var(--text3); font-family: 'JetBrains Mono', monospace; }
+
+  /* Spacing Preview */
+  .spacing-row { display: flex; align-items: center; gap: 16px; margin-bottom: 8px; }
+  .spacing-bar { background: var(--accent); height: 24px; border-radius: 4px; opacity: 0.7; }
+  .spacing-label { font-size: 12px; font-family: 'JetBrains Mono', monospace; color: var(--text2); min-width: 80px; }
+  .spacing-val { font-size: 11px; color: var(--text3); min-width: 50px; }
+
+  /* Radius Preview */
+  .radius-grid { display: flex; flex-wrap: wrap; gap: 16px; }
+  .radius-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .radius-box { width: 64px; height: 64px; background: var(--accent); opacity: 0.5; }
+  .radius-name { font-size: 11px; color: var(--text2); font-family: 'JetBrains Mono', monospace; }
+
+  /* Shadow Preview */
+  .shadow-grid { display: flex; flex-wrap: wrap; gap: 24px; }
+  .shadow-item { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .shadow-box { width: 120px; height: 80px; background: #fff; border-radius: 12px; }
+  .shadow-name { font-size: 11px; color: var(--text2); font-family: 'JetBrains Mono', monospace; }
+
+  /* Component Card */
+  .comp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .comp-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .comp-card h4 { font-size: 16px; margin-bottom: 8px; }
+  .comp-card .variants { font-size: 12px; color: var(--text2); margin-bottom: 12px; }
+  .comp-card .chip { display: inline-block; font-size: 11px; padding: 2px 8px; background: var(--surface2); border-radius: 4px; margin: 2px; color: var(--text2); }
+  .comp-card .link { font-size: 12px; color: var(--accent); text-decoration: none; }
+  .comp-card .link:hover { text-decoration: underline; }
+  .comp-systems { display: flex; gap: 4px; margin-top: 8px; }
+
+  /* Motion Preview */
+  .motion-row { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+  .motion-bar-wrap { flex: 1; height: 32px; background: var(--surface); border-radius: 8px; position: relative; overflow: hidden; cursor: pointer; }
+  .motion-bar-fill { height: 100%; background: var(--accent); border-radius: 8px; width: 0; opacity: 0.7; }
+  .motion-bar-wrap:hover .motion-bar-fill { width: 100%; }
+  .motion-label { min-width: 100px; font-size: 12px; font-family: 'JetBrains Mono', monospace; color: var(--text2); }
+
+  .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--accent); color: #fff; padding: 8px 20px; border-radius: 999px; font-size: 13px; font-weight: 500; transition: transform 0.3s; z-index: 999; }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  @media (max-width: 768px) {
+    .nav-inner { gap: 16px; }
+    .content { padding: 24px 16px 60px; }
+    .steps { flex-wrap: wrap; }
+    .step { min-width: 28px; flex: 0 0 calc(100%/6 - 4px); }
+    .themes { grid-template-columns: 1fr; }
+  }
+
+  /* === BUTTON SHOWCASE === */
+  .sc-wrap-all { background: #F7F8FA; border-radius: 16px; padding: 24px; }
+  .sc-theme-bar { display: flex; gap: 8px; margin-bottom: 20px; }
+  .sc-theme-btn { padding: 6px 18px; border-radius: 8px; border: 1px solid var(--sc-bd,#DDE0E6); background: var(--sc-card-bg,#fff); font-size: 13px; font-weight: 600; cursor: pointer; color: var(--sc-txt2,#575F6C); transition: all 0.15s; }
+  .sc-theme-btn.sc-active { background: var(--sc-primary, #1B55F6); color: #fff; border-color: var(--sc-primary, #1B55F6); }
+  .sc-basic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .sc-card { background: var(--sc-card-bg,#fff); border: 1px solid var(--sc-card-bd,#E8EAED); border-radius: 12px; padding: 20px; transition: background 0.2s, border-color 0.2s; }
+  .sc-card-title { font-size: 14px; font-weight: 700; color: var(--sc-txt1,#1A1C22); margin-bottom: 8px; padding-bottom: 10px; border-bottom: 1px solid var(--sc-surf-h,#F0F1F3); }
+  .sc-card-desc { font-size: 10px; color: var(--sc-txt3,#949BA8); margin-bottom: 14px; line-height: 1.5; }
+  .sc-sublabel { font-size: 10px; font-weight: 600; color: var(--sc-txt3,#949BA8); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; margin-top: 14px; }
+  .sc-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .sc-state-col { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .sc-state-label { font-size: 10px; color: #949BA8; }
+
+  /* JAMS Button base */
+  /* gap: lg/md=6px, sm/xs=4px · leftIcon: lg/md=20px, sm/xs=16px · rightIcon: 전체=14px */
+  .jb { display: inline-flex; align-items: center; justify-content: center; gap: 4px; font-weight: 600; cursor: pointer; border: none; font-family: 'Pretendard', -apple-system, sans-serif; white-space: nowrap; line-height: 1; height: 40px; padding: 0 12px; border-radius: var(--sc-r-sm, 10px); font-size: 14px; transition: background 0.1s; }
+  .jb-52 { height: 52px; padding: 0 16px; border-radius: var(--sc-r-lg, 10px); font-size: 16px; gap: 6px; }
+  .jb-48 { height: 48px; padding: 0 14px; border-radius: var(--sc-r-md, 10px); font-size: 16px; gap: 6px; }
+  .jb-40 { height: 40px; padding: 0 12px; border-radius: var(--sc-r-sm, 10px); font-size: 14px; gap: 4px; }
+  .jb-32 { height: 32px; padding: 0 10px; border-radius: var(--sc-r-xs, 6px); font-size: 13px; gap: 4px; }
+  .jb-filled { background: var(--sc-primary, #1B55F6); color: #fff; }
+  .jb-filled:hover { background: var(--sc-hover, #1447D4); }
+  .jb-filled-hover { background: var(--sc-hover, #1447D4); color: #fff; }
+  .jb-brand50 { background: var(--sc-b50-bg, #EEF3FE); color: var(--sc-primary, #1B55F6); border: 1px solid var(--sc-b50-border, #BED0FC); }
+  .jb-brandtext { background: var(--sc-surf,#F7F8FA); color: var(--sc-primary,#1B55F6); border: 1px solid var(--sc-bd,#DDE0E6); }
+  .jb-outlined { background: var(--sc-surf,#F7F8FA); color: var(--sc-txt1,#1A1C22); border: 1px solid var(--sc-bd,#DDE0E6); }
+  .jb-outlined:hover { background: var(--sc-surf-h,#F0F1F3); }
+  .jb-borderless { background: transparent; color: var(--sc-txt2,#575F6C); }
+  .jb-borderless:hover { background: var(--sc-surf,#F7F8FA); }
+  .jb-bl-brand50 { background: var(--sc-b50-bg,#EEF3FE); color: var(--sc-primary,#1B55F6); border: none; }
+  .jb-pill { border-radius: 999px !important; }
+  .jb-disabled { background: var(--sc-dis-bg,#F0F1F3) !important; color: var(--sc-dis-txt,#BBBFC5) !important; border-color: transparent !important; cursor: not-allowed; }
+  .jb-loading { background: var(--sc-primary, #1B55F6) !important; color: transparent !important; pointer-events: none; min-width: 80px; position: relative; }
+  .jb-loading::after { content: ''; position: absolute; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: sc-spin 0.7s linear infinite; }
+  @keyframes sc-spin { to { transform: rotate(360deg); } }
+  /* Icon-only */
+  .jb-sq { padding: 0; width: 40px; }
+  .jb-sq.jb-52 { width: 52px; }
+  .jb-sq.jb-48 { width: 48px; }
+  .jb-sq.jb-32 { width: 32px; }
+  .jb-circle { border-radius: 999px !important; }
+  .jb-icon-r { border-radius: 10px; background: var(--sc-surf,#F7F8FA); border: 1px solid var(--sc-bd,#DDE0E6); color: var(--sc-txt2,#575F6C); }
+  .jb-icon-circle { border-radius: 999px !important; background: var(--sc-surf,#F7F8FA); border: 1px solid var(--sc-bd,#DDE0E6); color: var(--sc-txt2,#575F6C); }
+  .jb-icon-borderless { background: transparent; color: var(--sc-txt2,#575F6C); border: none; }
+  .jb-icon-dark { background: rgba(25,27,32,0.65); color: #fff; border: none; }
+  /* Filter */
+  .jb-filter { height: 32px; padding: 0 12px; border-radius: 999px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; transition: all 0.1s; }
+  .jb-f-off { background: var(--sc-surf,#F7F8FA); color: var(--sc-txt3,#949BA8); border: 1px solid var(--sc-bd,#D1D6DA); }
+  .jb-f-on { background: var(--sc-primary, #1B55F6); color: #fff; }
+  /* Text */
+  .jb-text { background: none; border: none; cursor: pointer; font-family: inherit; font-size: 14px; font-weight: 500; padding: 0; }
+  .jb-text-brand { color: var(--sc-primary, #1B55F6); }
+  .jb-text-gray900 { color: var(--sc-txt1,#131618); }
+  .jb-text-gray500 { color: var(--sc-txt3,#9EA8AF); }
+  .jb-text-ul { text-decoration: underline; }
+  /* Special */
+  .jb-scrap { background: none; border: none; cursor: pointer; font-size: 20px; line-height: 1; width: 24px; height: 24px; padding: 0; }
+  .jb-counter { background: var(--sc-surf-h,#F0F1F3); color: var(--sc-txt2,#636C74); border-radius: 8px; }
+  .jb-search { background: var(--sc-primary, #1B55F6); color: #fff; border-radius: 999px !important; }
+  .jb-top { width: 56px; height: 56px; padding: 0; background: var(--sc-card-bg,#fff); border: 1px solid var(--sc-bd,#D1D6DA); border-radius: 999px; color: var(--sc-txt1,#131618); font-size: 18px; cursor: pointer; }
+  .jb-product { background: var(--sc-card-bg,#fff); border: 1px solid var(--sc-bd,#D1D6DA); color: var(--sc-txt2,#636C74); border-radius: 999px; height: 32px; padding: 0 12px; font-size: 12px; font-weight: 500; cursor: pointer; }
+  .jb-pagearrow { width: 64px; height: 32px; padding: 0; background: var(--sc-surf,#F7F8FA); border: 1px solid var(--sc-bd,#D1D6DA); border-radius: 6px; font-size: 12px; color: var(--sc-txt2,#636C74); cursor: pointer; }
+  .jb-pagenum { min-width: 32px; height: 32px; padding: 0 4px; border-radius: 6px; font-size: 13px; font-weight: 600; background: transparent; border: none; color: var(--sc-txt2,#636C74); cursor: pointer; }
+  .jb-pagenum-active { background: var(--sc-primary, #1B55F6); color: #fff; }
+  .jb-icontext { background: none; border: none; cursor: pointer; font-size: 13px; font-weight: 500; color: var(--sc-txt2,#636C74); display: inline-flex; align-items: center; gap: 2px; padding: 0; font-family: inherit; }
+  .jb-fw { width: 100%; justify-content: center; }
+  /* === Button Matrix === */
+  .sc-card-matrix { grid-column: 1 / -1; }
+  .sc-matrix-wrap { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--sc-surf-h,#F0F1F3); }
+  .sc-matrix-wrap:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+  .sc-matrix-type { font-size: 11px; font-weight: 700; color: var(--sc-txt2,#575F6C); margin-bottom: 8px; font-family: 'SFMono-Regular','Menlo',monospace; background: var(--sc-surf,#F7F8FA); display: inline-block; padding: 2px 8px; border-radius: 4px; }
+  .sc-matrix-grid { display: grid; grid-template-columns: 28px repeat(4, minmax(80px, 1fr)); gap: 6px 8px; align-items: center; }
+  .sc-matrix-col-hd { font-size: 10px; color: var(--sc-txt3,#949BA8); font-weight: 500; text-align: center; padding-bottom: 2px; }
+  .sc-matrix-sz { font-size: 11px; color: var(--sc-txt3,#B0B5BF); font-weight: 600; text-align: right; padding-right: 4px; }
+  .jb-b500-h { background: var(--sc-hover,#1447D4); color:#fff; filter:brightness(0.92); border:none; cursor:default; }
+  .jb-b400-h { background: var(--sc-hover,#1447D4); color:#fff; filter:brightness(1.1) saturate(0.7); border:none; cursor:default; }
+  .jb-b50-h  { background:var(--sc-b50-bg,#D6E4FC); color:var(--sc-primary,#1B55F6); border:1px solid var(--sc-b50-border,#BED0FC); cursor:default; filter:brightness(0.95); }
+  .jb-outlined-h { background:var(--sc-surf-h,#F0F1F3); color:var(--sc-txt1,#1A1C22); border:1px solid var(--sc-bd,#DDE0E6); cursor:default; }
+  .jb-borderless-h { background:var(--sc-surf,#F7F8FA); color:var(--sc-txt2,#575F6C); border:none; cursor:default; }
+  .jb-bl-b50-h { background:var(--sc-b50-bg,#D6E4FC); color:var(--sc-primary,#1B55F6); border:none; cursor:default; filter:brightness(0.95); }
+  .jb-icon-r-h { background:var(--sc-surf-h,#F0F1F3); border:1px solid var(--sc-bd,#DDE0E6); color:var(--sc-txt2,#575F6C); border-radius:10px; cursor:default; }
+  .jb-icon-circle-h { background:var(--sc-surf-h,#F0F1F3); border:1px solid var(--sc-bd,#DDE0E6); color:var(--sc-txt2,#575F6C); border-radius:999px !important; cursor:default; }
+  .jb-icon-bl-h { background:var(--sc-surf,#F7F8FA); color:var(--sc-txt2,#575F6C); border:none; cursor:default; }
+  .jb-icon-dark-h { background:rgba(25,27,32,0.85); color:#fff; border:none; cursor:default; }
+  /* ButtonText hover / disabled */
+  .jb-text-h   { text-decoration: underline; }
+  .jb-text-dis { color: var(--sc-dis-txt,#BBBFC5) !important; cursor: not-allowed; }
+  /* Filter hover / disabled */
+  .jb-f-off-h { background:var(--sc-surf-h,#F0F1F3); color:var(--sc-txt2,#575F6C); border:1px solid var(--sc-bd,#DDE0E6); cursor:default; border-radius:999px; }
+  .jb-f-on-h  { background:var(--sc-hover,#1447D4); color:#fff; cursor:default; border-radius:999px; }
+  .jb-f-dis   { background:var(--sc-dis-bg,#F0F1F3) !important; color:var(--sc-dis-txt,#BBBFC5) !important; border-color:transparent !important; cursor:not-allowed; border-radius:999px; }
+  /* ButtonFloating */
+  .jb-floating   { background:var(--sc-txt1,#1A1C22); color:var(--sc-card-bg,#fff); border-radius:999px; }
+  .jb-floating-h { background:rgba(26,28,34,0.7); color:#fff; border-radius:999px; cursor:default; }
+  /* ButtonIcon small 32×32 no bg */
+  .jb-icon-xs   { width:32px; height:32px; padding:0; background:transparent; border:none; color:var(--sc-txt3,#949BA8); display:inline-flex; align-items:center; justify-content:center; border-radius:8px; cursor:pointer; font-size:16px; }
+  .jb-icon-xs-h { width:32px; height:32px; padding:0; background:var(--sc-surf,#F7F8FA); border:none; color:var(--sc-txt3,#949BA8); display:inline-flex; align-items:center; justify-content:center; border-radius:8px; cursor:default; font-size:16px; }
+  /* ButtonEmoji pill */
+  .jb-emoji    { display:inline-flex; align-items:center; gap:4px; background:var(--sc-surf,#F7F8FA); border:1px solid var(--sc-bd,#DDE0E6); border-radius:999px; padding:0 12px; height:40px; font-size:14px; font-weight:500; color:var(--sc-txt1,#1A1C22); cursor:pointer; font-family:inherit; }
+  .jb-emoji-sm { height:32px; font-size:13px; padding:0 10px; }
+  .jb-emoji-h  { background:var(--sc-surf-h,#F0F1F3); cursor:default; }
+  .jb-emoji-d  { background:var(--sc-dis-bg,#F0F1F3) !important; color:var(--sc-dis-txt,#BBBFC5) !important; border-color:transparent !important; cursor:not-allowed; }
+  /* ButtonIconEmoji vertical 34px */
+  .jb-iconemoji   { display:inline-flex; flex-direction:column; align-items:center; gap:4px; background:none; border:none; cursor:pointer; width:34px; font-size:11px; font-weight:500; color:var(--sc-txt1,#1A1C22); font-family:inherit; padding:0; line-height:1.2; }
+  .jb-iconemoji-h { opacity:0.55; cursor:default; }
+  /* ButtonScrap on */
+  .jb-scrap-on { background:none; border:none; cursor:pointer; font-size:20px; line-height:1; width:24px; height:24px; padding:0; color:#FFC107; }
+  /* Usage grid */
+  .sc-usage-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+  .sc-usage-card { background: #F7F8FA; border-radius: 10px; padding: 14px; }
+  .sc-usage-name { font-size: 12px; font-weight: 700; color: #1A1C22; margin-bottom: 4px; }
+  .sc-usage-note { font-size: 10px; color: #949BA8; margin-bottom: 10px; line-height: 1.5; }
+  /* Right page comp grid */
+  .sc-comp-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 16px; }
+  .sc-comp-card { background: #fff; border: 1px solid #E8EAED; border-radius: 12px; padding: 16px; }
+  .sc-comp-title { font-size: 13px; font-weight: 700; color: #1A1C22; margin-bottom: 4px; }
+  .sc-comp-desc { font-size: 10px; color: #949BA8; margin-bottom: 12px; line-height: 1.4; }
+  .sc-comp-row { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-bottom: 8px; }
+  .sc-bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .sc-dark-preview { background: #1A1C22; border-radius: 10px; padding: 12px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 8px; }
+  .sc-list-demo { border: 1px solid var(--sc-card-bd,#D1D6DA); border-radius: 10px; overflow: hidden; }
+  .sc-list-item { height: 44px; display: flex; align-items: center; padding: 0 16px; font-size: 15px; font-weight: 500; color: var(--sc-txt1,#131618); border-bottom: 1px solid var(--sc-card-bd,#D1D6DA); background: var(--sc-card-bg,#fff); }
+  .sc-list-item:last-child { border-bottom: none; }
+  @media (max-width: 900px) {
+    .sc-basic-grid { grid-template-columns: 1fr; }
+    .sc-comp-grid { grid-template-columns: repeat(2, 1fr); }
+    .sc-usage-grid { grid-template-columns: repeat(2, 1fr); }
+    .sc-bottom-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">JAMS</div>
+    <div class="nav-tabs">
+      <button class="nav-tab active" data-page="color">Color</button>
+      <button class="nav-tab" data-page="typography">Typography</button>
+      <button class="nav-tab" data-page="spacing">Spacing</button>
+      <button class="nav-tab" data-page="radius">Radius</button>
+      <button class="nav-tab" data-page="shadow">Shadow</button>
+      <button class="nav-tab" data-page="button">Button</button>
+    </div>
+  </div>
+</nav>
+
+<div class="content">
+  <!-- COLOR -->
+  <div class="page active" id="page-color">
+    <h2>Color</h2>
+    <p class="page-desc">Figma에서 추출한 실제 값 기반 · 스와치 클릭 = 토큰명 복사 · hex는 아래 텍스트 클릭</p>
+    <p class="page-desc" style="margin-top:4px;color:var(--text2,#768091);font-size:12px;">2026.04.02 JAMS 2.1 컬러 팔레트로 업데이트</p>
+    <div class="section">
+      <div class="section-title">Palettes <span class="badge">8 palettes × 11 steps = 88 colors</span></div>
+      <div id="palettes"></div>
+    </div>
+    <div class="section">
+      <div class="section-title">Dark / Light Mode Logic</div>
+      <div id="logic"></div>
+    </div>
+    <div class="section">
+      <div class="section-title">Theme Preview <span class="badge">8 themes</span></div>
+      <div class="themes" id="themes"></div>
+    </div>
+  </div>
+
+  <!-- TYPOGRAPHY -->
+  <div class="page" id="page-typography">
+    <h2>Typography</h2>
+    <p class="page-desc">Pretendard 기반 타이포그래피 스케일</p>
+    <div class="section">
+      <div class="section-title">Font Size Scale</div>
+      <div id="type-previews"></div>
+    </div>
+    <div class="section">
+      <div class="section-title">Font Weight</div>
+      <div id="type-weights"></div>
+    </div>
+    <div class="section">
+      <div class="section-title">Font Family</div>
+      <table class="token-table">
+        <tr><th>Token</th><th>Value</th></tr>
+        <tr><td><code>font-family.sans</code></td><td class="val">Pretendard, -apple-system, system-ui, sans-serif</td></tr>
+        <tr><td><code>font-family.mono</code></td><td class="val">JetBrains Mono, Menlo, Consolas, monospace</td></tr>
+      </table>
+    </div>
+    <div class="section">
+      <div class="section-title">Letter Spacing 규칙</div>
+      <table class="token-table">
+        <tr><th>Category</th><th>Letter Spacing</th><th>Note</th></tr>
+        <tr><td>Display, H1~H4</td><td class="val">0.5px</td><td class="desc">제목/디스플레이 텍스트</td></tr>
+        <tr><td>H5, Body, Caption</td><td class="val">0px</td><td class="desc">본문 이하 텍스트</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- SPACING -->
+  <div class="page" id="page-spacing">
+    <h2>Spacing</h2>
+    <p class="page-desc">2px base, 4px grid 기반 스페이싱 · 20단계</p>
+    <div class="section">
+      <div class="section-title">Primitive Scale <span class="badge">20 steps · 0~80px</span></div>
+      <div id="spacing-bars"></div>
+    </div>
+    <div class="section">
+      <div class="section-title">Semantic Spacing</div>
+      <table class="token-table">
+        <tr><th>Token</th><th>Value</th><th>Usage</th></tr>
+        <tr><td><code>spacing.component.xs</code></td><td class="val">4px</td><td class="desc">아이콘-텍스트 간격</td></tr>
+        <tr><td><code>spacing.component.sm</code></td><td class="val">8px</td><td class="desc">인풋 내부 패딩</td></tr>
+        <tr><td><code>spacing.component.md</code></td><td class="val">12px</td><td class="desc">버튼 패딩</td></tr>
+        <tr><td><code>spacing.component.lg</code></td><td class="val">16px</td><td class="desc">카드 내부 패딩</td></tr>
+        <tr><td><code>spacing.component.xl</code></td><td class="val">24px</td><td class="desc">모달 내부 패딩</td></tr>
+        <tr><td><code>spacing.layout.xs</code></td><td class="val">16px</td><td class="desc">섹션 내부</td></tr>
+        <tr><td><code>spacing.layout.sm</code></td><td class="val">24px</td><td class="desc">섹션 간</td></tr>
+        <tr><td><code>spacing.layout.md</code></td><td class="val">32px</td><td class="desc">블록 간</td></tr>
+        <tr><td><code>spacing.layout.lg</code></td><td class="val">48px</td><td class="desc">페이지 섹션 간</td></tr>
+        <tr><td><code>spacing.layout.xl</code></td><td class="val">64px</td><td class="desc">페이지 상하 여백</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- RADIUS -->
+  <div class="page" id="page-radius">
+    <h2>Radius</h2>
+    <p class="page-desc">Border radius 스케일 · 19단계 · 클릭 시 토큰명 복사</p>
+    <div class="section">
+      <div class="section-title">Radius Scale</div>
+      <div id="radius-grid" class="radius-grid"></div>
+    </div>
+  </div>
+
+  <!-- SHADOW -->
+  <div class="page" id="page-shadow">
+    <h2>Shadow</h2>
+    <p class="page-desc">Figma JAMS 2.0 Shadow 페이지 기준 · Light/Dark 프리뷰</p>
+    <div class="section">
+      <div class="section-title">Shadow Styles <span class="badge">9 styles</span></div>
+      <div class="shadow-grid" id="shadows"></div>
+    </div>
+  </div>
+
+  <!-- BUTTON -->
+  <div class="page" id="page-button">
+    <h2>Button</h2>
+    <p class="page-desc">JAMS 2.0 Figma Button 페이지 전체 스펙 — 12개 섹션 완료</p>
+
+    <!-- VISUAL SHOWCASE -->
+    <div class="section">
+      <div class="section-title">Style Guide <span class="badge canonical">시각 쇼케이스</span></div>
+      <div class="sc-wrap-all" id="sc-wrap-all" style="--sc-primary:#1B55F6;--sc-hover:#1447D4;--sc-b50-bg:#EEF3FE;--sc-b50-border:#BED0FC;--sc-r-lg:10px;--sc-r-md:10px;--sc-r-sm:10px;--sc-r-xs:6px;--sc-surf:#F7F8FA;--sc-surf-h:#F0F1F3;--sc-bd:#DDE0E6;--sc-txt1:#1A1C22;--sc-txt2:#575F6C;--sc-txt3:#949BA8;--sc-dis-bg:#F0F1F3;--sc-dis-txt:#BBBFC5;--sc-card-bg:#fff;--sc-card-bd:#E8EAED;">
+
+        <!-- Theme toggle -->
+        <div class="sc-theme-bar">
+          <button class="sc-theme-btn sc-active" data-theme="jk" onclick="setScTheme('jk')">JK</button>
+          <button class="sc-theme-btn" data-theme="am" onclick="setScTheme('am')">AM</button>
+          <button class="sc-theme-btn" data-theme="jk-dark" onclick="setScTheme('jk-dark')">JK Dark</button>
+          <button class="sc-theme-btn" data-theme="am-dark" onclick="setScTheme('am-dark')">AM Dark</button>
+        </div>
+
+        <!-- 기본 버튼 2×2 -->
+        <div class="sc-basic-grid">
+
+          <!-- Filled Matrix -->
+          <div class="sc-card sc-card-matrix" id="matrix-filled">
+            <div class="sc-card-title">Filled <span class="badge">4 types × 4 sizes × 4 states = 64</span></div>
+            <p class="sc-card-desc">Heavy button. bg가 채워진 주요 버튼. Primary action.</p>
+          </div>
+
+          <!-- Outlined Matrix -->
+          <div class="sc-card sc-card-matrix" id="matrix-outlined">
+            <div class="sc-card-title">Outlined <span class="badge">3 types × 4 sizes × 4 states = 48</span></div>
+            <p class="sc-card-desc">Heavy button. 테두리만 있는 보조 버튼. Secondary action.</p>
+          </div>
+
+          <!-- Borderless Matrix -->
+          <div class="sc-card sc-card-matrix" id="matrix-borderless">
+            <div class="sc-card-title">Borderless <span class="badge">3 types × 4 sizes × 4 states = 48</span></div>
+            <p class="sc-card-desc">Light button. 배경·테두리 없는 Tertiary 버튼.</p>
+          </div>
+
+          <!-- IconOnly Matrix -->
+          <div class="sc-card sc-card-matrix" id="matrix-icononly">
+            <div class="sc-card-title">IconOnly <span class="badge">6 types × 4 sizes × 3 states = 72</span></div>
+            <p class="sc-card-desc">아이콘만 있는 정사각형 버튼. Loading 없음.</p>
+          </div>
+
+        </div><!-- /sc-basic-grid -->
+
+        <!-- Usage Guidelines -->
+        <div class="sc-card" style="margin-bottom:16px;padding:0;overflow:hidden;">
+          <img src="usage-guidelines.png" alt="Usage Guidelines" style="width:100%;display:block;">
+        </div>
+
+        <!-- Text / IconText Matrix -->
+        <div class="sc-card" style="margin-bottom:16px;" id="matrix-text">
+          <div class="sc-card-title">Text / IconText <span class="badge">8 variants × 3 states</span></div>
+          <p class="sc-card-desc">배경·테두리·패딩 없음. ButtonText(brand · gray950 · gray500) × 3 sizes + ButtonIcontext × 2.</p>
+        </div>
+
+        <!-- Icon / Emoji Matrix -->
+        <div class="sc-card" style="margin-bottom:16px;" id="matrix-iconemoji">
+          <div class="sc-card-title">Icon / Emoji <span class="badge">5 types × 3 states</span></div>
+          <p class="sc-card-desc">ButtonIconEmoji(세로·34px) · ButtonEmoji(pill 40/32) · ButtonIcon(32×32·no bg) · ButtonScrap(24×24).</p>
+        </div>
+
+        <!-- Filter Matrix -->
+        <div class="sc-card" style="margin-bottom:16px;" id="matrix-filter">
+          <div class="sc-card-title">Filter <span class="badge">3 types × 5 states</span></div>
+          <p class="sc-card-desc">h=32px 고정 pill. off ↔ on Variable Mode 전환. FilterItem · FilterIcon(text) · FilterIcon(icon).</p>
+        </div>
+
+        <!-- Floating / Special Matrix -->
+        <div class="sc-card" style="margin-bottom:16px;" id="matrix-floating">
+          <div class="sc-card-title">Floating / Special <span class="badge">4 types × 3 states</span></div>
+          <p class="sc-card-desc">ButtonFloating(dark pill h40) · ButtonSearch(brand pill h40/32) · ButtonTop(circle 56px).</p>
+        </div>
+
+        <!-- Pagination + ETC -->
+        <div class="sc-bottom-grid">
+          <div class="sc-card">
+            <div class="sc-card-title">Pagination</div>
+            <div class="sc-sublabel">Arrow</div>
+            <div class="sc-row" style="margin-bottom:12px;">
+              <button class="jb jb-pagearrow">‹ 이전</button>
+              <button class="jb jb-pagearrow">다음 ›</button>
+              <button class="jb jb-pagearrow">전체 ›</button>
+            </div>
+            <div class="sc-sublabel">Number</div>
+            <div class="sc-row" style="margin-bottom:12px;">
+              <button class="jb jb-pagenum jb-pagenum-active">1</button>
+              <button class="jb jb-pagenum">2</button>
+              <button class="jb jb-pagenum">3</button>
+              <button class="jb jb-pagenum">4</button>
+              <button class="jb jb-pagenum">5</button>
+            </div>
+            <div class="sc-sublabel">Counter</div>
+            <div class="sc-row" style="gap:4px;margin-bottom:12px;">
+              <span style="font-size:14px;font-weight:600;color:#1A1C22;">1</span>
+              <span style="color:#949BA8;">/</span>
+              <span style="color:#949BA8;">99</span>
+            </div>
+            <div class="sc-sublabel">White (dark bg)</div>
+            <div class="sc-dark-preview">
+              <button class="jb jb-pagenum" style="color:#fff;">‹</button>
+              <span style="color:rgba(255,255,255,0.5);font-size:13px;">1 / 99</span>
+              <button class="jb jb-pagenum" style="color:#fff;">›</button>
+            </div>
+            <div class="sc-dark-preview" style="margin-bottom:0;">
+              <button class="jb jb-pagenum jb-pagenum-active">1</button>
+              <button class="jb jb-pagenum" style="color:rgba(255,255,255,0.5);">2</button>
+              <button class="jb jb-pagenum" style="color:rgba(255,255,255,0.5);">3</button>
+            </div>
+          </div>
+          <div class="sc-card">
+            <div class="sc-card-title">ETC</div>
+            <div class="sc-sublabel">Count</div>
+            <div class="sc-row" style="margin-bottom:12px;">
+              <button class="jb jb-counter" style="gap:6px;height:40px;padding:0 12px;border-radius:8px;">
+                <span style="font-size:14px;">목록</span>
+                <span style="color:var(--sc-primary,#1B55F6);font-weight:700;font-size:14px;">12</span>
+              </button>
+              <button class="jb jb-counter jb-32" style="gap:4px;height:32px;padding:0 10px;border-radius:6px;">
+                <span style="font-size:13px;">목록</span>
+                <span style="color:var(--sc-primary,#1B55F6);font-weight:700;font-size:13px;">12</span>
+              </button>
+            </div>
+            <div class="sc-sublabel">Close / Icon</div>
+            <div class="sc-row" style="margin-bottom:12px;">
+              <div class="sc-state-col"><button class="jb jb-sq jb-icon-borderless jb-circle">✕</button><span class="sc-state-label">borderless</span></div>
+              <div class="sc-state-col"><button class="jb jb-sq jb-icon-circle">✕</button><span class="sc-state-label">circle</span></div>
+              <div class="sc-state-col"><button class="jb jb-sq jb-icon-dark jb-circle">✕</button><span class="sc-state-label">dark</span></div>
+            </div>
+            <div class="sc-sublabel">ListButton</div>
+            <div class="sc-list-demo">
+              <div class="sc-list-item">액션 1</div>
+              <div class="sc-list-item">액션 2</div>
+              <div class="sc-list-item">액션 3</div>
+            </div>
+          </div>
+        </div><!-- /sc-bottom-grid -->
+
+      </div><!-- /sc-wrap-all -->
+    </div>
+
+    <!-- Figma 사용 가이드라인 -->
+    <div class="section">
+      <div class="section-title">Figma 사용 가이드라인 <span class="badge todo">변경 불가 영역 주의</span></div>
+      <p class="section-desc">개발된 모든 Asset은 우측 속성 패널의 변경 사항만 반영합니다.</p>
+      <table class="token-table" style="margin-bottom:20px;">
+        <tr><th colspan="2">변경 불가능한 영역 (임의 수정 금지)</th></tr>
+        <tr><td>타이포그래피</td><td class="desc">font-size / weight / line-height / letter-spacing</td></tr>
+        <tr><td>색상 / 선</td><td class="desc">fill / stroke</td></tr>
+        <tr><td>레이아웃</td><td class="desc">padding / gap</td></tr>
+      </table>
+      <table class="token-table">
+        <tr><th>#</th><th>단계</th><th>선택 옵션</th></tr>
+        <tr><td>1</td><td>버튼 타입(variant) 선택</td><td class="val">button.filled.primary / button.filled.brand / button.filled.brand-dim / button.filled.subtle / button.outlined.brand / button.outlined.default / button.outlined.pill / button.borderless.default / button.borderless.pill / button.borderless.subtle</td></tr>
+        <tr><td>2</td><td>버튼 상태(state) 선택</td><td class="val">default / D-hover / disabled / loading</td></tr>
+        <tr><td>3</td><td>버튼 사이즈 선택</td><td class="val">52 / 48 / 40 / 32</td></tr>
+        <tr><td>4</td><td>아이콘 on/off 토글</td><td class="val">D-lefticon / D-righticon 스위치</td></tr>
+        <tr><td>5</td><td>버튼명(label) 변경</td><td class="val">label 필드 직접 입력</td></tr>
+        <tr><td>6</td><td>아이콘 사이즈 변경</td><td class="val">D-righticon: 12/14/16/18 · basicicon: 20/22/24/32/48</td></tr>
+        <tr><td>7</td><td>아이콘 변경</td><td class="val">basicicon → Choose instance에서 아이콘명 검색 후 교체</td></tr>
+      </table>
+    </div>
+
+    <!-- 공통 State 규칙 -->
+    <div class="section">
+      <div class="section-title">공통 State 규칙 <span class="badge canonical">전 버튼 적용</span></div>
+      <table class="token-table">
+        <tr><th>State</th><th>메커니즘</th><th>설명</th></tr>
+        <tr><td><code>D-hover</code></td><td class="val">Variable Mode resolve</td><td class="desc">토큰명 동일, Figma Variable Mode가 더 진한 값으로 자동 resolve. opacity 아님</td></tr>
+        <tr><td><code>disabled</code></td><td class="val">토큰 교체</td><td class="desc">opacity 방식 아님. bg/text 토큰 자체가 disabled 전용(<code>color.bg.interactive-disabled</code>, <code>color.text.disabled</code>)으로 교체</td></tr>
+        <tr><td><code>loading</code></td><td class="val">label→spinner</td><td class="desc">bg 유지, label 숨김, <code>system-loading 20×20</code> 스피너로 대체. D-Button에만 있음</td></tr>
+        <tr><td><code>dark mode</code></td><td class="val">Component Variable Mode</td><td class="desc">모든 버튼에 dark 버전 존재. 별도 토큰 불필요 — Mode만 전환</td></tr>
+        <tr><td><code>JK / AM 테마</code></td><td class="val">Theme Variable Mode</td><td class="desc">동일 시맨틱 토큰이 JK=blue, AM=orange로 자동 resolve</td></tr>
+      </table>
+    </div>
+
+    <!-- 공통 토큰 패턴 -->
+    <div class="section">
+      <div class="section-title">공통 토큰 패턴</div>
+      <table class="token-table">
+        <tr><th>카테고리</th><th>bg</th><th>border</th><th>text / icon</th></tr>
+        <tr><td>Filled (brand)</td><td class="val">color.bg.interactive</td><td class="val">—</td><td class="val">color.icon.inverse (흰색)</td></tr>
+        <tr><td>Outlined</td><td class="val">color.bg.base</td><td class="val">color.border.default</td><td class="val">color.text.primary</td></tr>
+        <tr><td>Borderless</td><td class="val">color.bg.base / none</td><td class="val">—</td><td class="val">color.text.secondary / color.icon.primary</td></tr>
+        <tr><td>Disabled</td><td class="val">color.bg.interactive-disabled</td><td class="val">—</td><td class="val">color.text.disabled</td></tr>
+        <tr><td>Brand text / count</td><td class="val">—</td><td class="val">—</td><td class="val">color.text.brand</td></tr>
+        <tr><td>Dark filled</td><td class="val">color.bg.dark</td><td class="val">—</td><td class="val">color.text.inverse / color.icon.inverse</td></tr>
+        <tr><td>Base (circle 등)</td><td class="val">color.bg.base</td><td class="val">color.border.default</td><td class="val">color.text.primary / color.icon.primary</td></tr>
+      </table>
+    </div>
+
+    <!-- D-Button -->
+    <div class="section">
+      <div class="section-title">D-Button <span class="badge canonical">기본 버튼</span></div>
+      <p class="section-desc">10 variants × 4 states × 4 sizes = 160 조합. Figma Variable Mode로 JK/AM 테마 자동 전환.</p>
+
+      <div class="section-title" style="font-size:15px; margin-top:32px;">Size Matrix</div>
+      <table class="token-table">
+        <tr><th>Size</th><th>Height</th><th>Padding (v/h)</th><th>Gap</th><th>Radius JK</th><th>Radius AM</th><th>Font</th><th>Left Icon</th><th>Right Icon</th></tr>
+        <tr><td><code>lg (52)</code></td><td class="val">52px</td><td class="val">14 / 16</td><td class="val">6</td><td class="val">10</td><td class="val">16</td><td class="val">16px (b2)</td><td class="val">20px</td><td class="val">14px</td></tr>
+        <tr><td><code>md (48)</code></td><td class="val">48px</td><td class="val">12 / 14</td><td class="val">6</td><td class="val">10</td><td class="val">16</td><td class="val">16px (b2)</td><td class="val">20px</td><td class="val">14px</td></tr>
+        <tr><td><code>sm (40)</code></td><td class="val">40px</td><td class="val">10 / 12</td><td class="val">4</td><td class="val">10</td><td class="val">12</td><td class="val">14px (b4)</td><td class="val">16px</td><td class="val">14px</td></tr>
+        <tr><td><code>xs (32)</code></td><td class="val">32px</td><td class="val">0 / 10</td><td class="val">4</td><td class="val">6</td><td class="val">8</td><td class="val">13px (c1)</td><td class="val">16px</td><td class="val">14px</td></tr>
+      </table>
+      <p class="section-desc" style="margin-top:8px;">JK와 AM 테마는 radius 값이 다름 (Figma 버튼 Radius 가이드라인). pill 계열(button.outlined.pill, button.borderless.pill)은 radius=999.</p>
+
+      <div class="section-title" style="font-size:15px; margin-top:32px;">Variant Tokens <span class="badge">10 variants</span></div>
+      <table class="token-table">
+        <tr><th>Token (DTCG)</th><th>Category</th><th>Fill</th><th>Icon/Text</th><th>Border</th><th>Note</th></tr>
+        <tr><td><code>button.filled.primary</code></td><td>Filled</td><td class="val">color.bg.interactive</td><td class="val">color.icon.inverse</td><td class="val">—</td><td></td></tr>
+        <tr><td><code>button.filled.brand</code></td><td>Filled</td><td class="val">color.bg.brand</td><td class="val">color.icon.inverse</td><td class="val">—</td><td></td></tr>
+        <tr><td><code>button.filled.brand-dim</code></td><td>Filled</td><td class="val">color.bg.brand-dim</td><td class="val">color.icon.inverse</td><td class="val">—</td><td></td></tr>
+        <tr><td><code>button.filled.subtle</code></td><td>Filled-subtle</td><td class="val">color.bg.brand-subtle</td><td class="val">color.text.brand</td><td class="val">color.border.brand 1px</td><td class="desc">연한 bg + 브랜드 텍스트</td></tr>
+        <tr><td><code>button.outlined.brand</code></td><td>Outlined-brand</td><td class="val">color.bg.base</td><td class="val">color.text.brand</td><td class="val">color.border.brand 1px</td><td class="desc">outlined + 브랜드 텍스트</td></tr>
+        <tr><td><code>button.outlined.default</code></td><td>Outlined</td><td class="val">color.bg.base</td><td class="val">color.text.primary</td><td class="val">color.border.default 1px</td><td></td></tr>
+        <tr><td><code>button.outlined.pill</code></td><td>Outlined-pill</td><td class="val">color.bg.base</td><td class="val">color.text.primary</td><td class="val">color.border.default 1px</td><td class="desc">radius 999</td></tr>
+        <tr><td><code>button.borderless.default</code></td><td>Borderless</td><td class="val">color.bg.base</td><td class="val">color.text.primary</td><td class="val">—</td><td></td></tr>
+        <tr><td><code>button.borderless.pill</code></td><td>Borderless-pill</td><td class="val">color.bg.base</td><td class="val">color.text.primary</td><td class="val">—</td><td class="desc">radius 999</td></tr>
+        <tr><td><code>button.borderless.subtle</code></td><td>Borderless-brand</td><td class="val">color.bg.brand-subtle</td><td class="val">color.text.brand</td><td class="val">—</td><td class="desc">연한 bg + 브랜드 텍스트</td></tr>
+      </table>
+    </div>
+
+    <!-- 아이콘/이모지 버튼 -->
+    <div class="section">
+      <div class="section-title">아이콘/이모지 버튼</div>
+
+      <div class="section-title" style="font-size:15px;">button.icon.* <span class="badge">6 variants × 4 sizes</span></div>
+      <p class="section-desc">정사각형(W=H). 모든 variant 공통 gap=unit-4.</p>
+      <table class="token-table">
+        <tr><th>Token (DTCG)</th><th>Shape</th><th>bg</th><th>icon</th><th>border</th></tr>
+        <tr><td><code>button.icon.outlined</code></td><td>Rounded rect</td><td class="val">color.bg.base</td><td class="val">color.icon.primary</td><td class="val">color.border.default 1px</td></tr>
+        <tr><td><code>button.icon.brand</code></td><td>Rounded rect</td><td class="val">color.bg.brand-dim</td><td class="val">color.icon.inverse</td><td class="val">—</td></tr>
+        <tr><td><code>button.icon.primary</code></td><td>Rounded rect</td><td class="val">color.bg.interactive</td><td class="val">color.icon.inverse</td><td class="val">—</td></tr>
+        <tr><td><code>button.icon.borderless</code></td><td>Rounded rect</td><td class="val">color.bg.base</td><td class="val">color.icon.primary</td><td class="val">—</td></tr>
+        <tr><td><code>button.icon.circle</code></td><td>Circle</td><td class="val">color.bg.base</td><td class="val">color.icon.primary</td><td class="val">color.border.default 1px</td></tr>
+        <tr><td><code>button.icon.dark</code></td><td>Rounded rect</td><td class="val">color.bg.dark</td><td class="val">color.icon.inverse</td><td class="val">—</td></tr>
+      </table>
+
+      <div class="section-title" style="font-size:15px; margin-top:24px;">기타 아이콘/이모지 컴포넌트</div>
+      <table class="token-table">
+        <tr><th>컴포넌트</th><th>설명</th><th>Size</th><th>Key tokens</th></tr>
+        <tr><td><code>ButtonIconEmoji</code></td><td>아이콘+텍스트 세로 배치</td><td class="val">Fixed 34px W, Hug H</td><td class="val">gap: unit-4</td></tr>
+        <tr><td><code>ButtonEmoji</code></td><td>이모지+텍스트 pill 칩</td><td class="val">40 / 32</td><td class="val">—</td></tr>
+        <tr><td><code>ButtonIcon</code></td><td>소형 아이콘 단일 액션</td><td class="val">32×32</td><td class="val">bg: none, icon: color.icon.secondary</td></tr>
+        <tr><td><code>ButtonScrap</code></td><td>스크랩 별 토글</td><td class="val">24×24</td><td class="val">Off=빈별, On=노란별</td></tr>
+        <tr><td><code>ButtonIcontext</code></td><td>"버튼명 >" 링크형</td><td class="val">Hug × 20px</td><td class="val">text: color.text.secondary, icon: color.icon.secondary</td></tr>
+      </table>
+    </div>
+
+    <!-- 필터 버튼 -->
+    <div class="section">
+      <div class="section-title">필터 버튼</div>
+      <p class="section-desc">모두 h=32px 고정, pill shape. off=outlined, on=brand filled (Variable Mode).</p>
+      <table class="token-table">
+        <tr><th>컴포넌트</th><th>Props</th><th>off (미선택)</th><th>on (선택됨)</th></tr>
+        <tr><td><code>button.filter.icon-text</code></td><td class="val">state(off/on), variant(text/icon), mark(none/check/count)</td><td class="val">bg: color.bg.base, text: color.text.tertiary</td><td class="val">bg: color.bg.interactive, text: color.icon.inverse</td></tr>
+        <tr><td><code>button.filter.item</code></td><td class="val">state(off/on/disabled), variant(outlined)</td><td class="val">bg: color.bg.base, border: color.border.default, text: color.text.secondary</td><td class="val">bg: color.bg.interactive, text: color.icon.inverse</td></tr>
+        <tr><td><code>button.filter.icon-only</code></td><td class="val">size(40/32), state(off/on), label</td><td class="val">bg: color.bg.base, border: color.border.default</td><td class="val">bg: color.bg.interactive, icon: color.icon.inverse</td></tr>
+      </table>
+    </div>
+
+    <!-- 텍스트 버튼 -->
+    <div class="section">
+      <div class="section-title">텍스트 버튼 <span class="badge">ButtonText</span></div>
+      <p class="section-desc">배경/테두리/패딩 없음. 텍스트만. variant(2) × color(3) × size(3) × weight(2) = 36 조합.</p>
+      <table class="token-table">
+        <tr><th>Token (DTCG)</th><th>color token</th><th>variant</th><th>sizes</th></tr>
+        <tr><td><code>button.text.brand</code></td><td class="val">color.text.brand</td><td class="val">normal / underline</td><td class="val">13(c1) / 14(b4) / 16(b2)</td></tr>
+        <tr><td><code>button.text.primary</code></td><td class="val">color.text.primary</td><td class="val">normal / underline</td><td class="val">13 / 14 / 16</td></tr>
+        <tr><td><code>button.text.secondary</code></td><td class="val">color.text.secondary</td><td class="val">normal / underline</td><td class="val">13 / 14 / 16</td></tr>
+      </table>
+    </div>
+
+    <!-- 카운트 버튼 -->
+    <div class="section">
+      <div class="section-title">카운트 버튼</div>
+      <table class="token-table">
+        <tr><th>컴포넌트</th><th>Size</th><th>Layout</th><th>Tokens</th></tr>
+        <tr><td><code>ButtonCounter</code></td><td class="val">40 / 32</td><td class="val">Horizontal, radius-xs, padding lr: unit-12, gap: unit-4</td><td class="val">bg: color.bg.surface, label: color.text.secondary, count: color.text.brand</td></tr>
+        <tr><td><code>ButtonPaginationCounterWhite</code></td><td class="val">—</td><td class="val">어두운 배경 위 흰색 카운터 변형</td><td class="val">—</td></tr>
+      </table>
+    </div>
+
+    <!-- 기타 (ETC) -->
+    <div class="section">
+      <div class="section-title">기타 (ETC)</div>
+      <table class="token-table">
+        <tr><th>컴포넌트</th><th>설명</th><th>Size</th><th>Key tokens</th></tr>
+        <tr><td><code>button.search.lg / .sm</code></td><td>검색 CTA pill 버튼</td><td class="val">40 / 32, radius unit-999</td><td class="val">bg: color.bg.interactive, icon+text: color.icon.inverse</td></tr>
+        <tr><td><code>button.top</code></td><td>스크롤 상단 이동 원형 버튼</td><td class="val">56×56 circle</td><td class="val">bg: color.bg.base, border: color.border.default, icon: system-arrowup 18×18</td></tr>
+        <tr><td><code>ButtonProduct</code></td><td>상품 안내 outlined pill</td><td class="val">Hug pill</td><td class="val">bg: color.bg.base, border: color.border.default, text: color.text.secondary</td></tr>
+      </table>
+    </div>
+
+    <!-- 페이지네이션 -->
+    <div class="section">
+      <div class="section-title">페이지네이션 버튼</div>
+      <table class="token-table">
+        <tr><th>컴포넌트</th><th>Props</th><th>Size</th><th>Note</th></tr>
+        <tr><td><code>ButtonPaginationArrow</code></td><td class="val">variant(next/previous/all), state(default/D-hover)</td><td class="val">64×32</td><td class="desc">system-arrowleft02, system-arrowright02 (12×12)</td></tr>
+        <tr><td><code>ButtonPaginationCounter</code></td><td class="val">variant(default/more)</td><td class="val">Hug 41px × 20px</td><td class="desc">"1/99" 형식. more=숫자+화살표</td></tr>
+        <tr><td><code>ButtonPaginationNumber</code></td><td class="val">—</td><td class="val">—</td><td class="desc badge todo">세부 미확인</td></tr>
+      </table>
+    </div>
+
+    <!-- 리스트 / 플로팅 -->
+    <div class="section">
+      <div class="section-title">리스트 버튼 / 플로팅 버튼</div>
+      <table class="token-table">
+        <tr><th>컴포넌트</th><th>설명</th><th>Size</th><th>Key tokens</th></tr>
+        <tr><td><code>ListbuttonBox</code></td><td>액션시트 행 버튼, Separator로 구분</td><td class="val">Hug 100px × Hug 44px</td><td class="val">bg: color.bg.base, text: color.text.primary, radius: none</td></tr>
+        <tr><td><code>button.floating</code></td><td>어두운 pill CTA. 이모지+텍스트+화살표</td><td class="val">Hug × 40px, radius unit-999</td><td class="val">bg: color.bg.dark, text: color.text.inverse, leftIcon: color.icon.brand</td></tr>
+      </table>
+    </div>
+
+    <!-- 섹션 완료 현황 -->
+    <div class="section">
+      <div class="section-title">Figma Page Sections <span class="badge canonical">전체 완료</span></div>
+      <table class="token-table">
+        <tr><th>섹션</th><th>Spec 파일</th><th>상태</th></tr>
+        <tr><td>기본 버튼</td><td class="val">button.spec.json + button.matrix.json</td><td><span class="badge canonical">완료</span></td></tr>
+        <tr><td>아이콘/이모지 버튼</td><td class="val">button-icononly.spec.json + button-iconemoji.spec.json</td><td><span class="badge canonical">완료</span></td></tr>
+        <tr><td>ButtonIcontext</td><td class="val">button-iconemoji.spec.json (포함)</td><td><span class="badge canonical">완료</span></td></tr>
+        <tr><td>필터 버튼</td><td class="val">button-filter.spec.json</td><td><span class="badge canonical">완료</span></td></tr>
+        <tr><td>텍스트 버튼</td><td class="val">button-text.spec.json</td><td><span class="badge canonical">완료</span></td></tr>
+        <tr><td>카운트 버튼</td><td class="val">button-counter.spec.json</td><td><span class="badge canonical">완료</span></td></tr>
+        <tr><td>기타 (ETC)</td><td class="val">button-etc.spec.json</td><td><span class="badge canonical">완료</span></td></tr>
+        <tr><td>페이지네이션 버튼</td><td class="val">button-pagination.spec.json</td><td><span class="badge canonical">완료</span></td></tr>
+        <tr><td>리스트 버튼</td><td class="val">button-list.spec.json</td><td><span class="badge canonical">완료</span></td></tr>
+        <tr><td>플로팅</td><td class="val">button-floating.spec.json</td><td><span class="badge canonical">완료</span></td></tr>
+        <tr><td>사용 가이드라인 / Radius</td><td class="val">button.md (포함)</td><td><span class="badge canonical">완료</span></td></tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast">Copied!</div>
+
+<script>
+// === BUTTON SHOWCASE THEME ===
+function setScTheme(theme) {
+  const wrap = document.getElementById('sc-wrap-all');
+  if (!wrap) return;
+  const isAM   = theme === 'am' || theme === 'am-dark';
+  const isDark = theme === 'jk-dark' || theme === 'am-dark';
+  // Brand — dark: lighter shade for contrast on dark bg (semantic-dark + theme-*-dark)
+  wrap.style.setProperty('--sc-primary',
+    isDark ? (isAM ? '#FF8D30' : '#5580FF') : (isAM ? '#FF6D12' : '#1B55F6'));
+  // orange.400 / blue2.400 = color.bg.interactive dark
+  wrap.style.setProperty('--sc-hover',
+    isDark ? (isAM ? '#FFAB5E' : '#82AAFF') : (isAM ? '#CC4D00' : '#1240CC'));
+  // orange.300 / blue2.300 = color.bg.interactive-hover dark
+  wrap.style.setProperty('--sc-b50-bg',
+    isDark ? (isAM ? '#421200' : '#06124A') : (isAM ? '#FFF6EE' : '#EEF3FF'));
+  // orange.900 / blue2.900 = color.bg.brand-subtle dark
+  wrap.style.setProperty('--sc-b50-border',
+    isDark ? (isAM ? '#9A3600' : '#0D2EA0') : (isAM ? '#FFD09A' : '#AECCFF'));
+  // orange.700 / blue2.700 = color.border.brand-subtle dark
+  // Radius
+  wrap.style.setProperty('--sc-r-lg', isAM ? '16px' : '10px');
+  wrap.style.setProperty('--sc-r-md', isAM ? '16px' : '10px');
+  wrap.style.setProperty('--sc-r-sm', isAM ? '12px' : '10px');
+  wrap.style.setProperty('--sc-r-xs', isAM ? '8px'  : '6px');
+  // Surface & text — semantic-dark: gray.800/700/500/300/50
+  wrap.style.setProperty('--sc-surf',   isDark ? '#30363C' : '#F7F8FA'); // gray.800 / gray.50
+  wrap.style.setProperty('--sc-surf-h', isDark ? '#484F56' : '#F0F1F3'); // gray.700 / gray.100
+  wrap.style.setProperty('--sc-bd',     isDark ? '#484F56' : '#D1D6DA'); // gray.700 = color.border.default
+  wrap.style.setProperty('--sc-txt1',   isDark ? '#F4F6F7' : '#131618'); // gray.50  = color.text.primary
+  wrap.style.setProperty('--sc-txt2',   isDark ? '#B8BFC5' : '#636C74'); // gray.300 = color.text.secondary
+  wrap.style.setProperty('--sc-txt3',   isDark ? '#86919A' : '#9EA8AF'); // gray.500 = color.text.tertiary
+  // Disabled — color.bg.interactive-disabled / color.text.disabled
+  wrap.style.setProperty('--sc-dis-bg',  isDark ? '#30363C' : '#E2E6E8'); // gray.800 / gray.100
+  wrap.style.setProperty('--sc-dis-txt', isDark ? '#484F56' : '#B8BFC5'); // gray.700 / gray.300
+  // Card — color.bg.surface / color.border.subtle
+  wrap.style.setProperty('--sc-card-bg', isDark ? '#1E2428' : '#fff');    // gray.900 / white
+  wrap.style.setProperty('--sc-card-bd', isDark ? '#30363C' : '#D1D6DA'); // gray.800 / gray.200
+  // Wrap bg — color.bg.base
+  wrap.style.background = isDark ? '#131618' : '';
+  document.querySelectorAll('.sc-theme-btn').forEach(b => {
+    b.classList.toggle('sc-active', b.dataset.theme === theme);
+  });
+}
+
+// === SHOWCASE CLICK TO COPY ===
+(function() {
+  const cls = [
+    ['jb-bl-brand50',      'button.borderless.subtle'],
+    ['jb-brand50',         'button.filled.subtle'],
+    ['jb-brandtext',       'button.outlined.brand'],
+    ['jb-filled-hover',    'state: hover'],
+    ['jb-loading',         'state: loading'],
+    ['jb-disabled',        'state: disabled'],
+    ['jb-f-on',            'button.filter — state: on'],
+    ['jb-f-off',           'button.filter — state: off'],
+    ['jb-search',          'button.search'],
+    ['jb-top',             'button.top'],
+    ['jb-product',         'button.product'],
+    ['jb-counter',         'button.counter'],
+    ['jb-pagearrow',       'button.pagination.arrow'],
+    ['jb-pagenum-active',  'button.pagination.number — state: active'],
+    ['jb-pagenum',         'button.pagination.number'],
+    ['jb-scrap',           'button.scrap'],
+    ['jb-icontext',        'button.text.link'],
+    ['jb-icon-dark',       'button.icon.dark'],
+    ['jb-icon-circle',     'button.icon.circle'],
+    ['jb-icon-borderless', 'button.icon.borderless'],
+    ['jb-icon-r',          'button.icon.outlined'],
+    ['jb-52',              'size: lg (52px)'],
+    ['jb-48',              'size: md (48px)'],
+    ['jb-40',              'size: sm (40px)'],
+    ['jb-32',              'size: xs (32px)'],
+    ['jb-borderless',      'button.borderless.default'],
+    ['jb-outlined',        'button.outlined.default'],
+    ['jb-filled',          'button.filled.primary'],
+  ];
+  const wrap = document.getElementById('sc-wrap-all');
+  if (!wrap) return;
+  wrap.addEventListener('click', function(e) {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    let val = btn.dataset.copy;
+    if (!val) {
+      for (const [c, label] of cls) {
+        if (btn.classList.contains(c)) { val = label; break; }
+      }
+    }
+    if (val) copyVal(val, btn);
+  });
+})();
+
+// === BUTTON MATRIX GENERATOR ===
+(function() {
+  const IC_PATH = 'M1.875 10C1.875 9.65482 2.15482 9.375 2.5 9.375H9.375V2.5C9.375 2.15482 9.65482 1.875 10 1.875C10.3452 1.87503 10.625 2.15484 10.625 2.5V9.375H17.5C17.8452 9.375 18.125 9.65482 18.125 10C18.125 10.3452 17.8452 10.625 17.5 10.625H10.625V17.5C10.625 17.8452 10.3452 18.125 10 18.125C9.65482 18.125 9.375 17.8452 9.375 17.5V10.625H2.5C2.15482 10.625 1.875 10.3452 1.875 10Z';
+  const mkIc = px => `<svg width="${px}" height="${px}" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;display:block"><path d="${IC_PATH}" fill="currentColor"/></svg>`;
+  const IC_SZ = {'52':20,'48':20,'40':16,'32':16};
+  const SIZES = ['52','48','40','32'];
+  const SZ     = {'52':'jb-52','48':'jb-48','40':'jb-40','32':'jb-32'};
+  const SZ_SEM = {'52':'lg',   '48':'md',   '40':'sm',   '32':'xs'};
+  const FILLED = [
+    { name:'button.filled.primary',   def:'jb-filled',  hov:'jb-filled-hover' },
+    { name:'button.filled.brand',     def:'jb-filled',  ds:'filter:brightness(0.92)',               hov:'jb-b500-h' },
+    { name:'button.filled.brand-dim', def:'jb-filled',  ds:'filter:brightness(1.1) saturate(0.7)', hov:'jb-b400-h' },
+    { name:'button.filled.subtle',    def:'jb-brand50', hov:'jb-b50-h' },
+  ];
+  const OUTLINED = [
+    { name:'button.outlined.default', def:'jb-outlined',         hov:'jb-outlined-h' },
+    { name:'button.outlined.brand',   def:'jb-brandtext',        hov:'jb-outlined-h' },
+    { name:'button.outlined.pill',    def:'jb-outlined jb-pill', hov:'jb-outlined-h jb-pill' },
+  ];
+  const BORDERLESS = [
+    { name:'button.borderless.default', def:'jb-borderless',          hov:'jb-borderless-h' },
+    { name:'button.borderless.pill',    def:'jb-borderless jb-pill',  hov:'jb-borderless-h jb-pill' },
+    { name:'button.borderless.subtle',  def:'jb-bl-brand50',          hov:'jb-bl-b50-h' },
+  ];
+  const ICON_ONLY = [
+    { name:'button.icon.primary',    def:'jb-sq jb-filled jb-circle',  hov:'jb-sq jb-filled-hover jb-circle', sq:true },
+    { name:'button.icon.brand',      def:'jb-sq jb-filled jb-circle',  ds:'filter:brightness(1.1) saturate(0.7)', hov:'jb-sq jb-b400-h jb-circle', sq:true },
+    { name:'button.icon.outlined',   def:'jb-sq jb-icon-r',            hov:'jb-sq jb-icon-r-h',      sq:true },
+    { name:'button.icon.circle',     def:'jb-sq jb-icon-circle',       hov:'jb-sq jb-icon-circle-h', sq:true },
+    { name:'button.icon.borderless', def:'jb-sq jb-icon-borderless',   hov:'jb-sq jb-icon-bl-h',     sq:true },
+    { name:'button.icon.dark',       def:'jb-sq jb-icon-dark',         hov:'jb-sq jb-icon-dark-h',   sq:true },
+  ];
+  function build(container, variants, cols = 1) {
+    if (!container) return;
+    const body = document.createElement('div');
+    if (cols > 1) body.style.cssText = `display:grid;grid-template-columns:repeat(${cols},1fr);gap:0 24px;`;
+    variants.forEach(v => {
+      const wrap = document.createElement('div');
+      wrap.className = 'sc-matrix-wrap';
+      const ds = v.ds ? ` style="${v.ds}"` : '';
+      const hdrs = v.sq ? ['Default','Hover','Disabled'] : ['Default','Hover','Disabled','Loading'];
+      const hlen = hdrs.length;
+      const gridCols = v.sq ? `28px repeat(${hlen},60px)` : `28px repeat(${hlen},minmax(80px,1fr))`;
+      let h = `<div class="sc-matrix-type">${v.name}</div>`;
+      h += `<div class="sc-matrix-grid" style="grid-template-columns:${gridCols}">`;
+      h += `<div></div>` + hdrs.map(hd => `<div class="sc-matrix-col-hd">${hd}</div>`).join('');
+      SIZES.forEach(sz => {
+        const s   = SZ[sz];
+        const tok = v.sq ? `${v.name}.${SZ_SEM[sz]}` : `${v.name}.${SZ_SEM[sz]}`;
+        const ic  = v.sq ? mkIc(IC_SZ[sz]) : '버튼명';
+        const sqExtra   = v.sq ? ' jb-sq' : '';
+        const shapeExtra = v.sq && v.def.includes('circle') ? ' jb-circle' : '';
+        h += `<div class="sc-matrix-sz">${sz}</div>`;
+        h += `<button class="jb ${v.def} ${s}"${ds} data-copy="${tok}">${ic}</button>`;
+        h += `<button class="jb ${v.hov} ${s}" data-copy="${tok}">${ic}</button>`;
+        h += `<button class="jb jb-disabled ${s}${sqExtra}${shapeExtra}" disabled data-copy="${tok}">${ic}</button>`;
+        if (!v.sq) h += `<button class="jb jb-loading ${s}" data-copy="${tok}">&nbsp;</button>`;
+      });
+      h += `</div>`;
+      wrap.innerHTML = h;
+      body.appendChild(wrap);
+    });
+    container.appendChild(body);
+  }
+  build(document.getElementById('matrix-filled'),    FILLED,     2);
+  build(document.getElementById('matrix-outlined'),  OUTLINED,   2);
+  build(document.getElementById('matrix-borderless'),BORDERLESS, 2);
+  build(document.getElementById('matrix-icononly'),  ICON_ONLY,  3);
+
+  // === SIMPLE MATRIX (no size axis) ===
+  function buildSM(container, variants, cols) {
+    if (!container) return;
+    const body = document.createElement('div');
+    body.style.cssText = `display:flex;flex-wrap:wrap;gap:0 32px;`;
+    variants.forEach(v => {
+      const wrap = document.createElement('div');
+      wrap.className = 'sc-matrix-wrap';
+      wrap.style.cssText = 'width:max-content;min-width:0;';
+      const hdrs = v.hdrs || ['Default','Hover','Disabled'];
+      const gc = `repeat(${hdrs.length},auto)`;
+      let h = `<div class="sc-matrix-type">${v.tok}</div>`;
+      h += `<div class="sc-matrix-grid" style="grid-template-columns:${gc};width:max-content">`;
+      h += hdrs.map(hd => `<div class="sc-matrix-col-hd">${hd}</div>`).join('');
+      v.cells.forEach(c => {
+        const dis = c.d ? ' disabled' : '';
+        const st  = c.s ? ` style="${c.s}"` : '';
+        h += `<button class="${c.cls}"${st}${dis} data-copy="${v.tok}">${c.lbl}</button>`;
+      });
+      h += `</div>`;
+      wrap.innerHTML = h;
+      body.appendChild(wrap);
+    });
+    container.appendChild(body);
+  }
+
+  // --- Text / IconText ---
+  const T = (cls, s, lbl) => ({cls, s, lbl});
+  const TEXT_BTN = [
+    {tok:'button.text.brand.lg',     cells:[T('jb-text jb-text-brand','font-size:16px','텍스트명'), T('jb-text jb-text-brand jb-text-h','font-size:16px','텍스트명'), T('jb-text jb-text-dis','font-size:16px','텍스트명')]},
+    {tok:'button.text.brand.md',     cells:[T('jb-text jb-text-brand','font-size:14px','텍스트명'), T('jb-text jb-text-brand jb-text-h','font-size:14px','텍스트명'), T('jb-text jb-text-dis','font-size:14px','텍스트명')]},
+    {tok:'button.text.brand.sm',     cells:[T('jb-text jb-text-brand','font-size:13px','텍스트명'), T('jb-text jb-text-brand jb-text-h','font-size:13px','텍스트명'), T('jb-text jb-text-dis','font-size:13px','텍스트명')]},
+    {tok:'button.text.primary.lg',   cells:[T('jb-text jb-text-gray900','font-size:16px','텍스트명'), T('jb-text jb-text-gray900 jb-text-h','font-size:16px','텍스트명'), T('jb-text jb-text-dis','font-size:16px','텍스트명')]},
+    {tok:'button.text.primary.md',   cells:[T('jb-text jb-text-gray900','font-size:14px','텍스트명'), T('jb-text jb-text-gray900 jb-text-h','font-size:14px','텍스트명'), T('jb-text jb-text-dis','font-size:14px','텍스트명')]},
+    {tok:'button.text.secondary.sm', cells:[T('jb-text jb-text-gray500','font-size:13px','텍스트명'), T('jb-text jb-text-gray500 jb-text-h','font-size:13px','텍스트명'), T('jb-text jb-text-dis','font-size:13px','텍스트명')]},
+    {tok:'button.text.link.md', cells:[T('jb-icontext','','버튼명 ›'), T('jb-icontext jb-text-h','','버튼명 ›'), T('jb-icontext jb-text-dis','','버튼명 ›')]},
+    {tok:'button.text.link.sm', cells:[T('jb-icontext jb-text-brand','','더보기 ›'), T('jb-icontext jb-text-brand jb-text-h','','더보기 ›'), T('jb-icontext jb-text-dis','','더보기 ›')]},
+  ];
+  buildSM(document.getElementById('matrix-text'), TEXT_BTN, 3);
+
+  // --- Icon / Emoji ---
+  const EMO = (tok, hdrs, cellMin, cells) => ({tok, hdrs, cellMin, cells});
+  const ICONEMOJI_BTN = [
+    EMO('button.iconemoji', ['Default','Hover','Disabled'], '80px', [
+      {cls:'jb-iconemoji', lbl:'<span style="font-size:20px">🏠</span><span>홈</span>'},
+      {cls:'jb-iconemoji jb-iconemoji-h', lbl:'<span style="font-size:20px">🏠</span><span>홈</span>'},
+      {cls:'jb-iconemoji jb-text-dis', lbl:'<span style="font-size:20px;opacity:0.35">🏠</span><span>홈</span>', d:true},
+    ]),
+    EMO('button.emoji.lg', ['Default','Hover','Disabled'], '100px', [
+      {cls:'jb-emoji', lbl:'🏠 홈'},
+      {cls:'jb-emoji jb-emoji-h', lbl:'🏠 홈'},
+      {cls:'jb-emoji jb-emoji-d', lbl:'🏠 홈', d:true},
+    ]),
+    EMO('button.emoji.sm', ['Default','Hover','Disabled'], '100px', [
+      {cls:'jb-emoji jb-emoji-sm', lbl:'🏠 홈'},
+      {cls:'jb-emoji jb-emoji-sm jb-emoji-h', lbl:'🏠 홈'},
+      {cls:'jb-emoji jb-emoji-sm jb-emoji-d', lbl:'🏠 홈', d:true},
+    ]),
+    EMO('button.icon.xs', ['Default','Hover','Disabled'], '70px', [
+      {cls:'jb-icon-xs', lbl:'☆'},
+      {cls:'jb-icon-xs-h', lbl:'☆'},
+      {cls:'jb-icon-xs jb-text-dis', lbl:'☆', d:true},
+    ]),
+    EMO('button.scrap', ['off','on','—'], '70px', [
+      {cls:'jb-scrap', lbl:'☆'},
+      {cls:'jb-scrap-on', lbl:'★'},
+      {cls:'jb-scrap', s:'opacity:0.3;cursor:not-allowed;', lbl:'☆', d:true},
+    ]),
+  ];
+  buildSM(document.getElementById('matrix-iconemoji'), ICONEMOJI_BTN, 3);
+
+  // --- Filter ---
+  const FH = ['off','off·hover','on','on·hover','disabled'];
+  const FILTER_BTN = [
+    {tok:'button.filter.item', hdrs:FH, cells:[
+      {cls:'jb jb-filter jb-f-off', lbl:'카테고리'},
+      {cls:'jb jb-filter jb-f-off-h', lbl:'카테고리'},
+      {cls:'jb jb-filter jb-f-on', lbl:'카테고리'},
+      {cls:'jb jb-filter jb-f-on-h', lbl:'카테고리'},
+      {cls:'jb jb-filter jb-f-dis', lbl:'카테고리', d:true},
+    ]},
+    {tok:'button.filter.icon-text', hdrs:FH, cells:[
+      {cls:'jb jb-filter jb-f-off', lbl:'전체 ›'},
+      {cls:'jb jb-filter jb-f-off-h', lbl:'전체 ›'},
+      {cls:'jb jb-filter jb-f-on', lbl:'전체 ✓'},
+      {cls:'jb jb-filter jb-f-on-h', lbl:'전체 ✓'},
+      {cls:'jb jb-filter jb-f-dis', lbl:'전체 ›', d:true},
+    ]},
+    {tok:'button.filter.icon-only', hdrs:FH, cells:[
+      {cls:'jb jb-filter jb-f-off', lbl:'☰'},
+      {cls:'jb jb-filter jb-f-off-h', lbl:'☰'},
+      {cls:'jb jb-filter jb-f-on', lbl:'☰'},
+      {cls:'jb jb-filter jb-f-on-h', lbl:'☰'},
+      {cls:'jb jb-filter jb-f-dis', lbl:'☰', d:true},
+    ]},
+  ];
+  buildSM(document.getElementById('matrix-filter'), FILTER_BTN, 1);
+
+  // --- Floating / Special ---
+  const FLOATING_BTN = [
+    {tok:'button.floating', cells:[
+      {cls:'jb jb-floating', lbl:'버튼명 ›'},
+      {cls:'jb jb-floating-h', lbl:'버튼명 ›'},
+      {cls:'jb jb-floating jb-disabled', lbl:'버튼명 ›', d:true},
+    ]},
+    {tok:'button.search.lg', cells:[
+      {cls:'jb jb-search jb-40', lbl:'🔍 검색'},
+      {cls:'jb jb-search jb-40 jb-b500-h', lbl:'🔍 검색'},
+      {cls:'jb jb-disabled jb-40 jb-pill', lbl:'🔍 검색', d:true},
+    ]},
+    {tok:'button.search.sm', cells:[
+      {cls:'jb jb-search jb-32', lbl:'검색'},
+      {cls:'jb jb-search jb-32 jb-b500-h', lbl:'검색'},
+      {cls:'jb jb-disabled jb-32 jb-pill', lbl:'검색', d:true},
+    ]},
+    {tok:'button.top', cells:[
+      {cls:'jb-top', lbl:'↑'},
+      {cls:'jb-top', s:'background:var(--sc-surf-h,#F0F1F3);cursor:default;', lbl:'↑'},
+      {cls:'jb-top', s:'background:var(--sc-dis-bg,#F0F1F3);color:var(--sc-dis-txt,#BBBFC5);cursor:not-allowed;', lbl:'↑', d:true},
+    ]},
+  ];
+  buildSM(document.getElementById('matrix-floating'), FLOATING_BTN, 2);
+})();
+
+// === ADD L+R ICONS TO FILLED/OUTLINED/BORDERLESS BUTTONS ===
+const IC_PATH = 'M1.875 10C1.875 9.65482 2.15482 9.375 2.5 9.375H9.375V2.5C9.375 2.15482 9.65482 1.875 10 1.875C10.3452 1.87503 10.625 2.15484 10.625 2.5V9.375H17.5C17.8452 9.375 18.125 9.65482 18.125 10C18.125 10.3452 17.8452 10.625 17.5 10.625H10.625V17.5C10.625 17.8452 10.3452 18.125 10 18.125C9.65482 18.125 9.375 17.8452 9.375 17.5V10.625H2.5C2.15482 10.625 1.875 10.3452 1.875 10Z';
+const mkIc = px => `<svg width="${px}" height="${px}" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;display:block"><path d="${IC_PATH}" fill="currentColor"/></svg>`;
+document.querySelectorAll('#sc-wrap-all .sc-basic-grid .jb:not(.jb-loading):not(.jb-sq)').forEach(btn => {
+  if (btn.textContent.trim() !== '버튼명') return;
+  // spec: leftIcon 52/48=20px, 40/32=16px · rightIcon 전체=14px
+  const big  = btn.classList.contains('jb-52') || btn.classList.contains('jb-48');
+  const liPx = big ? 20 : 16;
+  const riPx = 14;
+  btn.innerHTML = mkIc(liPx) + `버튼명` + mkIc(riPx);
+});
+
+// === NAV ===
+document.querySelectorAll('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('page-' + tab.dataset.page).classList.add('active');
+  });
+});
+
+// === UTILS ===
+function copyVal(val, el) {
+  navigator.clipboard.writeText(val);
+  if (el) { el.classList.add('copied'); setTimeout(() => el.classList.remove('copied'), 1000); }
+  const toast = document.getElementById('toast');
+  toast.textContent = 'Copied ' + val;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 1200);
+}
+function isLight(hex) {
+  const r=parseInt(hex.slice(1,3),16), g=parseInt(hex.slice(3,5),16), b=parseInt(hex.slice(5,7),16);
+  return (r*299+g*587+b*114)/1000 > 128;
+}
+
+// === DATA ===
+const P = {
+  gray:  {50:'#F4F6F7',100:'#E2E6E8',200:'#D1D6DA',300:'#B8BFC5',400:'#9EA8AF',500:'#86919A',600:'#636C74',700:'#484F56',800:'#30363C',900:'#1E2428',950:'#131618'},
+  red:   {50:'#FFF2F1',100:'#FFD9D6',200:'#FFB4B0',300:'#F98880',400:'#F05C55',500:'#F22A23',600:'#B8201A',700:'#8C1210',800:'#630808',900:'#3D0403',950:'#210102'},
+  orange:{50:'#FFF6EE',100:'#FFE8CC',200:'#FFD09A',300:'#FFAB5E',400:'#FF8D30',500:'#FF6D12',600:'#CC4D00',700:'#9A3600',800:'#6C2200',900:'#421200',950:'#230800'},
+  yellow:{50:'#FFFCE8',100:'#FFF5CC',200:'#FFE87A',300:'#FFDA36',400:'#FFC821',500:'#FFBB00',600:'#CC8800',700:'#9A5E00',800:'#6C3E00',900:'#332500',950:'#231100'},
+  green: {50:'#EEFFF6',100:'#C4F5DF',200:'#88E8BA',300:'#4AD898',400:'#1BC478',500:'#02B160',600:'#038548',700:'#015F30',800:'#003D1E',900:'#00240E',950:'#001307'},
+  blue:  {50:'#EBF5FF',100:'#CCE4FF',200:'#A4CEFF',300:'#70B0FF',400:'#4598FF',500:'#2684FF',600:'#0060CC',700:'#00469A',800:'#002F6E',900:'#001C46',950:'#000E24'},
+  blue2: {50:'#EEF3FF',100:'#D5E4FF',200:'#AECCFF',300:'#82AAFF',400:'#5580FF',500:'#1B55F6',600:'#1240CC',700:'#0D2EA0',800:'#091F74',900:'#06124A',950:'#030926'},
+  violet:{50:'#F5F3FF',100:'#EDE8FF',200:'#D8CDFF',300:'#BBA4FF',400:'#9D6EF8',500:'#7C3AED',600:'#5E20C5',700:'#451496',800:'#2E0C6A',900:'#1D004F',950:'#0E0224'},
+};
+
+const THEMES = [
+  {name:'JK Light', mode:'light', primary:'#1B55F6', hover:'#1240CC', active:'#0D2EA0', bg:'#FFFFFF',  surface:'#F4F6F7', text:'#131618', text2:'#636C74', border:'#D1D6DA'},
+  {name:'JK Dark',  mode:'dark',  primary:'#5580FF', hover:'#82AAFF', active:'#AECCFF', bg:'#131618',  surface:'#1E2428', text:'#F4F6F7', text2:'#B8BFC5', border:'#484F56'},
+  {name:'AM Light', mode:'light', primary:'#FF6D12', hover:'#CC4D00', active:'#9A3600', bg:'#FFFFFF',  surface:'#F4F6F7', text:'#131618', text2:'#636C74', border:'#D1D6DA'},
+  {name:'AM Dark',  mode:'dark',  primary:'#FF8D30', hover:'#FFAB5E', active:'#FFD09A', bg:'#131618',  surface:'#1E2428', text:'#F4F6F7', text2:'#B8BFC5', border:'#484F56'},
+  {name:'JP Light', mode:'light', primary:'#CCCCCC', hover:'#BBBBBB', active:'#AAAAAA', bg:'#FFFFFF',  surface:'#F4F6F7', text:'#131618', text2:'#636C74', border:'#D1D6DA', placeholder:true},
+  {name:'JP Dark',  mode:'dark',  primary:'#999999', hover:'#AAAAAA', active:'#BBBBBB', bg:'#131618',  surface:'#1E2428', text:'#F4F6F7', text2:'#B8BFC5', border:'#484F56', placeholder:true},
+  {name:'Biz Light',mode:'light', primary:'#2684FF', hover:'#0060CC', active:'#00469A', bg:'#FFFFFF',  surface:'#F4F6F7', text:'#131618', text2:'#636C74', border:'#D1D6DA'},
+  {name:'Biz Dark', mode:'dark',  primary:'#4598FF', hover:'#70B0FF', active:'#A4CEFF', bg:'#131618',  surface:'#1E2428', text:'#F4F6F7', text2:'#B8BFC5', border:'#484F56'},
+];
+
+// === COLOR PAGE ===
+const palLabels = {gray:'Gray',red:'Red',orange:'Orange (AM Brand)',yellow:'Yellow',green:'Green',blue:'Blue',blue2:'Blue2 (JK Brand)',violet:'Violet'};
+document.getElementById('palettes').innerHTML = Object.entries(P).map(([name, pal]) => `
+  <div class="palette">
+    <div class="palette-name">${palLabels[name]} <span class="hex">${pal['500']}</span>
+    </div>
+    <div class="steps">${Object.entries(pal).map(([s,h])=>{
+      const token = 'color.'+name+'.'+s;
+      return `
+      <div class="step"><div class="swatch" style="background:${h}" onclick="copyVal('${token}',this)" title="${token}"></div><div class="step-label">${s}</div><div class="step-hex" onclick="copyVal('${h}',this)" style="cursor:pointer" title="hex 복사">${h}</div></div>`;
+    }).join('')}</div>
+  </div>
+`).join('');
+
+document.getElementById('logic').innerHTML = `
+  <div class="logic-bar">${Object.entries(P.gray).map(([s,h])=>`<div class="logic-segment" style="background:${h};color:${isLight(h)?'#1a1a1e':'#f1f2f3'}">${s}</div>`).join('')}</div>
+  <div class="logic-labels"><span>Dark Mode (50~400)</span><span>500</span><span>Light Mode (600~950)</span></div>
+`;
+
+document.getElementById('themes').innerHTML = THEMES.map(t=>`
+  <div class="theme-card ${t.mode}">
+    <div class="theme-header">${t.name} ${t.placeholder?'<span class="badge placeholder">미확정</span>':''}</div>
+    <div class="theme-body">
+      ${[['primary',t.primary],['primary-hover',t.hover],['bg.base',t.bg],['bg.surface',t.surface],['text.default',t.text],['border.default',t.border]].map(([tok,val])=>{
+        const tokenName = 'color.'+tok;
+        return `
+        <div class="theme-row">
+          <div class="theme-swatch" style="background:${val};${tok.startsWith('text')?'border:1px solid '+(t.mode==='light'?'#e6e8ea':'#292c32'):''}" onclick="copyVal('${tokenName}',this)"></div>
+          <div><div class="theme-token" onclick="copyVal('${tokenName}')" style="cursor:pointer">${tokenName}</div><div class="theme-value" onclick="copyVal('${val}')" style="cursor:pointer" title="hex 복사">${val}</div></div>
+        </div>`;
+      }).join('')}
+    </div>
+  </div>
+`).join('');
+
+// === TYPOGRAPHY PAGE ===
+const typeStyles = [
+  {cat:'Display', n:'display1', label:'Display1 48', size:48, lh:64, ls:0.5},
+  {cat:'Display', n:'display2', label:'Display2 36', size:36, lh:46, ls:0.5},
+  {cat:'Heading', n:'h1', label:'H1 32', size:32, lh:42, ls:0.5},
+  {cat:'Heading', n:'h2', label:'H2 28', size:28, lh:34, ls:0.5},
+  {cat:'Heading', n:'h3', label:'H3 24', size:24, lh:32, ls:0.5},
+  {cat:'Heading', n:'h4', label:'H4 20', size:20, lh:28, ls:0.5},
+  {cat:'Heading', n:'h5', label:'H5 18', size:18, lh:24, ls:0},
+  {cat:'Body',    n:'b1', label:'B1 17', size:17, lh:25, ls:0},
+  {cat:'Body',    n:'b2', label:'B2 16', size:16, lh:24, ls:0},
+  {cat:'Body',    n:'b3', label:'B3 15', size:15, lh:22, ls:0},
+  {cat:'Body',    n:'b4', label:'B4 14', size:14, lh:20, ls:0},
+  {cat:'Caption', n:'c1', label:'C1 13', size:13, lh:18, ls:0},
+  {cat:'Caption', n:'c2', label:'C2 12', size:12, lh:17, ls:0},
+  {cat:'Caption', n:'c3', label:'C3 11', size:11, lh:15, ls:0},
+];
+let lastCat = '';
+document.getElementById('type-previews').innerHTML = typeStyles.map(t => {
+  const catHeader = t.cat !== lastCat ? `<div style="font-size:12px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin:24px 0 8px;${lastCat?'border-top:1px solid var(--border);padding-top:24px;':''}">${t.cat}</div>` : '';
+  lastCat = t.cat;
+  return `${catHeader}
+  <div class="type-preview" onclick="copyVal('typography.styles.${t.n}')" style="cursor:pointer">
+    <div class="type-sample" style="font-size:${t.size}px; line-height:${t.lh}px; letter-spacing:${t.ls}px">콘텐츠 타이틀 ABCD 1234</div>
+    <div class="type-meta">${t.label} · ${t.size}px / ${t.lh}px · ls: ${t.ls}px · <code>typography.styles.${t.n}</code></div>
+  </div>`;
+}).join('');
+
+const fontWeights = [{n:'regular',v:400},{n:'medium',v:500},{n:'semibold',v:600},{n:'bold',v:700}];
+document.getElementById('type-weights').innerHTML = fontWeights.map(w=>`
+  <div class="type-preview" onclick="copyVal('typography.font-weight.${w.n}')" style="cursor:pointer">
+    <div class="type-sample" style="font-size:24px; font-weight:${w.v}; line-height:1.4">잡코리아 ABCD 1234</div>
+    <div class="type-meta">${w.n} · ${w.v} · <code>typography.font-weight.${w.n}</code></div>
+  </div>
+`).join('');
+
+// === SPACING PAGE ===
+const spacings = [{n:'0',v:0},{n:'1',v:1},{n:'2',v:2},{n:'4',v:4},{n:'6',v:6},{n:'8',v:8},{n:'10',v:10},{n:'12',v:12},{n:'14',v:14},{n:'16',v:16},{n:'18',v:18},{n:'20',v:20},{n:'24',v:24},{n:'32',v:32},{n:'36',v:36},{n:'40',v:40},{n:'48',v:48},{n:'56',v:56},{n:'64',v:64},{n:'80',v:80}];
+document.getElementById('spacing-bars').innerHTML = spacings.map(s=>`
+  <div class="spacing-row">
+    <div class="spacing-label">spacing.${s.n}</div>
+    <div class="spacing-val">${s.v}px</div>
+    <div class="spacing-bar" style="width:${Math.max(s.v, 2)}px"></div>
+  </div>
+`).join('');
+
+const radii = [{n:'1',v:1},{n:'2',v:2},{n:'4',v:4},{n:'6',v:6},{n:'8',v:8},{n:'10',v:10},{n:'12',v:12},{n:'14',v:14},{n:'16',v:16},{n:'20',v:20},{n:'24',v:24},{n:'32',v:32},{n:'36',v:36},{n:'40',v:40},{n:'48',v:48},{n:'56',v:56},{n:'64',v:64},{n:'80',v:80},{n:'999',v:999}];
+document.getElementById('radius-grid').innerHTML = radii.map(r=>`
+  <div class="radius-item" onclick="copyVal('radius.${r.n}')" style="cursor:pointer">
+    <div class="radius-box" style="border-radius:${r.v >= 999 ? '50%' : r.v+'px'}"></div>
+    <div class="radius-name">${r.n} · ${r.v}px</div>
+  </div>
+`).join('');
+
+// === FOUNDATION PAGE ===
+const shadows = [
+  {n:'default', v:'0px 4px 16px 0px rgba(0,0,0,0.07)', desc:'기본 그림자'},
+  {n:'secondary', v:'0px 4px 16px 0px rgba(0,0,0,0.12)', desc:'보조 그림자'},
+  {n:'tertiary', v:'0px 0px 10px 0px rgba(0,0,0,0.06)', desc:'3차 그림자'},
+  {n:'up', v:'0px -2px 12px 0px rgba(0,0,0,0.12)', desc:'상단 그림자'},
+  {n:'list', v:'0px 4px 8px 0px rgba(0,0,0,0.2)', desc:'리스트/드롭다운'},
+  {n:'white', v:'0px 4px 20px 0px rgba(0,0,0,0.10)', desc:'화이트 배경 위'},
+  {n:'buttonbig', v:'0px 0px 12px 0px rgba(0,0,0,0.20)', desc:'큰 버튼'},
+  {n:'buttonsmall', v:'0px 0px 8px 0px rgba(0,0,0,0.10)', desc:'작은 버튼'},
+  {n:'bottomsheet', v:'0px -4px 12px 0px rgba(0,0,0,0.08)', desc:'바텀시트'},
+];
+document.getElementById('shadows').innerHTML = shadows.map(s=>`
+  <div class="shadow-item">
+    <div class="shadow-box" style="box-shadow:${s.v}"></div>
+    <div class="shadow-name">shadow.${s.n}</div>
+    <div class="shadow-name" style="opacity:0.5">${s.desc}</div>
+  </div>
+`).join('');
+
+// Motion — Figma에서 미가져옴
+
+// === COMPONENTS & PATTERNS — Figma에서 미가져옴, 빈 상태 ===
+</script>
+</body>
+</html>

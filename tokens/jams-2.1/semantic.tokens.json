@@ -1,59 +1,82 @@
 {
-  "$description": "JAMS 2.1 (B2C) — Semantic tokens. Theme files override per brand/mode.",
+  "$description": "JAMS 2.1 (B2C) — Semantic tokens (DTCG). Theme files override per brand/mode.",
+
   "color": {
-    "primary":        { "$value": "{color.jk.500}",   "$type": "color", "$description": "테마별 오버라이드됨" },
-    "primary-hover":  { "$value": "{color.jk.600}",   "$type": "color" },
-    "primary-active": { "$value": "{color.jk.700}",   "$type": "color" },
-    "secondary":      { "$value": "{color.gray.600}", "$type": "color" },
-    "secondary-hover": { "$value": "{color.gray.700}", "$type": "color" },
-    "danger":         { "$value": "{color.red.500}",   "$type": "color" },
-    "danger-hover":   { "$value": "{color.red.600}",   "$type": "color" },
-    "warning":        { "$value": "{color.yellow.500}", "$type": "color" },
-    "success":        { "$value": "{color.green.500}",  "$type": "color" },
-    "info":           { "$value": "{color.blue.500}",   "$type": "color" },
     "bg": {
-      "base":      { "$value": "{color.white}",      "$type": "color" },
-      "surface":   { "$value": "{color.gray.50}",    "$type": "color" },
-      "elevated":  { "$value": "{color.white}",      "$type": "color" },
-      "overlay":   { "$value": "rgba(0,0,0,0.5)",    "$type": "color" },
-      "disabled":  { "$value": "{color.gray.100}",   "$type": "color" }
+      "base":                  { "$value": "{color.white}",        "$type": "color", "$description": "페이지/카드 기본 흰 배경" },
+      "surface":               { "$value": "{color.gray.50}",      "$type": "color", "$description": "surface, input, 서브카드 배경" },
+      "elevated":              { "$value": "{color.white}",        "$type": "color", "$description": "모달·토스트 등 float 요소" },
+      "overlay":               { "$value": "rgba(0,0,0,0.5)",      "$type": "color", "$description": "딤드 오버레이" },
+      "interactive":           { "$value": "{color.blue2.500}",    "$type": "color", "$description": "버튼 primary fill — 테마별 override" },
+      "interactive-hover":     { "$value": "{color.blue2.600}",    "$type": "color", "$description": "버튼 primary hover" },
+      "interactive-active":    { "$value": "{color.blue2.700}",    "$type": "color", "$description": "버튼 primary pressed" },
+      "interactive-disabled":  { "$value": "{color.gray.100}",     "$type": "color", "$description": "outlined/borderless bg, disabled bg" },
+      "brand":                 { "$value": "{color.blue2.500}",    "$type": "color", "$description": "브랜드 500 fill — 테마별 override" },
+      "brand-dim":             { "$value": "{color.blue2.400}",    "$type": "color", "$description": "브랜드 400 (dim) fill" },
+      "brand-subtle":          { "$value": "{color.blue2.50}",     "$type": "color", "$description": "브랜드 50 (subtle) fill" },
+      "brand-subtle-hover":    { "$value": "{color.blue2.100}",    "$type": "color", "$description": "brand-subtle hover" },
+      "dark":                  { "$value": "rgba(26,28,34,0.85)",  "$type": "color", "$description": "floating/dark 버튼 bg" }
     },
     "text": {
-      "default":     { "$value": "{color.near-black}",  "$type": "color" },
-      "secondary":   { "$value": "{color.gray.600}",    "$type": "color" },
-      "tertiary":    { "$value": "{color.gray.400}",    "$type": "color" },
-      "disabled":    { "$value": "{color.gray.300}",    "$type": "color" },
-      "on-primary":  { "$value": "{color.white}",       "$type": "color" },
-      "on-danger":   { "$value": "{color.white}",       "$type": "color" },
-      "link":        { "$value": "{color.blue.500}",    "$type": "color" },
-      "link-hover":  { "$value": "{color.blue.600}",    "$type": "color" }
+      "primary":    { "$value": "{color.gray.950}",   "$type": "color", "$description": "본문 기본 텍스트" },
+      "secondary":  { "$value": "{color.gray.600}",   "$type": "color", "$description": "보조 텍스트" },
+      "tertiary":   { "$value": "{color.gray.500}",   "$type": "color", "$description": "힌트·플레이스홀더" },
+      "disabled":   { "$value": "{color.gray.300}",   "$type": "color", "$description": "비활성 텍스트" },
+      "inverse":    { "$value": "{color.white}",      "$type": "color", "$description": "어두운 bg 위 텍스트" },
+      "brand":      { "$value": "{color.blue2.500}",  "$type": "color", "$description": "브랜드 컬러 텍스트 — 테마별 override" },
+      "danger":     { "$value": "{color.red.500}",    "$type": "color", "$description": "오류·경고 텍스트" },
+      "success":    { "$value": "{color.green.500}",  "$type": "color", "$description": "성공 텍스트" }
     },
     "border": {
-      "default":  { "$value": "{color.gray.200}", "$type": "color" },
-      "strong":   { "$value": "{color.gray.400}", "$type": "color" },
-      "focus":    { "$value": "{color.blue.500}", "$type": "color" },
-      "error":    { "$value": "{color.red.500}",  "$type": "color" }
+      "default":       { "$value": "{color.gray.200}",   "$type": "color", "$description": "기본 경계선" },
+      "subtle":        { "$value": "{color.gray.100}",   "$type": "color", "$description": "가벼운 구분선" },
+      "strong":        { "$value": "{color.gray.400}",   "$type": "color", "$description": "강조 경계선" },
+      "brand":         { "$value": "{color.blue2.500}",  "$type": "color", "$description": "브랜드 경계선 — 테마별 override" },
+      "brand-subtle":  { "$value": "{color.blue2.200}",  "$type": "color", "$description": "brand-subtle 버튼 테두리" },
+      "focus":         { "$value": "{color.blue2.500}",  "$type": "color", "$description": "포커스 링" },
+      "danger":        { "$value": "{color.red.500}",    "$type": "color", "$description": "에러 테두리" }
     },
     "icon": {
-      "default":    { "$value": "{color.gray.600}", "$type": "color" },
-      "secondary":  { "$value": "{color.gray.400}", "$type": "color" },
-      "on-primary": { "$value": "{color.white}",    "$type": "color" }
+      "primary":    { "$value": "{color.gray.700}",   "$type": "color", "$description": "기본 아이콘" },
+      "secondary":  { "$value": "{color.gray.500}",   "$type": "color", "$description": "보조 아이콘" },
+      "tertiary":   { "$value": "{color.gray.400}",   "$type": "color", "$description": "힌트 아이콘" },
+      "disabled":   { "$value": "{color.gray.300}",   "$type": "color", "$description": "비활성 아이콘" },
+      "inverse":    { "$value": "{color.white}",      "$type": "color", "$description": "어두운 bg 위 아이콘" },
+      "brand":      { "$value": "{color.blue2.500}",  "$type": "color", "$description": "브랜드 아이콘 — 테마별 override" }
+    },
+    "status": {
+      "danger":   { "$value": "{color.red.500}",    "$type": "color" },
+      "warning":  { "$value": "{color.yellow.500}", "$type": "color" },
+      "success":  { "$value": "{color.green.500}",  "$type": "color" },
+      "info":     { "$value": "{color.blue.500}",   "$type": "color" }
     }
   },
-  "spacing": {
+
+  "space": {
     "component": {
-      "xs": { "$value": "{spacing.1}", "$type": "dimension" },
-      "sm": { "$value": "{spacing.2}", "$type": "dimension" },
-      "md": { "$value": "{spacing.3}", "$type": "dimension" },
-      "lg": { "$value": "{spacing.4}", "$type": "dimension" },
-      "xl": { "$value": "{spacing.6}", "$type": "dimension" }
+      "xs":  { "$value": "{spacing.4}",  "$type": "dimension", "$description": "4px — 아이콘-텍스트 gap" },
+      "sm":  { "$value": "{spacing.8}",  "$type": "dimension", "$description": "8px — 인풋 내부 padding" },
+      "md":  { "$value": "{spacing.12}", "$type": "dimension", "$description": "12px — 버튼 padding" },
+      "lg":  { "$value": "{spacing.16}", "$type": "dimension", "$description": "16px — 카드 내부 padding" },
+      "xl":  { "$value": "{spacing.24}", "$type": "dimension", "$description": "24px — 모달 내부 padding" }
     },
     "layout": {
-      "xs": { "$value": "{spacing.4}",  "$type": "dimension" },
-      "sm": { "$value": "{spacing.6}",  "$type": "dimension" },
-      "md": { "$value": "{spacing.8}",  "$type": "dimension" },
-      "lg": { "$value": "{spacing.12}", "$type": "dimension" },
-      "xl": { "$value": "{spacing.16}", "$type": "dimension" }
+      "xs":  { "$value": "{spacing.16}", "$type": "dimension", "$description": "16px — 섹션 내부" },
+      "sm":  { "$value": "{spacing.24}", "$type": "dimension", "$description": "24px — 섹션 간" },
+      "md":  { "$value": "{spacing.32}", "$type": "dimension", "$description": "32px — 블록 간" },
+      "lg":  { "$value": "{spacing.48}", "$type": "dimension", "$description": "48px — 페이지 섹션 간" },
+      "xl":  { "$value": "{spacing.64}", "$type": "dimension", "$description": "64px — 페이지 상하 여백" }
+    }
+  },
+
+  "radius": {
+    "component": {
+      "xs":   { "$value": "{radius.6}",   "$type": "dimension", "$description": "6px — 버튼 xs" },
+      "sm":   { "$value": "{radius.8}",   "$type": "dimension", "$description": "8px — 인풋·태그" },
+      "md":   { "$value": "{radius.10}",  "$type": "dimension", "$description": "10px — 버튼 기본" },
+      "lg":   { "$value": "{radius.12}",  "$type": "dimension", "$description": "12px — 카드" },
+      "xl":   { "$value": "{radius.16}",  "$type": "dimension", "$description": "16px — 모달·바텀시트" },
+      "pill": { "$value": "{radius.999}", "$type": "dimension", "$description": "999px — pill 형태" }
     }
   }
 }

@@ -45,16 +45,16 @@ B2C용 디자인 토큰. JK/AM/JP 브랜드별 컬러 테마와 라이트/다크
 
 | Token | Value | Type |
 |-------|-------|------|
-| `spacing.component.xs` | `{spacing.1}` | dimension |
-| `spacing.component.sm` | `{spacing.2}` | dimension |
-| `spacing.component.md` | `{spacing.3}` | dimension |
-| `spacing.component.lg` | `{spacing.4}` | dimension |
-| `spacing.component.xl` | `{spacing.6}` | dimension |
-| `spacing.layout.xs` | `{spacing.4}` | dimension |
-| `spacing.layout.sm` | `{spacing.6}` | dimension |
-| `spacing.layout.md` | `{spacing.8}` | dimension |
-| `spacing.layout.lg` | `{spacing.12}` | dimension |
-| `spacing.layout.xl` | `{spacing.16}` | dimension |
+| `spacing.component.xs` | `{spacing.4}` | dimension |
+| `spacing.component.sm` | `{spacing.8}` | dimension |
+| `spacing.component.md` | `{spacing.12}` | dimension |
+| `spacing.component.lg` | `{spacing.16}` | dimension |
+| `spacing.component.xl` | `{spacing.24}` | dimension |
+| `spacing.layout.xs` | `{spacing.16}` | dimension |
+| `spacing.layout.sm` | `{spacing.24}` | dimension |
+| `spacing.layout.md` | `{spacing.32}` | dimension |
+| `spacing.layout.lg` | `{spacing.48}` | dimension |
+| `spacing.layout.xl` | `{spacing.64}` | dimension |
 
 ## Theme: AM-DARK
 
@@ -120,9 +120,9 @@ B2C용 디자인 토큰. JK/AM/JP 브랜드별 컬러 테마와 라이트/다크
 
 | Token | Value | Type |
 |-------|-------|------|
-| `color.primary` | `{color.violet.400}` | color |
-| `color.primary-hover` | `{color.violet.300}` | color |
-| `color.primary-active` | `{color.violet.200}` | color |
+| `color.primary` | `TODO` | color |
+| `color.primary-hover` | `TODO` | color |
+| `color.primary-active` | `TODO` | color |
 | `color.bg.base` | `{color.gray.950}` | color |
 | `color.bg.surface` | `{color.gray.900}` | color |
 | `color.bg.elevated` | `{color.gray.800}` | color |
@@ -135,9 +135,9 @@ B2C용 디자인 토큰. JK/AM/JP 브랜드별 컬러 테마와 라이트/다크
 
 | Token | Value | Type |
 |-------|-------|------|
-| `color.primary` | `{color.violet.500}` | color |
-| `color.primary-hover` | `{color.violet.600}` | color |
-| `color.primary-active` | `{color.violet.700}` | color |
+| `color.primary` | `TODO` | color |
+| `color.primary-hover` | `TODO` | color |
+| `color.primary-active` | `TODO` | color |
 | `color.bg.base` | `{color.white}` | color |
 | `color.bg.surface` | `{color.gray.50}` | color |
 | `color.bg.elevated` | `{color.white}` | color |

@@ -1,0 +1,37 @@
+{
+  "$description": "CommJAMS — JAMS 2.1의 경량화 서브셋. 커뮤니티·파트너·임베디드 제품용. Color·Space는 2.1에서 그대로 상속, 컴포넌트는 최소 필수 세트만.",
+
+  "$extends": "jams-2.1/semantic.tokens.json",
+
+  "color": {
+    "$description": "CommJAMS 추가 색상 없음. 전부 JAMS 2.1 color.* 상속.",
+    "$note": "theme override는 comm-jams/theme-jk.tokens.json 참조"
+  },
+
+  "space": {
+    "$description": "CommJAMS는 JAMS 2.1 space 그대로 사용. 별도 재정의 없음.",
+    "$extends": "jams-2.1/semantic.tokens.json#space"
+  },
+
+  "radius": {
+    "$description": "CommJAMS는 JAMS 2.1 radius 그대로 사용.",
+    "$extends": "jams-2.1/semantic.tokens.json#radius"
+  },
+
+  "component": {
+    "$description": "CommJAMS 허용 컴포넌트 — 2.1 전체 세트의 경량 서브셋",
+    "allowed": [
+      "button.filled.primary",
+      "button.filled.subtle",
+      "button.outlined.default",
+      "button.borderless.default",
+      "button.icon.primary",
+      "button.icon.borderless",
+      "button.text.brand",
+      "button.text.primary",
+      "button.text.secondary",
+      "button.filter.item"
+    ],
+    "$note": "이 목록 외 컴포넌트는 CommJAMS 제품에서 사용 불가. 추가 필요 시 2.1 팀과 협의."
+  }
+}
