@@ -9,7 +9,7 @@
 | **Shared Primitives** | 전체 공유 raw 값 | 2.1이 소유 | 없음 | 정의 | 정의 |
 | **JAMS 2.1** | B2C canonical | **정본** | JK/AM/JP × light/dark | **소유·정의** | **소유·정의** |
 | **BizJAMS** | B2B | active | light/dark | 2.1 **상속** | **자체 정의** |
-| **CommJAMS** | 커뮤니티·파트너·임베디드 | active | JK Light 단일 | 2.1 **상속** | 2.1 **그대로** (서브셋) |
+| **CommJAMS** | 커뮤니티·파트너·임베디드 | active | JK Light / AM Light | 2.1 **상속** | 2.1 **그대로** (서브셋) |
 | ~~JAMS Core~~ | ~~레거시 호환~~ | **폐기** | — | — | — |
 
 ### 시스템 간 관계
@@ -86,7 +86,8 @@ tokens/
   comm-jams/
     semantic.tokens.json            ← Color/Space/Radius: 2.1 그대로
                                       component.allowed 목록만 명시
-    theme-jk.tokens.json            ← JK Light 단일 테마 (2.1 theme-jk-light 상속)
+    theme-jk.tokens.json            ← JK Light (2.1 theme-jk 상속)
+    theme-am.tokens.json            ← AM Light (2.1 theme-am 상속)
 ```
 
 ---
@@ -132,7 +133,7 @@ size: `lg`(52px) / `md`(48px) / `sm`(40px) / `xs`(32px)
 
 ### 시스템 아키텍처 (2026.04.02)
 - **JAMS Core 폐기** — CommJAMS로 대체
-- **CommJAMS** = JAMS 2.1 경량 서브셋. JK Light 단일 테마, component.allowed 목록으로 사용 컴포넌트 제한
+- **CommJAMS** = JAMS 2.1 경량 서브셋. JK Light / AM Light 테마, component.allowed 목록으로 사용 컴포넌트 제한
 - **BizJAMS** = Color는 2.1 상속, Space/Radius/Component는 B2B 독자 정의
 - **Color·Space 소유권** = JAMS 2.1. 다른 시스템은 상속 후 필요 부분만 override
 - **JP 브랜드 컬러 미확정** — 새로 지정 예정. Green은 JP 아님 (success 상태용)

@@ -5,7 +5,7 @@
 
   "color": {
     "$description": "CommJAMS 추가 색상 없음. 전부 JAMS 2.1 color.* 상속.",
-    "$note": "theme override는 comm-jams/theme-jk.tokens.json 참조"
+    "$note": "theme override는 comm-jams/theme-jk.tokens.json 또는 theme-am.tokens.json 참조"
   },
 
   "space": {

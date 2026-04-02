@@ -1,0 +1,4 @@
+{
+  "$description": "CommJAMS — AM 테마 (Light). JAMS 2.1 theme-am와 동일 값 사용.",
+  "$extends": "jams-2.1/theme-am.tokens.json"
+}
