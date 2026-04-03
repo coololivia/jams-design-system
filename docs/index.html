@@ -438,14 +438,20 @@
 
         <!-- Icon Matrix (테마 적용) -->
         <div class="sc-card" style="margin-bottom:16px;" id="matrix-icon">
-          <div class="sc-card-title">Icon <span class="badge theme-on">테마 적용</span> <span class="badge">3 types × 3 states</span></div>
-          <p class="sc-card-desc">ButtonIconEmoji 세로형(lg 24px·sm 20px) · ButtonIcon xs(32×32·no bg) · ButtonScrap(24×24). 브랜드 테마 색상 반영.</p>
+          <div class="sc-card-title">Icon <span class="badge theme-on">테마 적용</span> <span class="badge">1 type × 3 states</span></div>
+          <p class="sc-card-desc">ButtonIcon xs(32×32·no bg). 브랜드 테마 색상 반영.</p>
         </div>
 
-        <!-- Emoji Matrix (테마 미적용) -->
-        <div class="sc-card" style="margin-bottom:16px;" id="matrix-emoji">
-          <div class="sc-card-title">Emoji <span class="badge theme-off">테마 미적용</span> <span class="badge">2 types × 3 states</span></div>
-          <p class="sc-card-desc">ButtonEmoji 가로형 pill(h40 / h32). 브랜드 컬러 미반영 — 흰 배경·gray 테두리 고정.</p>
+        <!-- Emoji 세로형 Matrix (테마 미적용) -->
+        <div class="sc-card" style="margin-bottom:16px;" id="matrix-emoji-v">
+          <div class="sc-card-title">Emoji 세로형 <span class="badge theme-off">테마 미적용</span> <span class="badge">2 types × 3 states</span></div>
+          <p class="sc-card-desc">텍스트 13·11 2가지 사이즈로 이모지+텍스트 조합의 세로형 버튼.</p>
+        </div>
+
+        <!-- Emoji 가로형 Matrix (테마 미적용) -->
+        <div class="sc-card" style="margin-bottom:16px;" id="matrix-emoji-h">
+          <div class="sc-card-title">Emoji 가로형 <span class="badge theme-off">테마 미적용</span> <span class="badge">2 types × 3 states</span></div>
+          <p class="sc-card-desc">높이 40·32 2가지 사이즈로 이모지+텍스트 조합의 가로형 버튼. 흰 배경·gray 테두리 고정.</p>
         </div>
 
         <!-- Filter Matrix -->
@@ -956,6 +962,16 @@ function setScTheme(theme) {
   // --- Icon (테마 적용) ---
   const EMO = (tok, hdrs, cellMin, cells) => ({tok, hdrs, cellMin, cells});
   const ICON_THEMED_BTN = [
+    EMO('button.icon.xs', ['Default','Hover','Disabled'], '70px', [
+      {cls:'jb-icon-xs', lbl:'☆'},
+      {cls:'jb-icon-xs-h', lbl:'☆'},
+      {cls:'jb-icon-xs jb-text-dis', lbl:'☆', d:true},
+    ]),
+  ];
+  buildSM(document.getElementById('matrix-icon'), ICON_THEMED_BTN, 3);
+
+  // --- Emoji 세로형 (테마 미적용) ---
+  const EMOJI_V_BTN = [
     EMO('button.iconemoji.lg', ['Default','Hover','Disabled'], '80px', [
       {cls:'jb-iconemoji-lg', lbl:'<span style="font-size:24px">🏠</span><span>홈</span>'},
       {cls:'jb-iconemoji-lg jb-iconemoji-h', lbl:'<span style="font-size:24px">🏠</span><span>홈</span>'},
@@ -966,16 +982,11 @@ function setScTheme(theme) {
       {cls:'jb-iconemoji jb-iconemoji-h', lbl:'<span style="font-size:20px">🏠</span><span>홈</span>'},
       {cls:'jb-iconemoji jb-text-dis', lbl:'<span style="font-size:20px;opacity:0.35">🏠</span><span>홈</span>', d:true},
     ]),
-    EMO('button.icon.xs', ['Default','Hover','Disabled'], '70px', [
-      {cls:'jb-icon-xs', lbl:'☆'},
-      {cls:'jb-icon-xs-h', lbl:'☆'},
-      {cls:'jb-icon-xs jb-text-dis', lbl:'☆', d:true},
-    ]),
   ];
-  buildSM(document.getElementById('matrix-icon'), ICON_THEMED_BTN, 3);
+  buildSM(document.getElementById('matrix-emoji-v'), EMOJI_V_BTN, 3);
 
-  // --- Emoji (테마 미적용) ---
-  const EMOJI_BTN = [
+  // --- Emoji 가로형 (테마 미적용) ---
+  const EMOJI_H_BTN = [
     EMO('button.emoji.lg', ['Default','Hover','Disabled'], '100px', [
       {cls:'jb-emoji', lbl:'🏠 홈'},
       {cls:'jb-emoji jb-emoji-h', lbl:'🏠 홈'},
@@ -987,7 +998,7 @@ function setScTheme(theme) {
       {cls:'jb-emoji jb-emoji-sm jb-emoji-d', lbl:'🏠 홈', d:true},
     ]),
   ];
-  buildSM(document.getElementById('matrix-emoji'), EMOJI_BTN, 3);
+  buildSM(document.getElementById('matrix-emoji-h'), EMOJI_H_BTN, 3);
 
   // --- Filter ---
   const FH = ['off','off·hover','on','on·hover','disabled'];
