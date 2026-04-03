@@ -382,7 +382,7 @@
     <!-- VISUAL SHOWCASE -->
     <div class="section">
       <div class="section-title">Style Guide <span class="badge canonical">시각 쇼케이스</span></div>
-      <div class="sc-wrap-all" id="sc-wrap-all" style="--sc-primary:#1B55F6;--sc-hover:#1447D4;--sc-b50-bg:#EEF3FE;--sc-b50-border:#BED0FC;--sc-r-lg:10px;--sc-r-md:10px;--sc-r-sm:10px;--sc-r-xs:6px;--sc-surf:#F7F8FA;--sc-surf-h:#F0F1F3;--sc-bd:#DDE0E6;--sc-txt1:#1A1C22;--sc-txt2:#575F6C;--sc-txt3:#949BA8;--sc-dis-bg:#F0F1F3;--sc-dis-txt:#BBBFC5;--sc-card-bg:#fff;--sc-card-bd:#E8EAED;">
+      <div class="sc-wrap-all" id="sc-wrap-all" style="--sc-primary:#1B55F6;--sc-hover:#1240CC;--sc-b50-bg:#EEF3FF;--sc-b50-border:#AECCFF;--sc-r-lg:10px;--sc-r-md:10px;--sc-r-sm:10px;--sc-r-xs:6px;--sc-surf:#F4F6F7;--sc-surf-h:#E2E6E8;--sc-bd:#D1D6DA;--sc-txt1:#131618;--sc-txt2:#636C74;--sc-txt3:#9EA8AF;--sc-dis-bg:#E2E6E8;--sc-dis-txt:#B8BFC5;--sc-card-bg:#fff;--sc-card-bd:#D1D6DA;">
 
         <!-- Theme toggle -->
         <div class="sc-theme-bar">
@@ -740,13 +740,13 @@ function setScTheme(theme) {
   wrap.style.setProperty('--sc-r-md', isAM ? '16px' : '10px');
   wrap.style.setProperty('--sc-r-sm', isAM ? '12px' : '10px');
   wrap.style.setProperty('--sc-r-xs', isAM ? '8px'  : '6px');
-  // Surface & text — semantic-dark: gray.800/700/500/300/50
-  wrap.style.setProperty('--sc-surf',   isDark ? '#30363C' : '#F7F8FA'); // gray.800 / gray.50
-  wrap.style.setProperty('--sc-surf-h', isDark ? '#484F56' : '#F0F1F3'); // gray.700 / gray.100
-  wrap.style.setProperty('--sc-bd',     isDark ? '#484F56' : '#D1D6DA'); // gray.700 = color.border.default
-  wrap.style.setProperty('--sc-txt1',   isDark ? '#F4F6F7' : '#131618'); // gray.50  = color.text.primary
-  wrap.style.setProperty('--sc-txt2',   isDark ? '#B8BFC5' : '#636C74'); // gray.300 = color.text.secondary
-  wrap.style.setProperty('--sc-txt3',   isDark ? '#86919A' : '#9EA8AF'); // gray.500 = color.text.tertiary
+  // Surface & text — primitives: gray.50/100/200/950/600/500
+  wrap.style.setProperty('--sc-surf',   isDark ? '#30363C' : '#F4F6F7'); // gray.800 / gray.50
+  wrap.style.setProperty('--sc-surf-h', isDark ? '#484F56' : '#E2E6E8'); // gray.700 / gray.100
+  wrap.style.setProperty('--sc-bd',     isDark ? '#484F56' : '#D1D6DA'); // gray.700 / gray.200 = color.border.default
+  wrap.style.setProperty('--sc-txt1',   isDark ? '#F4F6F7' : '#131618'); // gray.50  / gray.950 = color.text.primary
+  wrap.style.setProperty('--sc-txt2',   isDark ? '#B8BFC5' : '#636C74'); // gray.300 / gray.600 = color.text.secondary
+  wrap.style.setProperty('--sc-txt3',   isDark ? '#86919A' : '#86919A'); // gray.500 = color.text.tertiary
   // Disabled — color.bg.interactive-disabled / color.text.disabled
   wrap.style.setProperty('--sc-dis-bg',  isDark ? '#30363C' : '#E2E6E8'); // gray.800 / gray.100
   wrap.style.setProperty('--sc-dis-txt', isDark ? '#484F56' : '#B8BFC5'); // gray.700 / gray.300
@@ -998,6 +998,7 @@ function setScTheme(theme) {
     ]},
   ];
   buildSM(document.getElementById('matrix-floating'), FLOATING_BTN, 2);
+  setScTheme('jk');
 })();
 
 // === ADD L+R ICONS TO FILLED/OUTLINED/BORDERLESS BUTTONS ===
