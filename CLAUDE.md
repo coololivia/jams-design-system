@@ -115,7 +115,8 @@ size: `lg`(52px) / `md`(48px) / `sm`(40px) / `xs`(32px)
 | `button.outlined` | `default` · `brand` · `pill` |
 | `button.borderless` | `default` · `pill` · `subtle` |
 | `button.icon` | `primary` · `brand` · `outlined` · `circle` · `borderless` · `dark` |
-| `button.iconlabel` | `lg` · `sm` · `no` — 아이콘+텍스트 세로형 (no = label 없음, IconOnly) |
+| `button.iconlabel` | `lg` · `sm` — 아이콘+텍스트 세로형 |
+| `button.icononly` | (variant·size 없음) — 아이콘 단독, 32×32, no bg |
 | `button.emojilabel` | (variant 없음, size만) `lg` · `sm` — 이모지+텍스트 세로형 |
 | `button.emoji` | (variant 없음, size만) `lg` · `sm` — 이모지+텍스트 가로형 pill |
 | `button.text` | `brand` · `primary` · `secondary` · `link` |

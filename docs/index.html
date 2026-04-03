@@ -439,7 +439,7 @@
         <!-- Icon Matrix (Light/Dark 반영) -->
         <div class="sc-card" style="margin-bottom:16px;" id="matrix-icon">
           <div class="sc-card-title">Icon <span class="badge theme-off">Light/Dark 반영</span> <span class="badge">3 variants × 3 states</span></div>
-          <p class="sc-card-desc">button.iconlabel.lg(13px) · .sm(11px) · .no(label 없음, 32×32). gray — 브랜드 테마 미반영.</p>
+          <p class="sc-card-desc">button.iconlabel.lg(13px) · .sm(11px) · button.icononly(32×32, label 없음). gray — 브랜드 테마 미반영.</p>
         </div>
 
         <!-- Emoji 세로형 Matrix (테마 미적용) -->
@@ -974,7 +974,7 @@ function setScTheme(theme) {
       {cls:'jb-iconemoji jb-iconemoji-h', lbl:`${IC(20)}<span>버튼명</span>`},
       {cls:'jb-iconemoji jb-text-dis', lbl:`${IC(20)}<span>버튼명</span>`, d:true},
     ]),
-    EMO('button.iconlabel.no', ['Default','Hover','Disabled'], '70px', [
+    EMO('button.icononly', ['Default','Hover','Disabled'], '70px', [
       {cls:'jb-icon-xs', lbl:IC(20)},
       {cls:'jb-icon-xs-h', lbl:IC(20)},
       {cls:'jb-icon-xs jb-text-dis', lbl:IC(20), d:true},
