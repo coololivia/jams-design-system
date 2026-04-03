@@ -205,7 +205,7 @@
   .sc-matrix-wrap { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--sc-surf-h,#F0F1F3); }
   .sc-matrix-wrap:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
   .sc-matrix-type { font-size: 11px; font-weight: 700; color: var(--sc-txt2,#575F6C); margin-bottom: 8px; font-family: 'SFMono-Regular','Menlo',monospace; background: var(--sc-surf,#F7F8FA); display: inline-block; padding: 2px 8px; border-radius: 4px; }
-  .sc-matrix-grid { display: grid; grid-template-columns: 28px repeat(4, minmax(80px, 1fr)); gap: 6px 8px; align-items: center; }
+  .sc-matrix-grid { display: grid; grid-template-columns: 28px repeat(4, minmax(80px, 1fr)); gap: 6px 8px; align-items: center; justify-items: center; }
   .sc-matrix-col-hd { font-size: 10px; color: var(--sc-txt3,#949BA8); font-weight: 500; text-align: center; padding-bottom: 2px; }
   .sc-matrix-sz { font-size: 11px; color: var(--sc-txt3,#B0B5BF); font-weight: 600; text-align: right; padding-right: 4px; }
   .jb-b500-h { background: var(--sc-hover,#1447D4); color:#fff; filter:brightness(0.92); border:none; cursor:default; }
@@ -904,7 +904,8 @@ function setScTheme(theme) {
       wrap.className = 'sc-matrix-wrap';
       wrap.style.cssText = 'width:max-content;min-width:0;';
       const hdrs = v.hdrs || ['Default','Hover','Disabled'];
-      const gc = `repeat(${hdrs.length},auto)`;
+      const cellMin = v.cellMin || '80px';
+      const gc = `repeat(${hdrs.length},minmax(${cellMin},auto))`;
       let h = `<div class="sc-matrix-type">${v.tok}</div>`;
       h += `<div class="sc-matrix-grid" style="grid-template-columns:${gc};width:max-content">`;
       h += hdrs.map(hd => `<div class="sc-matrix-col-hd">${hd}</div>`).join('');
