@@ -438,14 +438,8 @@
 
         <!-- Icon Matrix (테마 적용) -->
         <div class="sc-card" style="margin-bottom:16px;" id="matrix-icon">
-          <div class="sc-card-title">Icon <span class="badge theme-on">테마 적용</span> <span class="badge">1 type × 3 states</span></div>
-          <p class="sc-card-desc">ButtonIcon xs(32×32·no bg). 브랜드 테마 색상 반영.</p>
-        </div>
-
-        <!-- Emoji 세로형 Matrix (테마 미적용) -->
-        <div class="sc-card" style="margin-bottom:16px;" id="matrix-emoji-v">
-          <div class="sc-card-title">Emoji 세로형 <span class="badge theme-off">테마 미적용</span> <span class="badge">2 types × 3 states</span></div>
-          <p class="sc-card-desc">텍스트 13·11 2가지 사이즈로 이모지+텍스트 조합의 세로형 버튼.</p>
+          <div class="sc-card-title">Icon <span class="badge theme-on">테마 적용</span> <span class="badge">3 types × 3 states</span></div>
+          <p class="sc-card-desc">Icon 세로형(13·11px 2사이즈, 아이콘+텍스트 조합) · IconOnly(아이콘 단독, no bg). 브랜드 테마 색상 반영.</p>
         </div>
 
         <!-- Emoji 가로형 Matrix (테마 미적용) -->
@@ -960,19 +954,9 @@ function setScTheme(theme) {
   ];
   buildSM(document.getElementById('matrix-text'), ICONTEXT_BTN, 4);
 
-  // --- Icon (테마 적용) ---
+  // --- Icon (테마 적용): 세로형 + IconOnly ---
   const EMO = (tok, hdrs, cellMin, cells) => ({tok, hdrs, cellMin, cells});
   const ICON_THEMED_BTN = [
-    EMO('button.icon.xs', ['Default','Hover','Disabled'], '70px', [
-      {cls:'jb-icon-xs', lbl:'☆'},
-      {cls:'jb-icon-xs-h', lbl:'☆'},
-      {cls:'jb-icon-xs jb-text-dis', lbl:'☆', d:true},
-    ]),
-  ];
-  buildSM(document.getElementById('matrix-icon'), ICON_THEMED_BTN, 3);
-
-  // --- Emoji 세로형 (테마 미적용) ---
-  const EMOJI_V_BTN = [
     EMO('button.iconemoji.lg', ['Default','Hover','Disabled'], '80px', [
       {cls:'jb-iconemoji-lg', lbl:'<span style="font-size:24px">📍</span><span>버튼명</span>'},
       {cls:'jb-iconemoji-lg jb-iconemoji-h', lbl:'<span style="font-size:24px">📍</span><span>버튼명</span>'},
@@ -983,8 +967,13 @@ function setScTheme(theme) {
       {cls:'jb-iconemoji jb-iconemoji-h', lbl:'<span style="font-size:20px">📍</span><span>버튼명</span>'},
       {cls:'jb-iconemoji jb-text-dis', lbl:'<span style="font-size:20px;opacity:0.35">📍</span><span>버튼명</span>', d:true},
     ]),
+    EMO('button.icon.xs', ['Default','Hover','Disabled'], '70px', [
+      {cls:'jb-icon-xs', lbl:'🗑'},
+      {cls:'jb-icon-xs-h', lbl:'🗑'},
+      {cls:'jb-icon-xs jb-text-dis', lbl:'🗑', d:true},
+    ]),
   ];
-  buildSM(document.getElementById('matrix-emoji-v'), EMOJI_V_BTN, 3);
+  buildSM(document.getElementById('matrix-icon'), ICON_THEMED_BTN, 3);
 
   // --- Emoji 가로형 (테마 미적용) ---
   const EMOJI_H_BTN = [
