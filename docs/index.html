@@ -438,7 +438,7 @@
 
         <!-- Icon Matrix (테마 적용) -->
         <div class="sc-card" style="margin-bottom:16px;" id="matrix-icon">
-          <div class="sc-card-title">Icon <span class="badge theme-on">테마 적용</span> <span class="badge">4 types × 3 states</span></div>
+          <div class="sc-card-title">Icon <span class="badge theme-on">테마 적용</span> <span class="badge">3 types × 3 states</span></div>
           <p class="sc-card-desc">ButtonIconEmoji 세로형(lg 24px·sm 20px) · ButtonIcon xs(32×32·no bg) · ButtonScrap(24×24). 브랜드 테마 색상 반영.</p>
         </div>
 
@@ -970,11 +970,6 @@ function setScTheme(theme) {
       {cls:'jb-icon-xs', lbl:'☆'},
       {cls:'jb-icon-xs-h', lbl:'☆'},
       {cls:'jb-icon-xs jb-text-dis', lbl:'☆', d:true},
-    ]),
-    EMO('button.scrap', ['off','on','—'], '70px', [
-      {cls:'jb-scrap', lbl:'☆'},
-      {cls:'jb-scrap-on', lbl:'★'},
-      {cls:'jb-scrap', s:'opacity:0.3;cursor:not-allowed;', lbl:'☆', d:true},
     ]),
   ];
   buildSM(document.getElementById('matrix-icon'), ICON_THEMED_BTN, 3);
