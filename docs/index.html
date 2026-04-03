@@ -196,6 +196,7 @@
   .jb-pagenum { min-width: 32px; height: 32px; padding: 0 4px; border-radius: 6px; font-size: 13px; font-weight: 600; background: transparent; border: none; color: var(--sc-txt2,#636C74); cursor: pointer; }
   .jb-pagenum-active { background: var(--sc-primary, #1B55F6); color: #fff; }
   .jb-icontext { background: none; border: none; cursor: pointer; font-size: 13px; font-weight: 500; color: var(--sc-txt2,#636C74); display: inline-flex; align-items: center; gap: 2px; padding: 0; font-family: inherit; }
+  .jb-icontext-pill { background: var(--sc-surf,#F4F6F7); border-radius: 999px; padding: 3px 10px; }
   .jb-fw { width: 100%; justify-content: center; }
   /* === Button Matrix === */
   .sc-card-matrix { grid-column: 1 / -1; }
@@ -234,8 +235,9 @@
   .jb-emoji-h  { background:var(--sc-surf-h,#F0F1F3); cursor:default; }
   .jb-emoji-d  { background:var(--sc-dis-bg,#F0F1F3) !important; color:var(--sc-dis-txt,#BBBFC5) !important; border-color:transparent !important; cursor:not-allowed; }
   /* ButtonIconEmoji vertical 34px */
-  .jb-iconemoji   { display:inline-flex; flex-direction:column; align-items:center; gap:4px; background:none; border:none; cursor:pointer; width:34px; font-size:11px; font-weight:500; color:var(--sc-txt1,#1A1C22); font-family:inherit; padding:0; line-height:1.2; }
-  .jb-iconemoji-h { opacity:0.55; cursor:default; }
+  .jb-iconemoji    { display:inline-flex; flex-direction:column; align-items:center; gap:4px; background:none; border:none; cursor:pointer; width:34px; font-size:11px; font-weight:500; color:var(--sc-txt1,#1A1C22); font-family:inherit; padding:0; line-height:1.2; }
+  .jb-iconemoji-lg { display:inline-flex; flex-direction:column; align-items:center; gap:4px; background:none; border:none; cursor:pointer; width:40px; font-size:13px; font-weight:500; color:var(--sc-txt1,#1A1C22); font-family:inherit; padding:0; line-height:1.2; }
+  .jb-iconemoji-h  { opacity:0.55; cursor:default; }
   /* ButtonScrap on */
   .jb-scrap-on { background:none; border:none; cursor:pointer; font-size:20px; line-height:1; width:24px; height:24px; padding:0; color:#FFC107; }
   /* Usage grid */
@@ -428,14 +430,14 @@
 
         <!-- Text / IconText Matrix -->
         <div class="sc-card" style="margin-bottom:16px;" id="matrix-text">
-          <div class="sc-card-title">Text / IconText <span class="badge">8 variants × 3 states</span></div>
-          <p class="sc-card-desc">배경·테두리·패딩 없음. ButtonText(brand · gray950 · gray500) × 3 sizes + ButtonIcontext × 2.</p>
+          <div class="sc-card-title">Text / IconText <span class="badge">12 text rows + IconText 4 combos</span></div>
+          <p class="sc-card-desc">배경·테두리·패딩 없음. brand·primary·secondary·link × 3 sizes + IconText (icon+text+chevron 4 조합, no-bg / pill-bg 2행).</p>
         </div>
 
         <!-- Icon / Emoji Matrix -->
         <div class="sc-card" style="margin-bottom:16px;" id="matrix-iconemoji">
-          <div class="sc-card-title">Icon / Emoji <span class="badge">5 types × 3 states</span></div>
-          <p class="sc-card-desc">ButtonIconEmoji(세로·34px) · ButtonEmoji(pill 40/32) · ButtonIcon(32×32·no bg) · ButtonScrap(24×24).</p>
+          <div class="sc-card-title">Icon / Emoji <span class="badge">6 types × 3 states</span></div>
+          <p class="sc-card-desc">ButtonIconEmoji 세로형(13px / 11px 2사이즈) · ButtonEmoji 가로형(40 / 32) · ButtonIcon(32×32·no bg) · ButtonScrap(24×24).</p>
         </div>
 
         <!-- Filter Matrix -->
@@ -779,7 +781,9 @@ function setScTheme(theme) {
     ['jb-pagenum-active',  'button.pagination.number — state: active'],
     ['jb-pagenum',         'button.pagination.number'],
     ['jb-scrap',           'button.scrap'],
-    ['jb-icontext',        'button.text.link'],
+    ['jb-icontext-pill',   'button.text.icontext (pill bg)'],
+    ['jb-icontext',        'button.text.icontext'],
+    ['jb-iconemoji-lg',    'button.iconemoji.lg'],
     ['jb-icon-dark',       'button.icon.dark'],
     ['jb-icon-circle',     'button.icon.circle'],
     ['jb-icon-borderless', 'button.icon.borderless'],
@@ -905,21 +909,51 @@ function setScTheme(theme) {
   // --- Text / IconText ---
   const T = (cls, s, lbl) => ({cls, s, lbl});
   const TEXT_BTN = [
-    {tok:'button.text.brand.lg',     cells:[T('jb-text jb-text-brand','font-size:16px','텍스트명'), T('jb-text jb-text-brand jb-text-h','font-size:16px','텍스트명'), T('jb-text jb-text-dis','font-size:16px','텍스트명')]},
-    {tok:'button.text.brand.md',     cells:[T('jb-text jb-text-brand','font-size:14px','텍스트명'), T('jb-text jb-text-brand jb-text-h','font-size:14px','텍스트명'), T('jb-text jb-text-dis','font-size:14px','텍스트명')]},
-    {tok:'button.text.brand.sm',     cells:[T('jb-text jb-text-brand','font-size:13px','텍스트명'), T('jb-text jb-text-brand jb-text-h','font-size:13px','텍스트명'), T('jb-text jb-text-dis','font-size:13px','텍스트명')]},
-    {tok:'button.text.primary.lg',   cells:[T('jb-text jb-text-gray900','font-size:16px','텍스트명'), T('jb-text jb-text-gray900 jb-text-h','font-size:16px','텍스트명'), T('jb-text jb-text-dis','font-size:16px','텍스트명')]},
-    {tok:'button.text.primary.md',   cells:[T('jb-text jb-text-gray900','font-size:14px','텍스트명'), T('jb-text jb-text-gray900 jb-text-h','font-size:14px','텍스트명'), T('jb-text jb-text-dis','font-size:14px','텍스트명')]},
-    {tok:'button.text.secondary.sm', cells:[T('jb-text jb-text-gray500','font-size:13px','텍스트명'), T('jb-text jb-text-gray500 jb-text-h','font-size:13px','텍스트명'), T('jb-text jb-text-dis','font-size:13px','텍스트명')]},
-    {tok:'button.text.link.md', cells:[T('jb-icontext','','버튼명 ›'), T('jb-icontext jb-text-h','','버튼명 ›'), T('jb-icontext jb-text-dis','','버튼명 ›')]},
-    {tok:'button.text.link.sm', cells:[T('jb-icontext jb-text-brand','','더보기 ›'), T('jb-icontext jb-text-brand jb-text-h','','더보기 ›'), T('jb-icontext jb-text-dis','','더보기 ›')]},
+    // brand normal
+    {tok:'button.text.brand.lg',      cells:[T('jb-text jb-text-brand','font-size:16px','텍스트명'), T('jb-text jb-text-brand jb-text-h','font-size:16px','텍스트명'), T('jb-text jb-text-dis','font-size:16px','텍스트명')]},
+    {tok:'button.text.brand.md',      cells:[T('jb-text jb-text-brand','font-size:14px','텍스트명'), T('jb-text jb-text-brand jb-text-h','font-size:14px','텍스트명'), T('jb-text jb-text-dis','font-size:14px','텍스트명')]},
+    {tok:'button.text.brand.sm',      cells:[T('jb-text jb-text-brand','font-size:13px','텍스트명'), T('jb-text jb-text-brand jb-text-h','font-size:13px','텍스트명'), T('jb-text jb-text-dis','font-size:13px','텍스트명')]},
+    // primary normal
+    {tok:'button.text.primary.lg',    cells:[T('jb-text jb-text-gray900','font-size:16px','텍스트명'), T('jb-text jb-text-gray900 jb-text-h','font-size:16px','텍스트명'), T('jb-text jb-text-dis','font-size:16px','텍스트명')]},
+    {tok:'button.text.primary.md',    cells:[T('jb-text jb-text-gray900','font-size:14px','텍스트명'), T('jb-text jb-text-gray900 jb-text-h','font-size:14px','텍스트명'), T('jb-text jb-text-dis','font-size:14px','텍스트명')]},
+    {tok:'button.text.primary.sm',    cells:[T('jb-text jb-text-gray900','font-size:13px','텍스트명'), T('jb-text jb-text-gray900 jb-text-h','font-size:13px','텍스트명'), T('jb-text jb-text-dis','font-size:13px','텍스트명')]},
+    // secondary normal
+    {tok:'button.text.secondary.lg',  cells:[T('jb-text jb-text-gray500','font-size:16px','텍스트명'), T('jb-text jb-text-gray500 jb-text-h','font-size:16px','텍스트명'), T('jb-text jb-text-dis','font-size:16px','텍스트명')]},
+    {tok:'button.text.secondary.md',  cells:[T('jb-text jb-text-gray500','font-size:14px','텍스트명'), T('jb-text jb-text-gray500 jb-text-h','font-size:14px','텍스트명'), T('jb-text jb-text-dis','font-size:14px','텍스트명')]},
+    {tok:'button.text.secondary.sm',  cells:[T('jb-text jb-text-gray500','font-size:13px','텍스트명'), T('jb-text jb-text-gray500 jb-text-h','font-size:13px','텍스트명'), T('jb-text jb-text-dis','font-size:13px','텍스트명')]},
+    // link = brand color + underline
+    {tok:'button.text.link.lg',       cells:[T('jb-text jb-text-brand jb-text-ul','font-size:16px','텍스트명'), T('jb-text jb-text-brand jb-text-ul','font-size:16px;filter:brightness(0.8)','텍스트명'), T('jb-text jb-text-dis','font-size:16px','텍스트명')]},
+    {tok:'button.text.link.md',       cells:[T('jb-text jb-text-brand jb-text-ul','font-size:14px','텍스트명'), T('jb-text jb-text-brand jb-text-ul','font-size:14px;filter:brightness(0.8)','텍스트명'), T('jb-text jb-text-dis','font-size:14px','텍스트명')]},
+    {tok:'button.text.link.sm',       cells:[T('jb-text jb-text-brand jb-text-ul','font-size:13px','텍스트명'), T('jb-text jb-text-brand jb-text-ul','font-size:13px;filter:brightness(0.8)','텍스트명'), T('jb-text jb-text-dis','font-size:13px','텍스트명')]},
   ];
   buildSM(document.getElementById('matrix-text'), TEXT_BTN, 3);
+
+  // IconText combos (Figma "IconText" 섹션: icon+text+chevron 4 조합 × no-bg / pill-bg)
+  const ICONTEXT_BTN = [
+    {tok:'button.text.icontext', hdrs:['⟳ 텍+›','⟳ 텍','텍+›','텍'], cells:[
+      {cls:'jb-icontext', lbl:'⟳ 버튼명 ›'},
+      {cls:'jb-icontext', lbl:'⟳ 버튼명'},
+      {cls:'jb-icontext', lbl:'버튼명 ›'},
+      {cls:'jb-icontext', lbl:'버튼명'},
+    ]},
+    {tok:'button.text.icontext (pill bg)', hdrs:['⟳ 텍+›','⟳ 텍','텍+›','텍'], cells:[
+      {cls:'jb-icontext jb-icontext-pill', lbl:'⟳ 버튼명 ›'},
+      {cls:'jb-icontext jb-icontext-pill', lbl:'⟳ 버튼명'},
+      {cls:'jb-icontext jb-icontext-pill', lbl:'버튼명 ›'},
+      {cls:'jb-icontext jb-icontext-pill', lbl:'버튼명'},
+    ]},
+  ];
+  buildSM(document.getElementById('matrix-text'), ICONTEXT_BTN, 4);
 
   // --- Icon / Emoji ---
   const EMO = (tok, hdrs, cellMin, cells) => ({tok, hdrs, cellMin, cells});
   const ICONEMOJI_BTN = [
-    EMO('button.iconemoji', ['Default','Hover','Disabled'], '80px', [
+    EMO('button.iconemoji.lg', ['Default','Hover','Disabled'], '80px', [
+      {cls:'jb-iconemoji-lg', lbl:'<span style="font-size:24px">🏠</span><span>홈</span>'},
+      {cls:'jb-iconemoji-lg jb-iconemoji-h', lbl:'<span style="font-size:24px">🏠</span><span>홈</span>'},
+      {cls:'jb-iconemoji-lg jb-text-dis', lbl:'<span style="font-size:24px;opacity:0.35">🏠</span><span>홈</span>', d:true},
+    ]),
+    EMO('button.iconemoji.sm', ['Default','Hover','Disabled'], '80px', [
       {cls:'jb-iconemoji', lbl:'<span style="font-size:20px">🏠</span><span>홈</span>'},
       {cls:'jb-iconemoji jb-iconemoji-h', lbl:'<span style="font-size:20px">🏠</span><span>홈</span>'},
       {cls:'jb-iconemoji jb-text-dis', lbl:'<span style="font-size:20px;opacity:0.35">🏠</span><span>홈</span>', d:true},
