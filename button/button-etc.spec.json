@@ -48,7 +48,7 @@
       "$status": "✅ confirmed"
     },
 
-    "ButtonProduct": {
+    "button.product": {
       "$description": "상품 안내/이동 버튼 — 텍스트 + 오른쪽 화살표 outlined pill",
       "layout": {
         "flow": "Horizontal",
@@ -68,8 +68,9 @@
   },
 
   "progress": {
-    "button.search": "✅ confirmed",
+    "button.search.lg": "✅ confirmed",
+    "button.search.sm": "✅ confirmed",
     "button.top": "✅ confirmed",
-    "ButtonProduct": "✅ 구조 confirmed"
+    "button.product": "✅ 구조 confirmed"
   }
 }

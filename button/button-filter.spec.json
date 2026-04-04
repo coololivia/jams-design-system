@@ -6,7 +6,7 @@
 
   "components": {
 
-    "button.filter.icon-text": {
+    "button.filter.icontext": {
       "$description": "필터 아이콘 버튼 — 아이콘 + 텍스트 + 상태 뱃지(체크/카운트) 조합",
       "props": {
         "state": { "type": "enum", "values": ["off", "on"] },
@@ -72,7 +72,7 @@
       "$status": "✅ off 상태 confirmed"
     },
 
-    "button.filter.icon-only": {
+    "button.filter.icononly": {
       "$description": "필터 선택 결과 표시 버튼 — 선택된 필터 값을 pill 형태로 표시",
       "props": {
         "size": { "type": "enum", "values": ["40", "32"] },
@@ -104,8 +104,8 @@
   },
 
   "progress": {
-    "button.filter.icon-text": "✅ confirmed",
+    "button.filter.icontext": "✅ confirmed",
     "button.filter.item": "✅ off confirmed",
-    "button.filter.icon-only": "✅ confirmed"
+    "button.filter.icononly": "✅ confirmed"
   }
 }

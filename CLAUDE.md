@@ -44,14 +44,14 @@ Shared Primitives (color.*, spacing.*, radius.*)
 
 ```
 1. Primitive   tokens/primitives/primitives.tokens.json
-               color.blue2.500 / spacing.16 / radius.10
+               {color.blue2.500} / {spacing.16} / {radius.10}
 
 2. Semantic    tokens/{system}/semantic.tokens.json
-               color.bg.interactive / color.text.brand
-               space.component.md / radius.component.md
+               {color.bg.interactive} / {color.text.brand}
+               {space.component.md} / {radius.component.md}
 
 3. Theme       tokens/{system}/theme-{brand}-{mode}.tokens.json
-               color.bg.interactive → blue2.500 (JK) or orange.500 (AM)
+               {color.bg.interactive} → {color.blue2.500} (JK) or {color.orange.500} (AM)
 
 4. Component   tokens/{system}/component.{name}.tokens.json
                button.filled.primary.lg
@@ -109,6 +109,12 @@ tokens/
 패턴: `button.{군}.{variant}.{size}`
 size: `lg`(52px) / `md`(48px) / `sm`(40px) / `xs`(32px)
 
+> **예외 — variant 생략 규칙**: variant가 하나뿐이거나 없는 군은 variant 세그먼트를 생략.
+> `button.iconlabel.lg` / `button.icononly` / `button.emojilabel.lg` / `button.emoji.lg` 등
+>
+> **특수 사이즈**: `button.iconlabel` lg=13px폰트·54px높이, sm=11px폰트·43px높이 (D-Button size 기준 아님).
+> `button.icononly` = 32×32 고정, variant·size 없음.
+
 | 군 | variants |
 |---|---|
 | `button.filled` | `primary` · `brand` · `brand-dim` · `subtle` |
@@ -119,17 +125,24 @@ size: `lg`(52px) / `md`(48px) / `sm`(40px) / `xs`(32px)
 | `button.icononly` | (variant·size 없음) — 아이콘 단독, 32×32, no bg |
 | `button.emojilabel` | (variant 없음, size만) `lg` · `sm` — 이모지+텍스트 세로형 |
 | `button.emoji` | (variant 없음, size만) `lg` · `sm` — 이모지+텍스트 가로형 pill |
-| `button.text` | `brand` · `primary` · `secondary` · `link` |
-| `button.filter` | `item` · `icon-text` · `icon-only` |
+| `button.text` | `brand` · `primary` · `secondary` · `link` — 아이콘 유무는 variant 아님, 컴포넌트 prop |
+| `button.filter` | `item` · `icontext` · `icononly` |
 | `button.floating` | (size 없음) |
 | `button.search` | `lg` · `sm` |
 | `button.top` | (size 없음) |
+| `button.counter` | (variant·size 규칙 별도 정의 예정) |
+| `button.product` | (variant·size 규칙 별도 정의 예정) |
+| `button.scrap` | (variant·size 규칙 별도 정의 예정) |
+| `button.pagination` | `icon` · `number` · `dimmed` |
+> `dimmed`는 `number`(White Number)와 완전 동일 룰(화살표 variant 포함). 변경: 스트로크 없음 + bg Gray 950 60%
 
 이전 이름 → 새 이름 대조:
 `theme-primary` → `button.filled.primary` /
 `theme-brand50` → `button.filled.subtle` /
 `theme-rounded` → `button.outlined.pill` /
-`borderless-brand50` → `button.borderless.subtle`
+`borderless-brand50` → `button.borderless.subtle` /
+`button.filter.icon-text` → `button.filter.icontext` /
+`button.filter.icon-only` → `button.filter.icononly`
 
 ---
 

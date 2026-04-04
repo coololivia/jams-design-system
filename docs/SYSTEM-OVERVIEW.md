@@ -23,9 +23,7 @@
 ### 핵심 원칙
 - **JAMS 2.1이 정본(canonical)**. 새 토큰/컴포넌트는 여기서 먼저 정의됩니다.
 - **Shared Primitives**는 2.1이 소유합니다. 모든 시스템이 이 primitive를 참조합니다.
-- **JAMS Core는 레거시 호환 레이어**입니다. 직접 사용하는 프로덕트가 있어 유지하되, 신규 개발은 2.1 기준입니다.
-- Core에서 2.1과 다른 부분은 `tokens/jams-core/component-overrides.tokens.json`에 명시됩니다.
-- Core의 `$deprecated` 표시된 토큰은 2.1의 토큰으로 마이그레이션 대상입니다.
+- **JAMS Core는 폐기됨**. CommJAMS로 대체. 참조 금지. (CLAUDE.md 디시전 로그 2026.04.02 확정)
 
 ## 2. Shared Primitives
 모든 시스템이 공유하는 기본 값 라이브러리입니다.
@@ -63,43 +61,33 @@
 - 2개 모드: 라이트/다크
 - B2B 전용 토큰: 사이드바 색상, 데이터 시각화 컬러
 
-## 5. JAMS Core (Legacy)
-레거시 프로덕트 호환을 위한 시스템입니다.
-- **상태**: legacy — 신규 프로덕트에서는 사용 금지
-- 2.1과의 차이점:
-  - `color.text.default`가 gray.800 (2.1은 near-black #1A1A1E)
-  - `color.text.secondary`가 gray.500 (2.1은 gray.600)
-  - spacing은 sm/md/lg alias 사용 (2.1은 숫자 기반)
-  - Button에 ghost variant 없음
-  - Input에 filled variant 없음
-  - Modal에 fullscreen variant 없음
-  - border-radius가 전반적으로 작음 (sm vs md)
+## 5. ~~JAMS Core~~ (폐기)
+**폐기됨** — CommJAMS로 대체. 참조 금지. (2026.04.02 확정)
 
 ## 6. 토큰 계층 (3-Layer)
 
 ```
-Primitive (primitives/)  → 순수 값: #3B82F6, 16px, 700
+Primitive (primitives/)  → 순수 값: {color.blue2.500}, {spacing.16}, {radius.10}
     ↓ 참조
-Semantic (semantic.json) → 의미: color.primary, spacing.component.md
+Semantic (semantic.json) → 의미: {color.bg.interactive}, {space.component.md}
     ↓ 오버라이드
-Theme (theme-*.json)     → 테마별: JK-Light의 primary = blue.500
+Theme (theme-*.json)     → 테마별: {color.bg.interactive} → {color.blue2.500} (JK)
 ```
 
 ### 참조 규칙
-- 코드에서는 **Semantic 토큰만 사용** (color.primary, color.bg.surface 등)
-- Primitive 토큰(color.blue.500)은 직접 참조하지 않음
+- 코드에서는 **Semantic 토큰만 사용** (color.bg.interactive, color.text.primary 등)
+- Primitive 토큰(color.blue2.500)은 직접 참조하지 않음
 - 테마 전환은 theme 파일 교체로 자동 적용
-- Core 작업 시 `$deprecated` 토큰을 발견하면 마이그레이션 검토
 
 ## 7. 컴포넌트
 
-| 컴포넌트 | 2.1 | Biz | Core | Core 차이점 |
-|----------|-----|-----|------|-------------|
-| Button | primary/secondary/ghost/danger | 동일 | ghost 없음 | radius.sm |
-| Input | outlined/filled | 동일 | filled 없음 | radius.sm |
-| Modal | sm/md/lg/fullscreen | 동일 | fullscreen 없음 | radius.md |
-| Card | elevated/outlined/filled | 동일 | 동일 | - |
-| Badge | filled/outlined/subtle | 동일 | 동일 | - |
+| 컴포넌트 | 2.1 | Biz |
+|----------|-----|-----|
+| Button | filled/outlined/borderless + icon/text/filter/etc | 자체 정의 |
+| Input | outlined/filled | 동일 |
+| Modal | sm/md/lg/fullscreen | 동일 |
+| Card | elevated/outlined/filled | 동일 |
+| Badge | filled/outlined/subtle | 동일 |
 
 ## 8. 패턴
 
@@ -126,17 +114,17 @@ Figma Variables  ←→  tokens/*.json (SSOT)  ←→  docs/*.md
 
 | 용도 | 토큰 |
 |------|------|
-| 주요 액션 배경 | `color.primary` |
-| 주요 액션 텍스트 | `color.text.on-primary` |
+| 주요 액션 배경 | `color.bg.interactive` |
+| 주요 액션 텍스트 | `color.text.inverse` |
 | 페이지 배경 | `color.bg.base` |
 | 카드/섹션 배경 | `color.bg.surface` |
 | 떠 있는 요소 배경 | `color.bg.elevated` |
-| 기본 텍스트 | `color.text.default` |
+| 기본 텍스트 | `color.text.primary` |
 | 보조 텍스트 | `color.text.secondary` |
 | 비활성 텍스트 | `color.text.disabled` |
 | 기본 테두리 | `color.border.default` |
 | 포커스 테두리 | `color.border.focus` |
-| 에러 테두리 | `color.border.error` |
-| 위험 액션 | `color.danger` |
-| 성공 | `color.success` |
-| 경고 | `color.warning` |
+| 에러 테두리 | `color.border.danger` |
+| 위험 텍스트 | `color.text.danger` |
+| 성공 텍스트 | `color.text.success` |
+| 경고 | `color.status.warning` |

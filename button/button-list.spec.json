@@ -1,12 +1,12 @@
 {
   "$description": "리스트 버튼 섹션 — JAMS 2.1. DTCG 토큰 기준.",
   "$figmaSource": "https://www.figma.com/design/Dojrcqpr6br5B6BNkj08jR/JAMS-2.0?m=dev",
-  "$figmaSection": "리스트 버튼 (ListbuttonBox)",
+  "$figmaSection": "리스트 버튼 (button.listaction)",
   "$status": "extracted-from-figma",
 
   "components": {
 
-    "ListbuttonBox": {
+    "button.listaction": {
       "$description": "리스트 버튼 — 목록/액션시트에서 사용하는 행(row) 형태 버튼",
       "props": {
         "label": { "type": "string", "default": "버튼명" }
@@ -29,6 +29,6 @@
   },
 
   "progress": {
-    "ListbuttonBox": "✅ confirmed"
+    "button.listaction": "✅ confirmed"
   }
 }

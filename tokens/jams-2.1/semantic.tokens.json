@@ -11,11 +11,13 @@
       "interactive-hover":     { "$value": "{color.blue2.600}",    "$type": "color", "$description": "버튼 primary hover" },
       "interactive-active":    { "$value": "{color.blue2.700}",    "$type": "color", "$description": "버튼 primary pressed" },
       "interactive-disabled":  { "$value": "{color.gray.100}",     "$type": "color", "$description": "outlined/borderless bg, disabled bg" },
+      "interactive-secondary-hovered": { "$value": "{color.white}", "$type": "color", "$description": "secondary 버튼 hover bg+border" },
       "brand":                 { "$value": "{color.blue2.500}",    "$type": "color", "$description": "브랜드 500 fill — 테마별 override" },
       "brand-dim":             { "$value": "{color.blue2.400}",    "$type": "color", "$description": "브랜드 400 (dim) fill" },
       "brand-subtle":          { "$value": "{color.blue2.50}",     "$type": "color", "$description": "브랜드 50 (subtle) fill" },
       "brand-subtle-hover":    { "$value": "{color.blue2.100}",    "$type": "color", "$description": "brand-subtle hover" },
-      "dark":                  { "$value": "rgba(26,28,34,0.85)",  "$type": "color", "$description": "floating/dark 버튼 bg" }
+      "dark":                  { "$value": "rgba(26,28,34,0.85)",  "$type": "color", "$description": "floating/dark 버튼 bg" },
+      "dimmed":                { "$value": "rgba(19,22,24,0.6)",   "$type": "color", "$description": "gray.950 60% — dimmed 인디케이터 bg" }
     },
     "text": {
       "primary":    { "$value": "{color.gray.950}",   "$type": "color", "$description": "본문 기본 텍스트" },

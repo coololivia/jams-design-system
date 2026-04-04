@@ -128,6 +128,30 @@
       }
     },
 
+    "iconlabel": {
+      "$description": "아이콘+텍스트 세로형 버튼. gray 고정 — 브랜드 테마 미반영. variant 없음, size만 lg/sm.",
+      "lg": { "$value": { "bg": "transparent", "text": "{color.text.primary}", "icon": "{color.icon.primary}", "iconSize": "24px", "width": "40px", "height": "54px", "fontSize": "13px" }, "$type": "composite" },
+      "sm": { "$value": { "bg": "transparent", "text": "{color.text.primary}", "icon": "{color.icon.primary}", "iconSize": "20px", "width": "34px", "height": "43px", "fontSize": "11px" }, "$type": "composite" }
+    },
+
+    "icononly": {
+      "$description": "아이콘 단독 32×32 고정. bg 없음, variant·size 없음.",
+      "$value": { "bg": "transparent", "icon": "{color.icon.secondary}", "radius": "{radius.component.xs}", "size": "32px", "iconSize": "20px" },
+      "$type": "composite"
+    },
+
+    "emojilabel": {
+      "$description": "이모지+텍스트 세로형 버튼. 테마 미적용. variant 없음, size만 lg/sm.",
+      "lg": { "$value": { "bg": "transparent", "text": "{color.text.primary}", "emojiSize": "24px", "width": "40px", "height": "54px", "fontSize": "13px", "fontWeight": "400" }, "$type": "composite" },
+      "sm": { "$value": { "bg": "transparent", "text": "{color.text.primary}", "emojiSize": "20px", "width": "34px", "height": "43px", "fontSize": "11px", "fontWeight": "400" }, "$type": "composite" }
+    },
+
+    "emoji": {
+      "$description": "이모지+텍스트 가로형 pill 버튼. 흰 배경·gray 테두리 고정 — 테마 미적용. variant 없음, size만 lg/sm.",
+      "lg": { "$value": { "bg": "{color.bg.base}", "text": "{color.text.primary}", "border": "{color.border.default}", "radius": "{radius.component.md}", "height": "{spacing.40}", "paddingH": "{spacing.12}", "fontSize": "14px", "fontWeight": "400", "emojiSize": "24px" }, "$type": "composite" },
+      "sm": { "$value": { "bg": "{color.bg.base}", "text": "{color.text.primary}", "border": "{color.border.default}", "radius": "{radius.component.xs}", "height": "{spacing.32}", "paddingH": "{spacing.10}", "fontSize": "13px", "fontWeight": "400", "emojiSize": "20px" }, "$type": "composite" }
+    },
+
     "text": {
       "$description": "bg·border·padding 없는 텍스트 버튼 (ButtonText + ButtonIcontext)",
       "brand": {
@@ -141,29 +165,73 @@
         "sm": { "$value": { "text": "{color.text.primary}", "fontSize": "13px" }, "$type": "composite" }
       },
       "secondary": {
+        "lg": { "$value": { "text": "{color.text.secondary}", "fontSize": "16px" }, "$type": "composite" },
+        "md": { "$value": { "text": "{color.text.secondary}", "fontSize": "14px" }, "$type": "composite" },
         "sm": { "$value": { "text": "{color.text.secondary}", "fontSize": "13px" }, "$type": "composite" }
       },
       "link": {
-        "$description": "ButtonIcontext — 텍스트 + 화살표 아이콘",
-        "md": { "$value": { "text": "{color.text.secondary}", "icon": "{color.icon.secondary}", "fontSize": "13px" }, "$type": "composite" },
-        "sm": { "$value": { "text": "{color.text.brand}",    "icon": "{color.icon.brand}",     "fontSize": "12px" }, "$type": "composite" }
+        "$description": "brand 색상 + underline 텍스트 버튼",
+        "lg": { "$value": { "text": "{color.text.brand}", "fontSize": "16px" }, "$type": "composite" },
+        "md": { "$value": { "text": "{color.text.brand}", "fontSize": "14px" }, "$type": "composite" },
+        "sm": { "$value": { "text": "{color.text.brand}", "fontSize": "13px" }, "$type": "composite" }
       }
     },
 
     "filter": {
       "$description": "h=32px 고정 pill. off/on Variable Mode 전환.",
       "item":      { "$value": { "height": "{spacing.32}", "radius": "{radius.component.pill}", "bg-off": "{color.bg.interactive-disabled}", "text-off": "{color.text.tertiary}", "border-off": "{color.border.default}", "bg-on": "{color.bg.interactive}", "text-on": "{color.text.inverse}" }, "$type": "composite" },
-      "icon-text": { "$value": { "height": "{spacing.32}", "radius": "{radius.component.pill}", "bg-off": "{color.bg.interactive-disabled}", "text-off": "{color.text.tertiary}", "border-off": "{color.border.default}", "bg-on": "{color.bg.interactive}", "text-on": "{color.text.inverse}" }, "$type": "composite" },
-      "icon-only": { "$value": { "height": "{spacing.32}", "radius": "{radius.component.pill}", "bg-off": "{color.bg.interactive-disabled}", "icon-off": "{color.icon.secondary}", "border-off": "{color.border.default}", "bg-on": "{color.bg.interactive}", "icon-on": "{color.icon.inverse}" }, "$type": "composite" }
+      "icontext": { "$value": { "height": "{spacing.32}", "radius": "{radius.component.pill}", "bg-off": "{color.bg.interactive-disabled}", "text-off": "{color.text.tertiary}", "border-off": "{color.border.default}", "bg-on": "{color.bg.interactive}", "text-on": "{color.text.inverse}" }, "$type": "composite" },
+      "icononly": { "$value": { "height": "{spacing.32}", "radius": "{radius.component.pill}", "bg-off": "{color.bg.interactive-disabled}", "icon-off": "{color.icon.secondary}", "border-off": "{color.border.default}", "bg-on": "{color.bg.interactive}", "icon-on": "{color.icon.inverse}" }, "$type": "composite" }
     },
 
-    "floating": { "$value": { "bg": "{color.bg.dark}", "text": "{color.text.inverse}", "radius": "{radius.component.pill}", "height": "{spacing.40}", "paddingH": "{spacing.16}", "fontSize": "14px" }, "$type": "composite" },
+    "floating": {
+      "$description": "화면 상단이나 하단에 일정 시간 떠 있는 안내 문구. 사용자의 행동에 대한 피드백이나 간단한 상태 알림에 사용. card 형태는 별도 레이아웃으로 관리.",
+      "$value": { "bg": "{color.bg.dark}", "border": "{color.border.brand}", "borderPosition": "inside", "borderWidth": "1px", "radius": "{radius.component.pill}", "height": "{spacing.40}", "paddingH": "{spacing.16}", "paddingV": "{spacing.8}", "text": "{color.text.inverse}", "fontWeight": "500", "shadow": "{shadow.default}" },
+      "$type": "composite"
+    },
 
     "search": {
       "lg": { "$value": { "bg": "{color.bg.interactive}", "text": "{color.text.inverse}", "radius": "{radius.component.pill}", "height": "{spacing.40}", "paddingH": "{spacing.14}", "fontSize": "14px" }, "$type": "composite" },
       "sm": { "$value": { "bg": "{color.bg.interactive}", "text": "{color.text.inverse}", "radius": "{radius.component.pill}", "height": "{spacing.32}", "paddingH": "{spacing.12}", "fontSize": "13px" }, "$type": "composite" }
     },
 
-    "top": { "$value": { "bg": "{color.bg.base}", "icon": "{color.icon.primary}", "border": "{color.border.default}", "radius": "{radius.component.pill}", "size": "{spacing.56}" }, "$type": "composite" }
+    "top": { "$value": { "bg": "{color.bg.base}", "icon": "{color.icon.primary}", "border": "{color.border.default}", "radius": "{radius.component.pill}", "size": "{spacing.56}" }, "$type": "composite" },
+
+    "counter": {
+      "$description": "카운트 버튼. 라벨(Regular) + 숫자(Medium, brand). h=32, radius-xs, outlined.",
+      "$value": { "bg": "{color.bg.base}", "text": "{color.text.primary}", "count": "{color.text.brand}", "border": "{color.border.default}", "radius": "{radius.component.xs}", "height": "{spacing.32}", "paddingH": "{spacing.10}", "gap": "{spacing.4}", "fontSize": "13px", "fontWeight": "400", "countWeight": "500" },
+      "$type": "composite"
+    },
+
+    "product": {
+      "$description": "상품안내 pill 버튼. outlined, chevron 아이콘 포함.",
+      "$value": { "bg": "{color.bg.interactive-secondary-hovered}", "text": "{color.text.secondary}", "border": "{color.border.default}", "radius": "{radius.component.pill}", "paddingTop": "{spacing.6}", "paddingBottom": "{spacing.6}", "paddingLeft": "{spacing.12}", "paddingRight": "{spacing.8}", "gap": "{spacing.4}", "fontSize": "12px", "fontWeight": "500", "iconSize": "14px" },
+      "$type": "composite"
+    },
+
+    "scrap": {
+      "$description": "스크랩 별 토글. 24×24, bg 없음.",
+      "$value": { "size": "24px", "icon-off": "{color.icon.disabled}", "icon-on": "#FACC15", "$comment-icon-on": "Figma 원본값. yellow 팔레트에 없는 색상 — 별도 시맨틱 토큰 검토 필요" },
+      "$type": "composite"
+    },
+
+    "pagination": {
+      "$description": "페이지네이션 버튼 — 콘텐츠 위 페이지 이동·인디케이터",
+      "icon": {
+        "$description": "White Icon. 화살표만 (‹ ›). variant=next/previous/all",
+        "$value": { "bg": "{color.bg.base}", "icon": "{color.icon.secondary}", "border": "{color.border.default}", "radius": "{radius.8}", "width": "64px", "height": "{spacing.32}", "iconSize": "12px" },
+        "$type": "composite"
+      },
+      "number": {
+        "$description": "White Number. 카운터+화살표 (‹ 1/99 ›). variant=default/more",
+        "$value": { "bg": "transparent", "text": "{color.text.primary}", "border": "{color.border.default}", "radius": "{radius.4}", "height": "{spacing.20}", "paddingV": "{spacing.4}", "paddingH": "{spacing.6}", "fontSize": "12px" },
+        "$type": "composite"
+      },
+      "dimmed": {
+        "$description": "Dimmed Number. White Number와 완전 동일 룰(화살표 포함), 변경: 스트로크 없음 + bg Gray 950 60%. variant=default(1/99), more(1/99 ›)",
+        "$value": { "bg": "{color.bg.dimmed}", "text": "{color.text.inverse}", "radius": "{radius.4}", "height": "{spacing.20}", "paddingV": "{spacing.4}", "paddingH": "{spacing.6}", "fontSize": "12px" },
+        "$type": "composite"
+      }
+    }
   }
 }

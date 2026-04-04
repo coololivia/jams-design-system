@@ -77,7 +77,7 @@
   .token-table th { text-align: left; font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 12px; border-bottom: 1px solid var(--border); }
   .token-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); font-size: 13px; vertical-align: middle; }
   .token-table tr:last-child td { border-bottom: none; }
-  .token-table code { font-family: 'JetBrains Mono', monospace; font-size: 12px; background: var(--surface); padding: 2px 6px; border-radius: 4px; }
+  .token-table code { font-family: 'JetBrains Mono', monospace; font-size: 12px; background: var(--surface); padding: 2px 6px; border-radius: 4px; cursor: pointer; }
   .token-table .val { color: var(--text2); font-family: 'JetBrains Mono', monospace; font-size: 12px; }
   .token-table .desc { color: var(--text3); font-size: 12px; }
 
@@ -194,9 +194,24 @@
   .jb-search { background: var(--sc-primary, #1B55F6); color: #fff; border-radius: 999px !important; }
   .jb-top { width: 56px; height: 56px; padding: 0; background: var(--sc-card-bg,#fff); border: 1px solid var(--sc-bd,#D1D6DA); border-radius: 999px; color: var(--sc-txt1,#131618); font-size: 18px; cursor: pointer; }
   .jb-product { background: var(--sc-card-bg,#fff); border: 1px solid var(--sc-bd,#D1D6DA); color: var(--sc-txt2,#636C74); border-radius: 999px; height: 32px; padding: 0 12px; font-size: 12px; font-weight: 500; cursor: pointer; }
-  .jb-pagearrow { width: 64px; height: 32px; padding: 0; background: var(--sc-surf,#F7F8FA); border: 1px solid var(--sc-bd,#D1D6DA); border-radius: 6px; font-size: 12px; color: var(--sc-txt2,#636C74); cursor: pointer; }
-  .jb-pagenum { min-width: 32px; height: 32px; padding: 0 4px; border-radius: 6px; font-size: 13px; font-weight: 600; background: transparent; border: none; color: var(--sc-txt2,#636C74); cursor: pointer; }
-  .jb-pagenum-active { background: var(--sc-primary, #1B55F6); color: #fff; }
+  /* Pagination — White Icon: 32×32 두개가 붙은 64×32. 바깥 stroke gray100, 안쪽 구분선 없음 */
+  .jb-pg-icon { display:inline-flex; align-items:center; height:32px; background:var(--sc-card-bg,#fff); border:1px solid var(--sc-bd,#E6E8EA); border-radius:8px; overflow:hidden; cursor:pointer; }
+  .jb-pg-icon-btn { display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; font-size:18px; color:var(--sc-txt2,#636C74); }
+  .jb-pg-icon-btn:first-child { padding-left:8px; padding-right:4px; }
+  .jb-pg-icon-btn:last-child { padding-left:4px; padding-right:8px; }
+  .jb-pg-icon-dim { color:var(--sc-dis-txt,#B8BFC5); }
+  /* Pagination — White Number: padding unit-1(4) unit-6(24), gap unit-2(8) */
+  .jb-pg-number { display:inline-flex; align-items:center; justify-content:center; gap:2px; background:none; border:1px solid var(--sc-bd,#D1D6DA); border-radius:4px; padding:4px 6px; color:var(--sc-txt1,#131618); cursor:pointer; }
+  .jb-pg-number .pg-arrow { display:flex; align-items:center; justify-content:center; }
+  .jb-pg-number .pg-current { font-size:12px; font-weight:600; color:var(--sc-txt1,#131618); }
+  .jb-pg-number .pg-slash { font-size:11px; font-weight:400; color:var(--sc-txt1,#131618); }
+  .jb-pg-number .pg-total { font-size:12px; font-weight:400; color:var(--sc-txt1,#131618); }
+  /* Pagination — Dimmed Number */
+  .jb-pg-dimmed { display:inline-flex; align-items:center; justify-content:center; gap:2px; background:rgba(19,22,24,0.6); border:none; border-radius:4px; padding:4px 6px; color:#fff; cursor:pointer; }
+  .jb-pg-dimmed .pg-current { font-size:12px; font-weight:600; color:#fff; }
+  .jb-pg-dimmed .pg-slash { font-size:11px; font-weight:400; color:#fff; }
+  .jb-pg-dimmed .pg-total { font-size:12px; font-weight:400; color:#fff; }
+  .jb-pg-dimmed .pg-arrow { display:flex; align-items:center; justify-content:center; }
   .jb-icontext { background: none; border: none; cursor: pointer; font-size: 13px; font-weight: 500; color: var(--sc-txt2,#636C74); display: inline-flex; align-items: center; gap: 2px; padding: 0; font-family: inherit; }
   .jb-icontext-pill { background: var(--sc-surf,#F4F6F7); border-radius: 999px; padding: 3px 10px; }
   .jb-fw { width: 100%; justify-content: center; }
@@ -228,17 +243,21 @@
   /* ButtonFloating */
   .jb-floating   { background:var(--sc-txt1,#1A1C22); color:var(--sc-card-bg,#fff); border-radius:999px; }
   .jb-floating-h { background:rgba(26,28,34,0.7); color:#fff; border-radius:999px; cursor:default; }
+  .jb-floating-bar   { background:var(--sc-card-bg,#fff); color:var(--sc-txt1,#1A1C22); border:1px solid var(--sc-primary,#1B55F6); border-radius:999px; box-shadow:0 2px 8px rgba(0,0,0,0.08); font-weight:500; }
+  .jb-floating-bar-h { background:var(--sc-surf,#F7F8FA); color:var(--sc-txt1,#1A1C22); border:1px solid var(--sc-primary,#1B55F6); border-radius:999px; box-shadow:0 2px 8px rgba(0,0,0,0.08); font-weight:500; cursor:default; }
+  .jb-floating-card   { background:var(--sc-card-bg,#fff); color:var(--sc-txt1,#1A1C22); border:1px solid var(--sc-primary,#1B55F6); border-radius:16px; box-shadow:0 2px 8px rgba(0,0,0,0.08); font-weight:500; padding:12px 16px; min-width:120px; text-align:left; }
+  .jb-floating-card-h { background:var(--sc-surf,#F7F8FA); color:var(--sc-txt1,#1A1C22); border:1px solid var(--sc-primary,#1B55F6); border-radius:16px; box-shadow:0 2px 8px rgba(0,0,0,0.08); font-weight:500; padding:12px 16px; min-width:120px; text-align:left; cursor:default; }
   /* ButtonIcon small 32×32 no bg */
   .jb-icon-xs   { width:32px; height:32px; padding:0; background:transparent; border:none; color:var(--sc-txt3,#949BA8); display:inline-flex; align-items:center; justify-content:center; border-radius:8px; cursor:pointer; font-size:16px; }
   .jb-icon-xs-h { width:32px; height:32px; padding:0; background:var(--sc-surf,#F7F8FA); border:none; color:var(--sc-txt3,#949BA8); display:inline-flex; align-items:center; justify-content:center; border-radius:8px; cursor:default; font-size:16px; }
   /* ButtonEmoji pill */
-  .jb-emoji    { display:inline-flex; align-items:center; gap:4px; background:var(--sc-card-bg,#fff); border:1px solid var(--sc-bd,#DDE0E6); border-radius:999px; padding:0 12px; height:40px; font-size:14px; font-weight:500; color:var(--sc-txt1,#1A1C22); cursor:pointer; font-family:inherit; }
+  .jb-emoji    { display:inline-flex; align-items:center; gap:4px; background:var(--sc-card-bg,#fff); border:1px solid var(--sc-bd,#DDE0E6); border-radius:10px; padding:0 12px; height:40px; font-size:14px; font-weight:400; color:var(--sc-txt1,#1A1C22); cursor:pointer; font-family:inherit; }
   .jb-emoji-sm { height:32px; font-size:13px; padding:0 10px; }
   .jb-emoji-h  { background:var(--sc-surf,#F4F6F7); cursor:default; }
   .jb-emoji-d  { background:var(--sc-dis-bg,#F0F1F3) !important; color:var(--sc-dis-txt,#BBBFC5) !important; border-color:transparent !important; cursor:not-allowed; }
   /* ButtonIconEmoji vertical 34px */
-  .jb-iconemoji    { display:inline-flex; flex-direction:column; align-items:center; gap:4px; background:none; border:none; cursor:pointer; width:34px; font-size:11px; font-weight:500; color:var(--sc-txt1,#1A1C22); font-family:inherit; padding:0; line-height:1.2; }
-  .jb-iconemoji-lg { display:inline-flex; flex-direction:column; align-items:center; gap:4px; background:none; border:none; cursor:pointer; width:40px; font-size:13px; font-weight:500; color:var(--sc-txt1,#1A1C22); font-family:inherit; padding:0; line-height:1.2; }
+  .jb-iconemoji    { display:inline-flex; flex-direction:column; align-items:center; gap:4px; background:none; border:none; cursor:pointer; width:34px; font-size:11px; font-weight:400; color:var(--sc-txt1,#1A1C22); font-family:inherit; padding:0; line-height:1.2; }
+  .jb-iconemoji-lg { display:inline-flex; flex-direction:column; align-items:center; gap:4px; background:none; border:none; cursor:pointer; width:40px; font-size:13px; font-weight:400; color:var(--sc-txt1,#1A1C22); font-family:inherit; padding:0; line-height:1.2; }
   .jb-iconemoji-h  { opacity:0.55; cursor:default; }
   /* ButtonScrap on */
   .jb-scrap-on { background:none; border:none; cursor:pointer; font-size:20px; line-height:1; width:24px; height:24px; padding:0; color:#FFC107; }
@@ -344,16 +363,16 @@
       <div class="section-title">Semantic Spacing</div>
       <table class="token-table">
         <tr><th>Token</th><th>Value</th><th>Usage</th></tr>
-        <tr><td><code>spacing.component.xs</code></td><td class="val">4px</td><td class="desc">아이콘-텍스트 간격</td></tr>
-        <tr><td><code>spacing.component.sm</code></td><td class="val">8px</td><td class="desc">인풋 내부 패딩</td></tr>
-        <tr><td><code>spacing.component.md</code></td><td class="val">12px</td><td class="desc">버튼 패딩</td></tr>
-        <tr><td><code>spacing.component.lg</code></td><td class="val">16px</td><td class="desc">카드 내부 패딩</td></tr>
-        <tr><td><code>spacing.component.xl</code></td><td class="val">24px</td><td class="desc">모달 내부 패딩</td></tr>
-        <tr><td><code>spacing.layout.xs</code></td><td class="val">16px</td><td class="desc">섹션 내부</td></tr>
-        <tr><td><code>spacing.layout.sm</code></td><td class="val">24px</td><td class="desc">섹션 간</td></tr>
-        <tr><td><code>spacing.layout.md</code></td><td class="val">32px</td><td class="desc">블록 간</td></tr>
-        <tr><td><code>spacing.layout.lg</code></td><td class="val">48px</td><td class="desc">페이지 섹션 간</td></tr>
-        <tr><td><code>spacing.layout.xl</code></td><td class="val">64px</td><td class="desc">페이지 상하 여백</td></tr>
+        <tr><td><code>space.component.xs</code></td><td class="val">4px</td><td class="desc">아이콘-텍스트 간격</td></tr>
+        <tr><td><code>space.component.sm</code></td><td class="val">8px</td><td class="desc">인풋 내부 패딩</td></tr>
+        <tr><td><code>space.component.md</code></td><td class="val">12px</td><td class="desc">버튼 패딩</td></tr>
+        <tr><td><code>space.component.lg</code></td><td class="val">16px</td><td class="desc">카드 내부 패딩</td></tr>
+        <tr><td><code>space.component.xl</code></td><td class="val">24px</td><td class="desc">모달 내부 패딩</td></tr>
+        <tr><td><code>space.layout.xs</code></td><td class="val">16px</td><td class="desc">섹션 내부</td></tr>
+        <tr><td><code>space.layout.sm</code></td><td class="val">24px</td><td class="desc">섹션 간</td></tr>
+        <tr><td><code>space.layout.md</code></td><td class="val">32px</td><td class="desc">블록 간</td></tr>
+        <tr><td><code>space.layout.lg</code></td><td class="val">48px</td><td class="desc">페이지 섹션 간</td></tr>
+        <tr><td><code>space.layout.xl</code></td><td class="val">64px</td><td class="desc">페이지 상하 여백</td></tr>
       </table>
     </div>
   </div>
@@ -442,16 +461,10 @@
           <p class="sc-card-desc">button.iconlabel.lg(13px) · .sm(11px) · button.icononly(32×32, label 없음). gray — 브랜드 테마 미반영.</p>
         </div>
 
-        <!-- Emoji 세로형 Matrix (테마 미적용) -->
-        <div class="sc-card" style="margin-bottom:16px;" id="matrix-emoji-v">
-          <div class="sc-card-title">Emoji 세로형 <span class="badge theme-off">테마 미적용</span> <span class="badge">2 types × 3 states</span></div>
-          <p class="sc-card-desc">텍스트 13·11 2가지 사이즈로 이모지+텍스트 조합의 세로형 버튼.</p>
-        </div>
-
-        <!-- Emoji 가로형 Matrix (테마 미적용) -->
-        <div class="sc-card" style="margin-bottom:16px;" id="matrix-emoji-h">
-          <div class="sc-card-title">Emoji 가로형 <span class="badge theme-off">테마 미적용</span> <span class="badge">2 types × 3 states</span></div>
-          <p class="sc-card-desc">높이 40·32 2가지 사이즈로 이모지+텍스트 조합의 가로형 버튼. 흰 배경·gray 테두리 고정.</p>
+        <!-- Emoji Matrix (테마 미적용) -->
+        <div class="sc-card" style="margin-bottom:16px;" id="matrix-emoji">
+          <div class="sc-card-title">Emoji <span class="badge theme-off">테마 미적용</span> <span class="badge">4 types × 3 states</span></div>
+          <p class="sc-card-desc">세로형(emojilabel) lg·sm + 가로형(emoji) lg·sm. 테마 미적용, gray 고정.</p>
         </div>
 
         <!-- Filter Matrix -->
@@ -460,68 +473,91 @@
           <p class="sc-card-desc">h=32px 고정 pill. off ↔ on Variable Mode 전환. FilterItem · FilterIcon(text) · FilterIcon(icon).</p>
         </div>
 
-        <!-- Floating / Special Matrix -->
-        <div class="sc-card" style="margin-bottom:16px;" id="matrix-floating">
-          <div class="sc-card-title">Floating / Special <span class="badge">4 types × 3 states</span></div>
-          <p class="sc-card-desc">ButtonFloating(dark pill h40) · ButtonSearch(brand pill h40/32) · ButtonTop(circle 56px).</p>
-        </div>
+        <!-- Floating / Search / Top → 하단 bottom-grid로 이동 -->
 
         <!-- Pagination + ETC -->
         <div class="sc-bottom-grid">
           <div class="sc-card">
             <div class="sc-card-title">Pagination</div>
-            <div class="sc-sublabel">Arrow</div>
-            <div class="sc-row" style="margin-bottom:12px;">
-              <button class="jb jb-pagearrow">‹ 이전</button>
-              <button class="jb jb-pagearrow">다음 ›</button>
-              <button class="jb jb-pagearrow">전체 ›</button>
+            <p class="sc-card-desc" style="margin-bottom:16px;">페이지 또는 컨텐츠의 순서를 컨트롤 하거나 순서를 알수 있도록 표기 시 사용합니다.</p>
+            <div class="sc-matrix-type">button.pagination.icon</div>
+            <div class="sc-sublabel">White Icon</div>
+            <p class="sc-card-desc" style="margin-top:0;margin-bottom:8px;">이전/다음 페이지의 마우스 컨트롤 기능이 있는 콘텐츠에 사용합니다.</p>
+            <div class="sc-row" style="gap:24px;margin-bottom:16px;">
+              <span class="jb-pg-icon" data-copy="button.pagination.icon" style="cursor:pointer;"><span class="jb-pg-icon-btn jb-pg-icon-dim">‹</span><span class="jb-pg-icon-btn">›</span></span>
+              <span class="jb-pg-icon" data-copy="button.pagination.icon" style="cursor:pointer;"><span class="jb-pg-icon-btn">‹</span><span class="jb-pg-icon-btn jb-pg-icon-dim">›</span></span>
+              <span class="jb-pg-icon" data-copy="button.pagination.icon" style="cursor:pointer;"><span class="jb-pg-icon-btn">‹</span><span class="jb-pg-icon-btn">›</span></span>
             </div>
-            <div class="sc-sublabel">Number</div>
-            <div class="sc-row" style="margin-bottom:12px;">
-              <button class="jb jb-pagenum jb-pagenum-active">1</button>
-              <button class="jb jb-pagenum">2</button>
-              <button class="jb jb-pagenum">3</button>
-              <button class="jb jb-pagenum">4</button>
-              <button class="jb jb-pagenum">5</button>
-            </div>
-            <div class="sc-sublabel">Counter</div>
-            <div class="sc-row" style="gap:4px;margin-bottom:12px;">
-              <span style="font-size:14px;font-weight:600;color:var(--sc-txt1,#131618);">1</span>
-              <span style="color:var(--sc-txt3,#86919A);">/</span>
-              <span style="color:var(--sc-txt3,#86919A);">99</span>
-            </div>
-            <div class="sc-sublabel">White (dark bg)</div>
-            <div class="sc-dark-preview">
-              <button class="jb jb-pagenum" style="color:#fff;">‹</button>
-              <span style="color:rgba(255,255,255,0.5);font-size:13px;">1 / 99</span>
-              <button class="jb jb-pagenum" style="color:#fff;">›</button>
-            </div>
-            <div class="sc-dark-preview" style="margin-bottom:0;">
-              <button class="jb jb-pagenum jb-pagenum-active">1</button>
-              <button class="jb jb-pagenum" style="color:rgba(255,255,255,0.5);">2</button>
-              <button class="jb jb-pagenum" style="color:rgba(255,255,255,0.5);">3</button>
+            <div class="sc-matrix-type">button.pagination.number</div>
+            <div class="sc-sublabel">White Number</div>
+            <p class="sc-card-desc" style="margin-top:0;margin-bottom:8px;">이전/다음 페이지의 마우스 컨트롤 기능이 있는 콘텐츠에 사용합니다.</p>
+            <div class="sc-row" style="gap:24px;margin-bottom:16px;" id="pg-number-row"></div>
+            <div class="sc-matrix-type">button.pagination.dimmed</div>
+            <div class="sc-sublabel">Dimmed Number</div>
+            <p class="sc-card-desc" style="margin-top:0;margin-bottom:8px;">White Number와 완전 동일 룰(화살표 포함). 변경: 스트로크 없음 + Gray 950 60% bg.</p>
+            <div class="sc-row" style="gap:24px;margin-bottom:0;" id="pg-dimmed-row"></div>
+          </div>
+          <!-- 1. Count -->
+          <div class="sc-card" id="card-count">
+            <div class="sc-card-title">Count</div>
+            <p class="sc-card-desc">버튼 내 카운트 조합 시 사용합니다.</p>
+          </div>
+          <!-- 2. Close -->
+          <div class="sc-card">
+            <div class="sc-card-title">Close</div>
+            <p class="sc-card-desc">팝업, 모달, 툴팁 등 지정사용 외 콘텐츠 제작 시 사용합니다.</p>
+            <!-- 토큰명 미확정 -->
+            <div class="sc-row" style="gap:48px;color:var(--sc-txt1,#1E2428);">
+              <div class="sc-state-col"><span class="sc-state-label">24</span><span style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;cursor:pointer;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19.2479 3.46988C19.5408 3.17701 20.0165 3.17706 20.3094 3.46988C20.602 3.76277 20.6021 4.23764 20.3094 4.53043L13.0614 11.7785L20.3094 19.0265C20.602 19.3194 20.6021 19.7943 20.3094 20.0871C20.0166 20.3798 19.5418 20.3796 19.2489 20.0871L12.0008 12.839L4.75279 20.0871C4.45999 20.3796 3.98507 20.3795 3.69225 20.0871C3.39945 19.7942 3.39947 19.3184 3.69225 19.0255L10.9393 11.7775L3.69225 4.53043C3.39945 4.23756 3.39947 3.76276 3.69225 3.46988C3.98512 3.17708 4.45992 3.17708 4.75279 3.46988L11.9999 10.7169L19.2479 3.46988Z" fill="currentColor"/></svg></span></div>
+              <div class="sc-state-col"><span class="sc-state-label">22</span><span style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;cursor:pointer;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19.2479 3.46988C19.5408 3.17701 20.0165 3.17706 20.3094 3.46988C20.602 3.76277 20.6021 4.23764 20.3094 4.53043L13.0614 11.7785L20.3094 19.0265C20.602 19.3194 20.6021 19.7943 20.3094 20.0871C20.0166 20.3798 19.5418 20.3796 19.2489 20.0871L12.0008 12.839L4.75279 20.0871C4.45999 20.3796 3.98507 20.3795 3.69225 20.0871C3.39945 19.7942 3.39947 19.3184 3.69225 19.0255L10.9393 11.7775L3.69225 4.53043C3.39945 4.23756 3.39947 3.76276 3.69225 3.46988C3.98512 3.17708 4.45992 3.17708 4.75279 3.46988L11.9999 10.7169L19.2479 3.46988Z" fill="currentColor"/></svg></span></div>
+              <div class="sc-state-col"><span class="sc-state-label">18</span><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;cursor:pointer;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19.2479 3.46988C19.5408 3.17701 20.0165 3.17706 20.3094 3.46988C20.602 3.76277 20.6021 4.23764 20.3094 4.53043L13.0614 11.7785L20.3094 19.0265C20.602 19.3194 20.6021 19.7943 20.3094 20.0871C20.0166 20.3798 19.5418 20.3796 19.2489 20.0871L12.0008 12.839L4.75279 20.0871C4.45999 20.3796 3.98507 20.3795 3.69225 20.0871C3.39945 19.7942 3.39947 19.3184 3.69225 19.0255L10.9393 11.7775L3.69225 4.53043C3.39945 4.23756 3.39947 3.76276 3.69225 3.46988C3.98512 3.17708 4.45992 3.17708 4.75279 3.46988L11.9999 10.7169L19.2479 3.46988Z" fill="currentColor"/></svg></span></div>
             </div>
           </div>
+          <!-- 3. Floating -->
           <div class="sc-card">
-            <div class="sc-card-title">ETC</div>
-            <div class="sc-sublabel">Count</div>
-            <div class="sc-row" style="margin-bottom:12px;">
-              <button class="jb jb-counter" style="gap:6px;height:40px;padding:0 12px;border-radius:8px;">
-                <span style="font-size:14px;">목록</span>
-                <span style="color:var(--sc-primary,#1B55F6);font-weight:700;font-size:14px;">12</span>
-              </button>
-              <button class="jb jb-counter jb-32" style="gap:4px;height:32px;padding:0 10px;border-radius:6px;">
-                <span style="font-size:13px;">목록</span>
-                <span style="color:var(--sc-primary,#1B55F6);font-weight:700;font-size:13px;">12</span>
-              </button>
+            <div class="sc-card-title">Floating</div>
+            <p class="sc-card-desc">투명도 80%로 플로팅 시 사용하는 버튼입니다.</p>
+            <div class="sc-matrix-type">button.floating</div>
+            <div class="sc-row"><span data-copy="button.floating" style="display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 16px;border-radius:999px;background:rgba(26,26,30,0.85);color:#fff;font-size:14px;font-weight:500;cursor:pointer;"><span style="display:inline-flex;align-items:center;justify-content:center;padding:2px 8px;border-radius:999px;background:#fff;color:#083CCC;font-size:11px;font-weight:700;">TIP</span> 버튼명</span></div>
+          </div>
+          <!-- 4. Scrap -->
+          <div class="sc-card">
+            <div class="sc-card-title">Scrap</div>
+            <p class="sc-card-desc">공고카드 스크랩 버튼</p>
+            <div class="sc-matrix-type">button.scrap</div>
+            <div class="sc-row" style="gap:24px;">
+              <div class="sc-state-col"><span class="sc-state-label">off</span><span data-copy="button.scrap — state: off" style="cursor:pointer;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.929 1.90039C12.2049 1.90047 12.4601 2.03662 12.6135 2.25977L12.6731 2.36035V2.3623L15.5296 8.40625L21.885 9.2168L21.887 9.21777C22.2006 9.26291 22.4613 9.48197 22.5589 9.7832C22.6564 10.0845 22.5738 10.4147 22.346 10.6348L17.7678 15.0332L19.0969 21.125L19.0979 21.1289C19.1517 21.4401 19.0233 21.7545 18.7678 21.9404C18.513 22.1259 18.1754 22.1511 17.8958 22.0059L11.8372 18.998L5.83425 22.0068L5.83328 22.0059C5.55361 22.1507 5.21584 22.1259 4.96121 21.9404C4.70617 21.7544 4.57837 21.4398 4.6321 21.1289L4.63406 21.1191L6.34499 15.0312L1.65359 10.6367L1.65261 10.6348C1.4249 10.4147 1.34219 10.0844 1.43972 9.7832C1.53728 9.48201 1.79803 9.26298 2.1116 9.21777L2.11355 9.2168L8.39578 8.40723L11.1839 2.36328L11.1848 2.36035C11.3252 2.0783 11.6137 1.90042 11.929 1.90039ZM9.69265 9.53418L9.69167 9.53711C9.57013 9.78129 9.33586 9.95043 9.0657 9.98926H9.06374L4.03445 10.6211L7.82058 14.1455L7.82156 14.1475C8.01916 14.3383 8.10952 14.6142 8.06277 14.8848L8.06081 14.8975L6.58621 19.7461L11.4544 17.3271C11.694 17.2029 11.9793 17.2032 12.219 17.3271L17.1624 19.7559L16.055 14.8896L16.053 14.8848C16.0067 14.6145 16.0978 14.338 16.2952 14.1475L19.9671 10.6221L14.8635 9.98926H14.8616C14.5916 9.95037 14.3581 9.78112 14.2366 9.53711L14.2356 9.53516L11.93 4.6084L9.69265 9.53418Z" fill="#C2C6CD"/></svg></span></div>
+              <div class="sc-state-col"><span class="sc-state-label">on</span><span data-copy="button.scrap — state: on" style="cursor:pointer;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.9294 1.5C12.2069 1.5 12.4604 1.65689 12.5839 1.90499L15.4646 8L21.8734 8.81631C22.1494 8.85599 22.3788 9.04909 22.4646 9.31407C22.5504 9.57905 22.4777 9.86969 22.2772 10.0633L17.6588 14.5L18.9997 20.6459C19.047 20.9195 18.9347 21.1963 18.71 21.3598C18.4853 21.5234 18.1871 21.5454 17.9407 21.4167L11.8375 18.3873L5.79014 21.417C5.54376 21.5455 5.24572 21.5232 5.02119 21.3596C4.79665 21.1961 4.68448 20.9194 4.73179 20.6459L6.45907 14.5L1.72295 10.0633C1.52244 9.86969 1.44974 9.57905 1.53555 9.31407C1.62136 9.04909 1.85071 8.85599 2.12676 8.81631L8.4646 8L11.275 1.90499C11.3985 1.65689 11.652 1.5 11.9294 1.5Z" fill="#FACC15"/></svg></span></div>
             </div>
-            <div class="sc-sublabel">Close / Icon</div>
-            <div class="sc-row" style="margin-bottom:12px;">
-              <div class="sc-state-col"><button class="jb jb-sq jb-icon-borderless jb-circle">✕</button><span class="sc-state-label">borderless</span></div>
-              <div class="sc-state-col"><button class="jb jb-sq jb-icon-circle">✕</button><span class="sc-state-label">circle</span></div>
-              <div class="sc-state-col"><button class="jb jb-sq jb-icon-dark jb-circle">✕</button><span class="sc-state-label">dark</span></div>
+          </div>
+          <!-- 5. Search -->
+          <div class="sc-card">
+            <div class="sc-card-title">Search</div>
+            <p class="sc-card-desc">메인 검색바 영역에서 사용합니다.</p>
+            <div class="sc-matrix-type">button.search.lg</div>
+            <div class="sc-row"><span data-copy="button.search.lg" style="display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 14px;border-radius:999px;background:var(--sc-primary,#083CCC);color:#fff;font-size:14px;font-weight:500;cursor:pointer;"><svg width="20" height="20" viewBox="11 10 18 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M21.759 12.6661C20.8824 12.2608 19.9061 12.0347 18.877 12.0347C15.08 12.0347 12.002 15.1127 12.002 18.9097C12.002 22.7066 15.08 25.7847 18.877 25.7847C20.5279 25.7847 22.0423 25.2019 23.2275 24.2319L27.0527 28.0581C27.3212 28.3266 27.7569 28.3266 28.0254 28.0581C28.2939 27.7896 28.2939 27.3539 28.0254 27.0854L24.1992 23.2603C24.9309 22.3662 25.4423 21.2848 25.6493 20.0988C25.2689 20.4252 24.7768 20.6166 24.2512 20.6167C24.2033 20.6167 24.1557 20.6151 24.1084 20.612C23.3916 22.8163 21.3204 24.4097 18.877 24.4097C15.8394 24.4097 13.377 21.9472 13.377 18.9097C13.377 15.8721 15.8394 13.4097 18.877 13.4097C19.194 13.4097 19.5048 13.4365 19.8071 13.488C19.9691 13.3772 20.1481 13.2874 20.3408 13.2231L21.7275 12.7603L21.759 12.6661Z" fill="currentColor"/><path d="M24.3679 19.2279C24.622 19.1808 24.8384 19.0044 24.9381 18.7614C24.9448 18.7452 24.9509 18.7287 24.9565 18.7119L25.4527 17.2233C25.4683 17.1765 25.4869 17.1316 25.5079 17.0877C25.6437 16.8049 25.8888 16.5864 26.1904 16.4858L27.6797 15.9888C27.9928 15.8841 28.2039 15.5913 28.2041 15.2612C28.2041 14.9309 27.9929 14.6374 27.6797 14.5327L26.1904 14.0366C25.8421 13.9205 25.5693 13.6466 25.4531 13.2983L24.9561 11.8101C24.8516 11.4967 24.5588 11.2849 24.2285 11.2847C23.898 11.2847 23.6045 11.4965 23.5 11.8101L23.0039 13.2983C22.994 13.3281 22.9829 13.3573 22.9708 13.3859C22.8405 13.6923 22.5843 13.9304 22.2656 14.0366L20.777 14.5324C20.4634 14.6369 20.252 14.9303 20.252 15.2608C20.252 15.5913 20.4634 15.8847 20.777 15.9892L22.2656 16.4854C22.614 16.6015 22.8873 16.8749 23.0035 17.2233L23.4997 18.7119C23.6042 19.0255 23.8976 19.2369 24.2281 19.2369C24.2757 19.2369 24.3223 19.2363 24.3679 19.2279Z" fill="currentColor"/></svg> 버튼명</span></div>
+          </div>
+          <!-- 6. 상품안내 -->
+          <div class="sc-card">
+            <div class="sc-card-title">상품안내</div>
+            <p class="sc-card-desc">공고상품과 함께 사용합니다.</p>
+            <div class="sc-matrix-type">button.product</div>
+            <div class="sc-row" style="gap:12px;">
+              <span data-copy="button.product" style="display:inline-flex;align-items:center;gap:4px;padding:6px 8px 6px 12px;border-radius:999px;background:var(--sc-card-bg,#fff);border:1px solid var(--sc-bd,#D1D6DA);font-size:12px;font-weight:500;color:var(--sc-txt2,#636C74);cursor:pointer;">상품안내 <svg width="14" height="14" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.25717 8.56967C4.09022 8.73676 4.09022 9.00757 4.25717 9.17465C4.42429 9.34177 4.69553 9.34177 4.86264 9.17465L7.74252 6.29477C7.9096 6.1277 7.90951 5.85691 7.74252 5.68979L4.86264 2.80942C4.69553 2.6423 4.42429 2.6423 4.25717 2.80942C4.09006 2.97653 4.09006 3.24777 4.25717 3.41489L6.83481 5.99203L4.25717 8.56967Z" fill="currentColor"/></svg></span>
             </div>
-            <div class="sc-sublabel">ListButton</div>
+          </div>
+          <!-- 7. Top -->
+          <div class="sc-card">
+            <div class="sc-card-title">Top</div>
+            <p class="sc-card-desc">PC 탑버튼으로 기능이 맨위로 기능이 필요할때 사용합니다.</p>
+            <div class="sc-matrix-type">button.top</div>
+            <div class="sc-row"><span data-copy="button.top" style="cursor:pointer;"><svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M28 0.5C43.1878 0.5 55.5 12.8122 55.5 28C55.5 43.1878 43.1878 55.5 28 55.5C12.8122 55.5 0.5 43.1878 0.5 28C0.5 12.8122 12.8122 0.5 28 0.5Z" fill="var(--sc-card-bg,#fff)"/><path d="M28 0.5C43.1878 0.5 55.5 12.8122 55.5 28C55.5 43.1878 43.1878 55.5 28 55.5C12.8122 55.5 0.5 43.1878 0.5 28C0.5 12.8122 12.8122 0.5 28 0.5Z" stroke="var(--sc-bd,#D5D8DC)"/><path d="M27.5805 14.3524C27.7177 14.2153 27.908 14.163 28.0851 14.1972C28.192 14.2176 28.2939 14.2697 28.3766 14.3524L34.2104 20.1854C34.4299 20.405 34.4298 20.7612 34.2104 20.9808C33.9907 21.2005 33.6346 21.2005 33.415 20.9808L27.9789 15.5448L22.5422 20.9808C22.3225 21.2005 21.9664 21.2005 21.7467 20.9808C21.5271 20.7612 21.5271 20.4051 21.7467 20.1854L27.5805 14.3524Z" fill="var(--sc-txt1,#292C32)"/><path d="M16.3867 31.4688V30.0156H23.3359V31.4688H20.7344V38.5H18.9883V31.4688H16.3867ZM31.8203 34.2578C31.8203 37.0293 30.1035 38.6172 27.8594 38.6172C25.5977 38.6172 23.8867 37.0176 23.8867 34.2578C23.8867 31.4863 25.5977 29.8984 27.8594 29.8984C30.1035 29.8984 31.8203 31.4863 31.8203 34.2578ZM25.6797 34.2578C25.6797 36.0684 26.541 37.0527 27.8594 37.0586C29.166 37.0527 30.0332 36.0684 30.0273 34.2578C30.0332 32.4414 29.166 31.4629 27.8594 31.457C26.541 31.4629 25.6797 32.4414 25.6797 34.2578ZM33.0859 38.5V30.0156H36.4141C38.3418 30.0156 39.4492 31.2051 39.4492 32.875C39.4492 34.5684 38.3242 35.7344 36.3672 35.7344H34.8438V38.5H33.0859ZM34.8438 34.3164H36.0859C37.1289 34.3164 37.6387 33.7305 37.6328 32.875C37.6387 32.0312 37.1289 31.4629 36.0859 31.457H34.8438V34.3164Z" fill="var(--sc-txt1,#1A1A1E)"/></svg></span></div>
+          </div>
+          <!-- 8. ListButton -->
+          <div class="sc-card">
+            <div class="sc-card-title">ListButton</div>
+            <p class="sc-card-desc">리스트 버튼으로 사용합니다.</p>
+            <!-- 토큰명 미확정 -->
             <div class="sc-list-demo">
               <div class="sc-list-item">액션 1</div>
               <div class="sc-list-item">액션 2</div>
@@ -633,11 +669,11 @@
       <div class="section-title" style="font-size:15px; margin-top:24px;">기타 아이콘/이모지 컴포넌트</div>
       <table class="token-table">
         <tr><th>컴포넌트</th><th>설명</th><th>Size</th><th>Key tokens</th></tr>
-        <tr><td><code>ButtonIconEmoji</code></td><td>아이콘+텍스트 세로 배치</td><td class="val">Fixed 34px W, Hug H</td><td class="val">gap: unit-4</td></tr>
-        <tr><td><code>ButtonEmoji</code></td><td>이모지+텍스트 pill 칩</td><td class="val">40 / 32</td><td class="val">—</td></tr>
-        <tr><td><code>ButtonIcon</code></td><td>소형 아이콘 단일 액션</td><td class="val">32×32</td><td class="val">bg: none, icon: color.icon.secondary</td></tr>
-        <tr><td><code>ButtonScrap</code></td><td>스크랩 별 토글</td><td class="val">24×24</td><td class="val">Off=빈별, On=노란별</td></tr>
-        <tr><td><code>ButtonIcontext</code></td><td>"버튼명 >" 링크형</td><td class="val">Hug × 20px</td><td class="val">text: color.text.secondary, icon: color.icon.secondary</td></tr>
+        <tr><td><code>button.iconlabel</code></td><td>아이콘+텍스트 세로 배치</td><td class="val">Fixed 34px W, Hug H</td><td class="val">gap: unit-4</td></tr>
+        <tr><td><code>button.emoji</code></td><td>이모지+텍스트 pill 칩</td><td class="val">40 / 32</td><td class="val">—</td></tr>
+        <tr><td><code>button.icononly</code></td><td>소형 아이콘 단일 액션</td><td class="val">32×32</td><td class="val">bg: none, icon: color.icon.secondary</td></tr>
+        <tr><td><code>button.scrap</code></td><td>스크랩 별 토글</td><td class="val">24×24</td><td class="val">Off=빈별, On=노란별</td></tr>
+        <tr><td><code>button.text.secondary</code></td><td>"버튼명 >" 링크형</td><td class="val">Hug × 20px</td><td class="val">text: color.text.secondary, icon: color.icon.secondary</td></tr>
       </table>
     </div>
 
@@ -647,9 +683,9 @@
       <p class="section-desc">모두 h=32px 고정, pill shape. off=outlined, on=brand filled (Variable Mode).</p>
       <table class="token-table">
         <tr><th>컴포넌트</th><th>Props</th><th>off (미선택)</th><th>on (선택됨)</th></tr>
-        <tr><td><code>button.filter.icon-text</code></td><td class="val">state(off/on), variant(text/icon), mark(none/check/count)</td><td class="val">bg: color.bg.base, text: color.text.tertiary</td><td class="val">bg: color.bg.interactive, text: color.icon.inverse</td></tr>
+        <tr><td><code>button.filter.icontext</code></td><td class="val">state(off/on), variant(text/icon), mark(none/check/count)</td><td class="val">bg: color.bg.base, text: color.text.tertiary</td><td class="val">bg: color.bg.interactive, text: color.icon.inverse</td></tr>
         <tr><td><code>button.filter.item</code></td><td class="val">state(off/on/disabled), variant(outlined)</td><td class="val">bg: color.bg.base, border: color.border.default, text: color.text.secondary</td><td class="val">bg: color.bg.interactive, text: color.icon.inverse</td></tr>
-        <tr><td><code>button.filter.icon-only</code></td><td class="val">size(40/32), state(off/on), label</td><td class="val">bg: color.bg.base, border: color.border.default</td><td class="val">bg: color.bg.interactive, icon: color.icon.inverse</td></tr>
+        <tr><td><code>button.filter.icononly</code></td><td class="val">size(40/32), state(off/on), label</td><td class="val">bg: color.bg.base, border: color.border.default</td><td class="val">bg: color.bg.interactive, icon: color.icon.inverse</td></tr>
       </table>
     </div>
 
@@ -670,8 +706,8 @@
       <div class="section-title">카운트 버튼</div>
       <table class="token-table">
         <tr><th>컴포넌트</th><th>Size</th><th>Layout</th><th>Tokens</th></tr>
-        <tr><td><code>ButtonCounter</code></td><td class="val">40 / 32</td><td class="val">Horizontal, radius-xs, padding lr: unit-12, gap: unit-4</td><td class="val">bg: color.bg.surface, label: color.text.secondary, count: color.text.brand</td></tr>
-        <tr><td><code>ButtonPaginationCounterWhite</code></td><td class="val">—</td><td class="val">어두운 배경 위 흰색 카운터 변형</td><td class="val">—</td></tr>
+        <tr><td><code>button.counter</code></td><td class="val">32</td><td class="val">Horizontal, radius-xs, padding lr: unit-10, gap: unit-4</td><td class="val">bg: color.bg.base, text: color.text.primary, count: color.text.brand</td></tr>
+        <tr><td><code>button.pagination.number</code></td><td class="val">—</td><td class="val">어두운 배경 위 흰색 카운터 변형</td><td class="val">—</td></tr>
       </table>
     </div>
 
@@ -682,7 +718,7 @@
         <tr><th>컴포넌트</th><th>설명</th><th>Size</th><th>Key tokens</th></tr>
         <tr><td><code>button.search.lg / .sm</code></td><td>검색 CTA pill 버튼</td><td class="val">40 / 32, radius unit-999</td><td class="val">bg: color.bg.interactive, icon+text: color.icon.inverse</td></tr>
         <tr><td><code>button.top</code></td><td>스크롤 상단 이동 원형 버튼</td><td class="val">56×56 circle</td><td class="val">bg: color.bg.base, border: color.border.default, icon: system-arrowup 18×18</td></tr>
-        <tr><td><code>ButtonProduct</code></td><td>상품 안내 outlined pill</td><td class="val">Hug pill</td><td class="val">bg: color.bg.base, border: color.border.default, text: color.text.secondary</td></tr>
+        <tr><td><code>button.product</code></td><td>상품 안내 outlined pill</td><td class="val">Hug pill</td><td class="val">bg: color.bg.base, border: color.border.default, text: color.text.secondary</td></tr>
       </table>
     </div>
 
@@ -691,9 +727,9 @@
       <div class="section-title">페이지네이션 버튼</div>
       <table class="token-table">
         <tr><th>컴포넌트</th><th>Props</th><th>Size</th><th>Note</th></tr>
-        <tr><td><code>ButtonPaginationArrow</code></td><td class="val">variant(next/previous/all), state(default/D-hover)</td><td class="val">64×32</td><td class="desc">system-arrowleft02, system-arrowright02 (12×12)</td></tr>
-        <tr><td><code>ButtonPaginationCounter</code></td><td class="val">variant(default/more)</td><td class="val">Hug 41px × 20px</td><td class="desc">"1/99" 형식. more=숫자+화살표</td></tr>
-        <tr><td><code>ButtonPaginationNumber</code></td><td class="val">—</td><td class="val">—</td><td class="desc badge todo">세부 미확인</td></tr>
+        <tr><td><code>button.pagination.icon</code></td><td class="val">White Icon. 화살표만 (‹ ›)</td><td class="val">아이콘 버튼</td><td class="desc">이전/다음 마우스 컨트롤</td></tr>
+        <tr><td><code>button.pagination.number</code></td><td class="val">White Number. 카운터+화살표 (‹ 1/99 ›)</td><td class="val">pill, border</td><td class="desc">이전/다음 마우스 컨트롤</td></tr>
+        <tr><td><code>button.pagination.dimmed</code></td><td class="val">Dimmed Number. White Number 완전 동일 룰(화살표 포함)</td><td class="val">no stroke, gray950 60% bg</td><td class="desc">전체보기 인디케이터</td></tr>
       </table>
     </div>
 
@@ -702,24 +738,24 @@
       <div class="section-title">리스트 버튼 / 플로팅 버튼</div>
       <table class="token-table">
         <tr><th>컴포넌트</th><th>설명</th><th>Size</th><th>Key tokens</th></tr>
-        <tr><td><code>ListbuttonBox</code></td><td>액션시트 행 버튼, Separator로 구분</td><td class="val">Hug 100px × Hug 44px</td><td class="val">bg: color.bg.base, text: color.text.primary, radius: none</td></tr>
-        <tr><td><code>button.floating</code></td><td>어두운 pill CTA. 이모지+텍스트+화살표</td><td class="val">Hug × 40px, radius unit-999</td><td class="val">bg: color.bg.dark, text: color.text.inverse, leftIcon: color.icon.brand</td></tr>
+        <tr><td><code>button.listaction</code></td><td>액션시트 행 버튼, Separator로 구분</td><td class="val">Hug 100px × Hug 44px</td><td class="val">bg: color.bg.base, text: color.text.primary, radius: none</td></tr>
+        <tr><td><code>button.floating</code></td><td>FloatingBorder 바 형태. pill, h=40</td><td class="val">Hug × 40px, radius pill</td><td class="val">bg: color.bg.dark, text: color.text.inverse, border: color.border.brand (inside 1px), shadow: shadow.default</td></tr>
       </table>
     </div>
 
     <!-- 섹션 완료 현황 -->
     <div class="section">
-      <div class="section-title">Figma Page Sections <span class="badge canonical">전체 완료</span></div>
+      <div class="section-title">Figma Page Sections</div>
       <table class="token-table">
         <tr><th>섹션</th><th>Spec 파일</th><th>상태</th></tr>
         <tr><td>기본 버튼</td><td class="val">button.spec.json + button.matrix.json</td><td><span class="badge canonical">완료</span></td></tr>
-        <tr><td>아이콘/이모지 버튼</td><td class="val">button-icononly.spec.json + button-iconemoji.spec.json</td><td><span class="badge canonical">완료</span></td></tr>
-        <tr><td>ButtonIcontext</td><td class="val">button-iconemoji.spec.json (포함)</td><td><span class="badge canonical">완료</span></td></tr>
+        <tr><td>아이콘/이모지 버튼</td><td class="val">button-icononly.spec.json + button-iconemoji.spec.json</td><td><span class="badge todo">일부 미확인</span></td></tr>
+        <tr><td>button.text.secondary (icon prop)</td><td class="val">button-iconemoji.spec.json (포함)</td><td><span class="badge canonical">완료</span></td></tr>
         <tr><td>필터 버튼</td><td class="val">button-filter.spec.json</td><td><span class="badge canonical">완료</span></td></tr>
         <tr><td>텍스트 버튼</td><td class="val">button-text.spec.json</td><td><span class="badge canonical">완료</span></td></tr>
         <tr><td>카운트 버튼</td><td class="val">button-counter.spec.json</td><td><span class="badge canonical">완료</span></td></tr>
         <tr><td>기타 (ETC)</td><td class="val">button-etc.spec.json</td><td><span class="badge canonical">완료</span></td></tr>
-        <tr><td>페이지네이션 버튼</td><td class="val">button-pagination.spec.json</td><td><span class="badge canonical">완료</span></td></tr>
+        <tr><td>페이지네이션 버튼</td><td class="val">button-pagination.spec.json</td><td><span class="badge todo">일부 미확인</span></td></tr>
         <tr><td>리스트 버튼</td><td class="val">button-list.spec.json</td><td><span class="badge canonical">완료</span></td></tr>
         <tr><td>플로팅</td><td class="val">button-floating.spec.json</td><td><span class="badge canonical">완료</span></td></tr>
         <tr><td>사용 가이드라인 / Radius</td><td class="val">button.md (포함)</td><td><span class="badge canonical">완료</span></td></tr>
@@ -787,17 +823,21 @@ function setScTheme(theme) {
     ['jb-disabled',        'state: disabled'],
     ['jb-f-on',            'button.filter — state: on'],
     ['jb-f-off',           'button.filter — state: off'],
-    ['jb-search',          'button.search'],
+    ['jb-search',          'button.search.lg'],
     ['jb-top',             'button.top'],
     ['jb-product',         'button.product'],
     ['jb-counter',         'button.counter'],
-    ['jb-pagearrow',       'button.pagination.arrow'],
-    ['jb-pagenum-active',  'button.pagination.number — state: active'],
-    ['jb-pagenum',         'button.pagination.number'],
+    ['jb-pg-icon',         'button.pagination.icon'],
+    ['jb-pg-number',       'button.pagination.number'],
+    ['jb-pg-dimmed',       'button.pagination.dimmed'],
     ['jb-scrap',           'button.scrap'],
-    ['jb-icontext-pill',   'button.text.icontext (pill bg)'],
-    ['jb-icontext',        'button.text.icontext'],
+    ['jb-scrap-on',        'button.scrap — state: on'],
+    ['jb-icontext-pill',   'button.text.secondary'],
+    ['jb-icontext',        'button.text.secondary'],
     ['jb-iconemoji-lg',    'button.iconlabel.lg'],
+    ['jb-iconemoji',       'button.iconlabel.sm'],
+    ['jb-icon-xs',         'button.icononly'],
+    ['jb-emoji',           'button.emoji.lg'],
     ['jb-icon-dark',       'button.icon.dark'],
     ['jb-icon-circle',     'button.icon.circle'],
     ['jb-icon-borderless', 'button.icon.borderless'],
@@ -813,7 +853,13 @@ function setScTheme(theme) {
   const wrap = document.getElementById('sc-wrap-all');
   if (!wrap) return;
   wrap.addEventListener('click', function(e) {
-    const btn = e.target.closest('button');
+    // 1. 토큰 표 <code> 클릭 → 텍스트 복사
+    const code = e.target.closest('code');
+    if (code && code.closest('.token-table')) {
+      copyVal(code.textContent.trim(), code); return;
+    }
+    // 2. 데모 버튼 / data-copy 요소
+    const btn = e.target.closest('button') || e.target.closest('[data-copy]');
     if (!btn) return;
     let val = btn.dataset.copy;
     if (!val) {
@@ -944,14 +990,15 @@ function setScTheme(theme) {
   buildSM(document.getElementById('matrix-text'), TEXT_BTN, 3);
 
   // IconText combos (Figma "IconText" 섹션: icon+text+chevron 4 조합 × no-bg / pill-bg)
+  // → 별도 variant 아님. button.text.secondary 토큰 사용, icon 유무는 컴포넌트 prop으로 처리
   const ICONTEXT_BTN = [
-    {tok:'button.text.icontext', hdrs:['⟳ 텍+›','⟳ 텍','텍+›','텍'], cells:[
+    {tok:'button.text.secondary (icon prop)', hdrs:['⟳ 텍+›','⟳ 텍','텍+›','텍'], cells:[
       {cls:'jb-icontext', lbl:'⟳ 버튼명 ›'},
       {cls:'jb-icontext', lbl:'⟳ 버튼명'},
       {cls:'jb-icontext', lbl:'버튼명 ›'},
       {cls:'jb-icontext', lbl:'버튼명'},
     ]},
-    {tok:'button.text.icontext (pill bg)', hdrs:['⟳ 텍+›','⟳ 텍','텍+›','텍'], cells:[
+    {tok:'button.text.secondary (pill, icon prop)', hdrs:['⟳ 텍+›','⟳ 텍','텍+›','텍'], cells:[
       {cls:'jb-icontext jb-icontext-pill', lbl:'⟳ 버튼명 ›'},
       {cls:'jb-icontext jb-icontext-pill', lbl:'⟳ 버튼명'},
       {cls:'jb-icontext jb-icontext-pill', lbl:'버튼명 ›'},
@@ -960,7 +1007,7 @@ function setScTheme(theme) {
   ];
   buildSM(document.getElementById('matrix-text'), ICONTEXT_BTN, 4);
 
-  // --- Icon: button.iconlabel.lg / .sm / .no ---
+  // --- Icon: button.iconlabel.lg / .sm · button.icononly ---
   const EMO = (tok, hdrs, cellMin, cells) => ({tok, hdrs, cellMin, cells});
   const IC = sz => `<svg width="${sz}" height="${sz}" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.9482 2.67711C17.4092 2.61326 18.8684 2.84491 20.2347 3.3581L20.7503 3.55993C21.9412 4.05862 23.0347 4.76184 23.9782 5.63805L22.6188 7.1042C21.8485 6.3886 20.9538 5.81223 19.9782 5.40368L19.555 5.23961L19.5316 5.2305C18.5572 4.86453 17.5238 4.6737 16.4821 4.6667L16.0355 4.67581H15.8818C14.6932 4.63686 13.5087 4.83113 12.3988 5.24743C11.289 5.66374 10.2763 6.29404 9.4196 7.09769C9.41063 7.10612 9.40139 7.11547 9.39226 7.12373L9.07325 7.42711C8.34954 8.15271 7.76575 9.00213 7.3519 9.93232C6.89863 10.9867 6.66568 12.12 6.667 13.2631V13.2657C6.66729 17.3829 9.04822 20.916 11.7139 23.5547C13.0236 24.8511 14.3415 25.8688 15.3324 26.5625C15.5569 26.7197 15.7645 26.8598 15.9496 26.9818C16.1371 26.8589 16.3491 26.7187 16.5772 26.5599C17.5736 25.8659 18.8983 24.8473 20.2152 23.5508C22.8965 20.9108 25.2878 17.3788 25.2881 13.2657C25.2881 13.1387 25.3019 13.0136 25.3246 12.8933C25.2807 11.8731 25.0516 10.8663 24.6449 9.92321L24.46 9.52998C24.0698 8.75442 23.5584 8.04127 22.9443 7.418L22.6292 7.11461L22.6188 7.1042L23.9795 5.63935L24.3701 6.01435C25.256 6.91371 25.9707 7.96583 26.4769 9.11852C27.0441 10.4291 27.3353 11.841 27.3337 13.2657H27.2881L27.2803 13.7227C26.9378 23.2207 16.045 29.2797 15.9482 29.3334L15.4626 29.0456C13.3415 27.736 4.97353 22.0512 4.67481 13.7227L4.667 13.2657C4.66533 11.841 4.95657 10.4291 5.52377 9.11852C6.11103 7.79862 6.97399 6.61354 8.05242 5.63935C9.10267 4.65409 10.3413 3.88353 11.6969 3.37503C13.0526 2.86663 14.4984 2.62955 15.9482 2.67711Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M14.2139 9.68883C15.0665 9.33568 16.0054 9.24326 16.9105 9.42321C17.8156 9.60326 18.6472 10.0481 19.2998 10.7006C19.9522 11.3531 20.3971 12.1849 20.5772 13.0899C20.757 13.9948 20.6645 14.9341 20.3115 15.7865L20.1683 16.1003C19.8067 16.8177 19.264 17.4317 18.5928 17.8802L18.2985 18.0612C17.5992 18.4569 16.8077 18.6667 16.0003 18.6667L15.7686 18.6615C14.6925 18.608 13.6676 18.1826 12.8688 17.4597L12.7009 17.2995C11.8807 16.4793 11.3963 15.3848 11.3389 14.2318L11.3337 14C11.3337 13.1929 11.5436 12.401 11.9391 11.7019L12.1201 11.4076C12.5687 10.7364 13.1826 10.1936 13.9001 9.83206L14.2139 9.68883ZM16.5212 11.3841C16.0039 11.2813 15.4667 11.3347 14.9795 11.5365C14.4926 11.7383 14.0758 12.08 13.7829 12.5183C13.5266 12.9019 13.3754 13.3455 13.3415 13.8034L13.3337 14C13.3338 14.707 13.6151 15.3855 14.1149 15.8854C14.615 16.3853 15.2933 16.6667 16.0003 16.6667C16.5276 16.6667 17.0436 16.5104 17.4821 16.2175C17.9203 15.9246 18.262 15.5077 18.4639 15.0209C18.6655 14.5338 18.7189 13.9962 18.6162 13.4792C18.5132 12.9624 18.2583 12.4873 17.8857 12.1146C17.513 11.742 17.0381 11.4871 16.5212 11.3841Z" fill="currentColor"/></svg>`;
   const ICON_THEMED_BTN = [
@@ -982,8 +1029,8 @@ function setScTheme(theme) {
   ];
   buildSM(document.getElementById('matrix-icon'), ICON_THEMED_BTN, 3);
 
-  // --- Emoji 세로형 (테마 미적용) ---
-  const EMOJI_V_BTN = [
+  // --- Emoji (세로형 + 가로형, 테마 미적용) ---
+  const EMOJI_BTN = [
     EMO('button.emojilabel.lg', ['Default','Hover','Disabled'], '80px', [
       {cls:'jb-iconemoji-lg', lbl:'<span style="font-size:24px">📍</span><span>버튼명</span>'},
       {cls:'jb-iconemoji-lg jb-iconemoji-h', lbl:'<span style="font-size:24px">📍</span><span>버튼명</span>'},
@@ -994,11 +1041,6 @@ function setScTheme(theme) {
       {cls:'jb-iconemoji jb-iconemoji-h', lbl:'<span style="font-size:20px">📍</span><span>버튼명</span>'},
       {cls:'jb-iconemoji jb-text-dis', lbl:'<span style="font-size:20px;opacity:0.35">📍</span><span>버튼명</span>', d:true},
     ]),
-  ];
-  buildSM(document.getElementById('matrix-emoji-v'), EMOJI_V_BTN, 3);
-
-  // --- Emoji 가로형 (테마 미적용) ---
-  const EMOJI_H_BTN = [
     EMO('button.emoji.lg', ['Default','Hover','Disabled'], '110px', [
       {cls:'jb-emoji', lbl:'🟩 버튼명'},
       {cls:'jb-emoji jb-emoji-h', lbl:'🟩 버튼명'},
@@ -1010,7 +1052,7 @@ function setScTheme(theme) {
       {cls:'jb-emoji jb-emoji-sm jb-emoji-d', lbl:'🟩 버튼명', d:true},
     ]),
   ];
-  buildSM(document.getElementById('matrix-emoji-h'), EMOJI_H_BTN, 3);
+  buildSM(document.getElementById('matrix-emoji'), EMOJI_BTN, 3);
 
   // --- Filter ---
   const FH = ['off','off·hover','on','on·hover','disabled'];
@@ -1022,14 +1064,14 @@ function setScTheme(theme) {
       {cls:'jb jb-filter jb-f-on-h', lbl:'카테고리'},
       {cls:'jb jb-filter jb-f-dis', lbl:'카테고리', d:true},
     ]},
-    {tok:'button.filter.icon-text', hdrs:FH, cells:[
+    {tok:'button.filter.icontext', hdrs:FH, cells:[
       {cls:'jb jb-filter jb-f-off', lbl:'전체 ›'},
       {cls:'jb jb-filter jb-f-off-h', lbl:'전체 ›'},
       {cls:'jb jb-filter jb-f-on', lbl:'전체 ✓'},
       {cls:'jb jb-filter jb-f-on-h', lbl:'전체 ✓'},
       {cls:'jb jb-filter jb-f-dis', lbl:'전체 ›', d:true},
     ]},
-    {tok:'button.filter.icon-only', hdrs:FH, cells:[
+    {tok:'button.filter.icononly', hdrs:FH, cells:[
       {cls:'jb jb-filter jb-f-off', lbl:'☰'},
       {cls:'jb jb-filter jb-f-off-h', lbl:'☰'},
       {cls:'jb jb-filter jb-f-on', lbl:'☰'},
@@ -1039,30 +1081,48 @@ function setScTheme(theme) {
   ];
   buildSM(document.getElementById('matrix-filter'), FILTER_BTN, 1);
 
-  // --- Floating / Special ---
+  // --- Floating ---
+  const FIC = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:-2px"><path d="M8 1l1.796 4.728L14.5 7.5l-4.704 1.772L8 14l-1.796-4.728L1.5 7.5l4.704-1.772L8 1z" fill="currentColor"/></svg>';
   const FLOATING_BTN = [
     {tok:'button.floating', cells:[
-      {cls:'jb jb-floating', lbl:'버튼명 ›'},
-      {cls:'jb jb-floating-h', lbl:'버튼명 ›'},
-      {cls:'jb jb-floating jb-disabled', lbl:'버튼명 ›', d:true},
-    ]},
-    {tok:'button.search.lg', cells:[
-      {cls:'jb jb-search jb-40', lbl:'🔍 검색'},
-      {cls:'jb jb-search jb-40 jb-b500-h', lbl:'🔍 검색'},
-      {cls:'jb jb-disabled jb-40 jb-pill', lbl:'🔍 검색', d:true},
-    ]},
-    {tok:'button.search.sm', cells:[
-      {cls:'jb jb-search jb-32', lbl:'검색'},
-      {cls:'jb jb-search jb-32 jb-b500-h', lbl:'검색'},
-      {cls:'jb jb-disabled jb-32 jb-pill', lbl:'검색', d:true},
-    ]},
-    {tok:'button.top', cells:[
-      {cls:'jb-top', lbl:'↑'},
-      {cls:'jb-top', s:'background:var(--sc-surf-h,#F0F1F3);cursor:default;', lbl:'↑'},
-      {cls:'jb-top', s:'background:var(--sc-dis-bg,#F0F1F3);color:var(--sc-dis-txt,#BBBFC5);cursor:not-allowed;', lbl:'↑', d:true},
+      {cls:'jb jb-floating-bar', lbl:`${FIC} 버튼명`},
+      {cls:'jb jb-floating-bar-h', lbl:`${FIC} 버튼명`},
+      {cls:'jb jb-floating-bar jb-disabled', lbl:`${FIC} 버튼명`, d:true},
     ]},
   ];
-  buildSM(document.getElementById('matrix-floating'), FLOATING_BTN, 2);
+  // Floating은 SVG 하나로 렌더링 — buildSM 불필요
+
+  // --- Count ---
+  const COUNT_LBL = `<span style="font-size:13px;font-weight:400;">버튼명</span> <span style="color:var(--sc-primary,#1B55F6);font-weight:500;font-size:13px;">99</span>`;
+  const COUNT_LBL_D = `<span style="font-size:13px;font-weight:400;color:var(--sc-dis-txt,#BBBFC5);">버튼명</span> <span style="font-weight:500;font-size:13px;color:var(--sc-dis-txt,#BBBFC5);">99</span>`;
+  const COUNT_BTN = [
+    {tok:'button.counter', cells:[
+      {cls:'jb jb-counter', s:'gap:4px;height:32px;min-width:32px;padding:0 10px;border-radius:6px;background:var(--sc-card-bg,#fff);border:1px solid var(--sc-bd,#D1D6DA);', lbl:COUNT_LBL},
+      {cls:'jb jb-counter', s:'gap:4px;height:32px;min-width:32px;padding:0 10px;border-radius:6px;background:var(--sc-card-bg,#fff);border:1px solid var(--sc-bd,#D1D6DA);', lbl:COUNT_LBL},
+      {cls:'jb jb-counter jb-disabled', s:'gap:4px;height:32px;min-width:32px;padding:0 10px;border-radius:6px;background:var(--sc-dis-bg,#F4F6F7);border:1px solid transparent;', lbl:COUNT_LBL_D, d:true},
+    ]},
+  ];
+  buildSM(document.getElementById('card-count'), COUNT_BTN, 2);
+
+  // Search는 SVG 하나로 렌더링 — buildSM 불필요
+
+  // Top은 SVG 하나로 렌더링 — buildSM 불필요
+
+  // --- Pagination White Number SVG arrows ---
+  const PGA = (dir,dim) => `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:${dim?'0.35':'1'}"><path d="${dir==='l'?'M7.74283 3.43033C7.90978 3.26324 7.90978 2.99243 7.74283 2.82535C7.57571 2.65823 7.30447 2.65823 7.13736 2.82535L4.25748 5.70523C4.0904 5.8723 4.09049 6.14309 4.25748 6.31021L7.13736 9.19058C7.30447 9.3577 7.57571 9.3577 7.74283 9.19058C7.90994 9.02347 7.90994 8.75223 7.74283 8.58511L5.16519 6.00797L7.74283 3.43033Z':'M4.25717 8.56967C4.09022 8.73676 4.09022 9.00757 4.25717 9.17465C4.42429 9.34177 4.69553 9.34177 4.86264 9.17465L7.74252 6.29477C7.9096 6.1277 7.90951 5.85691 7.74252 5.68979L4.86264 2.80942C4.69553 2.6423 4.42429 2.6423 4.25717 2.80942C4.09006 2.97653 4.09006 3.24777 4.25717 3.41489L6.83481 5.99203L4.25717 8.56967Z'}" fill="currentColor"/></svg>`;
+  const pgRow = document.getElementById('pg-number-row');
+  if(pgRow){
+    const mk = (cur,total,dimL,dimR) => `<span class="jb-pg-number" data-copy="button.pagination.number" style="cursor:pointer;"><span class="pg-arrow">${PGA('l',dimL)}</span><span class="pg-current">${cur}</span><span class="pg-slash">/</span><span class="pg-total">${total}</span><span class="pg-arrow">${PGA('r',dimR)}</span></span>`;
+    pgRow.innerHTML = mk(1,99,true,false) + mk(50,99,false,false) + mk(99,99,false,true);
+  }
+  // --- Pagination Dimmed Number (White Number와 동일 구조, dimmed 스타일) ---
+  const PGAD = (dir,dim) => `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:${dim?'0.35':'1'}"><path d="${dir==='l'?'M7.74283 3.43033C7.90978 3.26324 7.90978 2.99243 7.74283 2.82535C7.57571 2.65823 7.30447 2.65823 7.13736 2.82535L4.25748 5.70523C4.0904 5.8723 4.09049 6.14309 4.25748 6.31021L7.13736 9.19058C7.30447 9.3577 7.57571 9.3577 7.74283 9.19058C7.90994 9.02347 7.90994 8.75223 7.74283 8.58511L5.16519 6.00797L7.74283 3.43033Z':'M4.25717 8.56967C4.09022 8.73676 4.09022 9.00757 4.25717 9.17465C4.42429 9.34177 4.69553 9.34177 4.86264 9.17465L7.74252 6.29477C7.9096 6.1277 7.90951 5.85691 7.74252 5.68979L4.86264 2.80942C4.69553 2.6423 4.42429 2.6423 4.25717 2.80942C4.09006 2.97653 4.09006 3.24777 4.25717 3.41489L6.83481 5.99203L4.25717 8.56967Z'}" fill="#fff"/></svg>`;
+  const pgDimRow = document.getElementById('pg-dimmed-row');
+  if(pgDimRow){
+    const mkD = (cur,total,dimL,dimR) => `<span class="jb-pg-dimmed" data-copy="button.pagination.dimmed" style="cursor:pointer;"><span class="pg-arrow">${PGAD('l',dimL)}</span><span class="pg-current">${cur}</span><span class="pg-slash">/</span><span class="pg-total">${total}</span><span class="pg-arrow">${PGAD('r',dimR)}</span></span>`;
+    pgDimRow.innerHTML = mkD(1,99,true,false) + mkD(50,99,false,false) + mkD(99,99,false,true);
+  }
+
   setScTheme('jk');
 })();
 
