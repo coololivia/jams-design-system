@@ -56,18 +56,18 @@
 
   "space": {
     "component": {
-      "xs":  { "$value": "{spacing.4}",  "$type": "dimension", "$description": "4px — 아이콘-텍스트 gap" },
-      "sm":  { "$value": "{spacing.8}",  "$type": "dimension", "$description": "8px — 인풋 내부 padding" },
-      "md":  { "$value": "{spacing.12}", "$type": "dimension", "$description": "12px — 버튼 padding" },
-      "lg":  { "$value": "{spacing.16}", "$type": "dimension", "$description": "16px — 카드 내부 padding" },
-      "xl":  { "$value": "{spacing.24}", "$type": "dimension", "$description": "24px — 모달 내부 padding" }
+      "xs":  { "$value": "{spacing.spacing-1}",  "$type": "dimension", "$description": "4px — 아이콘-텍스트 gap" },
+      "sm":  { "$value": "{spacing.spacing-2}",  "$type": "dimension", "$description": "8px — 인풋 내부 padding" },
+      "md":  { "$value": "{spacing.spacing-3}", "$type": "dimension", "$description": "12px — 버튼 padding" },
+      "lg":  { "$value": "{spacing.spacing-4}", "$type": "dimension", "$description": "16px — 카드 내부 padding" },
+      "xl":  { "$value": "{spacing.spacing-6}", "$type": "dimension", "$description": "24px — 모달 내부 padding" }
     },
     "layout": {
-      "xs":  { "$value": "{spacing.16}", "$type": "dimension", "$description": "16px — 섹션 내부" },
-      "sm":  { "$value": "{spacing.24}", "$type": "dimension", "$description": "24px — 섹션 간" },
-      "md":  { "$value": "{spacing.32}", "$type": "dimension", "$description": "32px — 블록 간" },
-      "lg":  { "$value": "{spacing.48}", "$type": "dimension", "$description": "48px — 페이지 섹션 간" },
-      "xl":  { "$value": "{spacing.64}", "$type": "dimension", "$description": "64px — 페이지 상하 여백" }
+      "xs":  { "$value": "{spacing.spacing-4}", "$type": "dimension", "$description": "16px — 섹션 내부" },
+      "sm":  { "$value": "{spacing.spacing-6}", "$type": "dimension", "$description": "24px — 섹션 간" },
+      "md":  { "$value": "{spacing.spacing-8}", "$type": "dimension", "$description": "32px — 블록 간" },
+      "lg":  { "$value": "{spacing.spacing-12}", "$type": "dimension", "$description": "48px — 페이지 섹션 간" },
+      "xl":  { "$value": "{spacing.spacing-16}", "$type": "dimension", "$description": "64px — 페이지 상하 여백" }
     }
   },
 
