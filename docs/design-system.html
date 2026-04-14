@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JAMS 2.1 Design System</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root, [data-brand="jk"] {
+  --bg: #FFFFFF; --surface1: #F8F9FA; --surface2: #F1F3F5; --surface3: #E9ECEF;
+  --border1: #E2E6E8; --border2: #D1D6DA;
+  --text1: #131618; --text2: #495057; --text3: #86919A;
+  --accent: #1B55F6; --accent-subtle: #EEF3FF;
+  --brand-radius-md: 10px; --brand-radius-sm: 8px;
+}
+[data-brand="am"] {
+  --accent: #FF6D12; --accent-subtle: #FFF6EE;
+  --brand-radius-md: 16px; --brand-radius-sm: 10px;
+}
+[data-brand="jp"] {
+  --accent: #00C66C; --accent-subtle: #EEFFF6;
+  --brand-radius-md: 10px; --brand-radius-sm: 8px;
+}
+body { font-family: 'Pretendard', -apple-system, sans-serif; background: var(--bg); color: var(--text1); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+/* ===== HEADER ===== */
+.header { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--border1); padding: 0 24px; height: 56px; display: flex; align-items: center; }
+.header-inner { max-width: 1600px; width: 100%; margin: 0 auto; display: flex; align-items: center; gap: 16px; }
+.logo { font-size: 18px; font-weight: 700; color: var(--accent); text-decoration: none; white-space: nowrap; }
+.header-search { flex: 1; max-width: 320px; margin-left: 24px; position: relative; }
+.header-search input { width: 100%; background: var(--surface2); border: 1px solid var(--border1); border-radius: 8px; padding: 6px 12px 6px 32px; color: var(--text1); font-size: 13px; font-family: inherit; outline: none; }
+.header-search input:focus { border-color: var(--accent); }
+.header-search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); pointer-events: none; width: 18px; height: 18px; opacity: .45; }
+.brand-switcher { display: flex; gap: 2px; margin-left: auto; background: var(--surface2); border-radius: 8px; padding: 2px; }
+.brand-btn { border: none; padding: 5px 14px; border-radius: 6px; cursor: pointer; font-family: inherit; font-size: 12px; font-weight: 600; background: transparent; color: var(--text3); transition: all .15s; }
+.brand-btn:hover { color: var(--text2); }
+.brand-btn.active { color: #fff; }
+.brand-btn.active[data-val="jk"] { background: #1B55F6; }
+.brand-btn.active[data-val="am"] { background: #FF6D12; }
+.brand-btn.active[data-val="jp"] { background: #00C66C; }
+
+/* ===== LAYOUT ===== */
+.layout { display: flex; max-width: 1600px; margin: 0 auto; min-height: calc(100vh - 56px); }
+.sidebar { width: 240px; flex-shrink: 0; border-right: 1px solid var(--border1); padding: 20px 0; overflow-y: auto; position: sticky; top: 56px; height: calc(100vh - 56px); }
+.main { flex: 1; padding: 32px 40px 80px; min-width: 0; }
+@media (max-width: 768px) { .sidebar { display: none; } .main { padding: 20px 16px 60px; } }
+
+/* ===== SIDEBAR ===== */
+.sidebar-group { margin-bottom: 8px; }
+.sidebar-label { font-size: 12px; font-weight: 700; letter-spacing: 0.3px; color: var(--text1); padding: 16px 20px 6px; }
+.sidebar-group + .sidebar-group .sidebar-label { border-top: 1px solid var(--border1); margin-top: 8px; padding-top: 20px; }
+.sidebar-item { display: flex; align-items: center; gap: 8px; padding: 7px 20px 7px 28px; font-size: 13px; color: var(--text3); cursor: pointer; transition: all .1s; text-decoration: none; border-left: 2px solid transparent; font-weight: 400; }
+.sidebar-item:hover { color: var(--text1); background: var(--surface2); }
+.sidebar-item.active { color: var(--accent); background: var(--accent-subtle); border-left-color: var(--accent); font-weight: 600; }
+.sidebar-item .badge { font-size: 10px; background: var(--surface3); color: var(--text3); padding: 1px 6px; border-radius: 4px; margin-left: auto; }
+.sidebar-item.hidden { display: none; }
+
+/* ===== CONTENT ===== */
+.page-header { margin-bottom: 32px; }
+.page-title { font-size: 30px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 8px; }
+.page-desc { font-size: 15px; color: var(--text2); max-width: 640px; }
+.section-title { font-size: 18px; font-weight: 600; margin: 40px 0 16px; color: var(--text1); }
+.section-title:first-of-type { margin-top: 0; }
+
+/* ===== OVERVIEW CARDS ===== */
+.overview-cat { margin-bottom: 40px; }
+.overview-cat-title { font-size: 15px; font-weight: 600; color: var(--text2); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.overview-cat-title .count { font-size: 12px; color: var(--text3); font-weight: 400; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.overview-card { background: var(--surface1); border: 1px solid var(--border1); border-radius: 10px; cursor: pointer; transition: all .15s; overflow: hidden; text-decoration: none; color: inherit; }
+.overview-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,.3); }
+.overview-card-head { padding: 12px 16px; border-bottom: 1px solid var(--border1); font-size: 14px; font-weight: 600; }
+.overview-card-body { padding: 16px; height: 100px; display: flex; align-items: center; justify-content: center; background: var(--surface2); }
+
+/* ===== DATA CARD ===== */
+.card { background: var(--surface1); border: 1px solid var(--border1); border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+
+/* ===== TABLE ===== */
+.spec-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.spec-table th { text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text3); border-bottom: 1px solid var(--border2); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+.spec-table td { padding: 10px 12px; border-bottom: 1px solid var(--border1); color: var(--text2); vertical-align: middle; }
+.spec-table tr:hover td { background: rgba(255,255,255,.02); }
+.token { font-family: 'Pretendard', monospace; font-size: 12px; color: var(--accent); cursor: pointer; padding: 2px 6px; border-radius: 4px; background: var(--accent-subtle); }
+.token:hover { opacity: .8; }
+.cdot { display: inline-block; width: 16px; height: 16px; border-radius: 4px; vertical-align: middle; margin-right: 6px; border: 1px solid rgba(255,255,255,.08); }
+
+/* ===== PREVIEW ===== */
+.preview-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-start; margin-bottom: 16px; }
+.preview-label { font-size: 11px; color: var(--text3); margin-bottom: 6px; }
+.spec-dl { display: grid; grid-template-columns: 140px 1fr; gap: 4px 16px; font-size: 13px; }
+.spec-dl dt { color: var(--text3); font-weight: 500; }
+.spec-dl dd { color: var(--text2); }
+
+/* ===== PANTONE CHIPS ===== */
+.palette-group { margin-bottom: 28px; }
+.palette-label { font-size: 14px; font-weight: 600; margin-bottom: 10px; color: var(--text1); }
+.chip-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.pantone-chip {
+  width: 88px; cursor: pointer; transition: transform .15s, box-shadow .15s;
+  border-radius: 8px; overflow: hidden; background: var(--bg);
+  border: 1px solid var(--border1);
+}
+.pantone-chip:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,.08); z-index: 1; }
+.pantone-chip-color { width: 100%; height: 80px; }
+.pantone-chip-info { padding: 8px 8px 10px; }
+.pantone-chip-step { font-size: 13px; font-weight: 700; color: var(--text1); line-height: 1; }
+.pantone-chip-hex { font-size: 10px; color: var(--text3); margin-top: 3px; font-family: 'Pretendard', monospace; letter-spacing: -0.2px; }
+
+/* ===== ICON GRID ===== */
+.icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 6px; }
+.icon-cell { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px 4px; background: var(--surface2); border-radius: 8px; cursor: pointer; transition: background .1s; }
+.icon-cell:hover { background: var(--surface3); }
+.icon-cell img { opacity: .85; }
+.icon-cell span { font-size: 9px; color: var(--text3); text-align: center; word-break: break-all; line-height: 1.2; }
+
+/* ===== TYPO ===== */
+.typo-row { display: flex; align-items: baseline; gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--border1); }
+.typo-meta { min-width: 160px; font-size: 11px; color: var(--text3); flex-shrink: 0; }
+.typo-sample { color: var(--text1); }
+
+/* ===== SPACING ===== */
+.sp-row { display: flex; align-items: center; gap: 12px; padding: 6px 0; }
+.sp-bar { height: 20px; background: var(--accent); border-radius: 3px; min-width: 2px; }
+.sp-label { font-size: 12px; color: var(--text3); min-width: 100px; }
+.sp-val { font-size: 12px; color: var(--text2); }
+
+/* ===== RADIUS ===== */
+.radius-row { display: flex; gap: 16px; flex-wrap: wrap; }
+.radius-item { text-align: center; }
+.radius-box { width: 72px; height: 72px; border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--text2); background: var(--surface1); }
+.radius-label { font-size: 10px; color: var(--text3); margin-top: 4px; }
+
+/* ===== TAG ===== */
+.tag-money { display: inline-flex; align-items: center; gap: 2px; height: 20px; padding: 0 6px; border-radius: 4px; font-size: 11px; font-weight: 600; line-height: 18px; white-space: nowrap; }
+
+/* ===== INTERACTIVE BUTTONS ===== */
+.btn-demo { font-family: inherit; cursor: pointer; transition: box-shadow .15s, transform .1s; position: relative; }
+.btn-demo:active { transform: scale(.97); }
+.btn-demo.btn-primary:hover { box-shadow: inset 0 0 0 100px rgba(22,22,24,.12); }
+.btn-demo.btn-secondary:hover { box-shadow: inset 0 0 0 100px rgba(22,22,24,.04); }
+.btn-demo.btn-monoline:hover { box-shadow: inset 0 0 0 100px rgba(22,22,24,.12); }
+.btn-demo[disabled] { cursor: not-allowed; opacity: .5; }
+.btn-demo[disabled]:hover { box-shadow: none; transform: none; }
+
+/* ===== INTERACTIVE INPUT ===== */
+.input-demo { font-family: inherit; outline: none; transition: border-color .15s; }
+.input-demo:focus { border-width: 2px; border-color: #131618; }
+.input-demo::placeholder { color: #86919A; }
+
+/* ===== INTERACTIVE CHECKBOX/RADIO ===== */
+.check-demo { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px; color: var(--text2); user-select: none; }
+.check-demo input { display: none; }
+.check-demo .box { width: 24px; height: 24px; border-radius: 4px; border: 1px solid #E2E6E8; background: #fff; display: flex; align-items: center; justify-content: center; transition: all .15s; flex-shrink: 0; }
+.check-demo .box svg { opacity: 0; transition: opacity .15s; }
+.check-demo input:checked + .box { border: none; }
+.check-demo input:checked + .box svg { opacity: 1; }
+.radio-demo { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px; color: var(--text2); user-select: none; }
+.radio-demo input { display: none; }
+.radio-demo .dot-outer { width: 24px; height: 24px; border-radius: 999px; border: 1px solid #E2E6E8; background: #fff; display: flex; align-items: center; justify-content: center; transition: all .15s; flex-shrink: 0; }
+.radio-demo .dot-inner { width: 10px; height: 10px; border-radius: 999px; background: transparent; transition: all .15s; }
+.radio-demo input:checked + .dot-outer { border-color: var(--accent); }
+.radio-demo input:checked + .dot-outer .dot-inner { background: var(--accent); }
+
+/* ===== DO/DONT ===== */
+.do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 768px) { .do-dont { grid-template-columns: 1fr; } }
+.do-list, .dont-list { padding: 0; list-style: none; font-size: 13px; }
+.do-list li, .dont-list li { padding: 6px 0; padding-left: 20px; position: relative; color: var(--text2); }
+.do-list li::before { content: '\2713'; position: absolute; left: 0; color: #02B160; font-weight: 700; }
+.dont-list li::before { content: '\2715'; position: absolute; left: 0; color: #F22A23; font-weight: 700; }
+
+/* ===== TOAST ===== */
+.toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--accent); color: #fff; padding: 8px 20px; border-radius: 8px; font-size: 13px; font-weight: 500; opacity: 0; transition: all .25s; pointer-events: none; z-index: 999; }
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a class="logo" href="#">JAMS 2.1</a>
+    <div class="header-search">
+      <img class="header-search-icon" src="icons/system-search.svg" alt="">
+      <input type="text" id="search-input" placeholder="Search tokens, components..." oninput="handleSearch(this.value)">
+    </div>
+    <div class="brand-switcher">
+      <button class="brand-btn active" data-val="jk" onclick="setBrand('jk')">JK</button>
+      <button class="brand-btn" data-val="am" onclick="setBrand('am')">AM</button>
+      <button class="brand-btn" data-val="jp" onclick="setBrand('jp')">JP</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-group">
+      <div class="sidebar-label">Overview</div>
+      <a class="sidebar-item active" data-page="overview">Components</a>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-label">Foundation</div>
+      <a class="sidebar-item" data-page="color">Color</a>
+      <a class="sidebar-item" data-page="typography">Typography</a>
+      <a class="sidebar-item" data-page="spacing">Spacing & Radius</a>
+      <a class="sidebar-item" data-page="icon">Icon <span class="badge">155</span></a>
+      <a class="sidebar-item" data-page="shadow">Shadow & Elevation</a>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-label">Components</div>
+      <a class="sidebar-item" data-page="button">Button</a>
+      <a class="sidebar-item" data-page="input">Input</a>
+      <a class="sidebar-item" data-page="select">Select</a>
+      <a class="sidebar-item" data-page="controls">Checkbox / Radio</a>
+      <a class="sidebar-item" data-page="tags">Tags & Badges</a>
+    </div>
+    <!-- <div class="sidebar-group">
+      <div class="sidebar-label">Guidelines</div>
+      <a class="sidebar-item" data-page="guidelines">Do's & Don'ts</a>
+    </div> -->
+  </nav>
+
+  <main class="main" id="main"></main>
+</div>
+
+<div class="toast" id="toast">Copied!</div>
+
+<script>
+// ===== DATA =====
+var themeJK={brand50:'#EEF3FF',brand300:'#82AAFF',brand500:'#1B55F6',brand700:'#0D2EA0',brand950:'#030926',rMd:10,rSm:8};
+var themeAM={brand50:'#FFF6EE',brand300:'#FFAB5E',brand500:'#FF6D12',brand700:'#9A3600',brand950:'#230800',rMd:16,rSm:10};
+var themeJP={brand50:'#EEFFF6',brand300:'#5CE8A6',brand500:'#00C66C',brand700:'#007842',brand950:'#001A0E',rMd:10,rSm:8};
+var spacingTokens=[{n:'spacing-0.25',v:-1},{n:'spacing-0.5',v:2},{n:'spacing-1',v:4},{n:'spacing-2',v:8},{n:'spacing-3',v:12},{n:'spacing-4',v:16},{n:'spacing-5',v:20},{n:'spacing-6',v:24},{n:'spacing-7',v:28},{n:'spacing-8',v:32},{n:'spacing-9',v:36},{n:'spacing-10',v:40},{n:'spacing-12',v:48},{n:'spacing-13',v:52},{n:'spacing-14',v:56},{n:'spacing-16',v:64},{n:'spacing-20',v:80}];
+var radiusTokens=[{n:'xs',v:4},{n:'sm',v:8},{n:'md',v:10},{n:'lg',v:16},{n:'xl',v:24},{n:'full',v:996}];
+var typoSizes=[{role:'Heading/xl',s:32,w:700,lh:40,ls:-0.5},{role:'Heading/lg',s:28,w:700,lh:36,ls:-0.5},{role:'Heading/base',s:24,w:700,lh:32,ls:-0.5},{role:'Heading/sm',s:20,w:600,lh:28,ls:0},{role:'Heading/xs',s:18,w:600,lh:24,ls:0},{role:'Body/lg',s:17,w:400,lh:24,ls:0},{role:'Body/base',s:16,w:400,lh:22,ls:0},{role:'Body/sm',s:15,w:400,lh:22,ls:0},{role:'Body/xs',s:14,w:400,lh:20,ls:0},{role:'Caption/lg',s:13,w:500,lh:18,ls:0.2},{role:'Caption/base',s:12,w:500,lh:18,ls:0.2},{role:'Micro/size11',s:11,w:600,lh:18,ls:0}];
+var tagVariants=[{n:'Red',lb:'#FFF2F1',db:'#421200',t:'#E9312A'},{n:'Orange',lb:'#FFF5EC',db:'#421200',t:'#FF6D12'},{n:'Yellow',lb:'#FFFCE8',db:'#332500',t:'#FFB700'},{n:'Gray',lb:'#F4F6F7',db:'#1E2428',t:'#86919A'},{n:'Blue',lb:'#EBF5FF',db:'#001C46',t:'#2684FF'},{n:'Blue2',lb:'#EEF3FF',db:'#06124A',t:'#1B55F6'},{n:'Violet',lb:'#F5F3FF',db:'#1D004F',t:'#7C3AED'}];
+var iconInventory={'Navigation & Arrow':[{n:'back-line',f:'system-back'},{n:'arrowleft-line',f:'system-arrowleft'},{n:'arrowright-line',f:'system-arrowright'},{n:'arrowdown-line',f:'system-arrowdown'},{n:'arrowup-line',f:'system-arrowup'},{n:'arrowgoback-line',f:'system-arrowgoback'},{n:'selectarrowdown-fill',f:'system-selectarrowdown'},{n:'direction-fill',f:'system-direction'}],'Action & Edit':[{n:'close-line',f:'system-close'},{n:'check-line',f:'system-check'},{n:'plus-line',f:'system-plus'},{n:'search-line',f:'system-search'},{n:'setting-line',f:'system-setting'},{n:'modify-line',f:'system-modify'},{n:'delete-line',f:'system-delete'},{n:'copy-line',f:'system-copy'},{n:'share-line',f:'system-share'},{n:'link-line',f:'system-link'},{n:'clip-line',f:'system-clip'},{n:'filter-line',f:'system-filter'},{n:'redo-line',f:'system-redo'},{n:'capture-line',f:'system-capture'},{n:'download02-line',f:'system-download02'},{n:'logout-line',f:'system-logout'},{n:'agentsend-fill',f:'system-agentsend'},{n:'agentstop-fill',f:'system-agentstop'}],'Status & Info':[{n:'circlecheck-line',f:'system-circlecheck'},{n:'circlecheck-fill',f:'system-circlecheckfill'},{n:'closecircle-line',f:'system-closecircle'},{n:'closecircle-fill',f:'system-closecirclefilled'},{n:'info-line',f:'system-info'},{n:'exclamation-line',f:'system-exclamation'},{n:'ban-line',f:'line-ban'},{n:'loading-line',f:'system-loading'},{n:'tooltip1-fill',f:'system-tooltip1'},{n:'tooltip2-fill',f:'system-tooltip2'}],'UI & Layout':[{n:'list-line',f:'system-list'},{n:'list02-line',f:'system-list02'},{n:'menu-line',f:'system_menu'},{n:'kebab-line',f:'system_kebab'},{n:'meatball-line',f:'system-meatball'},{n:'view-line',f:'system-view'},{n:'hide-line',f:'system-hide'},{n:'mobile-line',f:'system-mobile'}],'Social':[{n:'heart-line',f:'system-heart'},{n:'heart-fill',f:'system-heart_on'},{n:'scrap-line',f:'system-scrap'},{n:'thumbsup-line',f:'system-thumbs_up'},{n:'comment-line',f:'system-comment'},{n:'mail-line',f:'system-mail'},{n:'alram-line',f:'system-alram'},{n:'message-fill',f:'system-message'}],'Place & Map':[{n:'location-line',f:'system-location'},{n:'pin-line',f:'system-pin'},{n:'map-line',f:'system-map'},{n:'home-line',f:'system-home'},{n:'company-line',f:'system-company'},{n:'school-line',f:'system-school'}],'Media':[{n:'picture-line',f:'system-picture_line'},{n:'camera-line',f:'system-camera'},{n:'memo-line',f:'system-memo'},{n:'folder-line',f:'system-folder'},{n:'video-fill',f:'system-video'},{n:'new-fill',f:'system-new'}],'Finance':[{n:'cash-line',f:'system-cash'},{n:'card-line',f:'system-card'},{n:'wallet-line',f:'system-wallet'},{n:'bankbook-line',f:'system-bankbook'},{n:'calculator-line',f:'system-calculator'},{n:'money-fill',f:'system-money'},{n:'discount-fill',f:'system-discount'}],'Date & Time':[{n:'calendar-line',f:'system-calendar'},{n:'date-line',f:'system-date'},{n:'period-line',f:'system-period'},{n:'clock-line',f:'system-clock'},{n:'recent-line',f:'system-recent'}],'People':[{n:'my-line',f:'system-my'},{n:'idcard-line',f:'system-idcard'},{n:'career-line',f:'system-career'}],'AI & Tech':[{n:'ai-line',f:'system-ai'},{n:'aisearch-line',f:'system-aisearch'},{n:'smart-line',f:'system-smart'},{n:'thunder-line',f:'system-thunder'},{n:'lock-line',f:'system-lock'},{n:'smartfit-fill',f:'system-smartfit'},{n:'trash02-line',f:'system-trash02'}]};
+
+// ===== BRAND =====
+var currentBrand=localStorage.getItem('jams-brand')||'jk';
+function T(){return currentBrand==='am'?themeAM:currentBrand==='jp'?themeJP:themeJK;}
+function BC(){return T().brand500;} function BS(){return T().brand50;} function BB(){return T().brand300;}
+function BN(){return currentBrand.toUpperCase();} function RM(){return T().rMd;} function RS(){return T().rSm;}
+function setBrand(b){currentBrand=b;localStorage.setItem('jams-brand',b);document.documentElement.setAttribute('data-brand',b);document.querySelectorAll('.brand-btn').forEach(function(x){x.classList.toggle('active',x.dataset.val===b);});renderPage(currentPage);}
+
+// ===== UTILITY =====
+function copyToken(t){navigator.clipboard.writeText(t).then(function(){showToast('Copied: '+t);});}
+function showToast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._to);t._to=setTimeout(function(){t.classList.remove('show');},1500);}
+function wn(w){return{400:'Regular',500:'Medium',600:'Semibold',700:'Bold'}[w]||w;}
+
+// ===== NAV =====
+var currentPage='overview';
+function navigate(p){currentPage=p;document.querySelectorAll('.sidebar-item').forEach(function(x){x.classList.toggle('active',x.dataset.page===p);});renderPage(p);window.scrollTo(0,0);history.replaceState(null,'',p==='overview'?'#':'#'+p);}
+document.getElementById('sidebar').addEventListener('click',function(e){var item=e.target.closest('.sidebar-item');if(!item||item.getAttribute('href'))return;e.preventDefault();navigate(item.dataset.page);});
+function handleSearch(q){
+  q=q.toLowerCase().trim();
+  var firstMatch=null;
+  document.querySelectorAll('.sidebar-item').forEach(function(item){
+    if(!q){item.classList.remove('hidden');return;}
+    var match=item.textContent.toLowerCase().indexOf(q)!==-1;
+    item.classList.toggle('hidden',!match);
+    if(match&&!firstMatch)firstMatch=item;
+  });
+  if(q&&firstMatch){
+    var page=firstMatch.dataset.page;
+    if(page&&P[page]){navigate(page);}
+  }
+}
+
+// ===== PAGES =====
+var P={};
+
+P.overview=function(){var bc=BC();
+var cats=[{title:'Foundation',items:[
+  {name:'Color',desc:'9 Primitive, Semantic, Light/Dark',page:'color',pv:'<div style="display:flex;gap:3px"><div style="width:20px;height:20px;background:#1B55F6;border-radius:4px"></div><div style="width:20px;height:20px;background:#FF6D12;border-radius:4px"></div><div style="width:20px;height:20px;background:#02B160;border-radius:4px"></div><div style="width:20px;height:20px;background:#F22A23;border-radius:4px"></div><div style="width:20px;height:20px;background:#86919A;border-radius:4px"></div></div>'},
+  {name:'Typography',desc:'Pretendard, 11단계 Size/Weight',page:'typography',pv:'<span style="font-size:28px;font-weight:700;letter-spacing:-0.5px">Aa</span>'},
+  {name:'Spacing & Radius',desc:'4px 기반 17단계, Brand Radius',page:'spacing',pv:'<div style="display:flex;gap:6px;align-items:end"><div style="width:12px;height:8px;background:var(--accent);border-radius:2px"></div><div style="width:12px;height:16px;background:var(--accent);border-radius:2px"></div><div style="width:12px;height:32px;background:var(--accent);border-radius:2px"></div><div style="width:12px;height:48px;background:var(--accent);border-radius:2px"></div></div>'},
+  {name:'Icon',desc:'155개, 8사이즈, line/fill',page:'icon',pv:'<div style="display:flex;gap:8px"><img src="icons/system-search.svg" width="24" height="24" style="opacity:.5"><img src="icons/system-heart.svg" width="24" height="24" style="opacity:.5"><img src="icons/system-setting.svg" width="24" height="24" style="opacity:.5"></div>'},
+  {name:'Shadow & Elevation',desc:'6단계, Border 우선 깊이',page:'shadow',pv:'<div style="display:flex;gap:6px"><div style="width:40px;height:28px;border-radius:6px;background:var(--surface1);border:1px solid var(--border1)"></div><div style="width:40px;height:28px;border-radius:6px;background:var(--surface1);border:1px solid var(--accent)"></div></div>'}
+]},{title:'Components',items:[
+  {name:'Button',desc:'3 Variant × 4 Size × 3 State',page:'button',pv:'<button style="height:40px;padding:0 16px;border-radius:'+RM()+'px;background:'+bc+';border:none;color:#fff;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer">Button</button>'},
+  {name:'Input',desc:'Textfield 3 Size × 7 State',page:'input',pv:'<div style="width:160px;height:40px;background:#fff;border:1px solid #E2E6E8;border-radius:10px;display:flex;align-items:center;padding:0 12px"><span style="color:#86919A;font-size:13px">Placeholder</span></div>'},
+  {name:'Select',desc:'Dropdown 3 Size × 5 State',page:'select',pv:'<div style="width:160px;height:40px;background:#fff;border:1px solid #E2E6E8;border-radius:10px;display:flex;align-items:center;padding:0 12px;justify-content:space-between"><span style="color:#86919A;font-size:13px">Select</span><span style="color:#86919A">\u25BE</span></div>'},
+  {name:'Checkbox / Radio',desc:'2 Size, Checked/Error/Disabled',page:'controls',pv:'<div style="display:flex;gap:12px"><div style="width:24px;height:24px;background:'+bc+';border-radius:4px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px">\u2713</div><div style="width:24px;height:24px;border:1px solid '+bc+';border-radius:999px;background:#fff;display:flex;align-items:center;justify-content:center"><div style="width:10px;height:10px;background:'+bc+';border-radius:999px"></div></div></div>'},
+  {name:'Tags & Badges',desc:'TagMoney, 시스템 컬러 페어',page:'tags',pv:'<div style="display:flex;gap:4px"><span style="background:#EEF3FF;color:#1B55F6;font-size:11px;font-weight:600;padding:0 6px;border-radius:4px;height:20px;display:flex;align-items:center">Blue2</span><span style="background:#FFF2F1;color:#E9312A;font-size:11px;font-weight:600;padding:0 6px;border-radius:4px;height:20px;display:flex;align-items:center">Red</span></div>'}
+]}];
+var h='<div class="page-header"><div class="page-title">Components Overview</div><div class="page-desc">JAMS 2.1 디자인 시스템의 Foundation, Component, Guideline을 한눈에 탐색합니다.</div></div>';
+for(var ci=0;ci<cats.length;ci++){var c=cats[ci];h+='<div class="overview-cat"><div class="overview-cat-title">'+c.title+' <span class="count">'+c.items.length+'</span></div><div class="card-grid">';for(var i=0;i<c.items.length;i++){var it=c.items[i];h+='<div class="overview-card" onclick="navigate(\''+it.page+'\')"><div class="overview-card-head">'+it.name+'</div><div class="overview-card-body">'+it.pv+'</div></div>';}h+='</div></div>';}return h;};
+
+P.color=function(){
+var bc=BC();
+var palettes={
+  Gray:{50:'#F4F6F7',100:'#E2E6E8',200:'#D1D6DA',300:'#B8BFC5',400:'#9EA8AF',500:'#86919A',600:'#636C74',700:'#484F56',800:'#30363C',900:'#1E2428',950:'#131618'},
+  Red:{50:'#FFF2F1',100:'#FFD9D6',200:'#FFB4B0',300:'#F98880',400:'#F05C55',500:'#F22A23',600:'#B8201A',700:'#8C1210',800:'#630808',900:'#3D0403',950:'#210102'},
+  Orange:{50:'#FFF6EE',100:'#FFE8CC',200:'#FFD09A',300:'#FFAB5E',400:'#FF8D30',500:'#FF6D12',600:'#CC4D00',700:'#9A3600',800:'#6C2200',900:'#421200',950:'#230800'},
+  Yellow:{50:'#FFFCE8',100:'#FFF5CC',200:'#FFE87A',300:'#FFDA36',400:'#FFC821',500:'#FFBB00',600:'#CC8800',700:'#9A5E00',800:'#6C3E00',900:'#332500',950:'#231100'},
+  Green:{50:'#EEFFF6',100:'#C4F5DF',200:'#88E8BA',300:'#4AD898',400:'#1BC478',500:'#02B160',600:'#038548',700:'#015F30',800:'#003D1E',900:'#00240E',950:'#001307'},
+  Blue:{50:'#EBF5FF',100:'#CCE4FF',200:'#A4CEFF',300:'#70B0FF',400:'#4598FF',500:'#2684FF',600:'#0060CC',700:'#00469A',800:'#002F6E',900:'#001C46',950:'#000E24'},
+  'Blue2 (JK)':{50:'#EEF3FF',100:'#D5E4FF',200:'#AECCFF',300:'#82AAFF',400:'#5580FF',500:'#1B55F6',600:'#1240CC',700:'#0D2EA0',800:'#091F74',900:'#06124A',950:'#030926'},
+  'Green2 (JP)':{50:'#EEFFF6',100:'#CCFEE5',200:'#99F5CB',300:'#5CE8A6',400:'#2DD889',500:'#00C66C',600:'#009E56',700:'#007842',800:'#00522D',900:'#00331B',950:'#001A0E'},
+  Violet:{50:'#F5F3FF',100:'#EDE8FF',200:'#D8CDFF',300:'#BBA4FF',400:'#9D6EF8',500:'#7C3AED',600:'#5E20C5',700:'#451496',800:'#2E0C6A',900:'#1D004F',950:'#0E0224'}
+};
+function isLC(hex){var c=hex.replace('#','');if(c.length<6)return true;var r=parseInt(c.substr(0,2),16),g=parseInt(c.substr(2,2),16),b=parseInt(c.substr(4,2),16);return(r*299+g*587+b*114)/1000>140;}
+var h='<div class="page-header"><div class="page-title">Color System</div><div class="page-desc">9개 팔레트 × 11단계(50~950). Primitive → Theme → Semantic 3계층 토큰 구조.</div></div>';
+h+='<div class="section-title">Primitive Palettes</div>';
+var steps=[50,100,200,300,400,500,600,700,800,900,950];
+for(var name in palettes){if(!palettes.hasOwnProperty(name))continue;var colors=palettes[name];var sw='';for(var i=0;i<steps.length;i++){var s=steps[i];var hex=colors[s];sw+='<div class="pantone-chip" onclick="copyToken(\''+name+'/'+s+'\')" title="'+name+'/'+s+'"><div class="pantone-chip-color" style="background:'+hex+'"></div><div class="pantone-chip-info"><div class="pantone-chip-step">'+s+'</div><div class="pantone-chip-hex">'+hex+'</div></div></div>';}h+='<div class="palette-group"><div class="palette-label">'+name+'</div><div class="chip-row">'+sw+'</div></div>';}
+// Semantic tokens
+var semL={bg:{base:'#FFFFFF',surface:'#F4F6F7',elevated:'#FFFFFF',brand:T().brand500,'brand-subtle':T().brand50},text:{primary:'#131618',secondary:'#636C74',tertiary:'#86919A',disabled:'#B8BFC5',inverse:'#FFFFFF',brand:T().brand500,danger:'#F22A23',success:'#02B160'},border:{'default':'#D1D6DA',subtle:'#E2E6E8',strong:'#9EA8AF',brand:T().brand500,'brand-subtle':T().brand300,danger:'#F22A23'},icon:{primary:'#484F56',secondary:'#86919A',tertiary:'#9EA8AF',disabled:'#B8BFC5',inverse:'#FFFFFF',brand:T().brand500},status:{danger:'#F22A23',warning:'#FFBB00',success:'#02B160',info:'#2684FF'}};
+var semD={bg:{base:'#131618',surface:'#1E2428',elevated:'#30363C',brand:T().brand500,'brand-subtle':T().brand950},text:{primary:'#F4F6F7',secondary:'#B8BFC5',tertiary:'#86919A',disabled:'#484F56',inverse:'#131618',brand:T().brand500,danger:'#F22A23',success:'#02B160'},border:{'default':'#484F56',subtle:'#30363C',strong:'#636C74',brand:T().brand500,'brand-subtle':T().brand700,danger:'#F22A23'},icon:{primary:'#B8BFC5',secondary:'#86919A',tertiary:'#636C74',disabled:'#484F56',inverse:'#131618',brand:T().brand500},status:{danger:'#F22A23',warning:'#FFBB00',success:'#02B160',info:'#2684FF'}};
+h+='<div class="section-title">Semantic Tokens — '+BN()+'</div>';
+for(var cat in semL){if(!semL.hasOwnProperty(cat))continue;var lTokens=semL[cat],dTokens=semD[cat];h+='<div style="font-size:13px;font-weight:600;color:var(--text2);margin:24px 0 8px;text-transform:capitalize">'+cat+'</div><div class="card"><table class="spec-table"><thead><tr><th>Token</th><th>Light</th><th>Dark</th></tr></thead><tbody>';for(var tok in lTokens){if(!lTokens.hasOwnProperty(tok))continue;var lv=lTokens[tok],dv=dTokens[tok]||'';h+='<tr><td><span class="token" onclick="copyToken(\'color.'+cat+'.'+tok+'\')">'+cat+'.'+tok+'</span></td><td><span class="cdot" style="background:'+lv+'"></span>'+lv+'</td><td><span class="cdot" style="background:'+dv+'"></span>'+dv+'</td></tr>';}h+='</tbody></table></div>';}
+// Theme preview
+h+='<div class="section-title">Theme Preview: JK vs AM vs JP</div><div class="grid-2">';
+var themes=[{name:'JK',theme:themeJK,label:'Blue'},{name:'AM',theme:themeAM,label:'Orange'},{name:'JP',theme:themeJP,label:'Green'}];
+for(var t=0;t<themes.length;t++){var th=themes[t];var bks=['brand50','brand300','brand500','brand700','brand950'];var swatches='';for(var b=0;b<bks.length;b++){var k=bks[b],hex=th.theme[k],light=isLC(hex);swatches+='<div class="brand-swatch" style="background:'+hex+';color:'+(light?'#131618':'#fff')+'">'+k.replace('brand','')+'</div>';}h+='<div class="theme-card" style="background:var(--surface1)"><h3 style="color:'+th.theme.brand500+'">'+th.name+' ('+th.label+')</h3><div class="brand-swatch-row">'+swatches+'</div><div style="font-size:13px;color:var(--text2)"><div>radius-md: <strong>'+th.theme.rMd+'px</strong></div><div>radius-sm: <strong>'+th.theme.rSm+'px</strong></div></div></div>';}
+h+='</div>';
+return h;};
+
+P.typography=function(){
+var h='<div class="page-header"><div class="page-title">Typography</div><div class="page-desc">Pretendard 단일 서체. 크기(11\u201332px)와 굵기(400\u2013700)의 조합으로 명확한 위계를 만듭니다.</div></div>';
+h+='<div class="section-title">Size Scale</div><div class="card">';
+for(var i=0;i<typoSizes.length;i++){var t=typoSizes[i];h+='<div class="typo-row"><div class="typo-meta">'+t.role+'<br>'+t.s+'px / '+wn(t.w)+' / lh '+t.lh+'px</div><div class="typo-sample" style="font-size:'+t.s+'px;font-weight:'+t.w+';line-height:'+t.lh+'px;letter-spacing:'+t.ls+'px">채용공고 탐색 Recruitment</div></div>';}
+h+='</div>';
+h+='<div class="section-title">Weight Scale</div><div class="card">';
+var ws=[{w:400,n:'Regular',d:'본문, 설명'},{w:500,n:'Medium',d:'레이블, 강조'},{w:600,n:'Semibold',d:'소제목, 버튼'},{w:700,n:'Bold',d:'대제목'}];
+for(var i=0;i<ws.length;i++){var w=ws[i];h+='<div class="typo-row"><div class="typo-meta">'+w.n+' ('+w.w+')<br><span style="color:var(--text3)">'+w.d+'</span></div><div class="typo-sample" style="font-size:20px;font-weight:'+w.w+'">Pretendard '+w.w+'</div></div>';}
+h+='</div>';
+h+='<div class="section-title">Letter Spacing</div><div class="card"><table class="spec-table"><thead><tr><th>Name</th><th>Value</th><th>용도</th></tr></thead><tbody><tr><td>tight</td><td>-0.5px</td><td>헤딩 \u2014 큰 글자 응집력</td></tr><tr><td>normal</td><td>0px</td><td>본문 \u2014 기본값</td></tr><tr><td>wide</td><td>0.2px</td><td>캡션 \u2014 작은 글자 가독성</td></tr></tbody></table></div>';
+return h;};
+
+P.spacing=function(){
+var h='<div class="page-header"><div class="page-title">Spacing & Radius</div><div class="page-desc">4px 기반 스페이싱 그리드 17단계. 테마별 Brand Radius.</div></div>';
+h+='<div class="section-title">Spacing Scale</div><div class="card">';
+for(var i=0;i<spacingTokens.length;i++){var t=spacingTokens[i];var w=Math.max(t.v,0);h+='<div class="sp-row"><span class="sp-label"><span class="token" onclick="copyToken(\''+t.n+'\')">'+t.n+'</span></span><div class="sp-bar" style="width:'+w*3+'px"></div><span class="sp-val">'+t.v+'px</span></div>';}
+h+='</div>';
+h+='<div class="section-title">Global Radius</div><div class="card"><div class="radius-row">';
+for(var i=0;i<radiusTokens.length;i++){var r=radiusTokens[i];h+='<div class="radius-item"><div class="radius-box" style="border-radius:'+Math.min(r.v,36)+'px">'+r.v+'px</div><div class="radius-label">'+r.n+'</div></div>';}
+h+='</div></div>';
+h+='<div class="section-title">Brand Radius \u2014 '+BN()+'</div><div class="card"><div class="radius-row">';
+var brs=[{l:'brand-sm',v:RS()},{l:'brand-md',v:RM()}];
+for(var i=0;i<brs.length;i++){var b=brs[i];h+='<div class="radius-item"><div class="radius-box" style="border-radius:'+b.v+'px;border-color:'+BC()+'">'+b.v+'px</div><div class="radius-label">'+b.l+'</div></div>';}
+h+='</div></div>';return h;};
+
+P.shadow=function(){
+var h='<div class="page-header"><div class="page-title">Shadow & Elevation</div><div class="page-desc">JAMS는 보더와 표면색 차이를 1차 깊이 수단으로, Shadow는 플로팅 요소에만 보조적으로 사용합니다.</div></div>';
+var levels=[{l:'Flat (0)',t:'배경색만',u:'페이지 배경',bd:'none'},{l:'Subtle (1)',t:'1px borderSubtle',u:'구분선, 비강조',bd:'1px solid #E2E6E8'},{l:'Contained (2)',t:'1px borderDefault',u:'표준 카드, 인풋',bd:'1px solid #D1D6DA'},{l:'Strong (3)',t:'1px borderStrong',u:'강조, 포커스',bd:'1px solid #131618'},{l:'Raised (4)',t:'fillSurfaceRaised',u:'탭바, 헤더',bd:'none'},{l:'Brand (5)',t:'1px borderBrand',u:'선택 상태',bd:'1px solid '+BC()}];
+h+='<div class="section-title">Depth Levels</div><div class="card">';
+for(var i=0;i<levels.length;i++){var l=levels[i];h+='<div style="display:flex;align-items:center;gap:16px;padding:12px 0;border-bottom:1px solid var(--border1)"><div style="width:56px;height:36px;border-radius:6px;background:var(--surface2);border:'+l.bd+';flex-shrink:0"></div><div><div style="font-size:14px;font-weight:600">'+l.l+'</div><div style="font-size:12px;color:var(--text3)">'+l.t+'</div><div style="font-size:12px;color:var(--text2);margin-top:2px">'+l.u+'</div></div></div>';}
+h+='</div>';
+h+='<div class="section-title">Shadow 사용 컨텍스트</div><div class="card"><table class="spec-table"><thead><tr><th>용도</th><th>설명</th></tr></thead><tbody><tr><td>모달/다이얼로그</td><td>오버레이 위에 떠 있는 요소</td></tr><tr><td>바텀시트</td><td>화면 하단에서 올라오는 패널</td></tr><tr><td>플로팅 ���튼(FAB)</td><td>스크롤 위에 고정된 요소</td></tr><tr><td>드롭다운/팝오버</td><td>트리거 위에 떠 있는 메뉴</td></tr></tbody></table></div>';
+return h;};
+
+P.button=function(){var bc=BC(),bs=BS(),bb=BB(),rm=RM(),rs=RS();
+var h='<div class="page-header"><div class="page-title">Button</div><div class="page-desc">3가지 Variant \u00D7 4가지 Size \u00D7 3가지 State. 버튼을 호버/클릭해보세요.</div></div>';
+h+='<div class="section-title">Variants</div><div class="preview-row">';
+h+='<div><div class="preview-label">Primary</div><button class="btn-demo btn-primary" style="height:48px;padding:0 16px;border-radius:'+rm+'px;background:'+bc+';border:none;color:#fff;font-size:16px;font-weight:600">Button</button></div>';
+h+='<div><div class="preview-label">Secondary</div><button class="btn-demo btn-secondary" style="height:48px;padding:0 16px;border-radius:'+rm+'px;background:'+bs+';border:1px solid '+bb+';color:'+bc+';font-size:16px;font-weight:600">Button</button></div>';
+h+='<div><div class="preview-label">Monoline</div><button class="btn-demo btn-monoline" style="height:48px;padding:0 16px;border-radius:'+rm+'px;background:#fff;border:1px solid #D1D6DA;color:#131618;font-size:16px;font-weight:600">Button</button></div>';
+h+='<div><div class="preview-label">Disabled</div><button class="btn-demo" disabled style="height:48px;padding:0 16px;border-radius:'+rm+'px;background:#E2E6E8;border:none;color:#fff;font-size:16px;font-weight:600">Button</button></div>';
+h+='</div>';
+h+='<div class="section-title">Sizes</div><div class="card"><table class="spec-table"><thead><tr><th>Size</th><th>Height</th><th>Padding</th><th>Radius</th><th>Font</th><th>Icon</th><th>Preview</th></tr></thead><tbody>';
+var szs=[{h:52,p:16,r:rm,fs:16,fw:600,ic:'16px',rad:'brand-md ('+rm+'px)'},{h:48,p:16,r:rm,fs:16,fw:600,ic:'16px',rad:'brand-md ('+rm+'px)'},{h:40,p:12,r:10,fs:14,fw:500,ic:'14px',rad:'md (10px)'},{h:32,p:8,r:rs,fs:13,fw:500,ic:'14px',rad:'brand-sm ('+rs+'px)'}];
+for(var i=0;i<szs.length;i++){var s=szs[i];h+='<tr><td>'+s.h+'</td><td>'+s.h+'px</td><td>'+s.p+'px</td><td>'+s.rad+'</td><td>'+s.fs+'px '+wn(s.fw)+'</td><td>'+s.ic+'</td><td><button class="btn-demo btn-primary" style="height:'+s.h+'px;padding:0 '+s.p+'px;border-radius:'+s.r+'px;background:'+bc+';border:none;color:#fff;font-size:'+s.fs+'px;font-weight:'+s.fw+'">Button</button></td></tr>';}
+h+='</tbody></table></div>';
+h+='<div class="section-title">States</div><div class="card"><table class="spec-table"><thead><tr><th>State</th><th>Primary</th><th>Secondary</th><th>Monoline</th></tr></thead><tbody><tr><td><strong>Default</strong></td><td>fill/brand</td><td>fill/brand-subtle + border/brand</td><td>fill/default + border/default</td></tr><tr><td><strong>Hover</strong></td><td>+ rgba(22,22,24, 0.12)</td><td>+ rgba(22,22,24, 0.04)</td><td>+ rgba(22,22,24, 0.12)</td></tr><tr><td><strong>Disabled</strong></td><td>fill/surface-raised</td><td>border/subtle, text/disabled</td><td>border/subtle, text/disabled</td></tr></tbody></table></div>';
+h+='<div class="section-title">Icon Configuration</div><div class="card"><dl class="spec-dl"><dt>iconLeft</dt><dd>좌측 아이콘 독립 토글 (true/false)</dd><dt>iconRight</dt><dd>우측 아이콘 독립 토글 (true/false)</dd><dt>조합</dt><dd>텍스트만 / 좌측만 / 우측만 / 양쪽 모두</dd></dl></div>';
+return h;};
+
+P.input=function(){
+var h='<div class="page-header"><div class="page-title">Input (Textfield)</div><div class="page-desc">3가지 Size \u00D7 7가지 State. 직접 타이핑하면 상태가 변합니다.</div></div>';
+h+='<div class="section-title">Interactive Preview</div><div class="preview-row" style="gap:16px">';
+[52,48,40].forEach(function(sz){
+  var id='input-live-'+sz;
+  var pd=sz>=48?16:12, fs=sz>=48?15:14;
+  h+='<div style="min-width:220px"><div class="preview-label">Size '+sz+'</div>';
+  h+='<div style="position:relative">';
+  h+='<input id="'+id+'" type="text" placeholder="Placeholder" style="width:100%;height:'+sz+'px;background:#fff;border:1px solid #E2E6E8;border-radius:10px;padding:0 '+pd+'px;color:#131618;font-size:'+fs+'px;font-family:inherit;outline:none;transition:border .15s">';
+  h+='</div>';
+  h+='<div id="'+id+'-state" style="font-size:11px;color:var(--text3);margin-top:4px">State: Default</div>';
+  h+='</div>';
+});
+h+='</div>';
+// Error demo
+h+='<div class="preview-row" style="gap:16px;margin-top:8px">';
+h+='<div style="min-width:220px"><div class="preview-label">Error</div><div style="position:relative"><input id="input-live-error" type="text" value="\uC785\uB825 \uD14D\uC2A4\uD2B8" style="width:100%;height:48px;background:#fff;border:2px solid #F22A23;border-radius:10px;padding:0 16px;color:#131618;font-size:15px;font-family:inherit;outline:none"></div><div style="font-size:11px;color:#F22A23;margin-top:3px">\uC5D0\uB7EC \uBA54\uC2DC\uC9C0</div></div>';
+h+='<div style="min-width:220px"><div class="preview-label">Disabled</div><input disabled type="text" placeholder="Disabled" style="width:100%;height:48px;background:#F4F6F7;border:1px solid #E2E6E8;border-radius:10px;padding:0 16px;color:#9EA8AF;font-size:15px;font-family:inherit;outline:none;cursor:not-allowed"></div>';
+h+='</div>';
+h+='<div class="card"><table class="spec-table"><thead><tr><th>Size</th><th>Height</th><th>Padding</th><th>Radius</th><th>Placeholder</th><th>Label</th><th>Icon</th></tr></thead><tbody><tr><td>52</td><td>52px</td><td>16px</td><td>md (10px)</td><td>Body/sm 15px</td><td>Caption/base 12px</td><td>24px</td></tr><tr><td>48</td><td>48px</td><td>16px</td><td>md (10px)</td><td>Body/sm 15px</td><td>\u2014</td><td>24px</td></tr><tr><td>40</td><td>40px</td><td>12px</td><td>md (10px)</td><td>Body/xs 14px</td><td>\u2014</td><td>18px</td></tr></tbody></table></div>';
+h+='<div class="section-title">States Reference</div>';
+h+='<div class="card"><table class="spec-table"><thead><tr><th>State</th><th>Border</th><th>Background</th><th>Text</th><th>비고</th></tr></thead><tbody><tr><td><strong>Default</strong></td><td>1px border/subtle (#E2E6E8)</td><td>\u2014</td><td>typography/subtle</td><td>초기</td></tr><tr><td><strong>Focus</strong></td><td>2px border/strong (#131618)</td><td>\u2014</td><td>\u2014</td><td>커서, 레이블 축소(52)</td></tr><tr><td><strong>Pressed</strong></td><td>2px border/strong (#131618)</td><td>\u2014</td><td>typography/default</td><td>clear 버튼 표시</td></tr><tr><td><strong>Filled</strong></td><td>1px border/subtle (#E2E6E8)</td><td>\u2014</td><td>typography/default</td><td>입력 완료</td></tr><tr><td><strong>Error</strong></td><td>2px border/danger (#F22A23)</td><td>\u2014</td><td>typography/default</td><td>에러 메시지</td></tr><tr><td><strong>Errorpressed</strong></td><td>2px border/danger (#F22A23)</td><td>\u2014</td><td>typography/default</td><td>에러+재입력</td></tr><tr><td><strong>Disabled</strong></td><td>1px border/subtle (#E2E6E8)</td><td>fill/surface (#F4F6F7)</td><td>typography/disabled</td><td>비활성</td></tr></tbody></table></div>';
+return h;};
+
+P.select=function(){var bc=BC(),bs=BS(),bb=BB();
+var cities=['\uC11C\uC6B8\uD2B9\uBCC4\uC2DC','\uBD80\uC0B0\uAD11\uC5ED\uC2DC','\uB300\uAD6C\uAD11\uC5ED\uC2DC','\uC778\uCC9C\uAD11\uC5ED\uC2DC','\uAD11\uC8FC\uAD11\uC5ED\uC2DC'];
+var h='<div class="page-header"><div class="page-title">Select Box</div><div class="page-desc">Input과 동일한 토큰 체계. 3 Size \u00D7 5 State + Dropdown Open. 클릭하면 동작합니다.</div></div>';
+// Size별 States
+var sizes=[{sz:52,pd:16,fs:15,lh:22,iconSz:24,optH:48},{sz:48,pd:16,fs:15,lh:22,iconSz:24,optH:44},{sz:40,pd:12,fs:14,lh:20,iconSz:18,optH:36}];
+for(var si=0;si<sizes.length;si++){var s=sizes[si];
+  h+='<div class="section-title">size: '+s.sz+'</div>';
+  h+='<div style="display:flex;gap:24px;flex-wrap:wrap;margin-bottom:8px">';
+  // Default
+  h+='<div style="width:200px"><div class="preview-label">Default</div>';
+  h+='<div style="height:'+s.sz+'px;background:#fff;border:1px solid #E2E6E8;border-radius:10px;display:flex;align-items:center;padding:0 '+s.pd+'px;gap:8px">';
+  h+='<span style="flex:1;color:#86919A;font-size:'+s.fs+'px;line-height:'+s.lh+'px">\uC120\uD0DD\uD558\uC138\uC694</span>';
+  h+='<img src="icons/system-selectarrowdown.svg" width="'+s.iconSz+'" height="'+s.iconSz+'" style="opacity:.85"></div></div>';
+  // Focus
+  h+='<div style="width:200px"><div class="preview-label">Focus</div>';
+  h+='<div style="height:'+s.sz+'px;background:#fff;border:2px solid #131618;border-radius:10px;display:flex;align-items:center;padding:0 '+s.pd+'px;gap:8px">';
+  h+='<span style="flex:1;color:#86919A;font-size:'+s.fs+'px;line-height:'+s.lh+'px">\uC120\uD0DD\uD558\uC138\uC694</span>';
+  h+='<img src="icons/system-selectarrowdown.svg" width="'+s.iconSz+'" height="'+s.iconSz+'" style="opacity:.85"></div></div>';
+  // Filled
+  h+='<div style="width:200px"><div class="preview-label">Filled</div>';
+  h+='<div style="height:'+s.sz+'px;background:#fff;border:1px solid #E2E6E8;border-radius:10px;display:flex;align-items:center;padding:0 '+s.pd+'px;gap:8px">';
+  h+='<span style="flex:1;color:#131618;font-size:'+s.fs+'px;font-weight:500;line-height:'+s.lh+'px">\uC11C\uC6B8\uD2B9\uBCC4\uC2DC</span>';
+  h+='<img src="icons/system-selectarrowdown.svg" width="'+s.iconSz+'" height="'+s.iconSz+'" style="opacity:.85"></div></div>';
+  // Error
+  h+='<div style="width:200px"><div class="preview-label">Error</div>';
+  h+='<div style="height:'+s.sz+'px;background:#fff;border:2px solid #F22A23;border-radius:10px;display:flex;align-items:center;padding:0 '+s.pd+'px;gap:8px">';
+  h+='<span style="flex:1;color:#131618;font-size:'+s.fs+'px;font-weight:500;line-height:'+s.lh+'px">\uC11C\uC6B8\uD2B9\uBCC4\uC2DC</span>';
+  h+='<img src="icons/system-selectarrowdown.svg" width="'+s.iconSz+'" height="'+s.iconSz+'" style="opacity:.85"></div>';
+  h+='<div style="font-size:12px;color:#F22A23;margin-top:4px;line-height:18px">\uC5D0\uB7EC \uBA54\uC2DC\uC9C0</div></div>';
+  // Disabled
+  h+='<div style="width:200px"><div class="preview-label">Disabled</div>';
+  h+='<div style="height:'+s.sz+'px;background:#F4F6F7;border:1px solid #E2E6E8;border-radius:10px;display:flex;align-items:center;padding:0 '+s.pd+'px;gap:8px;cursor:not-allowed">';
+  h+='<span style="flex:1;color:#9EA8AF;font-size:'+s.fs+'px;font-weight:500;line-height:'+s.lh+'px">\uC120\uD0DD\uD558\uC138\uC694</span>';
+  h+='<img src="icons/system-selectarrowdown.svg" width="'+s.iconSz+'" height="'+s.iconSz+'" style="opacity:.2"></div></div>';
+  h+='</div>';
+}
+// Dropdown Open — size 48 하나만 인터랙티브로 표시
+h+='<div class="section-title">Dropdown Open</div>';
+var ds=sizes[1]; // size 48
+var did='select-dd-48';
+h+='<div style="width:360px;margin-bottom:16px">';
+h+='<div id="'+did+'" class="select-trigger" data-sz="'+ds.sz+'" style="height:'+ds.sz+'px;width:100%;background:#fff;border:1px solid #E2E6E8;border-radius:10px;display:flex;align-items:center;padding:0 '+ds.pd+'px;gap:8px;cursor:pointer;user-select:none;transition:border .15s">';
+h+='<span class="select-text" style="flex:1;color:#86919A;font-size:'+ds.fs+'px;line-height:'+ds.lh+'px">\uC120\uD0DD\uD558\uC138\uC694</span>';
+h+='<img class="select-arrow" src="icons/system-selectarrowdown.svg" width="'+ds.iconSz+'" height="'+ds.iconSz+'" style="opacity:.85;transition:transform .2s">';
+h+='</div>';
+h+='<div id="'+did+'-dropdown" class="select-dropdown" style="display:none;width:100%;margin-top:4px;background:#fff;border:1px solid #E2E6E8;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.08);overflow:hidden;padding:8px 0">';
+for(var ci=0;ci<cities.length;ci++){
+  h+='<div class="select-option" data-trigger="'+did+'" style="height:'+ds.optH+'px;display:flex;align-items:center;padding:0 '+ds.pd+'px;font-size:'+ds.fs+'px;line-height:'+ds.lh+'px;cursor:pointer;transition:background .1s;font-family:inherit;color:#131618">'+cities[ci]+'</div>';
+}
+h+='</div>';
+h+='<div id="'+did+'-state" style="font-size:11px;color:var(--text3);margin-top:6px">State: Default \u2014 \uD074\uB9AD\uD558\uBA74 \uC5F4\uB9BD\uB2C8\uB2E4</div>';
+h+='</div>';
+// Size별 옵션 높이 안내
+h+='<div class="card" style="margin-top:8px"><table class="spec-table"><thead><tr><th>Size</th><th>\uC635\uC158 \uB192\uC774</th><th>\uD328\uB529</th><th>\uD3F0\uD2B8</th></tr></thead><tbody>';
+h+='<tr><td><strong>52</strong></td><td>48px</td><td>0 16px</td><td>15px regular</td></tr>';
+h+='<tr><td><strong>48</strong></td><td>44px</td><td>0 16px</td><td>15px regular</td></tr>';
+h+='<tr><td><strong>40</strong></td><td>36px</td><td>0 12px</td><td>14px regular</td></tr>';
+h+='</tbody></table></div>';
+// Spec tables
+h+='<div class="section-title">States</div><div class="card"><table class="spec-table"><thead><tr><th>State</th><th>Border</th><th>Text</th><th>Icon</th></tr></thead><tbody><tr><td><strong>Default</strong></td><td>1px border/subtle (#E2E6E8)</td><td>typography/subtle \u2014 15px regular</td><td>selectarrowdown-fill 24px</td></tr><tr><td><strong>Focus</strong></td><td>2px border/strong (#131618)</td><td>typography/subtle</td><td>selectarrowdown-fill</td></tr><tr><td><strong>Filled</strong></td><td>1px border/subtle</td><td>typography/default \u2014 15px medium</td><td>selectarrowdown-fill</td></tr><tr><td><strong>Error</strong></td><td>2px border/danger (#F22A23)</td><td>typography/default</td><td>selectarrowdown-fill</td></tr><tr><td><strong>Disabled</strong></td><td>1px border/subtle</td><td>typography/disabled (#9EA8AF)</td><td>selectarrowdown-fill</td></tr></tbody></table></div>';
+h+='<div class="section-title">Dropdown Open Spec</div><div class="card"><table class="spec-table"><thead><tr><th>속성</th><th>Size 52</th><th>Size 48</th><th>Size 40</th></tr></thead><tbody>';
+h+='<tr><td>필드 Border</td><td colspan="3">2px border/strong (#131618), 아이콘 \u2192 selecarrowup-fill (180\u00B0)</td></tr>';
+h+='<tr><td>옵션 높이</td><td>48px</td><td>44px</td><td>36px</td></tr>';
+h+='<tr><td>옵션 패딩</td><td>0 16px</td><td>0 16px</td><td>0 12px</td></tr>';
+h+='<tr><td>옵션 폰트</td><td>15px regular</td><td>15px regular</td><td>14px regular</td></tr>';
+h+='<tr><td>선택된 옵션</td><td colspan="3">fill/brand-subtle 배경 + typography/brand semibold</td></tr>';
+h+='<tr><td>리스트 Border</td><td colspan="3">1px border/subtle, radius md (10px)</td></tr>';
+h+='<tr><td>Shadow</td><td colspan="3">0 4px 16px rgba(0,0,0,0.08)</td></tr>';
+h+='<tr><td>리스트 패딩</td><td colspan="3">py 8px</td></tr>';
+h+='</tbody></table></div>';
+return h;};
+
+P.controls=function(){var bc=BC();
+var checkSvg=function(sz,fill){return '<svg width="'+sz+'" height="'+sz+'" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M20.0303 6.46967C20.3232 6.76256 20.3232 7.23744 20.0303 7.53033L10.0303 17.5303C9.88428 17.6764 9.68445 17.7557 9.47798 17.7497C9.27151 17.7436 9.07668 17.6527 8.93945 17.4983L3.93945 11.8733C3.66426 11.5637 3.69215 11.0896 4.00174 10.8144C4.31132 10.5393 4.78538 10.5671 5.06056 10.8767L9.53212 15.9072L18.9697 6.46967C19.2626 6.17678 19.7374 6.17678 20.0303 6.46967Z" fill="'+fill+'"/></svg>';};
+var h='<div class="page-header"><div class="page-title">Checkbox / Radio</div><div class="page-desc">직접 클릭해서 상태 변화를 확인하세요.</div></div>';
+// === Checkbox ===
+h+='<div class="section-title">Checkbox</div>';
+h+='<div class="preview-row" style="margin-bottom:8px;gap:24px;align-items:start">';
+// Size 24
+h+='<div><div class="preview-label">24px</div><div style="display:flex;gap:16px;margin-top:8px">';
+h+='<div style="text-align:center"><div style="width:24px;height:24px;border-radius:4px;border:1px solid #E2E6E8;background:#fff"></div><div style="font-size:10px;color:var(--text3);margin-top:2px">Off</div></div>';
+h+='<div style="text-align:center"><div style="width:24px;height:24px;border-radius:4px;background:'+bc+';display:flex;align-items:center;justify-content:center">'+checkSvg(16,'#fff')+'</div><div style="font-size:10px;color:var(--text3);margin-top:2px">On</div></div>';
+h+='<div style="text-align:center"><div style="width:24px;height:24px;border-radius:4px;background:#FFF2F1;border:1px solid #F22A23"></div><div style="font-size:10px;color:var(--text3);margin-top:2px">Error</div></div>';
+h+='<div style="text-align:center"><div style="width:24px;height:24px;border-radius:4px;background:#E2E6E8"></div><div style="font-size:10px;color:var(--text3);margin-top:2px">Disabled</div></div>';
+h+='<div style="text-align:center"><div style="width:24px;height:24px;border-radius:4px;background:#E2E6E8;display:flex;align-items:center;justify-content:center">'+checkSvg(16,'#fff')+'</div><div style="font-size:10px;color:var(--text3);margin-top:2px">Disabled On</div></div>';
+h+='</div></div>';
+// Size 20
+h+='<div><div class="preview-label">20px</div><div style="display:flex;gap:16px;margin-top:8px">';
+h+='<div style="text-align:center"><div style="width:20px;height:20px;border-radius:4px;border:1px solid #E2E6E8;background:#fff"></div><div style="font-size:10px;color:var(--text3);margin-top:2px">Off</div></div>';
+h+='<div style="text-align:center"><div style="width:20px;height:20px;border-radius:4px;background:'+bc+';display:flex;align-items:center;justify-content:center">'+checkSvg(13,'#fff')+'</div><div style="font-size:10px;color:var(--text3);margin-top:2px">On</div></div>';
+h+='<div style="text-align:center"><div style="width:20px;height:20px;border-radius:4px;background:#FFF2F1;border:1px solid #F22A23"></div><div style="font-size:10px;color:var(--text3);margin-top:2px">Error</div></div>';
+h+='<div style="text-align:center"><div style="width:20px;height:20px;border-radius:4px;background:#E2E6E8"></div><div style="font-size:10px;color:var(--text3);margin-top:2px">Disabled</div></div>';
+h+='<div style="text-align:center"><div style="width:20px;height:20px;border-radius:4px;background:#E2E6E8;display:flex;align-items:center;justify-content:center">'+checkSvg(13,'#fff')+'</div><div style="font-size:10px;color:var(--text3);margin-top:2px">Disabled On</div></div>';
+h+='</div></div>';
+h+='</div>';
+// Interactive
+h+='<div style="margin-bottom:16px;padding:16px;background:var(--surface2);border-radius:8px"><div style="font-size:12px;color:var(--text3);margin-bottom:8px">Interactive</div><div style="display:flex;gap:24px">';
+h+='<label class="check-demo"><input type="checkbox" checked><div class="box" style="width:24px;height:24px;background:'+bc+'">'+checkSvg(16,'#fff')+'</div> Checked</label>';
+h+='<label class="check-demo"><input type="checkbox"><div class="box" style="width:24px;height:24px">'+checkSvg(16,'#fff')+'</div> Unchecked</label>';
+h+='<label class="check-demo"><input type="checkbox"><div class="box" style="width:24px;height:24px">'+checkSvg(16,'#fff')+'</div> Try me</label>';
+h+='</div></div>';
+h+='<div class="card"><table class="spec-table"><thead><tr><th>속성</th><th>값</th></tr></thead><tbody><tr><td>Sizes</td><td>20px, 24px</td></tr><tr><td>Radius</td><td>xs (4px)</td></tr><tr><td>Unchecked</td><td>bg: fill/default, border: 1px border/subtle</td></tr><tr><td>Unchecked Error</td><td>bg: fill/danger-subtle (#FFF2F1), border: border/danger</td></tr><tr><td>Checked</td><td>bg: fill/brand ('+bc+'), system-check 아이콘 white</td></tr><tr><td>Disabled</td><td>bg: fill/surface-raised (#E2E6E8)</td></tr><tr><td>Disabled Checked</td><td>bg: fill/surface-raised (#E2E6E8), system-check 아이콘 white</td></tr></tbody></table></div>';
+// === Radio ===
+h+='<div class="section-title">Radio</div>';
+h+='<div class="preview-row" style="margin-bottom:8px;gap:24px;align-items:start">';
+// Size 24
+h+='<div><div class="preview-label">24px</div><div style="display:flex;gap:16px;margin-top:8px">';
+h+='<div style="text-align:center"><div style="width:24px;height:24px;border-radius:999px;border:1px solid #E2E6E8;background:#fff"></div><div style="font-size:10px;color:var(--text3);margin-top:2px">Off</div></div>';
+h+='<div style="text-align:center"><div style="width:24px;height:24px;border-radius:999px;border:1px solid '+bc+';background:#fff;display:flex;align-items:center;justify-content:center"><div style="width:10px;height:10px;border-radius:999px;background:'+bc+'"></div></div><div style="font-size:10px;color:var(--text3);margin-top:2px">On</div></div>';
+h+='<div style="text-align:center"><div style="width:24px;height:24px;border-radius:999px;background:#E2E6E8"></div><div style="font-size:10px;color:var(--text3);margin-top:2px">Disabled</div></div>';
+h+='<div style="text-align:center"><div style="width:24px;height:24px;border-radius:999px;background:#E2E6E8;display:flex;align-items:center;justify-content:center"><div style="width:10px;height:10px;border-radius:999px;background:#B8BFC5"></div></div><div style="font-size:10px;color:var(--text3);margin-top:2px">Disabled On</div></div>';
+h+='</div></div>';
+// Size 20
+h+='<div><div class="preview-label">20px</div><div style="display:flex;gap:16px;margin-top:8px">';
+h+='<div style="text-align:center"><div style="width:20px;height:20px;border-radius:999px;border:1px solid #E2E6E8;background:#fff"></div><div style="font-size:10px;color:var(--text3);margin-top:2px">Off</div></div>';
+h+='<div style="text-align:center"><div style="width:20px;height:20px;border-radius:999px;border:1px solid '+bc+';background:#fff;display:flex;align-items:center;justify-content:center"><div style="width:8px;height:8px;border-radius:999px;background:'+bc+'"></div></div><div style="font-size:10px;color:var(--text3);margin-top:2px">On</div></div>';
+h+='<div style="text-align:center"><div style="width:20px;height:20px;border-radius:999px;background:#E2E6E8"></div><div style="font-size:10px;color:var(--text3);margin-top:2px">Disabled</div></div>';
+h+='<div style="text-align:center"><div style="width:20px;height:20px;border-radius:999px;background:#E2E6E8;display:flex;align-items:center;justify-content:center"><div style="width:8px;height:8px;border-radius:999px;background:#B8BFC5"></div></div><div style="font-size:10px;color:var(--text3);margin-top:2px">Disabled On</div></div>';
+h+='</div></div>';
+h+='</div>';
+// Interactive
+h+='<div style="margin-bottom:16px;padding:16px;background:var(--surface2);border-radius:8px"><div style="font-size:12px;color:var(--text3);margin-bottom:8px">Interactive</div><div style="display:flex;gap:24px">';
+h+='<label class="radio-demo"><input type="radio" name="radio-demo" checked><div class="dot-outer"><div class="dot-inner"></div></div> Option A</label>';
+h+='<label class="radio-demo"><input type="radio" name="radio-demo"><div class="dot-outer"><div class="dot-inner"></div></div> Option B</label>';
+h+='<label class="radio-demo"><input type="radio" name="radio-demo"><div class="dot-outer"><div class="dot-inner"></div></div> Option C</label>';
+h+='</div></div>';
+h+='<div class="card"><table class="spec-table"><thead><tr><th>속성</th><th>값</th></tr></thead><tbody><tr><td>Sizes</td><td>20px, 24px</td></tr><tr><td>Radius</td><td>999px (원)</td></tr><tr><td>Unchecked</td><td>bg: fill/default, border: 1px border/subtle</td></tr><tr><td>Checked</td><td>border: 1px brand, dot: brand</td></tr><tr><td>Disabled</td><td>bg: fill/surface-raised (#E2E6E8)</td></tr><tr><td>Disabled Checked</td><td>bg: fill/surface-raised, dot: gray (#B8BFC5)</td></tr></tbody></table></div>';
+// === Check (독립 아이콘) ===
+h+='<div class="section-title">Check (독립 아이콘)</div>';
+h+='<div class="preview-row" style="margin-bottom:16px;gap:32px;align-items:end">';
+var ckSizes=[16,20,24];
+for(var si=0;si<ckSizes.length;si++){var sz=ckSizes[si];
+h+='<div style="text-align:center"><div class="preview-label">'+sz+'px</div><div style="display:flex;gap:16px;margin-top:8px">';
+h+='<div style="text-align:center">'+checkSvg(sz,'#86919A')+'<div style="font-size:10px;color:var(--text3);margin-top:4px">Off</div></div>';
+h+='<div style="text-align:center">'+checkSvg(sz,bc)+'<div style="font-size:10px;color:var(--text3);margin-top:4px">On</div></div>';
+h+='</div></div>';
+}
+h+='</div>';
+h+='<div class="card"><table class="spec-table"><thead><tr><th>속성</th><th>값</th></tr></thead><tbody><tr><td>Sizes</td><td>16px, 20px, 24px</td></tr><tr><td>Unchecked (off)</td><td>typography/subtle (#86919A)</td></tr><tr><td>Checked (on)</td><td>fill/brand ('+bc+')</td></tr></tbody></table></div>';
+return h;};
+
+P.tags=function(){
+var h='<div class="page-header"><div class="page-title">Tags & Badges</div><div class="page-desc">TagMoney 컴포넌트. 시스템 컬러별 Light/Dark 배경 페어.</div></div>';
+h+='<div class="section-title">TagMoney Spec</div><div class="card"><dl class="spec-dl"><dt>높이</dt><dd>20px 고정</dd><dt>아이콘</dt><dd>12\u00D712px, 텍스트 좌측</dd><dt>폰트</dt><dd>Pretendard Semibold (600), 11px, lh 18px</dd><dt>갭</dt><dd>2px</dd><dt>수평 패딩</dt><dd>6px</dd><dt>Radius</dt><dd>4px</dd></dl></div>';
+h+='<div class="section-title">Light</div><div class="card"><div style="padding:16px;background:#fff;border-radius:8px;display:flex;gap:8px;flex-wrap:wrap">';
+for(var i=0;i<tagVariants.length;i++){h+='<span class="tag-money" style="background:'+tagVariants[i].lb+';color:'+tagVariants[i].t+'">'+tagVariants[i].n+'</span>';}
+h+='</div></div>';
+h+='<div class="section-title">Dark</div><div class="card"><div style="padding:16px;background:#131618;border-radius:8px;display:flex;gap:8px;flex-wrap:wrap">';
+for(var i=0;i<tagVariants.length;i++){h+='<span class="tag-money" style="background:'+tagVariants[i].db+';color:'+tagVariants[i].t+'">'+tagVariants[i].n+'</span>';}
+h+='</div></div>';
+h+='<div class="section-title">Color Pairs</div><div class="card"><table class="spec-table"><thead><tr><th>Color</th><th>Light bg</th><th>Dark bg</th><th>Text</th></tr></thead><tbody>';
+for(var i=0;i<tagVariants.length;i++){var v=tagVariants[i];h+='<tr><td>'+v.n+'</td><td><span class="cdot" style="background:'+v.lb+'"></span>'+v.lb+'</td><td><span class="cdot" style="background:'+v.db+'"></span>'+v.db+'</td><td><span class="cdot" style="background:'+v.t+'"></span>'+v.t+'</td></tr>';}
+h+='</tbody></table></div>';return h;};
+
+P.icon=function(){var bc=BC();
+var h='<div class="page-header"><div class="page-title">Icon</div><div class="page-desc">시맨틱 Icon 토큰, 8단계 고정 사이즈, line/fill 두 가지 스타일. 아이콘 클릭 시 이름 복사.</div></div>';
+var ic=[{t:'iconDefault',l:'#86919A',d:'#86919A',desc:'기본'},{t:'iconBrand',l:bc,d:bc,desc:'브랜드 ('+BN()+')'},{t:'iconInverse',l:'#FFFFFF',d:'#131618',desc:'브랜드 배경 위'},{t:'iconSubtle',l:'#B8BFC5',d:'#484F56',desc:'비강조'},{t:'iconDisabled',l:'#9EA8AF',d:'#636C74',desc:'비활성'},{t:'iconInfo',l:'#2684FF',d:'#2684FF',desc:'정보'},{t:'iconSuccess',l:'#02B160',d:'#02B160',desc:'성공'},{t:'iconWarning',l:'#FFBB00',d:'#FFBB00',desc:'경고'},{t:'iconDanger',l:'#F22A23',d:'#F22A23',desc:'에러'}];
+h+='<div class="section-title">Semantic Color Tokens</div><div class="card"><table class="spec-table"><thead><tr><th>Token</th><th>Light</th><th></th><th>Dark</th><th></th><th>용도</th></tr></thead><tbody>';
+for(var i=0;i<ic.length;i++){var c=ic[i];h+='<tr><td><span class="token" onclick="copyToken(\''+c.t+'\')">'+c.t+'</span></td><td>'+c.l+'</td><td><span class="cdot" style="background:'+c.l+'"></span></td><td>'+c.d+'</td><td><span class="cdot" style="background:'+c.d+'"></span></td><td>'+c.desc+'</td></tr>';}
+h+='</tbody></table></div>';
+var isz=[{s:12,d:'TagMoney'},{s:14,d:'Button 40/32'},{s:16,d:'Button 52/48'},{s:18,d:'Input 40'},{s:20,d:'Checkbox/Radio'},{s:24,d:'기본, Input 52/48'},{s:32,d:'대형, empty'},{s:48,d:'히어로/피처'}];
+h+='<div class="section-title">Size Scale</div><div class="card"><div style="display:flex;gap:20px;align-items:end">';
+for(var i=0;i<isz.length;i++){var s=isz[i];h+='<div style="text-align:center;flex:1"><div style="display:flex;align-items:center;justify-content:center;height:56px;margin-bottom:6px"><img src="icons/system-search.svg" width="'+s.s+'" height="'+s.s+'"></div><div style="font-size:13px;font-weight:600">'+s.s+'px</div><div style="font-size:10px;color:var(--text3);line-height:1.3">'+s.d+'</div></div>';}
+h+='</div></div>';
+h+='<div class="section-title">Icon Inventory</div>';
+var cats=Object.keys(iconInventory);
+for(var ci=0;ci<cats.length;ci++){var cat=cats[ci],icons=iconInventory[cat];h+='<div style="margin-bottom:20px"><div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:8px">'+cat+' <span style="font-weight:400;color:var(--text3)">('+icons.length+')</span></div><div class="icon-grid">';for(var ii=0;ii<icons.length;ii++){var ic2=icons[ii];h+='<div class="icon-cell" onclick="copyToken(\''+ic2.n+'\')"><img src="icons/'+ic2.f+'.svg" width="24" height="24"><span>'+ic2.n+'</span></div>';}h+='</div></div>';}
+return h;};
+
+P.guidelines=function(){
+return '<div class="page-header"><div class="page-title">Do\'s & Don\'ts</div><div class="page-desc">JAMS 디자인 시스템 사용 시 반드시 지켜야 할 원칙.</div></div><div class="do-dont"><div><div class="section-title" style="color:#02B160">Do</div><ul class="do-list"><li>시맨틱 토큰(typographyDefault, fillBrand)을 사용하라 \u2014 hex 하드코딩 금지</li><li>Light/Dark 양쪽 모드를 반드시 테스트하라</li><li>Brand/500을 primary 액션과 핵심 인터랙티브 요소에 사용하라</li><li>brand-radius 토큰을 브랜드 컴포넌트에 적용하라</li><li>spacing-4 (16px)를 기본 컴포넌트 패딩으로 사용하라</li><li>Gray/500 (#86919A)을 기본 아이콘 색상으로 사용하라</li><li>헤딩은 letter-spacing tight, 캡션은 wide를 적용하라</li><li>데이터 컬러는 ��테고��� 식별에만 사용하라</li></ul></div><div><div class="section-title" style="color:#F22A23">Don\'t</div><ul class="dont-list"><li>JK 블루와 AM 오렌지를 같은 테마에서 섞지 마라</li><li>Brand/500을 큰 면적 배경색으로 사용하지 마라</li><li>정의된 스페이싱 스케일 밖의 값을 만들지 마라</li><li>순흑(#000000)을 사용하지 마라 \u2014 black은 #131618</li><li>헤딩 굵기(700)를 본문에 쓰지 마라</li><li>brand-radius 토큰이 있는 곳에 고정 값을 쓰지 마라</li><li>Red, Blue, Green, Yellow를 장식 목적으로 사용하지 마라</li><li>보더 없이 그림자만으로 깊이를 표현하지 마라</li></ul></div></div>';};
+
+// ===== RENDER =====
+function renderPage(p){var m=document.getElementById('main');if(P[p])m.innerHTML=P[p]();}
+
+// Checkbox interactive toggle
+document.getElementById('main').addEventListener('change',function(e){
+  if(e.target.closest('.check-demo')){var box=e.target.nextElementSibling;var bc=BC();if(e.target.checked){box.style.background=bc;box.style.border='none';}else{box.style.background='#fff';box.style.border='1px solid #E2E6E8';}}
+});
+
+// ===== INPUT INTERACTIVE =====
+document.getElementById('main').addEventListener('focusin',function(e){
+  var inp=e.target;if(!inp.id||!inp.id.startsWith('input-live-'))return;
+  inp.style.border='2px solid #131618';
+  var st=document.getElementById(inp.id+'-state');if(st)st.textContent='State: Focus';
+});
+document.getElementById('main').addEventListener('input',function(e){
+  var inp=e.target;if(!inp.id||!inp.id.startsWith('input-live-'))return;
+  inp.style.border='2px solid #131618';
+  var st=document.getElementById(inp.id+'-state');if(st)st.textContent='State: Pressed';
+});
+document.getElementById('main').addEventListener('focusout',function(e){
+  var inp=e.target;if(!inp.id||!inp.id.startsWith('input-live-'))return;
+  var hasVal=inp.value.trim().length>0;
+  inp.style.border='1px solid #E2E6E8';
+  var st=document.getElementById(inp.id+'-state');
+  if(st)st.textContent=hasVal?'State: Filled':'State: Default';
+});
+
+// ===== SELECT INTERACTIVE =====
+document.getElementById('main').addEventListener('click',function(e){
+  var bc=BC(),bs=BS();
+  // trigger click
+  var trigger=e.target.closest('.select-trigger');
+  if(trigger){
+    var id=trigger.id;
+    var dd=document.getElementById(id+'-dropdown');
+    var arrow=trigger.querySelector('.select-arrow');
+    var st=document.getElementById(id+'-state');
+    var isOpen=dd.style.display!=='none';
+    // close all others
+    document.querySelectorAll('.select-dropdown').forEach(function(d){d.style.display='none';});
+    document.querySelectorAll('.select-trigger').forEach(function(t){t.style.border='1px solid #E2E6E8';var a=t.querySelector('.select-arrow');if(a)a.style.transform='';});
+    if(!isOpen){
+      dd.style.display='block';
+      trigger.style.border='2px solid #131618';
+      if(arrow)arrow.style.transform='rotate(180deg)';
+      if(st)st.textContent='State: Open';
+    }else{
+      var hasVal=trigger.querySelector('.select-text').style.color!=='rgb(134, 145, 154)';
+      if(st)st.textContent=hasVal?'State: Filled':'State: Default';
+    }
+    return;
+  }
+  // option click
+  var opt=e.target.closest('.select-option');
+  if(opt){
+    var triggerId=opt.dataset.trigger;
+    var triggerEl=document.getElementById(triggerId);
+    var textEl=triggerEl.querySelector('.select-text');
+    textEl.textContent=opt.textContent;
+    textEl.style.color='#131618';
+    textEl.style.fontWeight='500';
+    var dd2=document.getElementById(triggerId+'-dropdown');
+    dd2.style.display='none';
+    triggerEl.style.border='1px solid #E2E6E8';
+    var arrow2=triggerEl.querySelector('.select-arrow');
+    if(arrow2)arrow2.style.transform='';
+    // highlight selected
+    dd2.querySelectorAll('.select-option').forEach(function(o){o.style.background='';o.style.color='';o.style.fontWeight='';});
+    opt.style.background=BS();opt.style.color=BC();opt.style.fontWeight='600';
+    var st2=document.getElementById(triggerId+'-state');
+    if(st2)st2.textContent='State: Filled';
+    return;
+  }
+  // click outside closes selects
+  document.querySelectorAll('.select-dropdown').forEach(function(d){d.style.display='none';});
+  document.querySelectorAll('.select-trigger').forEach(function(t){
+    t.style.border='1px solid #E2E6E8';
+    var a=t.querySelector('.select-arrow');if(a)a.style.transform='';
+  });
+});
+// select option hover
+document.getElementById('main').addEventListener('mouseover',function(e){
+  var opt=e.target.closest('.select-option');
+  if(opt&&!opt.style.fontWeight){opt.style.background=BS();opt.style.color=BC();}
+});
+document.getElementById('main').addEventListener('mouseout',function(e){
+  var opt=e.target.closest('.select-option');
+  if(opt&&!opt.style.fontWeight){opt.style.background='';opt.style.color='#131618';}
+});
+
+// ===== INIT =====
+(function init(){setBrand(currentBrand);var hash=location.hash.replace('#','');if(hash&&P[hash])navigate(hash);else renderPage('overview');})();
+</script>
+</body>
+</html>

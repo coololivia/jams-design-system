@@ -1,6 +1,11 @@
 # JAMS Design System
 
-이 프로젝트는 JAMS 디자인 시스템의 토큰, 컴포넌트 스펙, 패턴을 관리합니다.
+이 프로젝트는 JAMS 디자인 시스템의 토큰과 디자인 가이드를 관리합니다.
+
+## 디자인 SSOT
+
+- **DESIGN.md** — 비주얼 테마, 컬러 팔레트, 타이포그래피, 컴포넌트 스타일, 레이아웃, 깊이/엘리베이션, Do/Don't, 반응형, Agent 프롬프트 가이드를 포함하는 디자인 시스템 정본 문서. UI 구현 시 이 파일을 1차 참조할 것.
+- **tokens/** — DTCG 표준 JSON 토큰 파일. DESIGN.md의 모든 값은 이 토큰에서 파생됨.
 
 ## 시스템 구성
 
@@ -36,7 +41,7 @@ Shared Primitives (color.*, spacing.*, radius.*)
 - **Space** — JAMS 2.1이 정의. BizJAMS는 데스크톱 밀도에 맞게 자체 스케일 사용. CommJAMS는 2.1 그대로
 - **Radius** — JAMS 2.1이 정의. BizJAMS는 더 각진(보수적) radius 사용. CommJAMS는 2.1 그대로
 - **Component** — JAMS 2.1이 정의. BizJAMS는 자체 정의. CommJAMS는 2.1 서브셋만 허용
-- **JP 브랜드 컬러** — 미확정. placeholder로 비워둠. Green은 JP 아님 (success 상태용)
+- **JP 브랜드 컬러** — `color.green2.500` (#00C66C). radius는 JK와 동일 (10/8/6). 시스템 green(success)과 구분을 위해 green2 팔레트 사용
 
 ---
 
@@ -99,54 +104,17 @@ tokens/
 - 신규 B2B 개발 → **BizJAMS** 토큰 기준 (color는 2.1 semantic 참조)
 - 파트너/커뮤니티 제품 → **CommJAMS** `component.allowed` 목록 내에서만
 - JAMS Core는 폐기됨. 참조 금지
-- 컴포넌트 구현 시 해당 `.spec.json`의 props, states, accessibility 준수
+- 컴포넌트 구현 시 DESIGN.md의 Component Stylings 섹션 준수
 - 접근성(WCAG 2.1 AA) 항상 준수
 
 ---
 
-## 버튼 토큰 네이밍 (DTCG, 2026.04.02 확정)
-
-패턴: `button.{군}.{variant}.{size}`
-size: `lg`(52px) / `md`(48px) / `sm`(40px) / `xs`(32px)
-
-> **예외 — variant 생략 규칙**: variant가 하나뿐이거나 없는 군은 variant 세그먼트를 생략.
-> `button.iconlabel.lg` / `button.icononly` / `button.emojilabel.lg` / `button.emoji.lg` 등
->
-> **특수 사이즈**: `button.iconlabel` lg=13px폰트·54px높이, sm=11px폰트·43px높이 (D-Button size 기준 아님).
-> `button.icononly` = 32×32 고정, variant·size 없음.
-
-| 군 | variants |
-|---|---|
-| `button.filled` | `primary` · `brand` · `brand-dim` · `subtle` |
-| `button.outlined` | `default` · `brand` · `pill` |
-| `button.borderless` | `default` · `pill` · `subtle` |
-| `button.icon` | `primary` · `brand` · `outlined` · `circle` · `borderless` · `dark` |
-| `button.iconlabel` | `lg` · `sm` — 아이콘+텍스트 세로형 |
-| `button.icononly` | (variant·size 없음) — 아이콘 단독, 32×32, no bg |
-| `button.emojilabel` | (variant 없음, size만) `lg` · `sm` — 이모지+텍스트 세로형 |
-| `button.emoji` | (variant 없음, size만) `lg` · `sm` — 이모지+텍스트 가로형 pill |
-| `button.text` | `brand` · `primary` · `secondary` · `link` — 아이콘 유무는 variant 아님, 컴포넌트 prop |
-| `button.filter` | `item` · `icontext` · `icononly` |
-| `button.floating` | (size 없음) |
-| `button.search` | `lg` · `sm` |
-| `button.top` | (size 없음) |
-| `button.counter` | (variant·size 규칙 별도 정의 예정) |
-| `button.product` | (variant·size 규칙 별도 정의 예정) |
-| `button.scrap` | (variant·size 규칙 별도 정의 예정) |
-| `button.pagination` | `icon` · `number` · `dimmed` |
-> `dimmed`는 `number`(White Number)와 완전 동일 룰(화살표 variant 포함). 변경: 스트로크 없음 + bg Gray 950 60%
-
-이전 이름 → 새 이름 대조:
-`theme-primary` → `button.filled.primary` /
-`theme-brand50` → `button.filled.subtle` /
-`theme-rounded` → `button.outlined.pill` /
-`borderless-brand50` → `button.borderless.subtle` /
-`button.filter.icon-text` → `button.filter.icontext` /
-`button.filter.icon-only` → `button.filter.icononly`
-
----
-
 ## 디시전 로그
+
+### 디자인 문서 리셋 (2026.04.06)
+- **DESIGN.md 도입** — awesome-design-md 포맷(9개 섹션) 기반. tokens.json에서 파생된 모든 디자인 값의 단일 정본
+- **기존 docs/ 문서 제거** — TOKENS-PRIMITIVES, TOKENS-CORE, TOKENS-JAMS21, TOKENS-BIZ, COMPONENTS, PATTERNS, SYSTEM-OVERVIEW → DESIGN.md로 통합
+- **button/ 스펙 제거** — 버튼 컴포넌트 스펙 파일 전체 삭제. 컴포넌트 스타일링은 DESIGN.md §4에서 정의
 
 ### 시스템 아키텍처 (2026.04.02)
 - **JAMS Core 폐기** — CommJAMS로 대체
@@ -159,7 +127,7 @@ size: `lg`(52px) / `md`(48px) / `sm`(40px) / `xs`(32px)
 
 ### 컬러 토큰
 - 팔레트 8개 × 11단계(50~950) = 88색. JAMS 2.1 Figma 실제 hex
-- JK = `color.blue2.500` (#1B55F6) / AM = `color.orange.500` (#FF6D12) / JP = 미확정
+- JK = `color.blue2.500` (#1B55F6) / AM = `color.orange.500` (#FF6D12) / JP = `color.green2.500` (#00C66C)
 - BizJAMS primary = `color.blue.600` (#0060CC) — blue2가 아닌 blue 팔레트 사용
 
 ### 토큰 레이어 적용 순서 (CSS 빌드 기준)
@@ -173,27 +141,14 @@ size: `lg`(52px) / `md`(48px) / `sm`(40px) / `xs`(32px)
 ```
 → Dark mode = mode 플립만으로 동작. neutral 토큰은 semantic-dark 하나로 JK/AM 공유.
 
-### 버튼 컴포넌트 — State 규칙
-- **hover**: 토큰명 동일, Figma Variable Mode가 더 진한 값으로 resolve
-- **disabled**: opacity 방식 아님 — bg/text 토큰 자체 교체 (`color.bg.interactive-disabled`, `color.text.disabled`)
-- **loading**: bg 유지, label 숨김, spinner(`system-loading 20×20`) 대체. D-Button에만 있음
-- **dark mode**: Component Variable Mode. 별도 토큰 불필요
-- **JK/AM 테마**: 동일 시맨틱 → Theme Variable Mode에 따라 자동 resolve
-
-### 버튼 컴포넌트 — D-Button Spec
-- Radius: JK lg/md/sm=10px, xs=6px / AM lg/md=16px, sm=12px, xs=8px
-- fontSize: lg/md=16px(b2), sm=14px(b4), xs=13px(c1)
-- leftIcon: lg/md=20px, sm/xs=16px. rightIcon=14px 고정
-
 ### Figma 구조
-- Button 페이지 12개 섹션
 - 4블록 레이아웃: 가로=무게(Heavy/Light), 세로=테마(JK/AM)
 - Ready for dev 패널 검색으로 컴포넌트 탐색
 
 ### 뷰어 & 문서
 - GitHub Pages (`/docs`): https://coololivia.github.io/jams-design-system/
 - 뷰어 버튼 클릭 → 토큰명 복사
-- GitHub Discussions: 팀 공유용. MD 파일은 Claude Code용 SSOT
+- GitHub Discussions: 팀 공유용. DESIGN.md는 Claude Code용 SSOT
 
 ---
 

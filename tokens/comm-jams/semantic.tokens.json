@@ -1,37 +1,58 @@
 {
-  "$description": "CommJAMS — JAMS 2.1의 경량화 서브셋. 커뮤니티·파트너·임베디드 제품용. Color·Space는 2.1에서 그대로 상속, 컴포넌트는 최소 필수 세트만.",
+  "$description": "CommJAMS — JAMS 2.1의 경량화 서브셋. 커뮤니티·파트너·임베디드 제품용. Color·Space·Radius는 2.1에서 그대로 상속. 디자인 가이드: DESIGN.md 참조.",
 
   "$extends": "jams-2.1/semantic.tokens.json",
 
   "color": {
-    "$description": "CommJAMS 추가 색상 없음. 전부 JAMS 2.1 color.* 상속.",
+    "$description": "CommJAMS 추가 색상 없음. 전부 JAMS 2.1 color.* 상속. DESIGN.md §2 Color Palette, §3 Semantic Color Tokens 참조.",
     "$note": "theme override는 comm-jams/theme-jk.tokens.json 또는 theme-am.tokens.json 참조"
   },
 
   "space": {
-    "$description": "CommJAMS는 JAMS 2.1 space 그대로 사용. 별도 재정의 없음.",
+    "$description": "CommJAMS는 JAMS 2.1 space 그대로 사용. 별도 재정의 없음. DESIGN.md §5 Spacing System 참조.",
     "$extends": "jams-2.1/semantic.tokens.json#space"
   },
 
   "radius": {
-    "$description": "CommJAMS는 JAMS 2.1 radius 그대로 사용.",
+    "$description": "CommJAMS는 JAMS 2.1 radius 그대로 사용. DESIGN.md §6 Border Radius 참조.",
     "$extends": "jams-2.1/semantic.tokens.json#radius"
   },
 
+  "shadow": {
+    "$description": "CommJAMS는 JAMS 2.1 shadow 그대로 사용. DESIGN.md §6 Depth & Elevation 참조.",
+    "$extends": "jams-2.1/semantic.tokens.json#shadow"
+  },
+
+  "typography": {
+    "$description": "CommJAMS는 JAMS 2.1 타이포그래피 그대로 사용. Pretendard 단일 서체, 11–32px. DESIGN.md §3 Typography Rules 참조.",
+    "$extends": "jams-2.1/semantic.tokens.json#typography"
+  },
+
   "component": {
-    "$description": "CommJAMS 허용 컴포넌트 — 2.1 전체 세트의 경량 서브셋",
-    "allowed": [
-      "button.filled.primary",
-      "button.filled.subtle",
-      "button.outlined.default",
-      "button.borderless.default",
-      "button.icon.primary",
-      "button.icon.borderless",
-      "button.text.brand",
-      "button.text.primary",
-      "button.text.secondary",
-      "button.filter.item"
-    ],
-    "$note": "이 목록 외 컴포넌트는 CommJAMS 제품에서 사용 불가. 추가 필요 시 2.1 팀과 협의."
+    "$description": "CommJAMS 허용 컴포넌트 — DESIGN.md §4 Component Stylings 기준 경량 서브셋. 2.1 전체 세트의 최소 필수만 허용.",
+    "allowed": {
+      "$note": "이 목록 외 컴포넌트는 CommJAMS 제품에서 사용 불가. 추가 필요 시 2.1 팀과 협의.",
+      "buttons": [
+        "Brand Primary",
+        "Default / Secondary",
+        "Ghost / Tertiary"
+      ],
+      "tags": [
+        "TagMoney (시스템 컬러 배지)"
+      ],
+      "status": [
+        "Info",
+        "Success",
+        "Warning",
+        "Danger"
+      ],
+      "navigation": [
+        "Tab Bar (활성/비활성)"
+      ],
+      "transit": [
+        "노선 배지 (Line Badge)",
+        "도착 정보 카드"
+      ]
+    }
   }
 }

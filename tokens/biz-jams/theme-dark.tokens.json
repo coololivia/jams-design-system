@@ -1,5 +1,5 @@
 {
-  "$description": "BizJAMS — Dark Mode.",
+  "$description": "BizJAMS — Dark Mode. DESIGN.md §3 Semantic Color Tokens (Dark) 패턴 기반, blue 팔레트로 override.",
   "color": {
     "bg": {
       "base":                { "$value": "{color.gray.950}",  "$type": "color" },

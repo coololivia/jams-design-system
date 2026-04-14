@@ -1,10 +1,10 @@
 {
-  "$description": "BizJAMS (B2B) — Color는 JAMS 2.1 semantic을 상속. Space·Radius·B2B 전용 토큰은 여기서 정의.",
+  "$description": "BizJAMS (B2B) — Color는 JAMS 2.1 semantic을 상속. Space·Radius·B2B 전용 토큰은 여기서 정의. 디자인 가이드: DESIGN.md 참조.",
 
   "$extends": "jams-2.1/semantic.tokens.json",
 
   "space": {
-    "$description": "BizJAMS는 데스크톱 밀도에 맞게 독자 space 스케일 정의",
+    "$description": "BizJAMS는 데스크톱 밀도에 맞게 독자 space 스케일 정의. DESIGN.md §5 Spacing System 기반, B2B 밀도 조정.",
     "component": {
       "xs":  { "$value": "{spacing.4}",  "$type": "dimension", "$description": "4px — 아이콘-텍스트" },
       "sm":  { "$value": "{spacing.6}",  "$type": "dimension", "$description": "6px — compact 인풋" },
@@ -50,13 +50,32 @@
       "on-sidebar":  { "$value": "{color.gray.300}",  "$type": "color" }
     },
     "data": {
-      "$description": "데이터 시각화 (차트·그래프) 전용 색상",
+      "$description": "데이터 시각화 (차트·그래프) 전용 색상. DESIGN.md §7 Do's: 시스템 컬러는 상태 시맨틱 전용, 데이터 시각화는 이 전용 토큰 사용.",
       "1": { "$value": "{color.blue.500}",   "$type": "color" },
       "2": { "$value": "{color.green.500}",  "$type": "color" },
       "3": { "$value": "{color.orange.500}", "$type": "color" },
       "4": { "$value": "{color.violet.500}", "$type": "color" },
       "5": { "$value": "{color.red.500}",    "$type": "color" },
       "6": { "$value": "{color.yellow.500}", "$type": "color" }
+    },
+    "shadow": {
+      "$description": "DESIGN.md §6 Shadow 시맨틱 카테고리. BizJAMS는 JAMS 2.1 shadow 상속.",
+      "$extends": "jams-2.1/semantic.tokens.json#shadow"
     }
+  },
+
+  "typography": {
+    "$description": "BizJAMS는 JAMS 2.1 타이포그래피 상속. Pretendard 단일 서체, 11–32px 스케일. DESIGN.md §3 참조.",
+    "$extends": "jams-2.1/semantic.tokens.json#typography",
+    "micro": {
+      "$description": "TagMoney 배지용 마이크로 사이즈. DESIGN.md §3 Micro/size11, §4 Tags & Badges 참조.",
+      "size11": { "$value": { "fontSize": "11px", "lineHeight": "18px", "letterSpacing": "0px", "fontWeight": 600 }, "$type": "typography" }
+    }
+  },
+
+  "unit": {
+    "$description": "컴포넌트 내부 미세 조정용. DESIGN.md §5 Unit Tokens 참조.",
+    "4": { "$value": "4px", "$type": "dimension", "$description": "배지 radius, 소형 컴포넌트 radius" },
+    "6": { "$value": "6px", "$type": "dimension", "$description": "배지 수평 패딩, 소형 요소 내부 간격" }
   }
 }

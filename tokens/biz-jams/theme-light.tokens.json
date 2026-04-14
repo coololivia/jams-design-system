@@ -1,5 +1,5 @@
 {
-  "$description": "BizJAMS — Light Mode. color.bg.interactive 계열만 Biz 브랜드(blue.600)로 override.",
+  "$description": "BizJAMS — Light Mode. color.bg.interactive 계열만 Biz 브랜드(blue.600=#0060CC)로 override. DESIGN.md §2 참조: BizJAMS primary는 blue2가 아닌 blue 팔레트 사용.",
   "color": {
     "bg": {
       "interactive":         { "$value": "{color.blue.600}",  "$type": "color" },

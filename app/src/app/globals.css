@@ -1,0 +1,415 @@
+@import "tailwindcss";
+
+/* ============================================
+   JAMS Design System — CSS Variables
+   토큰 JSON에서 파생. 직접 수정하지 말 것.
+   ============================================ */
+
+/* --- Pretendard 웹폰트 --- */
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/packages/pretendard/dist/web/static/woff2/Pretendard-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 500;
+  font-display: swap;
+  src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/packages/pretendard/dist/web/static/woff2/Pretendard-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 600;
+  font-display: swap;
+  src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/packages/pretendard/dist/web/static/woff2/Pretendard-SemiBold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/packages/pretendard/dist/web/static/woff2/Pretendard-Bold.woff2') format('woff2');
+}
+
+/* ============================================
+   Primitive Colors
+   ============================================ */
+:root {
+  /* Gray */
+  --color-gray-50: #F4F6F7;
+  --color-gray-100: #E2E6E8;
+  --color-gray-200: #D1D6DA;
+  --color-gray-300: #B8BFC5;
+  --color-gray-400: #9EA8AF;
+  --color-gray-500: #86919A;
+  --color-gray-600: #636C74;
+  --color-gray-700: #484F56;
+  --color-gray-800: #30363C;
+  --color-gray-900: #1E2428;
+  --color-gray-950: #131618;
+
+  /* JK Blue (Blue2) */
+  --color-blue2-50: #EEF3FF;
+  --color-blue2-100: #D5E4FF;
+  --color-blue2-200: #AECCFF;
+  --color-blue2-300: #82AAFF;
+  --color-blue2-400: #5580FF;
+  --color-blue2-500: #1B55F6;
+  --color-blue2-600: #1240CC;
+  --color-blue2-700: #0D2EA0;
+  --color-blue2-800: #091F74;
+  --color-blue2-900: #06124A;
+  --color-blue2-950: #030926;
+
+  /* AM Orange */
+  --color-orange-50: #FFF6EE;
+  --color-orange-100: #FFE8CC;
+  --color-orange-200: #FFD09A;
+  --color-orange-300: #FFAB5E;
+  --color-orange-400: #FF8D30;
+  --color-orange-500: #FF6D12;
+  --color-orange-600: #CC4D00;
+  --color-orange-700: #9A3600;
+  --color-orange-800: #6C2200;
+  --color-orange-900: #421200;
+  --color-orange-950: #230800;
+
+  /* JP Green (Green2) */
+  --color-green2-50: #EEFFF6;
+  --color-green2-100: #CCFEE5;
+  --color-green2-200: #99F5CB;
+  --color-green2-300: #5CE8A6;
+  --color-green2-400: #2DD889;
+  --color-green2-500: #00C66C;
+  --color-green2-600: #009E56;
+  --color-green2-700: #007842;
+  --color-green2-800: #00522D;
+  --color-green2-900: #00331B;
+  --color-green2-950: #001A0E;
+
+  /* System: Red */
+  --color-red-50: #FFF2F1;
+  --color-red-100: #FFD9D6;
+  --color-red-200: #FFB4B0;
+  --color-red-500: #F22A23;
+  --color-red-800: #630808;
+  --color-red-900: #3D0403;
+  --color-red-950: #210102;
+
+  /* System: Green */
+  --color-green-50: #EEFFF6;
+  --color-green-100: #C4F5DF;
+  --color-green-200: #88E8BA;
+  --color-green-500: #02B160;
+  --color-green-800: #003D1E;
+  --color-green-900: #00240E;
+
+  /* System: Blue (Info) */
+  --color-blue-50: #EBF5FF;
+  --color-blue-100: #CCE4FF;
+  --color-blue-200: #A4CEFF;
+  --color-blue-500: #2684FF;
+  --color-blue-800: #002F6E;
+  --color-blue-900: #001C46;
+
+  /* System: Yellow */
+  --color-yellow-50: #FFFCE8;
+  --color-yellow-100: #FFF5CC;
+  --color-yellow-200: #FFE87A;
+  --color-yellow-500: #FFBB00;
+  --color-yellow-800: #6C3E00;
+  --color-yellow-900: #332500;
+
+  /* System: Violet */
+  --color-violet-50: #F5F3FF;
+  --color-violet-100: #EDE8FF;
+  --color-violet-200: #D8CDFF;
+  --color-violet-500: #7C3AED;
+  --color-violet-800: #2E0C6A;
+  --color-violet-900: #1D004F;
+
+  /* Base */
+  --color-white: #FFFFFF;
+  --color-black: #131618;
+}
+
+/* ============================================
+   Semantic Tokens — Light Mode (기본)
+   ============================================ */
+:root {
+  /* Background */
+  --bg-base: var(--color-white);
+  --bg-surface: var(--color-gray-50);
+  --bg-elevated: var(--color-white);
+  --bg-overlay: rgba(0, 0, 0, 0.5);
+  --bg-interactive-disabled: var(--color-gray-100);
+  --bg-dark: rgba(26, 28, 34, 0.85);
+  --bg-dimmed: rgba(19, 22, 24, 0.6);
+
+  /* Text */
+  --text-primary: var(--color-gray-950);
+  --text-secondary: var(--color-gray-600);
+  --text-tertiary: var(--color-gray-500);
+  --text-disabled: var(--color-gray-300);
+  --text-inverse: var(--color-white);
+  --text-danger: var(--color-red-500);
+  --text-success: var(--color-green-500);
+
+  /* Border */
+  --border-default: var(--color-gray-200);
+  --border-subtle: var(--color-gray-100);
+  --border-strong: var(--color-gray-400);
+  --border-danger: var(--color-red-500);
+
+  /* Icon */
+  --icon-primary: var(--color-gray-700);
+  --icon-secondary: var(--color-gray-500);
+  --icon-tertiary: var(--color-gray-400);
+  --icon-disabled: var(--color-gray-300);
+  --icon-inverse: var(--color-white);
+
+  /* Status */
+  --status-danger: var(--color-red-500);
+  --status-warning: var(--color-yellow-500);
+  --status-success: var(--color-green-500);
+  --status-info: var(--color-blue-500);
+
+  /* Spacing */
+  --space-0: 0px;
+  --space-0-5: 2px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-9: 36px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-13: 52px;
+  --space-14: 56px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  /* Radius */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 999px;
+}
+
+/* ============================================
+   Brand Tokens — JK (기본)
+   data-brand="jk" 또는 기본값
+   ============================================ */
+:root,
+[data-brand="jk"] {
+  --bg-brand: var(--color-blue2-500);
+  --bg-brand-dim: var(--color-blue2-400);
+  --bg-brand-subtle: var(--color-blue2-50);
+  --bg-brand-subtle-hover: var(--color-blue2-100);
+  --bg-interactive: var(--color-blue2-500);
+  --bg-interactive-hover: var(--color-blue2-600);
+  --bg-interactive-active: var(--color-blue2-700);
+
+  --text-brand: var(--color-blue2-500);
+
+  --border-brand: var(--color-blue2-500);
+  --border-brand-subtle: var(--color-blue2-200);
+  --border-focus: var(--color-blue2-500);
+
+  --icon-brand: var(--color-blue2-500);
+
+  --radius-brand-md: 10px;
+  --radius-brand-sm: 8px;
+  --radius-brand-xs: 6px;
+}
+
+/* ============================================
+   Brand Tokens — AM
+   ============================================ */
+[data-brand="am"] {
+  --bg-brand: var(--color-orange-500);
+  --bg-brand-dim: var(--color-orange-400);
+  --bg-brand-subtle: var(--color-orange-50);
+  --bg-brand-subtle-hover: var(--color-orange-100);
+  --bg-interactive: var(--color-orange-500);
+  --bg-interactive-hover: var(--color-orange-600);
+  --bg-interactive-active: var(--color-orange-700);
+
+  --text-brand: var(--color-orange-500);
+
+  --border-brand: var(--color-orange-500);
+  --border-brand-subtle: var(--color-orange-200);
+  --border-focus: var(--color-orange-500);
+
+  --icon-brand: var(--color-orange-500);
+
+  --radius-brand-md: 16px;
+  --radius-brand-sm: 12px;
+  --radius-brand-xs: 8px;
+}
+
+/* ============================================
+   Brand Tokens — JP
+   ============================================ */
+[data-brand="jp"] {
+  --bg-brand: var(--color-green2-500);
+  --bg-brand-dim: var(--color-green2-400);
+  --bg-brand-subtle: var(--color-green2-50);
+  --bg-brand-subtle-hover: var(--color-green2-100);
+  --bg-interactive: var(--color-green2-500);
+  --bg-interactive-hover: var(--color-green2-600);
+  --bg-interactive-active: var(--color-green2-700);
+
+  --text-brand: var(--color-green2-500);
+
+  --border-brand: var(--color-green2-500);
+  --border-brand-subtle: var(--color-green2-200);
+  --border-focus: var(--color-green2-500);
+
+  --icon-brand: var(--color-green2-500);
+
+  --radius-brand-md: 10px;
+  --radius-brand-sm: 8px;
+  --radius-brand-xs: 6px;
+}
+
+/* ============================================
+   Dark Mode
+   ============================================ */
+[data-mode="dark"] {
+  --bg-base: var(--color-gray-950);
+  --bg-surface: var(--color-gray-900);
+  --bg-elevated: var(--color-gray-800);
+  --bg-interactive-disabled: var(--color-gray-800);
+
+  --text-primary: var(--color-gray-50);
+  --text-secondary: var(--color-gray-300);
+  --text-tertiary: var(--color-gray-500);
+  --text-disabled: var(--color-gray-700);
+
+  --border-default: var(--color-gray-700);
+  --border-subtle: var(--color-gray-800);
+  --border-strong: var(--color-gray-600);
+
+  --icon-primary: var(--color-gray-300);
+  --icon-secondary: var(--color-gray-500);
+}
+
+/* Dark × JP */
+[data-mode="dark"][data-brand="jp"] {
+  --bg-brand: var(--color-green2-400);
+  --bg-brand-dim: var(--color-green2-300);
+  --bg-brand-subtle: var(--color-green2-900);
+  --bg-brand-subtle-hover: var(--color-green2-800);
+  --bg-interactive: var(--color-green2-400);
+  --bg-interactive-hover: var(--color-green2-300);
+  --bg-interactive-active: var(--color-green2-200);
+
+  --text-brand: var(--color-green2-300);
+
+  --border-brand: var(--color-green2-400);
+  --border-brand-subtle: var(--color-green2-700);
+  --border-focus: var(--color-green2-400);
+
+  --icon-brand: var(--color-green2-300);
+}
+
+/* ============================================
+   Tailwind Theme 연동
+   ============================================ */
+@theme inline {
+  --font-sans: 'Pretendard', system-ui, -apple-system, sans-serif;
+
+  /* Background */
+  --color-bg-base: var(--bg-base);
+  --color-bg-surface: var(--bg-surface);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-bg-overlay: var(--bg-overlay);
+  --color-bg-brand: var(--bg-brand);
+  --color-bg-brand-dim: var(--bg-brand-dim);
+  --color-bg-brand-subtle: var(--bg-brand-subtle);
+  --color-bg-brand-subtle-hover: var(--bg-brand-subtle-hover);
+  --color-bg-interactive: var(--bg-interactive);
+  --color-bg-interactive-hover: var(--bg-interactive-hover);
+  --color-bg-interactive-active: var(--bg-interactive-active);
+  --color-bg-interactive-disabled: var(--bg-interactive-disabled);
+  --color-bg-dark: var(--bg-dark);
+  --color-bg-dimmed: var(--bg-dimmed);
+
+  /* Text */
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-disabled: var(--text-disabled);
+  --color-text-inverse: var(--text-inverse);
+  --color-text-brand: var(--text-brand);
+  --color-text-danger: var(--text-danger);
+  --color-text-success: var(--text-success);
+
+  /* Border */
+  --color-border-default: var(--border-default);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
+  --color-border-brand: var(--border-brand);
+  --color-border-brand-subtle: var(--border-brand-subtle);
+  --color-border-focus: var(--border-focus);
+  --color-border-danger: var(--border-danger);
+
+  /* Icon */
+  --color-icon-primary: var(--icon-primary);
+  --color-icon-secondary: var(--icon-secondary);
+  --color-icon-tertiary: var(--icon-tertiary);
+  --color-icon-disabled: var(--icon-disabled);
+  --color-icon-inverse: var(--icon-inverse);
+  --color-icon-brand: var(--icon-brand);
+
+  /* Status */
+  --color-status-danger: var(--status-danger);
+  --color-status-warning: var(--status-warning);
+  --color-status-success: var(--status-success);
+  --color-status-info: var(--status-info);
+
+  /* Spacing */
+  --spacing-0-5: var(--space-0-5);
+  --spacing-1: var(--space-1);
+  --spacing-2: var(--space-2);
+  --spacing-3: var(--space-3);
+  --spacing-4: var(--space-4);
+  --spacing-5: var(--space-5);
+  --spacing-6: var(--space-6);
+  --spacing-7: var(--space-7);
+  --spacing-8: var(--space-8);
+  --spacing-9: var(--space-9);
+  --spacing-10: var(--space-10);
+  --spacing-12: var(--space-12);
+  --spacing-13: var(--space-13);
+  --spacing-14: var(--space-14);
+  --spacing-16: var(--space-16);
+  --spacing-20: var(--space-20);
+
+  /* Radius */
+  --radius-xs: var(--radius-xs);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-full: var(--radius-full);
+  --radius-brand-xs: var(--radius-brand-xs);
+  --radius-brand-sm: var(--radius-brand-sm);
+  --radius-brand-md: var(--radius-brand-md);
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+body {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: 'Pretendard', system-ui, -apple-system, sans-serif;
+}

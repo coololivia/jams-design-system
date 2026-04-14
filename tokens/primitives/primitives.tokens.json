@@ -83,6 +83,20 @@
       "900": { "$value": "#001C46", "$type": "color" },
       "950": { "$value": "#000E24", "$type": "color" }
     },
+    "green2": {
+      "$description": "JP Brand color palette",
+      "50":  { "$value": "#EEFFF6", "$type": "color" },
+      "100": { "$value": "#CCFEE5", "$type": "color" },
+      "200": { "$value": "#99F5CB", "$type": "color" },
+      "300": { "$value": "#5CE8A6", "$type": "color" },
+      "400": { "$value": "#2DD889", "$type": "color" },
+      "500": { "$value": "#00C66C", "$type": "color" },
+      "600": { "$value": "#009E56", "$type": "color" },
+      "700": { "$value": "#007842", "$type": "color" },
+      "800": { "$value": "#00522D", "$type": "color" },
+      "900": { "$value": "#00331B", "$type": "color" },
+      "950": { "$value": "#001A0E", "$type": "color" }
+    },
     "blue2": {
       "$description": "JK Brand color palette",
       "50":  { "$value": "#EEF3FF", "$type": "color" },

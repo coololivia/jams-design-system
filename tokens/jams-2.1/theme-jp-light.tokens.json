@@ -1,25 +1,32 @@
 {
-  "$description": "JAMS 2.1 — JP Brand, Light Mode. ⚠ 브랜드 컬러 미확정 — 컬러 세트 도착 대기 중.",
-  "$status": "placeholder",
+  "$description": "JAMS 2.1 — JP Brand (Green2 #00C66C), Light Mode. semantic.tokens.json의 brand 계열 override. Dark mode brand: theme-jp-dark.tokens.json",
+
   "color": {
     "bg": {
-      "interactive":         { "$value": "TODO", "$type": "color", "$description": "TODO: JP 브랜드 컬러 입력 필요" },
-      "interactive-hover":   { "$value": "TODO", "$type": "color" },
-      "interactive-active":  { "$value": "TODO", "$type": "color" },
-      "brand":               { "$value": "TODO", "$type": "color" },
-      "brand-dim":           { "$value": "TODO", "$type": "color" },
-      "brand-subtle":        { "$value": "TODO", "$type": "color" },
-      "brand-subtle-hover":  { "$value": "TODO", "$type": "color" }
+      "interactive":        { "$value": "{color.green2.500}", "$type": "color" },
+      "interactive-hover":  { "$value": "{color.green2.600}", "$type": "color" },
+      "interactive-active": { "$value": "{color.green2.700}", "$type": "color" },
+      "brand":              { "$value": "{color.green2.500}", "$type": "color" },
+      "brand-dim":          { "$value": "{color.green2.400}", "$type": "color" },
+      "brand-subtle":       { "$value": "{color.green2.50}",  "$type": "color" },
+      "brand-subtle-hover": { "$value": "{color.green2.100}", "$type": "color" }
     },
     "text": {
-      "brand": { "$value": "TODO", "$type": "color" }
+      "brand": { "$value": "{color.green2.500}", "$type": "color" }
     },
     "border": {
-      "brand":        { "$value": "TODO", "$type": "color" },
-      "brand-subtle": { "$value": "TODO", "$type": "color" }
+      "brand":        { "$value": "{color.green2.500}", "$type": "color" },
+      "brand-subtle": { "$value": "{color.green2.200}", "$type": "color" },
+      "focus":        { "$value": "{color.green2.500}", "$type": "color" }
     },
     "icon": {
-      "brand": { "$value": "TODO", "$type": "color" }
+      "brand": { "$value": "{color.green2.500}", "$type": "color" }
+    }
+  },
+  "radius": {
+    "component": {
+      "md": { "$value": "{radius.10}", "$type": "dimension", "$description": "JP 버튼 lg/md/sm radius — JK와 동일" },
+      "xs": { "$value": "{radius.6}",  "$type": "dimension", "$description": "JP 버튼 xs radius — JK와 동일" }
     }
   }
 }
