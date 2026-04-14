@@ -6,18 +6,18 @@
   "space": {
     "$description": "BizJAMS는 데스크톱 밀도에 맞게 독자 space 스케일 정의. DESIGN.md §5 Spacing System 기반, B2B 밀도 조정.",
     "component": {
-      "xs":  { "$value": "{spacing.4}",  "$type": "dimension", "$description": "4px — 아이콘-텍스트" },
-      "sm":  { "$value": "{spacing.6}",  "$type": "dimension", "$description": "6px — compact 인풋" },
-      "md":  { "$value": "{spacing.10}", "$type": "dimension", "$description": "10px — 버튼 패딩" },
-      "lg":  { "$value": "{spacing.14}", "$type": "dimension", "$description": "14px — 카드 내부" },
-      "xl":  { "$value": "{spacing.20}", "$type": "dimension", "$description": "20px — 모달 내부" }
+      "xs":  { "$value": "{spacing.spacing-1}",  "$type": "dimension", "$description": "4px — 아이콘-텍스트" },
+      "sm":  { "$value": "{spacing.spacing-2}",  "$type": "dimension", "$description": "6px — compact 인풋" },
+      "md":  { "$value": "{spacing.spacing-3}", "$type": "dimension", "$description": "10px — 버튼 패딩" },
+      "lg":  { "$value": "{spacing.spacing-4}", "$type": "dimension", "$description": "14px — 카드 내부" },
+      "xl":  { "$value": "{spacing.spacing-5}", "$type": "dimension", "$description": "20px — 모달 내부" }
     },
     "layout": {
-      "xs":  { "$value": "{spacing.12}", "$type": "dimension", "$description": "12px — 섹션 내부" },
-      "sm":  { "$value": "{spacing.20}", "$type": "dimension", "$description": "20px — 섹션 간" },
-      "md":  { "$value": "{spacing.28}", "$type": "dimension", "$description": "28px — 블록 간" },
-      "lg":  { "$value": "{spacing.40}", "$type": "dimension", "$description": "40px — 페이지 섹션 간" },
-      "xl":  { "$value": "{spacing.56}", "$type": "dimension", "$description": "56px — 페이지 상하 여백" },
+      "xs":  { "$value": "{spacing.spacing-3}", "$type": "dimension", "$description": "12px — 섹션 내부" },
+      "sm":  { "$value": "{spacing.spacing-5}", "$type": "dimension", "$description": "20px — 섹션 간" },
+      "md":  { "$value": "{spacing.spacing-7}", "$type": "dimension", "$description": "28px — 블록 간" },
+      "lg":  { "$value": "{spacing.spacing-10}", "$type": "dimension", "$description": "40px — 페이지 섹션 간" },
+      "xl":  { "$value": "{spacing.spacing-14}", "$type": "dimension", "$description": "56px — 페이지 상하 여백" },
       "sidebar": { "$value": "240px", "$type": "dimension", "$description": "사이드바 폭 고정값" }
     }
   },

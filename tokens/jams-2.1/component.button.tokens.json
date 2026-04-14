@@ -7,31 +7,31 @@
       "$description": "배경이 채워진 주요 버튼 (Heavy)",
       "primary": {
         "$description": "브랜드 primary fill — JK=blue2.500, AM=orange.500",
-        "lg": { "$value": { "bg": "{color.bg.interactive}",       "text": "{color.text.inverse}", "radius": "{radius.component.md}", "height": "{spacing.52}", "paddingH": "{spacing.16}", "fontSize": "16px" }, "$type": "composite" },
-        "md": { "$value": { "bg": "{color.bg.interactive}",       "text": "{color.text.inverse}", "radius": "{radius.component.md}", "height": "{spacing.48}", "paddingH": "{spacing.14}", "fontSize": "16px" }, "$type": "composite" },
-        "sm": { "$value": { "bg": "{color.bg.interactive}",       "text": "{color.text.inverse}", "radius": "{radius.component.md}", "height": "{spacing.40}", "paddingH": "{spacing.12}", "fontSize": "14px" }, "$type": "composite" },
-        "xs": { "$value": { "bg": "{color.bg.interactive}",       "text": "{color.text.inverse}", "radius": "{radius.component.xs}", "height": "{spacing.32}", "paddingH": "{spacing.10}", "fontSize": "13px" }, "$type": "composite" }
+        "lg": { "$value": { "bg": "{color.bg.interactive}",       "text": "{color.text.inverse}", "radius": "{radius.component.md}", "height": "{spacing.spacing-13}", "paddingH": "{spacing.spacing-4}", "fontSize": "16px" }, "$type": "composite" },
+        "md": { "$value": { "bg": "{color.bg.interactive}",       "text": "{color.text.inverse}", "radius": "{radius.component.md}", "height": "{spacing.spacing-12}", "paddingH": "{spacing.spacing-4}", "fontSize": "16px" }, "$type": "composite" },
+        "sm": { "$value": { "bg": "{color.bg.interactive}",       "text": "{color.text.inverse}", "radius": "{radius.component.md}", "height": "{spacing.spacing-10}", "paddingH": "{spacing.spacing-3}", "fontSize": "14px" }, "$type": "composite" },
+        "xs": { "$value": { "bg": "{color.bg.interactive}",       "text": "{color.text.inverse}", "radius": "{radius.component.xs}", "height": "{spacing.spacing-8}", "paddingH": "{spacing.spacing-3}", "fontSize": "13px" }, "$type": "composite" }
       },
       "brand": {
         "$description": "브랜드 500 fill (=primary와 동일하나 별도 variant 존재)",
-        "lg": { "$value": { "bg": "{color.bg.brand}",             "text": "{color.text.inverse}", "radius": "{radius.component.md}", "height": "{spacing.52}", "paddingH": "{spacing.16}", "fontSize": "16px" }, "$type": "composite" },
-        "md": { "$value": { "bg": "{color.bg.brand}",             "text": "{color.text.inverse}", "radius": "{radius.component.md}", "height": "{spacing.48}", "paddingH": "{spacing.14}", "fontSize": "16px" }, "$type": "composite" },
-        "sm": { "$value": { "bg": "{color.bg.brand}",             "text": "{color.text.inverse}", "radius": "{radius.component.md}", "height": "{spacing.40}", "paddingH": "{spacing.12}", "fontSize": "14px" }, "$type": "composite" },
-        "xs": { "$value": { "bg": "{color.bg.brand}",             "text": "{color.text.inverse}", "radius": "{radius.component.xs}", "height": "{spacing.32}", "paddingH": "{spacing.10}", "fontSize": "13px" }, "$type": "composite" }
+        "lg": { "$value": { "bg": "{color.bg.brand}",             "text": "{color.text.inverse}", "radius": "{radius.component.md}", "height": "{spacing.spacing-13}", "paddingH": "{spacing.spacing-4}", "fontSize": "16px" }, "$type": "composite" },
+        "md": { "$value": { "bg": "{color.bg.brand}",             "text": "{color.text.inverse}", "radius": "{radius.component.md}", "height": "{spacing.spacing-12}", "paddingH": "{spacing.spacing-4}", "fontSize": "16px" }, "$type": "composite" },
+        "sm": { "$value": { "bg": "{color.bg.brand}",             "text": "{color.text.inverse}", "radius": "{radius.component.md}", "height": "{spacing.spacing-10}", "paddingH": "{spacing.spacing-3}", "fontSize": "14px" }, "$type": "composite" },
+        "xs": { "$value": { "bg": "{color.bg.brand}",             "text": "{color.text.inverse}", "radius": "{radius.component.xs}", "height": "{spacing.spacing-8}", "paddingH": "{spacing.spacing-3}", "fontSize": "13px" }, "$type": "composite" }
       },
       "brand-dim": {
         "$description": "브랜드 400 (dim) fill",
-        "lg": { "$value": { "bg": "{color.bg.brand-dim}",         "text": "{color.text.inverse}", "radius": "{radius.component.md}", "height": "{spacing.52}", "paddingH": "{spacing.16}", "fontSize": "16px" }, "$type": "composite" },
-        "md": { "$value": { "bg": "{color.bg.brand-dim}",         "text": "{color.text.inverse}", "radius": "{radius.component.md}", "height": "{spacing.48}", "paddingH": "{spacing.14}", "fontSize": "16px" }, "$type": "composite" },
-        "sm": { "$value": { "bg": "{color.bg.brand-dim}",         "text": "{color.text.inverse}", "radius": "{radius.component.md}", "height": "{spacing.40}", "paddingH": "{spacing.12}", "fontSize": "14px" }, "$type": "composite" },
-        "xs": { "$value": { "bg": "{color.bg.brand-dim}",         "text": "{color.text.inverse}", "radius": "{radius.component.xs}", "height": "{spacing.32}", "paddingH": "{spacing.10}", "fontSize": "13px" }, "$type": "composite" }
+        "lg": { "$value": { "bg": "{color.bg.brand-dim}",         "text": "{color.text.inverse}", "radius": "{radius.component.md}", "height": "{spacing.spacing-13}", "paddingH": "{spacing.spacing-4}", "fontSize": "16px" }, "$type": "composite" },
+        "md": { "$value": { "bg": "{color.bg.brand-dim}",         "text": "{color.text.inverse}", "radius": "{radius.component.md}", "height": "{spacing.spacing-12}", "paddingH": "{spacing.spacing-4}", "fontSize": "16px" }, "$type": "composite" },
+        "sm": { "$value": { "bg": "{color.bg.brand-dim}",         "text": "{color.text.inverse}", "radius": "{radius.component.md}", "height": "{spacing.spacing-10}", "paddingH": "{spacing.spacing-3}", "fontSize": "14px" }, "$type": "composite" },
+        "xs": { "$value": { "bg": "{color.bg.brand-dim}",         "text": "{color.text.inverse}", "radius": "{radius.component.xs}", "height": "{spacing.spacing-8}", "paddingH": "{spacing.spacing-3}", "fontSize": "13px" }, "$type": "composite" }
       },
       "subtle": {
         "$description": "브랜드 50 (subtle) fill + 브랜드 텍스트 + 브랜드 테두리",
-        "lg": { "$value": { "bg": "{color.bg.brand-subtle}",      "text": "{color.text.brand}", "border": "{color.border.brand-subtle}", "radius": "{radius.component.md}", "height": "{spacing.52}", "paddingH": "{spacing.16}", "fontSize": "16px" }, "$type": "composite" },
-        "md": { "$value": { "bg": "{color.bg.brand-subtle}",      "text": "{color.text.brand}", "border": "{color.border.brand-subtle}", "radius": "{radius.component.md}", "height": "{spacing.48}", "paddingH": "{spacing.14}", "fontSize": "16px" }, "$type": "composite" },
-        "sm": { "$value": { "bg": "{color.bg.brand-subtle}",      "text": "{color.text.brand}", "border": "{color.border.brand-subtle}", "radius": "{radius.component.md}", "height": "{spacing.40}", "paddingH": "{spacing.12}", "fontSize": "14px" }, "$type": "composite" },
-        "xs": { "$value": { "bg": "{color.bg.brand-subtle}",      "text": "{color.text.brand}", "border": "{color.border.brand-subtle}", "radius": "{radius.component.xs}", "height": "{spacing.32}", "paddingH": "{spacing.10}", "fontSize": "13px" }, "$type": "composite" }
+        "lg": { "$value": { "bg": "{color.bg.brand-subtle}",      "text": "{color.text.brand}", "border": "{color.border.brand-subtle}", "radius": "{radius.component.md}", "height": "{spacing.spacing-13}", "paddingH": "{spacing.spacing-4}", "fontSize": "16px" }, "$type": "composite" },
+        "md": { "$value": { "bg": "{color.bg.brand-subtle}",      "text": "{color.text.brand}", "border": "{color.border.brand-subtle}", "radius": "{radius.component.md}", "height": "{spacing.spacing-12}", "paddingH": "{spacing.spacing-4}", "fontSize": "16px" }, "$type": "composite" },
+        "sm": { "$value": { "bg": "{color.bg.brand-subtle}",      "text": "{color.text.brand}", "border": "{color.border.brand-subtle}", "radius": "{radius.component.md}", "height": "{spacing.spacing-10}", "paddingH": "{spacing.spacing-3}", "fontSize": "14px" }, "$type": "composite" },
+        "xs": { "$value": { "bg": "{color.bg.brand-subtle}",      "text": "{color.text.brand}", "border": "{color.border.brand-subtle}", "radius": "{radius.component.xs}", "height": "{spacing.spacing-8}", "paddingH": "{spacing.spacing-3}", "fontSize": "13px" }, "$type": "composite" }
       }
     },
 
@@ -39,92 +39,92 @@
       "$description": "테두리 있는 보조 버튼 (Heavy)",
       "brand": {
         "$description": "outlined bg + 브랜드 텍스트 + default 테두리",
-        "lg": { "$value": { "bg": "{color.bg.interactive-disabled}", "text": "{color.text.brand}",    "border": "{color.border.default}", "radius": "{radius.component.md}", "height": "{spacing.52}", "paddingH": "{spacing.16}", "fontSize": "16px" }, "$type": "composite" },
-        "md": { "$value": { "bg": "{color.bg.interactive-disabled}", "text": "{color.text.brand}",    "border": "{color.border.default}", "radius": "{radius.component.md}", "height": "{spacing.48}", "paddingH": "{spacing.14}", "fontSize": "16px" }, "$type": "composite" },
-        "sm": { "$value": { "bg": "{color.bg.interactive-disabled}", "text": "{color.text.brand}",    "border": "{color.border.default}", "radius": "{radius.component.md}", "height": "{spacing.40}", "paddingH": "{spacing.12}", "fontSize": "14px" }, "$type": "composite" },
-        "xs": { "$value": { "bg": "{color.bg.interactive-disabled}", "text": "{color.text.brand}",    "border": "{color.border.default}", "radius": "{radius.component.xs}", "height": "{spacing.32}", "paddingH": "{spacing.10}", "fontSize": "13px" }, "$type": "composite" }
+        "lg": { "$value": { "bg": "{color.bg.interactive-disabled}", "text": "{color.text.brand}",    "border": "{color.border.default}", "radius": "{radius.component.md}", "height": "{spacing.spacing-13}", "paddingH": "{spacing.spacing-4}", "fontSize": "16px" }, "$type": "composite" },
+        "md": { "$value": { "bg": "{color.bg.interactive-disabled}", "text": "{color.text.brand}",    "border": "{color.border.default}", "radius": "{radius.component.md}", "height": "{spacing.spacing-12}", "paddingH": "{spacing.spacing-4}", "fontSize": "16px" }, "$type": "composite" },
+        "sm": { "$value": { "bg": "{color.bg.interactive-disabled}", "text": "{color.text.brand}",    "border": "{color.border.default}", "radius": "{radius.component.md}", "height": "{spacing.spacing-10}", "paddingH": "{spacing.spacing-3}", "fontSize": "14px" }, "$type": "composite" },
+        "xs": { "$value": { "bg": "{color.bg.interactive-disabled}", "text": "{color.text.brand}",    "border": "{color.border.default}", "radius": "{radius.component.xs}", "height": "{spacing.spacing-8}", "paddingH": "{spacing.spacing-3}", "fontSize": "13px" }, "$type": "composite" }
       },
       "default": {
         "$description": "outlined bg + 기본 텍스트 + default 테두리",
-        "lg": { "$value": { "bg": "{color.bg.interactive-disabled}", "text": "{color.text.primary}",  "border": "{color.border.default}", "radius": "{radius.component.md}", "height": "{spacing.52}", "paddingH": "{spacing.16}", "fontSize": "16px" }, "$type": "composite" },
-        "md": { "$value": { "bg": "{color.bg.interactive-disabled}", "text": "{color.text.primary}",  "border": "{color.border.default}", "radius": "{radius.component.md}", "height": "{spacing.48}", "paddingH": "{spacing.14}", "fontSize": "16px" }, "$type": "composite" },
-        "sm": { "$value": { "bg": "{color.bg.interactive-disabled}", "text": "{color.text.primary}",  "border": "{color.border.default}", "radius": "{radius.component.md}", "height": "{spacing.40}", "paddingH": "{spacing.12}", "fontSize": "14px" }, "$type": "composite" },
-        "xs": { "$value": { "bg": "{color.bg.interactive-disabled}", "text": "{color.text.primary}",  "border": "{color.border.default}", "radius": "{radius.component.xs}", "height": "{spacing.32}", "paddingH": "{spacing.10}", "fontSize": "13px" }, "$type": "composite" }
+        "lg": { "$value": { "bg": "{color.bg.interactive-disabled}", "text": "{color.text.primary}",  "border": "{color.border.default}", "radius": "{radius.component.md}", "height": "{spacing.spacing-13}", "paddingH": "{spacing.spacing-4}", "fontSize": "16px" }, "$type": "composite" },
+        "md": { "$value": { "bg": "{color.bg.interactive-disabled}", "text": "{color.text.primary}",  "border": "{color.border.default}", "radius": "{radius.component.md}", "height": "{spacing.spacing-12}", "paddingH": "{spacing.spacing-4}", "fontSize": "16px" }, "$type": "composite" },
+        "sm": { "$value": { "bg": "{color.bg.interactive-disabled}", "text": "{color.text.primary}",  "border": "{color.border.default}", "radius": "{radius.component.md}", "height": "{spacing.spacing-10}", "paddingH": "{spacing.spacing-3}", "fontSize": "14px" }, "$type": "composite" },
+        "xs": { "$value": { "bg": "{color.bg.interactive-disabled}", "text": "{color.text.primary}",  "border": "{color.border.default}", "radius": "{radius.component.xs}", "height": "{spacing.spacing-8}", "paddingH": "{spacing.spacing-3}", "fontSize": "13px" }, "$type": "composite" }
       },
       "pill": {
         "$description": "outlined + radius pill (999)",
-        "lg": { "$value": { "bg": "{color.bg.interactive-disabled}", "text": "{color.text.primary}",  "border": "{color.border.default}", "radius": "{radius.component.pill}", "height": "{spacing.52}", "paddingH": "{spacing.16}", "fontSize": "16px" }, "$type": "composite" },
-        "md": { "$value": { "bg": "{color.bg.interactive-disabled}", "text": "{color.text.primary}",  "border": "{color.border.default}", "radius": "{radius.component.pill}", "height": "{spacing.48}", "paddingH": "{spacing.14}", "fontSize": "16px" }, "$type": "composite" },
-        "sm": { "$value": { "bg": "{color.bg.interactive-disabled}", "text": "{color.text.primary}",  "border": "{color.border.default}", "radius": "{radius.component.pill}", "height": "{spacing.40}", "paddingH": "{spacing.12}", "fontSize": "14px" }, "$type": "composite" },
-        "xs": { "$value": { "bg": "{color.bg.interactive-disabled}", "text": "{color.text.primary}",  "border": "{color.border.default}", "radius": "{radius.component.pill}", "height": "{spacing.32}", "paddingH": "{spacing.10}", "fontSize": "13px" }, "$type": "composite" }
+        "lg": { "$value": { "bg": "{color.bg.interactive-disabled}", "text": "{color.text.primary}",  "border": "{color.border.default}", "radius": "{radius.component.pill}", "height": "{spacing.spacing-13}", "paddingH": "{spacing.spacing-4}", "fontSize": "16px" }, "$type": "composite" },
+        "md": { "$value": { "bg": "{color.bg.interactive-disabled}", "text": "{color.text.primary}",  "border": "{color.border.default}", "radius": "{radius.component.pill}", "height": "{spacing.spacing-12}", "paddingH": "{spacing.spacing-4}", "fontSize": "16px" }, "$type": "composite" },
+        "sm": { "$value": { "bg": "{color.bg.interactive-disabled}", "text": "{color.text.primary}",  "border": "{color.border.default}", "radius": "{radius.component.pill}", "height": "{spacing.spacing-10}", "paddingH": "{spacing.spacing-3}", "fontSize": "14px" }, "$type": "composite" },
+        "xs": { "$value": { "bg": "{color.bg.interactive-disabled}", "text": "{color.text.primary}",  "border": "{color.border.default}", "radius": "{radius.component.pill}", "height": "{spacing.spacing-8}", "paddingH": "{spacing.spacing-3}", "fontSize": "13px" }, "$type": "composite" }
       }
     },
 
     "borderless": {
       "$description": "배경·테두리 없는 Tertiary 버튼 (Light)",
       "default": {
-        "lg": { "$value": { "bg": "transparent", "text": "{color.text.primary}",  "radius": "{radius.component.md}", "height": "{spacing.52}", "paddingH": "{spacing.16}", "fontSize": "16px" }, "$type": "composite" },
-        "md": { "$value": { "bg": "transparent", "text": "{color.text.primary}",  "radius": "{radius.component.md}", "height": "{spacing.48}", "paddingH": "{spacing.14}", "fontSize": "16px" }, "$type": "composite" },
-        "sm": { "$value": { "bg": "transparent", "text": "{color.text.primary}",  "radius": "{radius.component.md}", "height": "{spacing.40}", "paddingH": "{spacing.12}", "fontSize": "14px" }, "$type": "composite" },
-        "xs": { "$value": { "bg": "transparent", "text": "{color.text.primary}",  "radius": "{radius.component.xs}", "height": "{spacing.32}", "paddingH": "{spacing.10}", "fontSize": "13px" }, "$type": "composite" }
+        "lg": { "$value": { "bg": "transparent", "text": "{color.text.primary}",  "radius": "{radius.component.md}", "height": "{spacing.spacing-13}", "paddingH": "{spacing.spacing-4}", "fontSize": "16px" }, "$type": "composite" },
+        "md": { "$value": { "bg": "transparent", "text": "{color.text.primary}",  "radius": "{radius.component.md}", "height": "{spacing.spacing-12}", "paddingH": "{spacing.spacing-4}", "fontSize": "16px" }, "$type": "composite" },
+        "sm": { "$value": { "bg": "transparent", "text": "{color.text.primary}",  "radius": "{radius.component.md}", "height": "{spacing.spacing-10}", "paddingH": "{spacing.spacing-3}", "fontSize": "14px" }, "$type": "composite" },
+        "xs": { "$value": { "bg": "transparent", "text": "{color.text.primary}",  "radius": "{radius.component.xs}", "height": "{spacing.spacing-8}", "paddingH": "{spacing.spacing-3}", "fontSize": "13px" }, "$type": "composite" }
       },
       "pill": {
-        "lg": { "$value": { "bg": "transparent", "text": "{color.text.primary}",  "radius": "{radius.component.pill}", "height": "{spacing.52}", "paddingH": "{spacing.16}", "fontSize": "16px" }, "$type": "composite" },
-        "md": { "$value": { "bg": "transparent", "text": "{color.text.primary}",  "radius": "{radius.component.pill}", "height": "{spacing.48}", "paddingH": "{spacing.14}", "fontSize": "16px" }, "$type": "composite" },
-        "sm": { "$value": { "bg": "transparent", "text": "{color.text.primary}",  "radius": "{radius.component.pill}", "height": "{spacing.40}", "paddingH": "{spacing.12}", "fontSize": "14px" }, "$type": "composite" },
-        "xs": { "$value": { "bg": "transparent", "text": "{color.text.primary}",  "radius": "{radius.component.pill}", "height": "{spacing.32}", "paddingH": "{spacing.10}", "fontSize": "13px" }, "$type": "composite" }
+        "lg": { "$value": { "bg": "transparent", "text": "{color.text.primary}",  "radius": "{radius.component.pill}", "height": "{spacing.spacing-13}", "paddingH": "{spacing.spacing-4}", "fontSize": "16px" }, "$type": "composite" },
+        "md": { "$value": { "bg": "transparent", "text": "{color.text.primary}",  "radius": "{radius.component.pill}", "height": "{spacing.spacing-12}", "paddingH": "{spacing.spacing-4}", "fontSize": "16px" }, "$type": "composite" },
+        "sm": { "$value": { "bg": "transparent", "text": "{color.text.primary}",  "radius": "{radius.component.pill}", "height": "{spacing.spacing-10}", "paddingH": "{spacing.spacing-3}", "fontSize": "14px" }, "$type": "composite" },
+        "xs": { "$value": { "bg": "transparent", "text": "{color.text.primary}",  "radius": "{radius.component.pill}", "height": "{spacing.spacing-8}", "paddingH": "{spacing.spacing-3}", "fontSize": "13px" }, "$type": "composite" }
       },
       "subtle": {
         "$description": "borderless + brand-subtle bg + 브랜드 텍스트",
-        "lg": { "$value": { "bg": "{color.bg.brand-subtle}", "text": "{color.text.brand}", "radius": "{radius.component.md}", "height": "{spacing.52}", "paddingH": "{spacing.16}", "fontSize": "16px" }, "$type": "composite" },
-        "md": { "$value": { "bg": "{color.bg.brand-subtle}", "text": "{color.text.brand}", "radius": "{radius.component.md}", "height": "{spacing.48}", "paddingH": "{spacing.14}", "fontSize": "16px" }, "$type": "composite" },
-        "sm": { "$value": { "bg": "{color.bg.brand-subtle}", "text": "{color.text.brand}", "radius": "{radius.component.md}", "height": "{spacing.40}", "paddingH": "{spacing.12}", "fontSize": "14px" }, "$type": "composite" },
-        "xs": { "$value": { "bg": "{color.bg.brand-subtle}", "text": "{color.text.brand}", "radius": "{radius.component.xs}", "height": "{spacing.32}", "paddingH": "{spacing.10}", "fontSize": "13px" }, "$type": "composite" }
+        "lg": { "$value": { "bg": "{color.bg.brand-subtle}", "text": "{color.text.brand}", "radius": "{radius.component.md}", "height": "{spacing.spacing-13}", "paddingH": "{spacing.spacing-4}", "fontSize": "16px" }, "$type": "composite" },
+        "md": { "$value": { "bg": "{color.bg.brand-subtle}", "text": "{color.text.brand}", "radius": "{radius.component.md}", "height": "{spacing.spacing-12}", "paddingH": "{spacing.spacing-4}", "fontSize": "16px" }, "$type": "composite" },
+        "sm": { "$value": { "bg": "{color.bg.brand-subtle}", "text": "{color.text.brand}", "radius": "{radius.component.md}", "height": "{spacing.spacing-10}", "paddingH": "{spacing.spacing-3}", "fontSize": "14px" }, "$type": "composite" },
+        "xs": { "$value": { "bg": "{color.bg.brand-subtle}", "text": "{color.text.brand}", "radius": "{radius.component.xs}", "height": "{spacing.spacing-8}", "paddingH": "{spacing.spacing-3}", "fontSize": "13px" }, "$type": "composite" }
       }
     },
 
     "icon": {
       "$description": "정사각형 아이콘 전용 버튼 (W=H). 3 states: default/hover/disabled. Loading 없음.",
       "primary":    {
-        "lg": { "$value": { "bg": "{color.bg.interactive}", "icon": "{color.icon.inverse}", "radius": "{radius.component.pill}", "size": "{spacing.52}" }, "$type": "composite" },
-        "md": { "$value": { "bg": "{color.bg.interactive}", "icon": "{color.icon.inverse}", "radius": "{radius.component.pill}", "size": "{spacing.48}" }, "$type": "composite" },
-        "sm": { "$value": { "bg": "{color.bg.interactive}", "icon": "{color.icon.inverse}", "radius": "{radius.component.pill}", "size": "{spacing.40}" }, "$type": "composite" },
-        "xs": { "$value": { "bg": "{color.bg.interactive}", "icon": "{color.icon.inverse}", "radius": "{radius.component.pill}", "size": "{spacing.32}" }, "$type": "composite" }
+        "lg": { "$value": { "bg": "{color.bg.interactive}", "icon": "{color.icon.inverse}", "radius": "{radius.component.pill}", "size": "{spacing.spacing-13}" }, "$type": "composite" },
+        "md": { "$value": { "bg": "{color.bg.interactive}", "icon": "{color.icon.inverse}", "radius": "{radius.component.pill}", "size": "{spacing.spacing-12}" }, "$type": "composite" },
+        "sm": { "$value": { "bg": "{color.bg.interactive}", "icon": "{color.icon.inverse}", "radius": "{radius.component.pill}", "size": "{spacing.spacing-10}" }, "$type": "composite" },
+        "xs": { "$value": { "bg": "{color.bg.interactive}", "icon": "{color.icon.inverse}", "radius": "{radius.component.pill}", "size": "{spacing.spacing-8}" }, "$type": "composite" }
       },
       "brand": {
         "$description": "brand-dim (400) fill, pill",
-        "lg": { "$value": { "bg": "{color.bg.brand-dim}",  "icon": "{color.icon.inverse}", "radius": "{radius.component.pill}", "size": "{spacing.52}" }, "$type": "composite" },
-        "md": { "$value": { "bg": "{color.bg.brand-dim}",  "icon": "{color.icon.inverse}", "radius": "{radius.component.pill}", "size": "{spacing.48}" }, "$type": "composite" },
-        "sm": { "$value": { "bg": "{color.bg.brand-dim}",  "icon": "{color.icon.inverse}", "radius": "{radius.component.pill}", "size": "{spacing.40}" }, "$type": "composite" },
-        "xs": { "$value": { "bg": "{color.bg.brand-dim}",  "icon": "{color.icon.inverse}", "radius": "{radius.component.pill}", "size": "{spacing.32}" }, "$type": "composite" }
+        "lg": { "$value": { "bg": "{color.bg.brand-dim}",  "icon": "{color.icon.inverse}", "radius": "{radius.component.pill}", "size": "{spacing.spacing-13}" }, "$type": "composite" },
+        "md": { "$value": { "bg": "{color.bg.brand-dim}",  "icon": "{color.icon.inverse}", "radius": "{radius.component.pill}", "size": "{spacing.spacing-12}" }, "$type": "composite" },
+        "sm": { "$value": { "bg": "{color.bg.brand-dim}",  "icon": "{color.icon.inverse}", "radius": "{radius.component.pill}", "size": "{spacing.spacing-10}" }, "$type": "composite" },
+        "xs": { "$value": { "bg": "{color.bg.brand-dim}",  "icon": "{color.icon.inverse}", "radius": "{radius.component.pill}", "size": "{spacing.spacing-8}" }, "$type": "composite" }
       },
       "outlined": {
         "$description": "surface bg + default 테두리, rounded rect",
-        "lg": { "$value": { "bg": "{color.bg.interactive-disabled}", "icon": "{color.icon.primary}", "border": "{color.border.default}", "radius": "{radius.component.md}", "size": "{spacing.52}" }, "$type": "composite" },
-        "md": { "$value": { "bg": "{color.bg.interactive-disabled}", "icon": "{color.icon.primary}", "border": "{color.border.default}", "radius": "{radius.component.md}", "size": "{spacing.48}" }, "$type": "composite" },
-        "sm": { "$value": { "bg": "{color.bg.interactive-disabled}", "icon": "{color.icon.primary}", "border": "{color.border.default}", "radius": "{radius.component.md}", "size": "{spacing.40}" }, "$type": "composite" },
-        "xs": { "$value": { "bg": "{color.bg.interactive-disabled}", "icon": "{color.icon.primary}", "border": "{color.border.default}", "radius": "{radius.component.xs}", "size": "{spacing.32}" }, "$type": "composite" }
+        "lg": { "$value": { "bg": "{color.bg.interactive-disabled}", "icon": "{color.icon.primary}", "border": "{color.border.default}", "radius": "{radius.component.md}", "size": "{spacing.spacing-13}" }, "$type": "composite" },
+        "md": { "$value": { "bg": "{color.bg.interactive-disabled}", "icon": "{color.icon.primary}", "border": "{color.border.default}", "radius": "{radius.component.md}", "size": "{spacing.spacing-12}" }, "$type": "composite" },
+        "sm": { "$value": { "bg": "{color.bg.interactive-disabled}", "icon": "{color.icon.primary}", "border": "{color.border.default}", "radius": "{radius.component.md}", "size": "{spacing.spacing-10}" }, "$type": "composite" },
+        "xs": { "$value": { "bg": "{color.bg.interactive-disabled}", "icon": "{color.icon.primary}", "border": "{color.border.default}", "radius": "{radius.component.xs}", "size": "{spacing.spacing-8}" }, "$type": "composite" }
       },
       "circle": {
         "$description": "surface bg + default 테두리, pill",
-        "lg": { "$value": { "bg": "{color.bg.interactive-disabled}", "icon": "{color.icon.primary}", "border": "{color.border.default}", "radius": "{radius.component.pill}", "size": "{spacing.52}" }, "$type": "composite" },
-        "md": { "$value": { "bg": "{color.bg.interactive-disabled}", "icon": "{color.icon.primary}", "border": "{color.border.default}", "radius": "{radius.component.pill}", "size": "{spacing.48}" }, "$type": "composite" },
-        "sm": { "$value": { "bg": "{color.bg.interactive-disabled}", "icon": "{color.icon.primary}", "border": "{color.border.default}", "radius": "{radius.component.pill}", "size": "{spacing.40}" }, "$type": "composite" },
-        "xs": { "$value": { "bg": "{color.bg.interactive-disabled}", "icon": "{color.icon.primary}", "border": "{color.border.default}", "radius": "{radius.component.pill}", "size": "{spacing.32}" }, "$type": "composite" }
+        "lg": { "$value": { "bg": "{color.bg.interactive-disabled}", "icon": "{color.icon.primary}", "border": "{color.border.default}", "radius": "{radius.component.pill}", "size": "{spacing.spacing-13}" }, "$type": "composite" },
+        "md": { "$value": { "bg": "{color.bg.interactive-disabled}", "icon": "{color.icon.primary}", "border": "{color.border.default}", "radius": "{radius.component.pill}", "size": "{spacing.spacing-12}" }, "$type": "composite" },
+        "sm": { "$value": { "bg": "{color.bg.interactive-disabled}", "icon": "{color.icon.primary}", "border": "{color.border.default}", "radius": "{radius.component.pill}", "size": "{spacing.spacing-10}" }, "$type": "composite" },
+        "xs": { "$value": { "bg": "{color.bg.interactive-disabled}", "icon": "{color.icon.primary}", "border": "{color.border.default}", "radius": "{radius.component.pill}", "size": "{spacing.spacing-8}" }, "$type": "composite" }
       },
       "borderless": {
         "$description": "bg/border 없음, pill",
-        "lg": { "$value": { "bg": "transparent", "icon": "{color.icon.primary}", "radius": "{radius.component.pill}", "size": "{spacing.52}" }, "$type": "composite" },
-        "md": { "$value": { "bg": "transparent", "icon": "{color.icon.primary}", "radius": "{radius.component.pill}", "size": "{spacing.48}" }, "$type": "composite" },
-        "sm": { "$value": { "bg": "transparent", "icon": "{color.icon.primary}", "radius": "{radius.component.pill}", "size": "{spacing.40}" }, "$type": "composite" },
-        "xs": { "$value": { "bg": "transparent", "icon": "{color.icon.primary}", "radius": "{radius.component.pill}", "size": "{spacing.32}" }, "$type": "composite" }
+        "lg": { "$value": { "bg": "transparent", "icon": "{color.icon.primary}", "radius": "{radius.component.pill}", "size": "{spacing.spacing-13}" }, "$type": "composite" },
+        "md": { "$value": { "bg": "transparent", "icon": "{color.icon.primary}", "radius": "{radius.component.pill}", "size": "{spacing.spacing-12}" }, "$type": "composite" },
+        "sm": { "$value": { "bg": "transparent", "icon": "{color.icon.primary}", "radius": "{radius.component.pill}", "size": "{spacing.spacing-10}" }, "$type": "composite" },
+        "xs": { "$value": { "bg": "transparent", "icon": "{color.icon.primary}", "radius": "{radius.component.pill}", "size": "{spacing.spacing-8}" }, "$type": "composite" }
       },
       "dark": {
         "$description": "gray95060 — 어두운 bg, 흰 아이콘",
-        "lg": { "$value": { "bg": "{color.bg.dark}", "icon": "{color.icon.inverse}", "radius": "{radius.6}", "size": "{spacing.52}" }, "$type": "composite" },
-        "md": { "$value": { "bg": "{color.bg.dark}", "icon": "{color.icon.inverse}", "radius": "{radius.6}", "size": "{spacing.48}" }, "$type": "composite" },
-        "sm": { "$value": { "bg": "{color.bg.dark}", "icon": "{color.icon.inverse}", "radius": "{radius.6}", "size": "{spacing.40}" }, "$type": "composite" },
-        "xs": { "$value": { "bg": "{color.bg.dark}", "icon": "{color.icon.inverse}", "radius": "{radius.6}", "size": "{spacing.32}" }, "$type": "composite" }
+        "lg": { "$value": { "bg": "{color.bg.dark}", "icon": "{color.icon.inverse}", "radius": "{radius.6}", "size": "{spacing.spacing-13}" }, "$type": "composite" },
+        "md": { "$value": { "bg": "{color.bg.dark}", "icon": "{color.icon.inverse}", "radius": "{radius.6}", "size": "{spacing.spacing-12}" }, "$type": "composite" },
+        "sm": { "$value": { "bg": "{color.bg.dark}", "icon": "{color.icon.inverse}", "radius": "{radius.6}", "size": "{spacing.spacing-10}" }, "$type": "composite" },
+        "xs": { "$value": { "bg": "{color.bg.dark}", "icon": "{color.icon.inverse}", "radius": "{radius.6}", "size": "{spacing.spacing-8}" }, "$type": "composite" }
       }
     },
 
@@ -148,8 +148,8 @@
 
     "emoji": {
       "$description": "이모지+텍스트 가로형 pill 버튼. 흰 배경·gray 테두리 고정 — 테마 미적용. variant 없음, size만 lg/sm.",
-      "lg": { "$value": { "bg": "{color.bg.base}", "text": "{color.text.primary}", "border": "{color.border.default}", "radius": "{radius.component.md}", "height": "{spacing.40}", "paddingH": "{spacing.12}", "fontSize": "14px", "fontWeight": "400", "emojiSize": "24px" }, "$type": "composite" },
-      "sm": { "$value": { "bg": "{color.bg.base}", "text": "{color.text.primary}", "border": "{color.border.default}", "radius": "{radius.component.xs}", "height": "{spacing.32}", "paddingH": "{spacing.10}", "fontSize": "13px", "fontWeight": "400", "emojiSize": "20px" }, "$type": "composite" }
+      "lg": { "$value": { "bg": "{color.bg.base}", "text": "{color.text.primary}", "border": "{color.border.default}", "radius": "{radius.component.md}", "height": "{spacing.spacing-10}", "paddingH": "{spacing.spacing-3}", "fontSize": "14px", "fontWeight": "400", "emojiSize": "24px" }, "$type": "composite" },
+      "sm": { "$value": { "bg": "{color.bg.base}", "text": "{color.text.primary}", "border": "{color.border.default}", "radius": "{radius.component.xs}", "height": "{spacing.spacing-8}", "paddingLeft": "{spacing.spacing-2}", "paddingRight": "{spacing.spacing-3}", "fontSize": "13px", "fontWeight": "400", "emojiSize": "20px" }, "$type": "composite" }
     },
 
     "text": {
@@ -179,33 +179,33 @@
 
     "filter": {
       "$description": "h=32px 고정 pill. off/on Variable Mode 전환.",
-      "item":      { "$value": { "height": "{spacing.32}", "radius": "{radius.component.pill}", "bg-off": "{color.bg.interactive-disabled}", "text-off": "{color.text.tertiary}", "border-off": "{color.border.default}", "bg-on": "{color.bg.interactive}", "text-on": "{color.text.inverse}" }, "$type": "composite" },
-      "icontext": { "$value": { "height": "{spacing.32}", "radius": "{radius.component.pill}", "bg-off": "{color.bg.interactive-disabled}", "text-off": "{color.text.tertiary}", "border-off": "{color.border.default}", "bg-on": "{color.bg.interactive}", "text-on": "{color.text.inverse}" }, "$type": "composite" },
-      "icononly": { "$value": { "height": "{spacing.32}", "radius": "{radius.component.pill}", "bg-off": "{color.bg.interactive-disabled}", "icon-off": "{color.icon.secondary}", "border-off": "{color.border.default}", "bg-on": "{color.bg.interactive}", "icon-on": "{color.icon.inverse}" }, "$type": "composite" }
+      "item":      { "$value": { "height": "{spacing.spacing-8}", "radius": "{radius.component.pill}", "bg-off": "{color.bg.interactive-disabled}", "text-off": "{color.text.tertiary}", "border-off": "{color.border.default}", "bg-on": "{color.bg.interactive}", "text-on": "{color.text.inverse}" }, "$type": "composite" },
+      "icontext": { "$value": { "height": "{spacing.spacing-8}", "radius": "{radius.component.pill}", "bg-off": "{color.bg.interactive-disabled}", "text-off": "{color.text.tertiary}", "border-off": "{color.border.default}", "bg-on": "{color.bg.interactive}", "text-on": "{color.text.inverse}" }, "$type": "composite" },
+      "icononly": { "$value": { "height": "{spacing.spacing-8}", "radius": "{radius.component.pill}", "bg-off": "{color.bg.interactive-disabled}", "icon-off": "{color.icon.secondary}", "border-off": "{color.border.default}", "bg-on": "{color.bg.interactive}", "icon-on": "{color.icon.inverse}" }, "$type": "composite" }
     },
 
     "floating": {
       "$description": "화면 상단이나 하단에 일정 시간 떠 있는 안내 문구. 사용자의 행동에 대한 피드백이나 간단한 상태 알림에 사용. card 형태는 별도 레이아웃으로 관리.",
-      "$value": { "bg": "{color.bg.dark}", "border": "{color.border.brand}", "borderPosition": "inside", "borderWidth": "1px", "radius": "{radius.component.pill}", "height": "{spacing.40}", "paddingH": "{spacing.16}", "paddingV": "{spacing.8}", "text": "{color.text.inverse}", "fontWeight": "500", "shadow": "{shadow.default}" },
+      "$value": { "bg": "{color.bg.dark}", "border": "{color.border.brand}", "borderPosition": "inside", "borderWidth": "1px", "radius": "{radius.component.pill}", "height": "{spacing.spacing-10}", "paddingH": "{spacing.spacing-4}", "paddingV": "{spacing.spacing-2}", "text": "{color.text.inverse}", "fontWeight": "500", "shadow": "{shadow.default}" },
       "$type": "composite"
     },
 
     "search": {
-      "lg": { "$value": { "bg": "{color.bg.interactive}", "text": "{color.text.inverse}", "radius": "{radius.component.pill}", "height": "{spacing.40}", "paddingH": "{spacing.14}", "fontSize": "14px" }, "$type": "composite" },
-      "sm": { "$value": { "bg": "{color.bg.interactive}", "text": "{color.text.inverse}", "radius": "{radius.component.pill}", "height": "{spacing.32}", "paddingH": "{spacing.12}", "fontSize": "13px" }, "$type": "composite" }
+      "lg": { "$value": { "bg": "{color.bg.interactive}", "text": "{color.text.inverse}", "radius": "{radius.component.pill}", "height": "{spacing.spacing-10}", "paddingLeft": "{spacing.spacing-2}", "paddingRight": "{spacing.spacing-3}", "fontSize": "14px" }, "$type": "composite" },
+      "sm": { "$value": { "bg": "{color.bg.interactive}", "text": "{color.text.inverse}", "radius": "{radius.component.pill}", "height": "{spacing.spacing-8}", "paddingH": "{spacing.spacing-3}", "fontSize": "13px" }, "$type": "composite" }
     },
 
-    "top": { "$value": { "bg": "{color.bg.base}", "icon": "{color.icon.primary}", "border": "{color.border.default}", "radius": "{radius.component.pill}", "size": "{spacing.56}" }, "$type": "composite" },
+    "top": { "$value": { "bg": "{color.bg.base}", "icon": "{color.icon.primary}", "border": "{color.border.default}", "radius": "{radius.component.pill}", "size": "{spacing.spacing-14}" }, "$type": "composite" },
 
     "counter": {
       "$description": "카운트 버튼. 라벨(Regular) + 숫자(Medium, brand). h=32, radius-xs, outlined.",
-      "$value": { "bg": "{color.bg.base}", "text": "{color.text.primary}", "count": "{color.text.brand}", "border": "{color.border.default}", "radius": "{radius.component.xs}", "height": "{spacing.32}", "paddingH": "{spacing.10}", "gap": "{spacing.4}", "fontSize": "13px", "fontWeight": "400", "countWeight": "500" },
+      "$value": { "bg": "{color.bg.base}", "text": "{color.text.primary}", "count": "{color.text.brand}", "border": "{color.border.default}", "radius": "{radius.component.xs}", "height": "{spacing.spacing-8}", "paddingH": "{spacing.spacing-2}", "gap": "{spacing.spacing-1}", "fontSize": "13px", "fontWeight": "400", "countWeight": "500" },
       "$type": "composite"
     },
 
     "product": {
       "$description": "상품안내 pill 버튼. outlined, chevron 아이콘 포함.",
-      "$value": { "bg": "{color.bg.interactive-secondary-hovered}", "text": "{color.text.secondary}", "border": "{color.border.default}", "radius": "{radius.component.pill}", "paddingTop": "{spacing.6}", "paddingBottom": "{spacing.6}", "paddingLeft": "{spacing.12}", "paddingRight": "{spacing.8}", "gap": "{spacing.4}", "fontSize": "12px", "fontWeight": "500", "iconSize": "14px" },
+      "$value": { "bg": "{color.bg.interactive-secondary-hovered}", "text": "{color.text.secondary}", "border": "{color.border.default}", "radius": "{radius.component.pill}", "height": "30px", "paddingLeft": "{spacing.spacing-3}", "paddingRight": "{spacing.spacing-2}", "gap": "{spacing.spacing-1}", "fontSize": "12px", "fontWeight": "500", "iconSize": "14px" },
       "$type": "composite"
     },
 
@@ -219,17 +219,17 @@
       "$description": "페이지네이션 버튼 — 콘텐츠 위 페이지 이동·인디케이터",
       "icon": {
         "$description": "White Icon. 화살표만 (‹ ›). variant=next/previous/all",
-        "$value": { "bg": "{color.bg.base}", "icon": "{color.icon.secondary}", "border": "{color.border.default}", "radius": "{radius.8}", "width": "64px", "height": "{spacing.32}", "iconSize": "12px" },
+        "$value": { "bg": "{color.bg.base}", "icon": "{color.icon.secondary}", "border": "{color.border.default}", "radius": "{radius.8}", "width": "64px", "height": "{spacing.spacing-8}", "iconSize": "12px" },
         "$type": "composite"
       },
       "number": {
         "$description": "White Number. 카운터+화살표 (‹ 1/99 ›). variant=default/more",
-        "$value": { "bg": "transparent", "text": "{color.text.primary}", "border": "{color.border.default}", "radius": "{radius.4}", "height": "{spacing.20}", "paddingV": "{spacing.4}", "paddingH": "{spacing.6}", "fontSize": "12px" },
+        "$value": { "bg": "transparent", "text": "{color.text.primary}", "border": "{color.border.default}", "radius": "{radius.4}", "height": "{spacing.spacing-5}", "paddingV": "{spacing.spacing-1}", "paddingH": "{spacing.spacing-2}", "fontSize": "12px" },
         "$type": "composite"
       },
       "dimmed": {
         "$description": "Dimmed Number. White Number와 완전 동일 룰(화살표 포함), 변경: 스트로크 없음 + bg Gray 950 60%. variant=default(1/99), more(1/99 ›)",
-        "$value": { "bg": "{color.bg.dimmed}", "text": "{color.text.inverse}", "radius": "{radius.4}", "height": "{spacing.20}", "paddingV": "{spacing.4}", "paddingH": "{spacing.6}", "fontSize": "12px" },
+        "$value": { "bg": "{color.bg.dimmed}", "text": "{color.text.inverse}", "radius": "{radius.4}", "height": "{spacing.spacing-5}", "paddingV": "{spacing.spacing-1}", "paddingH": "{spacing.spacing-2}", "fontSize": "12px" },
         "$type": "composite"
       }
     }
